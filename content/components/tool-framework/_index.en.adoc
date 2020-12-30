@@ -129,7 +129,7 @@ Interactive tools also normally indicate that they are active with
 a cursor change and by setting a status string.
 
 [source,cpp]
-```
+----
     int TOOL_NAME::someAction( const TOOL_EVENT& aEvent )
     {
         auto& frame = *getEditFrame<PCB_EDIT_FRAME>();
@@ -166,7 +166,7 @@ a cursor change and by setting a status string.
 
         return 0;
     }
-```
+----
 
 === The tool menu
 
@@ -178,8 +178,8 @@ To use a `TOOL_MENU` in a top level tool, simply add one as a member
 and initialize it with a reference to the tools at construction time:
 
 [source,cpp]
-```
-TOOL_NAME: public PCB_TOOL
+----
+class TOOL_NAME: public PCB_TOOL
 {
 public:
     TOOL_NAME() :
@@ -190,7 +190,7 @@ public:
 private:
     TOOL_MENU m_menu;
 }
-```
+----
 
 You can then add a menu accessor, or provide a custom function to
 allow other tools to add any other actions, or a subset that you
@@ -232,7 +232,7 @@ calling `Push()`. The underlying model won't be updated.
 As an example:
 
 [source,cpp]
-```
+----
 // Construct commit from current PCB_TOOL
 BOARD_COMMIT commit( this );
 
@@ -254,7 +254,7 @@ commit.Add( newItem );
 
 // update the model and add the undo point
 commit.Push( "Modified one item, added another" );
-```
+----
 
 == Tutorial: Adding a new tool
 
@@ -290,10 +290,10 @@ In `pcbnew/tools/pcb_actions.h`, we add the following to the
 `PCB_ACTIONS` class, which declares our tools:
 
 [source,cpp]
-```
+----
 static TOOL_ACTION uselessMoveItemLeft;
 static TOOL_ACTION uselessFixedCircle;
-```
+----
 
 Definitions of actions generally happen in the .cpp of the relevant tool.
 It doesn't actually matter where the definition occurs (the declaration
@@ -308,7 +308,7 @@ be a strong indicator as to where to define the tool.
 The tools definitions look like this:
 
 [source,cpp]
-```
+----
 TOOL_ACTION COMMON_ACTIONS::uselessMoveItemLeft(
         "pcbnew.UselessTool.MoveItemLeft",
         AS_GLOBAL, MD_CTRL + MD_SHIFT + int( 'L' ),
@@ -319,7 +319,7 @@ TOOL_ACTION COMMON_ACTIONS::uselessFixedCircle(
         AS_GLOBAL, MD_CTRL + MD_SHIFT + int( 'C' ),
         _( "Fixed circle" ), _( "Add a fixed size circle in a fixed place" ),
         add_circle_xpm );
-```
+----
 
 We have defined hotkeys for each action, and they are both global. This
 means you can use `Shift+Ctrl+L` and `Shift-Ctrl-C` to access each tool
@@ -344,7 +344,7 @@ Add a new tool class header `pcbnew/tools/useless_tool.h` containing
 the following class:
 
 [source,cpp]
-```
+----
 class USELESS_TOOL : public PCB_TOOL
 {
 public:
@@ -373,7 +373,7 @@ private:
     ///> Menu model displayed by the tool.
     TOOL_MENU m_menu;
 };
-```
+----
 
 === Implement tool class methods
 
@@ -387,7 +387,7 @@ build it.
 Below you will find the contents of useless_tool.cpp:
 
 [source,cpp]
-```
+----
 #include "useless_tool.h"
 
 #include <class_draw_panel_gal.h>
@@ -560,7 +560,7 @@ void USELESS_TOOL::setTransitions()
     Go( &USELESS_TOOL::fixedCircle, PCB_ACTIONS::uselessFixedCircle.MakeEvent() );
     Go( &USELESS_TOOL::moveLeft,    PCB_ACTIONS::uselessMoveItemLeft.MakeEvent() );
 }
-```
+----
 
 === Register the tool
 

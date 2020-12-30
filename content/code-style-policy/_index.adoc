@@ -46,7 +46,7 @@ leader. All changes to this document require approval.**
 
 There are some tools that can help you format your code easily.
 
-[`clang-format`][clang-format] is a formatting tool that can both be used to
+https://clang.llvm.org/docs/ClangFormat.html[clang-format] is a formatting tool that can both be used to
 provide code-style automation to your editor of choice, as well as allow git to
 check formatting when committing (using a "Git hook"). You should install this
 program to be able to use the Git hooks.
@@ -56,16 +56,22 @@ by `clang-format` when the `--style=file` option is set.
 
 To enable the Git hooks (only needs to be done once per Git repo):
 
-    git config core.hooksPath .githooks
+[source,bash]
+----
+git config core.hooksPath .githooks
+----
 
 Set the `git clang-format` tool to use the provided `_clang-format` file:
 
-    git config clangFormat.style file
+git config clangFormat.style file
 
 Then, to enable the format checker, set the `kicad.check-format` Git config
 to "true" for the KiCad repo:
 
-    git config kicad.check-format true
+[source,bash]
+----
+git config kicad.check-format true
+----
 
 Without this config, the format checker will not run on commit, but you can
 still check files staged for commit manually (see below).
@@ -77,7 +83,10 @@ the errors, either manually, or with the tools below.
 If you are warned about formatting errors, but you are sure your style is correct,
 you can still commit:
 
-    git commit --no-verify
+[source,bash]
+----
+git commit --no-verify
+----
 
 === 1.3.1 Correcting Formatting Errors
 
@@ -85,7 +94,10 @@ There is a Git aliases file that provides the right commands to show and correct
 formatting errors. Add to your repository config by running this command from
 the source directory:
 
-    git config --add include.path $(pwd)/helpers/git/format_alias
+[source,bash]
+----
+git config --add include.path $(pwd)/helpers/git/format_alias
+----
 
 Then you can use the following aliases:
 
@@ -116,7 +128,6 @@ conventions for improved readability:
 Avoid mixing camel case and underscores.
 
 **Examples**
-[source,cpp]
 ----
     CamelCaseName           // if camelcase, then no underscores
     all_lower_case_name
@@ -239,11 +250,11 @@ Doxygen is a C++ source code documenting tool used by the project.  Descriptive
 building the target named **doxygen-docs** and **dev-docs** that include this
 document.
 
-[source,bash]
-----
+[source,sh]
+```
     cd <kicad_build_base>
     make doxygen-docs
-----
+```
 
 The generated source \*.html files will be placed into
 \<kicad\_project\_base\>/Documentation/doxygen/html/ and the developer's
@@ -259,16 +270,15 @@ in which case the Doxygen comments should go into the \*.cpp source file.
 Again, avoid duplicating the Doxygen comments in both the header and
 \*.cpp source files.
 
-KiCad uses the JAVADOC comment style defined in the [“Documenting the
-code”][doccode] section of the Doxygen [manual][manual]. Don't forget
+KiCad uses the JAVADOC comment style defined in the 
+http://www.doxygen.nl/manual/docblocks.html[doccode] 
+section of the Doxygen http://www.doxygen.nl/manual[manual]. Don't forget
 to use the special Doxygen tags: bug, todo, deprecated, etc., so other
 developers can quickly get useful information about your code. It is
 good practice to actually generate the Doxygen \*.html files by
 building target doxygen-docs, and then to review the quality of your
 Doxygen comments with a web browser before submitting a patch.
 
-[doccode]: http://www.doxygen.nl/manual/docblocks.html
-[manual]:  http://www.doxygen.nl/manual
 
 ==== 3.2.1 Function Comments
 These go into a header file, unless the function is a private (i.e.
@@ -413,7 +423,7 @@ line, even if it exceeds the 99 character line length limit. However,
 the preferred method is to break strings within the 99 character limit
 whenever possible to prevent wrapping.
 
-=== 4.5 Trailing Whitespace ## {#trailing_whitespace}
+=== 4.5 Trailing Whitespace
 Many programming editors conveniently indent your code for you. Some of
 them do it rather poorly and leave trailing whitespace. Thankfully, most
 editors come with a remove trailing whitespace macro or at least a
@@ -431,7 +441,7 @@ This is especially true for statements without keywords.
     x=1; y=2; z=3; // Bad, should be on separate lines.
 ----
 
-=== 4.7 Braces ## {#braces}
+=== 4.7 Braces
 Braces should be placed on the line proceeding the keyword and indented
 to the same level. It is not necessary to use braces if there is only a
 single line statement after the keyword. In the case of if..else
@@ -456,7 +466,7 @@ if..else, indent all to the same level.
     }
 ----
 
-=== 4.8 Parenthesis ## {#parenthesis}
+=== 4.8 Parenthesis
 Parenthesis should be placed immediately after function names and
 keywords. Spaces should be placed after the opening parenthesis, before
 the closing parenthesis, and between the comma and the next argument in
@@ -476,7 +486,7 @@ functions. No space is needed if a function has no arguments.
     }
 ----
 
-=== 4.9 Switch Formatting ## {#switch}
+=== 4.9 Switch Formatting
 The case statement is to be indented to the same level as the switch.
 
 [source,cpp]
@@ -510,7 +520,7 @@ reject clang-format's suggested changes, if you use it:
     }
 ----
 
-=== 4.10 Lamdas ## {#lamda_formatting}
+=== 4.10 Lamdas
 The braces and statements of the body should be indented as you would a method,
 with the braces lined up under the capture block:
 
@@ -533,7 +543,7 @@ or:
         };
 ----
 
-=== 4.11 Class Definition Layout ## {#class_defs}
+=== 4.11 Class Definition Layout
 When defining classes member variables should be placed at the bottom
 and methods should be placed above the member variables.  The scope
 ordering of the class should be public, protect, then private.  Do not
@@ -560,7 +570,7 @@ class definition:
 ----
 
 
-== 5. License Statement # {#license_statement}
+== 5. License Statement
 There is a the file copyright.h which you can copy into the top of
 your new source files and edit the \<author\> field. KiCad depends on
 the copyright enforcement capabilities of copyright law, and this
@@ -568,12 +578,13 @@ means that source files must be copyrighted and not be released into
 the public domain. Each source file has one or more owners.
 
 
-== 6. Debugging Output {#debugging_output}
+== 6. Debugging Output
 Debugging output is a common method for validating code. However, it
 should not always active in debug builds. This makes it difficult for
 other developers to see their debugging output and can have a significant
 impact on the performance of debug builds. I you need to use debugging
-output, use [wxLogDebug] instead of `printf` or C++ output stream.  If
+output, use link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug] 
+instead of `printf` or C++ output stream.  If
 you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
 from the source tree before pushing changes to the main KiCad repo. Do not
@@ -581,16 +592,15 @@ comment out debugging output. This just adds more cruft to the code base.
 If you need to leave debugging output for, future testing, use tracing
 output (see 6.1).
 
-=== 6.1 Using Tracing for Debugging Output {#tracing_output}
+=== 6.1 Using Tracing for Debugging Output
 There are occasions when you want to see debugging output to ensure
-existing code performs as expected. In this case, use [wxLogTrace] which
-allows debugging output to be controlled by the `WXTRACE` environment
-variable. When using [wxLogTrace][wxLogTrace], the trace environment
+existing code performs as expected. In this case, use link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#gae28a46b220921cd87a6f75f0842294c5[wxLogTrace] which allows debugging output to be controlled by the `WXTRACE` environment
+variable. When using wxLogTrace, the trace environment
 variable string should be documented by either adding it to the
-`trace_helper.{h/cpp}` source files or locally using the [Doxygen][Doxygen]
+`trace_helper.{h/cpp}` source files or locally using the https://www.doxygen.nl/index.html[Doxygen]
 comment `\ingroup trace_env_vars`.
 
-== 7. Header Files # {#header_files}
+== 7. Header Files
 Project \*.h source files should:
 
 - contain a license statement
@@ -600,7 +610,7 @@ Project \*.h source files should:
 
 The license statement was described above.
 
-=== 7.1 Nested Include #ifndef ## {#nested_include}
+=== 7.1 Nested Include #ifndef
 Each header file should include an \#ifndef which is commonly used to
 prevent compiler errors in the case where the header file is seen
 multiple times in the code stream presented to the compiler. Just
@@ -626,7 +636,7 @@ the very bottom of the file. It is important that it wrap any nested
 \#include statements, so that the compiler can skip them if the
 \#ifndef evaluates to false, which will reduce compilation time.
 
-=== 7.2 Headers Without Unsatisfied Dependencies ## {#header_depends}
+=== 7.2 Headers Without Unsatisfied Dependencies
 Any header file should include other headers that it depends on. (Note:
 KiCad is not at this point now, but this section is a goal of the
 project.)
@@ -663,13 +673,13 @@ is exposed in the header file, merely by including that one header
 file.
 
 
-== 8. When in Doubt... # {#when_in_doubt}
+== 8. When in Doubt... 
 When editing existing source code files and there are multiple acceptable
 code formatting options or no formatting is defined, follow the existing
 formatting in the file.
 
 
-== 9. I Wrote X Lines of Code Before I Read This Document # {#x_lines}
+== 9. I Wrote X Lines of Code Before I Read This Document
 It's OK. We all make mistakes. Fortunately, KiCad provides a
 configuration file for the code beautifier uncrustify. Uncrustify won't
 fix your naming problems but it does a pretty decent job of formatting
@@ -683,7 +693,7 @@ uncrustify [website][uncrustify] for more information.
 [uncrustify]: http://uncrustify.sourceforge.net/
 
 
-== 10. Show Me an Example # {#show_me_an_example}
+== 10. Show Me an Example
 Nothing drives the point home like an example. The source file richio.h
 below was taken directly from the KiCad source.
 
@@ -951,16 +961,7 @@ is plenty of other good information here. Besides, most of them have
 some great humor in them enjoyable to read. Who knows, you might even
 learn something new.
 
-- [C++ Coding Standard][cppstandard]
-- [Linux Kernel Coding Style][kernel]
-- [C++ Operator Overloading Guidelines][overloading]
-- [Wikipedia's Programming Style Page][style]
-
-[clang-format]: https://clang.llvm.org/docs/ClangFormat.html
-[cppstandard]:http://www.possibility.com/Cpp/CppCodingStandard.html
-[kernel]:https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/coding-style.rst
-[overloading]:http://www.cs.caltech.edu/courses/cs11/material/cpp/donnie/cpp-ops.html
-[style]:http://en.wikipedia.org/wiki/Programming_style
-[wxLogDebug]:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b
-[wxLogTrace]:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#gae28a46b220921cd87a6f75f0842294c5
-[Doxygen]:https://www.doxygen.nl/index.html
+- http://www.possibility.com/Cpp/CppCodingStandard.html[C++ Coding Standard]
+- https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/coding-style.rst[Linux Kernel Coding Style]
+- http://www.cs.caltech.edu/courses/cs11/material/cpp/donnie/cpp-ops.html[C++ Operator Overloading Guidelines]
+- http://en.wikipedia.org/wiki/Programming_style[Wikipedia's Programming Style Page]

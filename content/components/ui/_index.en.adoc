@@ -13,8 +13,8 @@ as possible when contributing user interface code to the KiCad project.
 
 === Text Capitalization
 For all visible text used within KiCad, follow recommendations in the
-capitalization section in the [writing style section of the GNOME User
-Interface Guidelines][gnome-ui-style].  This applies to all Menus, Titles,
+capitalization section in the https://developer.gnome.org/hig/stable/writing-style.html.en[writing style section of the GNOME User
+Interface Guidelines].  This applies to all Menus, Titles,
 Labels, Tooltips, Buttons, etc.
 
 The capitalization for the application names is KiCad, Eeschema, CvPcb,
@@ -77,18 +77,18 @@ of user interface element.
 == Dialogs
 
 This section defines how dialog boxes should be designed.  The KiCad project
-uses the [GNOME User Interface Guidelines][gnome-ui-guidelines] for laying out
-dialogs.  When designing dialogs, follow the [visual layout section of the GNOME
-User Interface Guidelines][gnome-ui-layout].  KiCad's dialogs may either be
-designed with [wxFormBuilder][wxformbuilder] or created by hand.  However,
+uses the https://developer.gnome.org/hig/stable/[GNOME User Interface Guidelines] for laying out
+dialogs.  When designing dialogs, follow the https://developer.gnome.org/hig/stable/visual-layout.html.en[visual layout section of the GNOME
+User Interface Guidelines].  KiCad's dialogs may either be
+designed with https://github.com/wxFormBuilder/wxFormBuilder[wxformbuilder] or created by hand.  However,
 existing dialogs must be maintained in the same way as they have been
-implemented.  Please use [wxFormBuilder v3.8.0 or later][wxformbuilder-releases]
+implemented.  Please use https://github.com/wxFormBuilder/wxFormBuilder/releases[wxformbuilder-releases]
 to avoid version mismatch between developers.
 
 === Escape Key Termination
 Please note that the escape key termination only works properly if there is a
 dialog button defined with an ID of wxID_CANCEL or setting the escape button
-ID using [wxDialog::SetEscapeID( MY_ESCAPE_BUTTON_ID )][wxdialog-setescapeid]
+ID using link:http://docs.wxwidgets.org/3.0/classwx_dialog.html#a585869988e308f549128a6a065f387c6[wxDialog::SetEscapeID( MY_ESCAPE_BUTTON_ID )]
 is called during dialog initialization.  The former is the preferred method for
 handling escape key dialog termination.  There is a checkbox in wxFormBuilder
 for setting the "default" control, and this is the one fired when the "enter"
@@ -96,8 +96,8 @@ key is pressed.
 
 === Dialog Layout with Sizers
 Use wxWidgets "sizers" in all dialogs, no matter how simple they are.  Using
-absolute sizing in dialogs is forbidden in KiCad.  See the [wxWidgets sizer
-overview][wxwidgets-sizers] for more information on using sizers.  Configure
+absolute sizing in dialogs is forbidden in KiCad.  See the link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview] 
+for more information on using sizers.  Configure
 the sizers so that as the dialog window is expanded, the most sensible use of
 the increased dialog window occurs automatically by the sizers. For example,
 in the DRC dialog of Pcbnew, sizers should be used to expand the text control
@@ -137,7 +137,7 @@ to the "Dialog" tab:
 
 This will provide for an override of the Show( bool ) wxWindow() function
 and provide retentive size and position for the session.  For more information,
-see the [DIALOG_SHIM class source code][kicad-src-dialog-shim].
+see the link:https://gitlab.com/kicad/code/kicad/-/blob/master/common/dialog_shim.cpp[DIALOG_SHIM class source code].
 
 Use tooltips to explain the functionality of each non-obvious control.
 This is important because the help files and the wiki often lag behind
@@ -149,8 +149,8 @@ Dialog data must be transferred to the dialog controls on dialog initialization
 and transferred from controls when the dialog is dismissed by the default
 affirmative action (typically clicking the wxID_OK button) or the clicking the
 wxID_APPLY button.  The wxWidgets dialog framework has support for this by
-using validators.  Please read the [wxValidator Overview][wxwidgets-validator]
-in the [wxWidgets documentation][wxwidgets-doc].  In the past, data transfer
+using validators.  Please read the https://docs.wxwidgets.org/3.0/overview_validator.html[wxValidator Overview]
+in the http://docs.wxwidgets.org/3.0/[wxWidgets documentation].  In the past, data transfer
 was handled in various default button handlers virtually all of which were
 broken.  Do not implement default button handlers in your dialog code.  Use
 validators to transfer data to and from controls and allow the default dialog
@@ -171,14 +171,3 @@ controls so text should be quoted with single quotes ''.  e.g.:
 * 'longpath/subdir'
 * 'FOOTPRINTNAME'
 * 'anything else'
-
-[gnome-ui-guidelines]:https://developer.gnome.org/hig/stable/
-[gnome-ui-layout]:https://developer.gnome.org/hig/stable/visual-layout.html.en
-[gnome-ui-style]:https://developer.gnome.org/hig/stable/writing-style.html.en
-[wxformbuilder]:https://github.com/wxFormBuilder/wxFormBuilder
-[wxformbuilder-releases]:https://github.com/wxFormBuilder/wxFormBuilder/releases
-[wxwidgets-doc]:http://docs.wxwidgets.org/3.0/
-[wxdialog-setescapeid]:http://docs.wxwidgets.org/3.0/classwx_dialog.html#a585869988e308f549128a6a065f387c6
-[wxwidgets-sizers]:http://docs.wxwidgets.org/3.0/overview_sizer.html
-[wxwidgets-validator]:http://docs.wxwidgets.org/3.0/overview_validator.html
-[kicad-src-dialog-shim]:http://bazaar.launchpad.net/~kicad-product-committers/kicad/product/view/head:/common/dialog_shim.cpp
