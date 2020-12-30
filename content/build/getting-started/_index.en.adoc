@@ -1,0 +1,324 @@
+---
+date: 2016-04-09T16:50:16+02:00
+title: Getting Started
+weight: 10
+---
+
+
+
+== Development Tools
+
+Before you begin building KiCad, there are a few tools required in addition to your compiler.
+Some of these tools are required to build from source and some are optional.
+
+=== CMake Build Configuration Tool
+
+[CMake][] is the build configuration and makefile generation tool used by KiCad.  It is required.
+
+
+=== Git Version Control System
+
+The official source code repository is hosted on [GitLab][] and requires [git][] to get
+the latest source. If you prefer to use [GitHub][] there is a read only mirror of the official
+KiCad repository. The previous official hosting location at [Launchpad][] is still active as
+a mirror. Changes should be submitted as [merge requests][] via GitLab.  The development team
+will not review changes submitted on GitHub or Launchpad as those platforms are mirrors only.
+
+=== Doxygen Code Documentation Generator
+
+The KiCad source code is documented using [Doxygen][] which parses the KiCad source code files
+and builds a dependency tree along with the source documentation into HTML.  Doxygen is only
+required if you are going to build the KiCad documentation.
+
+=== SWIG Simplified Wrapper and Interface Generator
+
+[SWIG][] is used to generate the Python scripting language extensions for KiCad.  SWIG is not
+required if you are not going to build the KiCad scripting extension.
+
+== Library Dependencies
+
+This section includes a list of library dependencies required to build KiCad.  It does not
+include any dependencies of the libraries.  Please consult the library's documentation for any
+additional dependencies.  Some of these libraries are optional depending on you build
+configuration.  This is not a guide on how to install the library dependencies using you systems
+package management tools or how to build the library from source.  Consult the appropriate
+documentation to perform these tasks.
+
+=== wxWidgets Cross Platform GUI Library
+
+[wxWidgets][] is the graphical user interface (GUI) library used by KiCad.  The current minimum
+version is 3.0.0.  However, 3.0.2 should be used whenever possible as there are some known bugs
+in prior versions that can cause problems on some platforms.  Please note that there are also
+some platform specific patches that must be applied before building wxWidgets from source.  These
+patches can be found in the [patches folder][] in the KiCad source.  These patches are named by
+the wxWidgets version and platform name they should be applied against.  wxWidgets must be built
+with the --with-opengl option.  If you installed the packaged version of wxWidgets on your system,
+verify that it was built with this option.
+
+=== Boost C++ Libraries
+
+The [Boost][] C++ library is required only if you intend to build KiCad with the system installed
+version of Boost instead of the default internally built version.  If you use the system installed
+version of Boost, version 1.56 or greater is required.  Please note there are some platform
+specific patches required to build a working Boost library.  These patches can be found in the
+[patches folder][] in the KiCad source.  These patches are named by the platform name they should
+be applied against.
+
+=== GLEW OpenGL Extension Wrangler Library
+
+The [OpenGL Extension Wrangler][GLEW] is an OpenGL helper library used by the KiCad graphics
+abstraction library [GAL] and is always required to build KiCad.
+
+=== ZLib Library
+
+The [ZLib][] development library is used by KiCad to handle compressed 3d models (.stpz and .wrz files)
+and is always required to build KiCad.
+
+=== GLM OpenGL Mathematics Library
+
+The [OpenGL Mathematics Library][GLM] is an OpenGL helper library used by the KiCad graphics
+abstraction library [GAL] and is always required to build KiCad.
+
+=== GLUT OpenGL Utility Toolkit Library
+
+The [OpenGL Utility Toolkit][GLUT] is an OpenGL helper library used by the KiCad graphics
+abstraction library [GAL] and is always required to build KiCad.
+
+=== Cairo 2D Graphics Library
+
+The [Cairo][] 2D graphics library is used as a fallback rendering canvas when OpenGL is not
+available and is always required to build KiCad.
+
+=== Python Programming Language
+
+The [Python][] programming language is used to provide scripting support to KiCad.  It needs
+to be installed unless the [KiCad scripting](#kicad_scripting) build configuration option is
+disabled.
+
+=== wxPython Library
+
+The [wxPython][] library is used to provide a scripting console for Pcbnew.  It needs to be
+installed unless the [wxPython scripting](#wxpython_scripting) build configuration option is
+disabled.  When building KiCad with wxPython support, make sure the version of the wxWidgets
+library and the version of wxPython installed on your system are the same.  Mismatched versions
+have been known to cause runtime issues.
+
+=== Curl Multi-Protocol File Transfer Library
+
+The [Curl Multi-Protocol File Transfer Library][libcurl] is used to provide secure internet
+file transfer access for the [GitHub][] plug in.  This library needs to be installed unless
+the GitHub plug build option is disabled.
+
+=== OpenCascade Library
+
+The [OpenCascade Community Edition (OCE)][liboce] is used to provide support for loading and saving
+3D model file formats such as STEP.  This library needs to be installed unless the OCE build
+option is disabled.
+
+[Open CASCSADE Technology (OCC)][libocc] should also work as an alternative to OCE. Selection of
+library Cascade library can be specified at build time.  See the [STEP/IGES support](#oce_opt)
+section.  When building OCC using the option BUILD_MODULE_Draw=OFF make building more easy
+
+==== Ngspice Library
+
+The [Ngspice Library][libngspice] is used to provide Spice simulation support in the schematic
+editor.  Make sure the the version of ngspice library used was built with the--with-ngshared
+option.  This library needs to be installed unless the Spice build option is disabled.
+
+== KiCad Build Configuration Options
+
+KiCad has many build options that can be configured to build different options depending on
+the availability of support for each option on a given platform.  This section documents
+these options and their default values.
+
+=== Scripting Support
+
+The KICAD_SCRIPTING option is used to enable building the Python scripting support into Pcbnew.
+This options is enabled by default, and will disable all other KICAD_SCRIPTING_* options when
+it is disabled.
+
+=== Python 3 Scripting Support
+
+The KICAD_SCRIPTING_PYTHON3 option is used to enable using Python 3 for the scripting support
+instead of Python 2.  This option is disabled by default and only is relevant if
+[KICAD_SCRIPTING](#scripting_opt) is enabled.
+
+=== Scripting Module Support
+
+The KICAD_SCRIPTING_MODULES option is used to enable building and installing the Python modules
+supplied by KiCad.  This option is enabled by default, but will be disabled if
+[KICAD_SCRIPTING](#scripting_opt) is disabled.
+
+=== wxPython Scripting Support
+
+The KICAD_SCRIPTING_WXPYTHON option is used to enable building the wxPython interface into
+Pcbnew including the wxPython console.  This option is enabled by default, but will be disabled if
+[KICAD_SCRIPTING](#scripting_opt) is disabled.
+
+=== wxPython Phoenix Scripting Support
+
+The KICAD_SCRIPTING_WXPYTHON_PHOENIX option is used to enable building the wxPython interface with
+the new Phoenix binding instead of the legacy one.  This option is disabled by default, and
+enabling it requires [KICAD_SCRIPTING](#scripting_opt) to be enabled.
+
+=== Python Scripting Action Menu Support
+
+The KICAD_SCRIPTING_ACTION_MENU option allows Python scripts to be added directly to the Pcbnew
+menu.  This option is enabled by default, but will be disabled if
+[KICAD_SCRIPTING](#scripting_opt) is disabled.  Please note that this option is highly
+experimental and can cause Pcbnew to crash if Python scripts create an invalid object state
+within Pcbnew.
+
+=== Integrated Spice simulator
+
+The KICAD_SPICE option is used to control if the Spice simulator interface for Eeschema is
+built.  When this option is enabled, it requires [ngspice][] to be available as a shared
+library.  This option is enabled by default.
+
+=== STEP/IGES support for the 3D viewer
+
+The KICAD_USE_OCE is used for the 3D viewer plugin to support STEP and IGES 3D models. Build tools
+and plugins related to OpenCascade Community Edition (OCE) are enabled with this option. When
+enabled it requires [liboce][] to be available, and the location of the installed OCE library to be
+passed via the OCE_DIR flag.  This option is enabled by default.
+
+Alternatively KICAD_USE_OCC can be used instead of OCE. Both options are not supposed to be enabled
+at the same time.
+
+=== Wayland EGL support ## {#egl_opt}
+
+The KICAD_USE_EGL option switches the OpenGL backend from using X11 bindings to Wayland EGL bindings.
+This option is only relevant on Linux when running wxWidgets 3.1.5+ with the EGL backend of
+the wxGLCanvas (which is the default option, but can be disabled in the wxWidgets build).
+
+By default, setting KICAD_USE_EGL will use a in-tree version of the GLEW library (that is compiled with
+the additional flags needed to run on an EGL canvas) staticly linked into KiCad. If the system
+version of GLEW supports EGL (it must be compiled with the GLEW_EGL flag), then it can be used instead
+by setting KICAD_USE_BUNDLED_GLEW to OFF.
+
+=== Windows HiDPI Support
+
+The KICAD_WIN32_DPI_AWARE option makes the Windows manifest file for KiCad use a DPI aware version, which
+tells Windows that KiCad wants Per Monitor V2 DPI awareness (requires Windows 10 version 1607 and later).
+
+=== Development Analysis Tools
+
+KiCad can be compiled with support for several features to aid in the catching and debugging of
+runtime memory issues
+
+==== Valgrind support
+
+The KICAD_USE_VALGRIND option is used to enable Valgrind's stack annotation feature in the tool framework.
+This provides the ability for Valgrind to trace memory allocations and accesses in the tool framework
+and reduce the number of false positives reported. This option is disabled by default.
+
+==== C++ standard library debugging
+
+KiCad provides two options to enable debugging assertions contained in the GCC C++ standard library:
+KICAD_STDLIB_DEBUG and KICAD_STDLIB_LIGHT_DEBUG. Both these options are disabled by default, and only
+one should be turned on at a time with KICAD_STDLIB_DEBUG taking precedence.
+
+The KICAD_STDLIB_LIGHT_DEBUG option enables the light-weight standard library assertions by passing
+`_GLIBCXX_ASSERTIONS ` into CXXFLAGS. This enables things such as bounds checking on strings, arrays
+and vectors, as well as null pointer checks for smart pointers.
+
+The KICAD_STDLIB_DEBUG option enables the full set of standard library assertions by passing
+`_GLIBCXX_DEBUG` into CXXFLAGS. This enables full debugging support for the standard library.
+
+==== Address Sanitizer support
+
+The KICAD_SANITIZE option enables Address Sanitizer support to trace memory allocations and
+accesses to identify problems. This option is disabled by default. The Address Sanitizer
+contains several runtime options to tailor its behavior that are described in more detail in its
+[documentation](https://github.com/google/sanitizers/wiki/AddressSanitizerFlags).
+
+This option is not supported on all build systems, and is known to have problems when using
+mingw.
+
+=== Demos and Examples
+
+The KiCad source code includes some demos and examples to showcase the program. You can choose
+whether install them or not with the KICAD_INSTALL_DEMOS option. You can also select where to
+install them with the KICAD_DEMOS variable. On Linux the demos are installed in
+$PREFIX/share/kicad/demos by default.
+
+=== Quality assurance (QA) unit tests
+
+The KICAD_BUILD_QA_TESTS option allows building unit tests binaries for quality assurance as part
+of the default build. This option is enabled by default.
+
+If this option is disabled, the QA binaries can still be built by manually specifying the target.
+For example, with `make`:
+
+* Build all QA binaries: `make qa_all`
+* Build a specific test: `make qa_pcbnew`
+* Build all unit tests: `make qa_all_tests`
+* Build all test tool binaries: `make qa_all_tools`
+
+For more information about testing KiCad, see [this page](testing.md).
+
+=== KiCad Build Version
+
+The KiCad version string is defined by the output of `git describe --dirty` when git is available
+or the version string defined in CMakeModules/KiCadVersion.cmake with the value of
+KICAD_VERSION_EXTRA appended to the former.  If the KICAD_VERSION_EXTRA variable is not defined,
+it is not appended to the version string.  If the KICAD_VERSION_EXTRA  variable is defined it
+is appended along with a leading '-' to the full version string as follows:
+
+    (KICAD_VERSION[-KICAD_VERSION_EXTRA])
+
+The build script automatically creates the version string information from the [git][] repository
+information as follows:
+
+    (5.0.0-rc2-dev-100-g5a33f0960)
+     |
+     output of `git describe --dirty` if git is available.
+
+
+=== KiCad Config Directory
+
+The default KiCad configuration directory is `kicad`.  On Linux this is located at
+`~/.config/kicad`, on MSW, this is `C:\Documents and Settings\username\Application Data\kicad` and
+on MacOS, this is `~/Library/Preferences/kicad`.  If the installation package would like to, it may
+specify an alternate configuration name instead of `kicad`.  This may be useful for versioning
+the configuration parameters and allowing the use of, e.g. `kicad5` and `kicad6` concurrently without
+losing configuration data.
+
+This is set by specifying the KICAD_CONFIG_DIR string at compile time.
+
+== Getting the KiCad Source Code
+
+There are several ways to get the KiCad source.  If you want to build the stable version you
+can down load the source archive from the [GitLab][] repository.  Use tar or some
+other archive program to extract the source on your system.  If you are using tar, use the
+following command:
+
+    tar -xaf kicad_src_archive.tar.xz
+
+If you are contributing directly to the KiCad project on GitLab, you can create a local
+copy on your machine by using the following command:
+
+    git clone https://gitlab.com/kicad/code/kicad.git
+
+Here is a list of source links:
+
+Stable release archives: https://kicad.org/download/source/
+
+Development branch: https://gitlab.com/kicad/code/kicad/tree/master
+
+GitHub mirror: https://github.com/KiCad/kicad-source-mirror
+
+
+== Known Issues
+
+There are some known issues that effect all platforms.  This section provides a list of the
+currently known issues when building KiCad on any platform.
+
+=== Boost C++ Library Issues
+
+As of version 5 of https://gcc.gnu.org/[GNU GCC], using the default configuration of downloading, patching, and
+building of Boost 1.54 will cause the KiCad build to fail.  Therefore a newer version of Boost
+must be used to build KiCad.  If your system has Boost 1.56 or greater installed, you job is
+straight forward.  If your system does not have Boost 1.56 or greater installed, you will have
+to download and [build Boost][] from source.  If you are building Boost on windows using [MinGW][]
+you will have to apply the Boost patches in the KiCad source [patches folder][].

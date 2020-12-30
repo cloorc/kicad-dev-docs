@@ -1,0 +1,23 @@
+---
+date: 2016-04-09T16:50:16+02:00
+title: Linux
+weight: 20
+---
+
+
+== Building KiCad on Linux
+
+To perform a full build on Linux, run the following commands:
+
+    cd <your kicad source mirror>
+    mkdir -p build/release
+    mkdir build/debug               # Optional for debug build.
+    cd build/release
+    cmake -DCMAKE_BUILD_TYPE=Release \
+          ../../
+    make
+    sudo make install
+
+If the CMake configuration fails, determine the missing dependencies and install them on your
+system.  By default, CMake sets the install path on Linux to /usr/local.  Use the
+CMAKE_INSTALL_PREFIX option to specify a different install path.

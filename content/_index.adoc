@@ -1,1 +1,3 @@
-testfasf
+== Welcome to the KiCad Developer Documentation
+
+This page is intended only for developers, if you simply want to use KiCad this is not what you want.
