@@ -17,11 +17,11 @@ You must first install [Visual Studio][] with the **Desktop development with C++
 Then run these three commands
 
 [source,powershell]
-----
+```
 git clone https://github.com/microsoft/vcpkg
 .\vcpkg\bootstrap-vcpkg.bat
 .\vcpkg\vcpkg integrate install
-----
+```
 
 which will give you a vcpkg install ready to use with the next steps
 
@@ -37,7 +37,7 @@ KiCad still supports 32-bit builds for now but may not in the future, thus 64-bi
 The following packages are required for vcpkg
 
 [source,powershell]
-----
+```
 .\vcpkg install boost
 .\vcpkg install cairo
 .\vcpkg install curl
@@ -52,7 +52,7 @@ The following packages are required for vcpkg
 .\vcpkg install python3
 .\vcpkg install wxwidgets
 .\vcpkg install zlib
-----
+```
 
 If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will have to append
 :x64-windows to end of each packages name, `boost:x64-windows` for example.

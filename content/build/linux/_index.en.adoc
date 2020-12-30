@@ -9,14 +9,17 @@ weight: 20
 
 To perform a full build on Linux, run the following commands:
 
-    cd <your kicad source mirror>
-    mkdir -p build/release
-    mkdir build/debug               # Optional for debug build.
-    cd build/release
-    cmake -DCMAKE_BUILD_TYPE=Release \
-          ../../
-    make
-    sudo make install
+[source,sh]
+```
+cd <your kicad source mirror>
+mkdir -p build/release
+mkdir build/debug               # Optional for debug build.
+cd build/release
+cmake -DCMAKE_BUILD_TYPE=Release \
+        ../../
+make
+sudo make install
+```
 
 If the CMake configuration fails, determine the missing dependencies and install them on your
 system.  By default, CMake sets the install path on Linux to /usr/local.  Use the

@@ -25,56 +25,57 @@ and some other fixes/improvements are contained in the `kicad/macos-wx-3.0` bran
 
 To perform a wxWidgets build, execute the following commands:
 
-[source,shell]
-----
-    cd <your wxWidgets build folder>
-    git clone -b kicad/macos-wx-3.0 https://gitlab.com/kicad/code/wxWidgets.git
-    mkdir wx-build
-    cd wx-build
-    ../wxWidgets/configure \
-        --prefix=`pwd`/../wx-bin \
-        --with-opengl \
-        --enable-aui \
-        --enable-html \
-        --enable-stl \
-        --enable-richtext \
-        --with-libjpeg=builtin \
-        --with-libpng=builtin \
-        --with-regex=builtin \
-        --with-libtiff=builtin \
-        --with-zlib=builtin \
-        --with-expat=builtin \
-        --without-liblzma \
-        --with-macosx-version-min=10.11 \
-        --enable-universal-binary=i386,x86_64 \
-        CC=clang \
-        CXX=clang++
-    make
-    make install
-----
+[source,sh]
+```
+cd <your wxWidgets build folder>
+git clone -b kicad/macos-wx-3.0 https://gitlab.com/kicad/code/wxWidgets.git
+mkdir wx-build
+cd wx-build
+../wxWidgets/configure \
+    --prefix=`pwd`/../wx-bin \
+    --with-opengl \
+    --enable-aui \
+    --enable-html \
+    --enable-stl \
+    --enable-richtext \
+    --with-libjpeg=builtin \
+    --with-libpng=builtin \
+    --with-regex=builtin \
+    --with-libtiff=builtin \
+    --with-zlib=builtin \
+    --with-expat=builtin \
+    --without-liblzma \
+    --with-macosx-version-min=10.11 \
+    --enable-universal-binary=i386,x86_64 \
+    CC=clang \
+    CXX=clang++
+make
+make install
+```
 
 If everything works you will find the wxWidgets binaries in `<your wxWidgets build folder>/wx-bin`.
 Now, build a basic KiCad without Python scripting using the following commands:
 
-[source,shell]
-----
-    cd <your kicad source mirror>
-    mkdir -p build/release
-    mkdir build/debug               # Optional for debug build.
-    cd build/release
-    cmake -DCMAKE_C_COMPILER=clang \
-          -DCMAKE_CXX_COMPILER=clang++ \
-          -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 \
-          -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
-          -DKICAD_SCRIPTING=OFF \
-          -DKICAD_SCRIPTING_MODULES=OFF \
-          -DKICAD_SCRIPTING_WXPYTHON=OFF \
-          -DCMAKE_INSTALL_PREFIX=../bin \
-          -DCMAKE_BUILD_TYPE=Release \
-          ../../
-    make
-    make install
-----
+
+[source,sh]
+```
+cd <your kicad source mirror>
+mkdir -p build/release
+mkdir build/debug               # Optional for debug build.
+cd build/release
+cmake -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ \
+        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 \
+        -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
+        -DKICAD_SCRIPTING=OFF \
+        -DKICAD_SCRIPTING_MODULES=OFF \
+        -DKICAD_SCRIPTING_WXPYTHON=OFF \
+        -DCMAKE_INSTALL_PREFIX=../bin \
+        -DCMAKE_BUILD_TYPE=Release \
+        ../../
+make
+make install
+```
 
 If the CMake configuration fails, determine the missing dependencies and install them on your
 system or disable the corresponding KiCad feature. If everything works you will get self-contained
@@ -86,15 +87,15 @@ that might be bundled with the wxPython package won't work. Please see wxPython 
 or [macOS bundle build scripts][] (`compile_wx.sh`) on how to do this. Then, use a CMake
 configuration as follows to point it to your own wxWidgets/wxPython:
 
-[source,shell]
-----
-    cmake -DCMAKE_C_COMPILER=clang \
-          -DCMAKE_CXX_COMPILER=clang++ \
-          -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
-          -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
-          -DPYTHON_EXECUTABLE=<path-to-python-exe>/python \
-          -DPYTHON_SITE_PACKAGE_PATH=<your wxWidgets build folder>/wx-bin/lib/python2.7/site-packages \
-          -DCMAKE_INSTALL_PREFIX=../bin \
-          -DCMAKE_BUILD_TYPE=Release \
-          ../../
-----
+[source,sh]
+```
+cmake -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ \
+        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
+        -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
+        -DPYTHON_EXECUTABLE=<path-to-python-exe>/python \
+        -DPYTHON_SITE_PACKAGE_PATH=<your wxWidgets build folder>/wx-bin/lib/python2.7/site-packages \
+        -DCMAKE_INSTALL_PREFIX=../bin \
+        -DCMAKE_BUILD_TYPE=Release \
+        ../../
+```

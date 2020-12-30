@@ -23,38 +23,38 @@ for changes if you need to build for 32-bit instead.  Run `mingw64.exe` from the
 install path. At the command prompt run the the following commands:
 
 [source,bash]
-----
-    pacman -S base-devel \
-              git \
-              mingw-w64-x86_64-cmake \
-              mingw-w64-x86_64-doxygen \
-              mingw-w64-x86_64-gcc \
-              mingw-w64-x86_64-python2 \
-              mingw-w64-x86_64-pkg-config \
-              mingw-w64-x86_64-swig \
-              mingw-w64-x86_64-boost \
-              mingw-w64-x86_64-cairo \
-              mingw-w64-x86_64-glew \
-              mingw-w64-x86_64-curl \
-              mingw-w64-x86_64-wxPython \
-              mingw-w64-x86_64-wxWidgets \
-              mingw-w64-x86_64-toolchain \
-              mingw-w64-x86_64-glm \
-              mingw-w64-x86_64-oce \
-              mingw-w64-x86_64-ngspice \
-              mingw-w64-x86_64-zlib
-    cd kicad-source
-    mkdir -p build/release
-    mkdir build/debug               # Optional for debug build.
-    cd build/release
-    cmake -DCMAKE_BUILD_TYPE=Release \
-          -G "MSYS Makefiles" \
-          -DCMAKE_PREFIX_PATH=/mingw64 \
-          -DCMAKE_INSTALL_PREFIX=/mingw64 \
-          -DDEFAULT_INSTALL_PATH=/mingw64 \
-          ../../
-    make -j N install   # Where N is the number of concurrent threads that your system can handle
-----
+```
+pacman -S base-devel \
+            git \
+            mingw-w64-x86_64-cmake \
+            mingw-w64-x86_64-doxygen \
+            mingw-w64-x86_64-gcc \
+            mingw-w64-x86_64-python2 \
+            mingw-w64-x86_64-pkg-config \
+            mingw-w64-x86_64-swig \
+            mingw-w64-x86_64-boost \
+            mingw-w64-x86_64-cairo \
+            mingw-w64-x86_64-glew \
+            mingw-w64-x86_64-curl \
+            mingw-w64-x86_64-wxPython \
+            mingw-w64-x86_64-wxWidgets \
+            mingw-w64-x86_64-toolchain \
+            mingw-w64-x86_64-glm \
+            mingw-w64-x86_64-oce \
+            mingw-w64-x86_64-ngspice \
+            mingw-w64-x86_64-zlib
+cd kicad-source
+mkdir -p build/release
+mkdir build/debug               # Optional for debug build.
+cd build/release
+cmake -DCMAKE_BUILD_TYPE=Release \
+        -G "MSYS Makefiles" \
+        -DCMAKE_PREFIX_PATH=/mingw64 \
+        -DCMAKE_INSTALL_PREFIX=/mingw64 \
+        -DDEFAULT_INSTALL_PATH=/mingw64 \
+        ../../
+make -j N install   # Where N is the number of concurrent threads that your system can handle
+```
 
 For 32-bit builds, run `mingw32.exe` and change `x86_64` to `i686` in the package names and
 change the paths in the cmake configuration from `/mingw64` to `/mingw32`.
@@ -94,12 +94,12 @@ You want to create a Debug configuration as such
 * Build-Type: `Debug`
 * Toolchain: `MSYS2-MinGW64`
 * CMake options:
-----
+```sh
 -G "MinGW Makefiles"
 -DCMAKE_PREFIX_PATH=/mingw64
 -DCMAKE_INSTALL_PREFIX=/mingw64
 -DDEFAULT_INSTALL_PATH=/mingw64
-----
+```
 * Build-directory: `build/debug-msys2`
 
 
@@ -110,12 +110,12 @@ We change the build folder because we have a gitignore for `/build`
 Warning: Receiving warning messages about Boost versions is normal.
 
 
-=== Known MSYS2 Build Issues ## {#known_issues_msys2}
+=== Known MSYS2 Build Issues
 
 There are some known issues that are specific to MSYS2.  This section provides a list of the
 currently known issues when building KiCad using MSYS2.
 
-==== Building with Boost 1.70 ### {#ki_msys2_boost_1_70}
+==== Building with Boost 1.70
 
 There is an issue building KiCad with Boost version 1.70 due to CMake not defining the proper
 link libraries during configuration.  Boost 1.70 can be used but `-DBoost_NO_BOOST_CMAKE=ON`
@@ -134,7 +134,7 @@ compilation errors about missing files, it is probably because your path is too 
 
 [source,bash]
 ----
-    git clone https://github.com/Alexpux/MINGW-packages /c/mwp
-    cd /c/mwp/mingw-w64-oce
-    makepkg-mingw -is
+git clone https://github.com/Alexpux/MINGW-packages /c/mwp
+cd /c/mwp/mingw-w64-oce
+makepkg-mingw -is
 ----

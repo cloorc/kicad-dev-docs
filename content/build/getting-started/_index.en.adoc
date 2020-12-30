@@ -13,26 +13,26 @@ Some of these tools are required to build from source and some are optional.
 
 === CMake Build Configuration Tool
 
-[CMake][] is the build configuration and makefile generation tool used by KiCad.  It is required.
+https://cmake.org[CMake] is the build configuration and makefile generation tool used by KiCad.  It is required.
 
 
 === Git Version Control System
 
-The official source code repository is hosted on [GitLab][] and requires [git][] to get
-the latest source. If you prefer to use [GitHub][] there is a read only mirror of the official
-KiCad repository. The previous official hosting location at [Launchpad][] is still active as
-a mirror. Changes should be submitted as [merge requests][] via GitLab.  The development team
+The official source code repository is hosted on https://gitlab.com/[GitLab] and requires [git][] to get
+the latest source. If you prefer to use https://github.com/[GitHub][] there is a read only mirror of the official
+KiCad repository. The previous official hosting location at https://launchpad.net/kicad/[Launchpad] is still active as
+a mirror. Changes should be submitted as https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html[merge requests] via GitLab.  The development team
 will not review changes submitted on GitHub or Launchpad as those platforms are mirrors only.
 
 === Doxygen Code Documentation Generator
 
-The KiCad source code is documented using [Doxygen][] which parses the KiCad source code files
+The KiCad source code is documented using https://www.doxygen.nl/index.html[Doxygen] which parses the KiCad source code files
 and builds a dependency tree along with the source documentation into HTML.  Doxygen is only
 required if you are going to build the KiCad documentation.
 
 === SWIG Simplified Wrapper and Interface Generator
 
-[SWIG][] is used to generate the Python scripting language extensions for KiCad.  SWIG is not
+http://www.swig.org/[SWIG] is used to generate the Python scripting language extensions for KiCad.  SWIG is not
 required if you are not going to build the KiCad scripting extension.
 
 == Library Dependencies
@@ -46,7 +46,7 @@ documentation to perform these tasks.
 
 === wxWidgets Cross Platform GUI Library
 
-[wxWidgets][] is the graphical user interface (GUI) library used by KiCad.  The current minimum
+http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library used by KiCad.  The current minimum
 version is 3.0.0.  However, 3.0.2 should be used whenever possible as there are some known bugs
 in prior versions that can cause problems on some platforms.  Please note that there are also
 some platform specific patches that must be applied before building wxWidgets from source.  These
@@ -57,7 +57,7 @@ verify that it was built with this option.
 
 === Boost C++ Libraries
 
-The [Boost][] C++ library is required only if you intend to build KiCad with the system installed
+The https://www.boost.org/[Boost] C++ library is required only if you intend to build KiCad with the system installed
 version of Boost instead of the default internally built version.  If you use the system installed
 version of Boost, version 1.56 or greater is required.  Please note there are some platform
 specific patches required to build a working Boost library.  These patches can be found in the
@@ -66,7 +66,7 @@ be applied against.
 
 === GLEW OpenGL Extension Wrangler Library
 
-The [OpenGL Extension Wrangler][GLEW] is an OpenGL helper library used by the KiCad graphics
+The http://glew.sourceforge.net/[OpenGL Extension Wrangler] is an OpenGL helper library used by the KiCad graphics
 abstraction library [GAL] and is always required to build KiCad.
 
 === ZLib Library
@@ -185,7 +185,7 @@ passed via the OCE_DIR flag.  This option is enabled by default.
 Alternatively KICAD_USE_OCC can be used instead of OCE. Both options are not supposed to be enabled
 at the same time.
 
-=== Wayland EGL support ## {#egl_opt}
+=== Wayland EGL support
 
 The KICAD_USE_EGL option switches the OpenGL backend from using X11 bindings to Wayland EGL bindings.
 This option is only relevant on Linux when running wxWidgets 3.1.5+ with the EGL backend of
