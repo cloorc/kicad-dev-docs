@@ -18,8 +18,8 @@ https://cmake.org[CMake] is the build configuration and makefile generation tool
 
 === Git Version Control System
 
-The official source code repository is hosted on https://gitlab.com/[GitLab] and requires [git][] to get
-the latest source. If you prefer to use https://github.com/[GitHub][] there is a read only mirror of the official
+The official source code repository is hosted on https://gitlab.com/[GitLab] and requires https://git-scm.com/[git] to get
+the latest source. If you prefer to use https://github.com/[GitHub] there is a read only mirror of the official
 KiCad repository. The previous official hosting location at https://launchpad.net/kicad/[Launchpad] is still active as
 a mirror. Changes should be submitted as https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html[merge requests] via GitLab.  The development team
 will not review changes submitted on GitHub or Launchpad as those platforms are mirrors only.
@@ -50,7 +50,7 @@ http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library u
 version is 3.0.0.  However, 3.0.2 should be used whenever possible as there are some known bugs
 in prior versions that can cause problems on some platforms.  Please note that there are also
 some platform specific patches that must be applied before building wxWidgets from source.  These
-patches can be found in the [patches folder][] in the KiCad source.  These patches are named by
+patches can be found in the https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder] in the KiCad source.  These patches are named by
 the wxWidgets version and platform name they should be applied against.  wxWidgets must be built
 with the --with-opengl option.  If you installed the packaged version of wxWidgets on your system,
 verify that it was built with this option.
@@ -61,7 +61,7 @@ The https://www.boost.org/[Boost] C++ library is required only if you intend to 
 version of Boost instead of the default internally built version.  If you use the system installed
 version of Boost, version 1.56 or greater is required.  Please note there are some platform
 specific patches required to build a working Boost library.  These patches can be found in the
-[patches folder][] in the KiCad source.  These patches are named by the platform name they should
+https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder] in the KiCad source.  These patches are named by the platform name they should
 be applied against.
 
 === GLEW OpenGL Extension Wrangler Library
@@ -71,33 +71,33 @@ abstraction library [GAL] and is always required to build KiCad.
 
 === ZLib Library
 
-The [ZLib][] development library is used by KiCad to handle compressed 3d models (.stpz and .wrz files)
+The http://www.zlib.net/[ZLib] development library is used by KiCad to handle compressed 3d models (.stpz and .wrz files)
 and is always required to build KiCad.
 
 === GLM OpenGL Mathematics Library
 
-The [OpenGL Mathematics Library][GLM] is an OpenGL helper library used by the KiCad graphics
+The http://glm.g-truc.net/[OpenGL Mathematics Library] is an OpenGL helper library used by the KiCad graphics
 abstraction library [GAL] and is always required to build KiCad.
 
 === GLUT OpenGL Utility Toolkit Library
 
-The [OpenGL Utility Toolkit][GLUT] is an OpenGL helper library used by the KiCad graphics
+The https://www.opengl.org/resources/libraries/glut/[OpenGL Utility Toolkit] is an OpenGL helper library used by the KiCad graphics
 abstraction library [GAL] and is always required to build KiCad.
 
 === Cairo 2D Graphics Library
 
-The [Cairo][] 2D graphics library is used as a fallback rendering canvas when OpenGL is not
+The http://cairographics.org/[Cairo] 2D graphics library is used as a fallback rendering canvas when OpenGL is not
 available and is always required to build KiCad.
 
 === Python Programming Language
 
-The [Python][] programming language is used to provide scripting support to KiCad.  It needs
+The https://www.python.org/[Python] programming language is used to provide scripting support to KiCad.  It needs
 to be installed unless the [KiCad scripting](#kicad_scripting) build configuration option is
 disabled.
 
 === wxPython Library
 
-The [wxPython][] library is used to provide a scripting console for Pcbnew.  It needs to be
+The http://wxpython.org/[wxPython] library is used to provide a scripting console for Pcbnew.  It needs to be
 installed unless the [wxPython scripting](#wxpython_scripting) build configuration option is
 disabled.  When building KiCad with wxPython support, make sure the version of the wxWidgets
 library and the version of wxPython installed on your system are the same.  Mismatched versions
@@ -105,23 +105,23 @@ have been known to cause runtime issues.
 
 === Curl Multi-Protocol File Transfer Library
 
-The [Curl Multi-Protocol File Transfer Library][libcurl] is used to provide secure internet
+The http://curl.haxx.se/libcurl/[Curl Multi-Protocol File Transfer Library] is used to provide secure internet
 file transfer access for the [GitHub][] plug in.  This library needs to be installed unless
 the GitHub plug build option is disabled.
 
 === OpenCascade Library
 
-The [OpenCascade Community Edition (OCE)][liboce] is used to provide support for loading and saving
+The https://github.com/tpaviot/oce[OpenCascade Community Edition (OCE)] is used to provide support for loading and saving
 3D model file formats such as STEP.  This library needs to be installed unless the OCE build
 option is disabled.
 
-[Open CASCSADE Technology (OCC)][libocc] should also work as an alternative to OCE. Selection of
+https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] should also work as an alternative to OCE. Selection of
 library Cascade library can be specified at build time.  See the [STEP/IGES support](#oce_opt)
 section.  When building OCC using the option BUILD_MODULE_Draw=OFF make building more easy
 
 ==== Ngspice Library
 
-The [Ngspice Library][libngspice] is used to provide Spice simulation support in the schematic
+The https://sourceforge.net/projects/ngspice/[Ngspice Library] is used to provide Spice simulation support in the schematic
 editor.  Make sure the the version of ngspice library used was built with the--with-ngshared
 option.  This library needs to be installed unless the Spice build option is disabled.
 
@@ -230,7 +230,7 @@ The KICAD_STDLIB_DEBUG option enables the full set of standard library assertion
 The KICAD_SANITIZE option enables Address Sanitizer support to trace memory allocations and
 accesses to identify problems. This option is disabled by default. The Address Sanitizer
 contains several runtime options to tailor its behavior that are described in more detail in its
-[documentation](https://github.com/google/sanitizers/wiki/AddressSanitizerFlags).
+https://github.com/google/sanitizers/wiki/AddressSanitizerFlags[documentation].
 
 This option is not supported on all build systems, and is known to have problems when using
 mingw.
@@ -293,12 +293,16 @@ can down load the source archive from the [GitLab][] repository.  Use tar or som
 other archive program to extract the source on your system.  If you are using tar, use the
 following command:
 
-    tar -xaf kicad_src_archive.tar.xz
+```sh
+tar -xaf kicad_src_archive.tar.xz
+```
 
 If you are contributing directly to the KiCad project on GitLab, you can create a local
 copy on your machine by using the following command:
 
-    git clone https://gitlab.com/kicad/code/kicad.git
+```sh
+git clone https://gitlab.com/kicad/code/kicad.git
+```
 
 Here is a list of source links:
 
@@ -320,5 +324,6 @@ As of version 5 of https://gcc.gnu.org/[GNU GCC], using the default configuratio
 building of Boost 1.54 will cause the KiCad build to fail.  Therefore a newer version of Boost
 must be used to build KiCad.  If your system has Boost 1.56 or greater installed, you job is
 straight forward.  If your system does not have Boost 1.56 or greater installed, you will have
-to download and [build Boost][] from source.  If you are building Boost on windows using [MinGW][]
-you will have to apply the Boost patches in the KiCad source [patches folder][].
+to download and http://www.boost.org/doc/libs/1_59_0/more/getting_started/index.html[build Boost] from source.  
+If you are building Boost on windows using http://mingw.org/[MinGW]
+you will have to apply the Boost patches in the KiCad source https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder].

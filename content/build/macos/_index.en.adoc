@@ -6,7 +6,7 @@ weight: 30
 
 == Building KiCad on macOS
 
-As of V5, building and packaging for macOS can be done using [kicad-mac-builder][],
+As of V5, building and packaging for macOS can be done using https://github.com/KiCad/kicad-mac-builder[kicad-mac-builder],
 which downloads, patches, builds, and packages for macOS.  It is used to create the official
 releases and nightlies, and it reduces the complexity of setting up a build environment to a command
 or two.  Usage of kicad-mac-builder is detailed at on its website.
@@ -20,7 +20,7 @@ minimum version.  It may be easiest to build for the same version you are runnin
 
 KiCad currently won't work with a stock version of wxWidgets that can be downloaded or
 installed by package managers like MacPorts or Homebrew. To avoid having to deal with
-patches a [KiCad fork of wxWidgets][] is being maintained on GitHub. All the needed patches
+patches a https://github.com/KiCad/wxWidgets[KiCad fork of wxWidgets] is being maintained on GitHub. All the needed patches
 and some other fixes/improvements are contained in the `kicad/macos-wx-3.0` branch.
 
 To perform a wxWidgets build, execute the following commands:

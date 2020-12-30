@@ -9,7 +9,7 @@ weight: 40
 === Environment Setup
 
 ==== Visual Studio
-You must first install [Visual Studio][] with the **Desktop development with C++** feature set installed.
+You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with C++** feature set installed.
 
 
 ==== vcpkg

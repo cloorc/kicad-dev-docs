@@ -10,8 +10,8 @@ weight: 30
 
 The https://www.msys2.org/[MSYS2] project provides packages for all of the require dependencies to build KiCad. 
 To setup the MSYS2
-build environment, depending on your system download and run either the [MSYS2 32-bit Installer][]
-or the [MSYS2 64-bit Installer].  After the installer is finished, update to the latest
+build environment, download and run  the [MSYS2 64-bit Installer] available from the msys2 home page.  
+After the installer is finished, update to the latest
 package versions by running the `msys2_shell.cmd` file located in the MSYS2 install path and
 running the command `pacman -Syu`.  If the msys2-runtime package is updated, close the shell
 and run `msys2_shell.cmd`.
@@ -23,7 +23,7 @@ for changes if you need to build for 32-bit instead.  Run `mingw64.exe` from the
 install path. At the command prompt run the the following commands:
 
 [source,bash]
-```
+----
 pacman -S base-devel \
             git \
             mingw-w64-x86_64-cmake \
@@ -54,7 +54,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
         -DDEFAULT_INSTALL_PATH=/mingw64 \
         ../../
 make -j N install   # Where N is the number of concurrent threads that your system can handle
-```
+----
 
 For 32-bit builds, run `mingw32.exe` and change `x86_64` to `i686` in the package names and
 change the paths in the cmake configuration from `/mingw64` to `/mingw32`.
