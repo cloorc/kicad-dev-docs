@@ -71,22 +71,24 @@ helpful subclasses created to make it easier to store complex data in JSON files
 The basic `PARAM` class is templated and is useful for storing any data type can be serialized to
 JSON automatically.  A basic instantiation of a `PARAM` might look like:
 
-----
+[source,cpp]
+```
     m_params.emplace_back( new PARAM<int>( "appearance.icon_scale",
                                            &m_Appearance.icon_scale, 0 ) );
-----
+```
 
 Here, `m_Appearance.icon_scale` is a public member of the settings object (an `int` inside a
 `struct`).  `"appearance.icon_scale"` is the **path** to store the value in the JSON file, and `0`
 is the default value.  This would result in JSON looking like this:
 
-----
+[source,json]
+```
     {
         "appearance": {
             "icon_scale": 0
         }
     }
-----
+```
 
 Note that it is possible to use custom types with `PARAM<>` as long as they have a `to_json` and
 `from_json` defined.  See `COLOR4D` for an example of this.
