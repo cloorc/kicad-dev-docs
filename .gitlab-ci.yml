@@ -1,0 +1,19 @@
+variables:
+    BASE_TAG: ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/${CI_COMMIT_REF_SLUG}
+
+stages:
+  - build
+
+build_site_docker:
+  image: docker:19.03.12
+  services:
+    - docker:19.03.12-dind
+  stage: build
+  before_script:
+    - docker info
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:latest" .
+    - docker push "$CI_REGISTRY_IMAGE:latest"
+  only:
+    - master
