@@ -9,7 +9,7 @@ defaultContentLanguageInSubdir= true
 ignoreFiles = [ "(^__|/__)(.+).adoc$" ]
 
 [params]
-  editURL = "https://gitlab.com/kicad/services/kicad-dev-docs/"
+  editURL = "https://gitlab.com/kicad/services/kicad-dev-docs/-/edit/master/"
   description = "KiCad Developer Documentation"
   author = "Mathieu Cornic"
   showVisitedLinks = true
