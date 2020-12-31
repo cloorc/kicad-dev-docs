@@ -1,5 +1,5 @@
-KiCad Dev Docs
-====================
+= KiCad Dev Docs
+
 
 This the source for the kicad developer documentation
 
