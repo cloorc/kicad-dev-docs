@@ -9,7 +9,7 @@ weight: 13
 
 The https://www.msys2.org/[MSYS2] project provides packages for all of the require dependencies to build KiCad. 
 To setup the MSYS2
-build environment, download and run  the [MSYS2 64-bit Installer] available from the msys2 home page.  
+build environment, download and run  the *MSYS2 64-bit Installer* available from the msys2 home page.  
 After the installer is finished, update to the latest
 package versions by running the `msys2_shell.cmd` file located in the MSYS2 install path and
 running the command `pacman -Syu`.  If the msys2-runtime package is updated, close the shell
