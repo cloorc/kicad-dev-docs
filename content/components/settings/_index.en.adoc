@@ -49,8 +49,8 @@ There are four main places a setting might be stored:
 
 The `JSON_SETTINGS` class is the backbone of the settings infrastructure.  It is a subclass of the
 `nlohmann::json::basic_json` class provided by `thirdparty/nlohmann_json/nlohmann/json.hpp`.  As
-such, anytime raw manipulation of the underlying JSON data is needed, you can use the [standard
-`nlohmann::json` API](https://nlohmann.github.io/json/api/basic_json/).  The JSON contents represent
+such, anytime raw manipulation of the underlying JSON data is needed, you can use the 
+https://nlohmann.github.io/json/api/basic_json/[standard nlohmann::json API].  The JSON contents represent
 the **state of the file on disk**, not the state of the data exposed to C++.  Synchronization
 between the two is done via parameters (see below) and takes place right after loading from disk and
 right before saving to disk.
