@@ -1,6 +1,6 @@
 ---
 title: Windows (Visual Studio)
-weight: 40
+weight: 14
 ---
 
 == Building using Visual Studio (2019)

@@ -1,6 +1,6 @@
 ---
 title: macOS
-weight: 30
+weight: 12
 ---
 
 == Building KiCad on macOS

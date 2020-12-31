@@ -1,6 +1,6 @@
 ---
 title: Windows (MSYS2)
-weight: 30
+weight: 13
 ---
 
 == Building using MSYS2
