@@ -11,11 +11,11 @@ be run from within Pcbnew.  The interface is generated using the `Simplified
 Wrapper and Interface Generator` or http://www.swig.org[SWIG].  SWIG is
 instructed to translate specific C/C++ header files into other languages using
 `interface` files.  These files ultimately decide what C/C++ functions, classes
-and other declarations are exported and can be found in `pcbnew/swig/`.
+and other declarations are exported and can be found in *pcbnew/swig/*.
 
 During build-time the SWIG interface files are used to generate the
 corresponding .py files.  These files are installed into Python's system-wide
-`dist-packages` repository, thus they can be imported by any Python 2
+*dist-packages* repository, thus they can be imported by any Python 2
 interpreter installed on the system.
 
 == Existing Pcbnew Python API documentation
@@ -25,15 +25,14 @@ file.  This approach is shown with some examples in the https://docs.kicad.org/m
 documentation].
 
 Another documentation source is the auto-generated Doxygen reference of the
-API. It can be found
-(http://docs.kicad.org/doxygen-python/namespacepcbnew.html[here].
+API. It can be found http://docs.kicad.org/doxygen-python/namespacepcbnew.html[here].
 
-== \`Action Plugin\` Support
+== "Action Plugin" Support
 Besides the stand-alone usage of the generated Python plugin interface,
 additional support regarding online manipulation of board projects is available
-for Pcbnew.  Plugins using this feature are called `Action Plugins` and they are
-accessible using a Pcbnew menu entry that can be found under `Tools->External
-Plugins`.  KiCad plugins that follow the `Action Plugin` conventions can be made
+for Pcbnew.  Plugins using this feature are called *Action Plugins* and they are
+accessible using a Pcbnew menu entry that can be found under *Tools->External
+Plugins*.  KiCad plugins that follow the *Action Plugin* conventions can be made
 to show up as external plugins in that menu and optionally as top toolbar button.
 The user can run the plugin resulting in calling a defined entry function in the
 Python plugin's code.
@@ -41,7 +40,7 @@ This function can then be used to access and manipulate the currently loaded
 board from the Python script environment.
 
 === Typical Plugin Structure
-The `Action Plugin` support is implemented in Pcbnew by discovering Python
+The *Action Plugin* support is implemented in Pcbnew by discovering Python
 packages and Python script files in specific directories on startup.
 In order for the discovery process to work, the following requirements must be met.
 
