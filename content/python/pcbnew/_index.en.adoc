@@ -49,24 +49,24 @@ In order for the discovery process to work, the following requirements must be m
   in `scripting/kicadplugins.i`.  You can always discover the search path for your
   setup by opening the scripting console and entering the command:
 
-        `import pcbnew; print pcbnew.PLUGIN_DIRECTORIES_SEARCH`
+`import pcbnew; print pcbnew.PLUGIN_DIRECTORIES_SEARCH`
 
-  Currently on a Linux Installation the plugins search path is
+Currently on a Linux Installation the plugins search path is
 
-    * /usr/share/kicad/scripting/plugins/
-    * ~/.kicad/scripting/plugins
-    * ~/.kicad_plugins/
+    * `/usr/share/kicad/scripting/plugins/``
+    * `~/.kicad/scripting/plugins`
+    * `~/.kicad_plugins/``
 
-  On Windows
+On Windows
 
-    * \%KICAD_INSTALL_PATH%/share/kicad/scripting/plugins
-    * \%APPDATA%/Roaming/kicad/scripting/plugins
+    * `%KICAD_INSTALL_PATH%/share/kicad/scripting/plugins`
+    * `%APPDATA%/Roaming/kicad/scripting/plugins`
 
-  On macOS, there is a security feature that makes it easier to add scripting plugins
-  to the ~/Library... path than to kicad.app, but the search path is
+On macOS, there is a security feature that makes it easier to add scripting plugins
+to the ~/Library... path than to kicad.app, but the search path is
 
-    * /Applications/kicad/Kicad/Contents/SharedSupport/scripting/plugins
-    * ~/Library/Application Support/kicad/scripting/plugins
+    * `/Applications/kicad/Kicad/Contents/SharedSupport/scripting/plugins`
+    * `~/Library/Application Support/kicad/scripting/plugins`
 
 * Alternatively a symbolic link can be created in the KiCad plugin path link to
   the plugin file/folder in another location of the file system. This can be
@@ -89,9 +89,11 @@ The folder structure of the simple plugin is fairly straight forward.
 A single Python script file is placed into a directory that is present in the
 KiCad plugin path.
 
-    + ~/.kicad_plugins/ # A folder in the KiCad plugin path
-        - simple_plugin.py
-        - simple_plugin.png (optional)
+----
++ ~/.kicad_plugins/ # A folder in the KiCad plugin path
+    - simple_plugin.py
+    - simple_plugin.png (optional)
+----
 
 The file `simple_plugin.py` contains the following.
 
@@ -133,16 +135,18 @@ Additionally, the same plugin can be executed standalone using `python -m`
 e.g. to perform tests on the Python code.
 The following folder structure shows how complex plugins are implemented:
 
-    + ~/.kicad_plugins/ # this directory has to be in the plugin path
-        + complex_plugin/ # The plugin directory (A Python package)
-            - __init__.py # This file is executed when the package is imported (on Pcbnew startup)
-            - __main__.py # This file is optional. See below
-            - complex_plugin_action.py # The ActionPlugin derived class lives here
-            - complex_plugin_utils.py # Other Python parts of the plugin
-            - icon.png
-            + otherstuff/
-                - otherfile.png
-                - misc.txt
+----
++ ~/.kicad_plugins/ # this directory has to be in the plugin path
+    + complex_plugin/ # The plugin directory (A Python package)
+        - __init__.py # This file is executed when the package is imported (on Pcbnew startup)
+        - __main__.py # This file is optional. See below
+        - complex_plugin_action.py # The ActionPlugin derived class lives here
+        - complex_plugin_utils.py # Other Python parts of the plugin
+        - icon.png
+        + otherstuff/
+            - otherfile.png
+            - misc.txt
+----
 
 It is recommended to name the file containing the ActionPlugin derived class as
 `<package-name>_action.py`.
