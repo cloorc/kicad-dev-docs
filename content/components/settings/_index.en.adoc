@@ -5,6 +5,8 @@ weight: 10
 
 :toc:
 
+NOTE: HELLO
+
 The settings framework manages application settings, as well as projects.  This document explains
 how to make use of the framework as well as some of its inner workings.
 

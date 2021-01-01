@@ -37,3 +37,10 @@ name = "<i class='fab fa-fw fa-gitlab'></i> GitLab repo"
 identifier = "ds"
 url = "https://gitlab.com/kicad/services/kicad-dev-docs"
 weight = 10
+
+
+[markup.asciidocExt]
+    noHeaderOrFooter = true
+    preserveTOC = false
+    [markup.asciidocExt.attributes]
+        icons = "font"
