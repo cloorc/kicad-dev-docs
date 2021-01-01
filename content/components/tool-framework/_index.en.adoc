@@ -3,6 +3,8 @@ title: Tool Framework
 weight: 18
 ---
 
+:toc:
+
 This document briefly outlines the structure of the tool system in the
 GAL canvases.
 

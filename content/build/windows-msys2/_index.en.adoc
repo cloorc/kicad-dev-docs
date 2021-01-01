@@ -4,6 +4,8 @@ weight: 13
 summary: Guide on building KiCad using MSYS2
 ---
 
+:toc:
+
 == Building using MSYS2
 
 === Setup

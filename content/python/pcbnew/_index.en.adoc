@@ -4,6 +4,7 @@ title: PcbNew Plugins
 weight: 18
 ---
 
+:toc:
 
 KiCad implements a Python plugin interface so that external Python plugins can
 be run from within Pcbnew.  The interface is generated using the `Simplified

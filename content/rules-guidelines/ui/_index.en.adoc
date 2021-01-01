@@ -4,6 +4,8 @@ weight: 10
 summary: Rules on how the user interface elements should be implemented
 ---
 
+:toc:
+
 == User Interface Guidelines
 
 This document defines the guidelines for user interface development in

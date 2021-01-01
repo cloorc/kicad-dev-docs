@@ -4,6 +4,8 @@ weight: 2
 summary: The guidelines describing how git commit messages should be formatted
 ---
 
+:toc:
+
 == Commit Message Format Policy
 
 

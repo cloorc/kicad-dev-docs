@@ -3,6 +3,8 @@ title: Testing
 weight: 20
 ---
 
+:toc:
+
 == Unit tests
 
 KiCad has a limited number of unit tests, which can be used to
