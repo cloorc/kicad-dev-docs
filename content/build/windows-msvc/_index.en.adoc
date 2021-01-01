@@ -2,6 +2,7 @@
 title: Windows (Visual Studio)
 weight: 14
 summary: Guide on building KiCad using Microsoft Visual Studio and vcpkg
+tags: ["windows"] 
 ---
 :toc:
 

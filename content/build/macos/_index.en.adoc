@@ -2,6 +2,7 @@
 title: macOS
 weight: 12
 summary: Instructions for macOS using cmake and clang
+tags: ["macos"] 
 ---
 
 :toc:
