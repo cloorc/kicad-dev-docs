@@ -3,8 +3,6 @@ title: S-Expressions
 weight: 21
 ---
 
-== Introduction
-
 An s-expression is a text stream or string, in the same vain as XML, consisting
 of a sequence of elements. Each element is either an atom or list. An atom
 corresponds to a string, while a list corresponds to an s-expression. 

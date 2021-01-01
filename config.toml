@@ -12,13 +12,13 @@ ignoreFiles = [ "(^__|/__)(.+).adoc$" ]
   editURL = "https://gitlab.com/kicad/services/kicad-dev-docs/-/edit/master/"
   description = "KiCad Developer Documentation"
   author = "Mathieu Cornic"
-  showVisitedLinks = true
+  showVisitedLinks = false
   disableBreadcrumb = false
   disableNextPrev = true
   disableLandingPageButton = true
   disableMermaid = false
   customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
-  titleSeparator = "::"
+  titleSeparator = "|"
   themeVariant = "blue"
 
 [outputs]
@@ -26,7 +26,7 @@ home = [ "HTML", "RSS", "JSON"]
 
 [Languages]
 [Languages.en]
-title = "KiCad Developer Documentation"
+title = "Developer Documentation | KiCad"
 weight = 1
 languageName = "English"
 landingPageURL = "/en"

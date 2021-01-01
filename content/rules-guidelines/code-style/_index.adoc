@@ -1,6 +1,7 @@
 ---
 title: Code Style Policy
 weight: 2
+summary: The code style guidelines that must be met for any contribution to KiCad's application codebase.
 ---
 
 == 1. Introduction

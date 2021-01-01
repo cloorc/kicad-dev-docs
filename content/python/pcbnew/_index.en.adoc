@@ -5,7 +5,6 @@ weight: 18
 ---
 
 
-== Introduction
 KiCad implements a Python plugin interface so that external Python plugins can
 be run from within Pcbnew.  The interface is generated using the `Simplified
 Wrapper and Interface Generator` or http://www.swig.org[SWIG].  SWIG is

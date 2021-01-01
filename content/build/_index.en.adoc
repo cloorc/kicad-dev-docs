@@ -5,7 +5,7 @@ pre: "<b>1. </b>"
 ---
 
 
-== 1. Building KiCad from Source
+== Building KiCad from Source
 If you are a user and not a developer, please consider using one of the prebuilt packages
 of KiCad which can be found at the https://kicad.org/download/[download] page on the https://kicad.org/[KiCad website].  Building KiCad
 from source is not for the faint of heart and is not recommended unless you have reasonable
@@ -17,3 +17,6 @@ supported platforms are Windows Versions 7-10, just about any version of Linux, 
 10.9-10.13.  You may be able to build KiCad on other platforms but it is not supported.  On
 Windows and Linux the https://gcc.gnu.org/[GNU GCC] is the only supported compiler and on macOS http://clang.llvm.org/[Clang] is the
 only supported compiler.
+
+== Pages
+{{% children description="true" %}}

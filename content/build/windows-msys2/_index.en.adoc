@@ -1,6 +1,7 @@
 ---
 title: Windows (MSYS2)
 weight: 13
+summary: Guide on building KiCad using MSYS2
 ---
 
 == Building using MSYS2

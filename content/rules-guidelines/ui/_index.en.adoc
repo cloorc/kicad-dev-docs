@@ -1,6 +1,7 @@
 ---
 title: UI Policy
 weight: 10
+summary: Rules on how the user interface elements should be implemented
 ---
 
 == User Interface Guidelines

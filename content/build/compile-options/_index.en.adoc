@@ -1,6 +1,7 @@
 ---
 title: Compile Options
 weight: 17
+summary: Summary of compile options via CMake Config
 ---
 
 These are options that are passed to cmake during configuration

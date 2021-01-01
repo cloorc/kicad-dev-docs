@@ -2,5 +2,6 @@
 title: Rules and Guidelines
 weight: 6
 pre: "<b>2. </b>"
-chapter: true
 ---
+
+{{% children description="true" %}}

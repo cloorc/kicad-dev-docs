@@ -1,6 +1,7 @@
 ---
 title: Commit Policy
 weight: 2
+summary: The guidelines describing how git commit messages should be formatted
 ---
 
 == Commit Message Format Policy
