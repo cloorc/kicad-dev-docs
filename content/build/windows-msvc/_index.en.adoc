@@ -12,7 +12,7 @@ tags: ["windows"]
 
 ==== Visual Studio
 You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with C++** feature set installed.
-
+Additionally, you'll need to make sure the optional component link:https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-160#installation[**C++ CMake tools for Windows**] is installed.
 
 ==== vcpkg
 **If you are new to vcpkg** you must, pick a spot on your system to put it.
