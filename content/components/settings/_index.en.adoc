@@ -3,14 +3,10 @@ title: Settings Framework
 weight: 10
 ---
 
-:toc:
-
-NOTE: HELLO
-
 The settings framework manages application settings, as well as projects.  This document explains
 how to make use of the framework as well as some of its inner workings.
 
-## Source Code Guide
+== Source Code Guide
 
 Most of the relevant code is in `common/settings` and `common/project`.
 
@@ -28,7 +24,7 @@ Most of the relevant code is in `common/settings` and `common/project`.
 |`PROJECT_LOCAL_SETTINGS` | A `JSON_SETTINGS` representing a project local state (`.kicad_prl`) file
 |===
 
-## Where Settings are Stored
+== Where Settings are Stored
 
 There are four main places a setting might be stored:
 
@@ -48,7 +44,7 @@ There are four main places a setting might be stored:
    (for many users, at least) not be checked in to source control.  Any setting here should be
    transient, meaning there will be no ill effect if the entire file is deleted.
    
-## JSON_SETTINGS
+== JSON_SETTINGS
 
 The `JSON_SETTINGS` class is the backbone of the settings infrastructure.  It is a subclass of the
 `nlohmann::json::basic_json` class provided by `thirdparty/nlohmann_json/nlohmann/json.hpp`.  As
@@ -58,7 +54,7 @@ the **state of the file on disk**, not the state of the data exposed to C++.  Sy
 between the two is done via parameters (see below) and takes place right after loading from disk and
 right before saving to disk.
    
-## Parameters
+== Parameters
 
 Parameters establish the link between C++ data and content in the JSON file. In general, parameters
 consist of a **path**, **pointer**, and **default value**.  The path is a string of the form
@@ -99,7 +95,7 @@ to define a "getter" and "setter" as part of the parameter definition.  You can 
 a `nlohmann::json` object and store it as the "value" of your parameter.  For examples of how this
 is done, see `NET_SETTINGS`.
 
-## NESTED_SETTINGS
+== NESTED_SETTINGS
 
 The `NESTED_SETTINGS` class is like a `JSON_SETTINGS` but instead of a file for a backing store, it
 uses another `JSON_SETTINGS` object.  The entire contents of a `NESTED_SETTINGS` are stored as the
@@ -122,7 +118,7 @@ manager, for example) while a frame that uses a nested settings inside it can be
 destroyed.  When the nested settings is destroyed, it ensures that its data is stored to the JSON
 data of the parent.  The parent `JSON_SETTINGS` can then be saved to disk, if desired.
 
-## Schema Version and Migrations
+== Schema Version and Migrations
 
 Settings objects have a **schema version**, which is a const integer that can be incremented when a
 migration is needed.  The schema version in the code is compared to that in the loaded file, and if
