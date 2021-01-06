@@ -307,8 +307,9 @@ When printed, the debug will be prefixed with a timestamp and the trace mask:
 
     11:22:33: Trace: (TRACEMASK) My trace, value: 42
 
-If you add a trace mask, define and document the mask as a variable in
-`include/trace_helpers.h`. This will add it to the http://docs.kicad.org/doxygen/group__trace__env__vars.html[trace mask documentation].
+If you add a trace mask, define and document the mask as a variable in `include/trace_helpers.h`.
+This will add it to the link:http://docs.kicad.org/doxygen/group$$__trace__env__$$vars.html[trace
+mask documentation].
 
 Some available masks:
 
