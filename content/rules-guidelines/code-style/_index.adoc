@@ -151,7 +151,7 @@ all capital letters.
 
 === 2.2 Local, Private and Automatic Variables
 The first character of automatic, static local, and private variable
-names should be lower case. This indicates that the variable will not be
+names must be lower case. This indicates that the variable will not be
 “visible” outside of the function, file, or class where they are
 defined, respectively. The limited visibility is being acknowledged with
 the lowercase starting letter, where lowercase is considered to be less
@@ -165,8 +165,17 @@ boisterous than uppercase.
     static char* static_variable = NULL;
 ----
 
+Private class and struct members must be prefixed with `m_` and the first
+character after the `m_` prefix must also be lowercase:
+
+[source,cpp]
+----
+private:
+    int m_privateData;
+----
+
 === 2.3 Public and Global Variables
-The first character of public and global variable names are to be
+The first character of public and global variable names must be
 uppercase. This indicates that the variable is visible outside the class
 or file in which it was defined. (An exception is the use of prefix `g_`
 which is also sometimes used to indicate a global variable.)
@@ -176,6 +185,16 @@ which is also sometimes used to indicate a global variable.)
 ----
     char* GlobalVariable;
 ----
+
+In general, classes should not use public member variables, and instead
+should use getter/setter methods to access private members. The exception
+is classes that are essentially data structures with some helper methods.
+For example, the `SEG` class is used frequently as a data structure
+representing a line segment between two points.  This class has public
+member variables `A` and `B` storing those points.  This is acceptable
+because the `SEG` class meets that definition of being essentially a data
+structure, and because there is no need for side-effects when changing
+`A` or `B`.
 
 === 2.4 Local, Private and Static Functions
 The first character of local, private, and static functions should be
@@ -546,7 +565,7 @@ or:
 ----
 
 === 4.11 Class Definition Layout
-When defining classes member variables should be placed at the bottom
+When defining classes, member variables should be placed at the bottom
 and methods should be placed above the member variables.  The scope
 ordering of the class should be public, protect, then private.  Do not
 redefine the same scope multiple times in a row.  Here is an example
@@ -569,6 +588,19 @@ class definition:
         // Private not redefined here unless no private methods.
         int m_privateMemberVariable;
     };
+----
+
+=== 4.12 Getters and Setters
+Class methods used to read and write from private class members
+without any other side effects are permitted to violate several
+of the normal formatting rules in order to improve legibility.
+These methods can exist all on one line, with no blank line between:
+
+[source,cpp]
+----
+public:
+    wxString GetFoo() const { return m_foo; }
+    void SetFoo( const wxString& aFoo ) { m_foo = aFoo; }
 ----
 
 
