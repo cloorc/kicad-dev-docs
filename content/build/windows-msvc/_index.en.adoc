@@ -73,3 +73,9 @@ Launch Visual Studio (only after completing the above steps).
 
 When the initial wizard launches, select to **Open a local folder**
 This is the correct way to make Visual Studio directly handle *CMake* projects.
+
+
+=== Visual Studio Extensions
+
+==== Trailing Whitespace Remover
+It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
