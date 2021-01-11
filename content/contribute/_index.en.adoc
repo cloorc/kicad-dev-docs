@@ -61,7 +61,7 @@ Your commit messages should follow the rules stated in the link:/rules-guideline
 Commit Message Format Policy]
 
 If you feel like working on the user interface, you will find useful reading the
-link:/rules-guidelines/[User Interface Guidelines].
+link:/rules-guidelines/ui/[User Interface Guidelines].
 
 It's important for us to keep the codebase readable by
 all developers. Your patches will not be accepted until adhere to the rules set forth in these
