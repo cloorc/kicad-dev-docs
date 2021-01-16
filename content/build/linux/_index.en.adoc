@@ -16,12 +16,32 @@ cd <your kicad source mirror>
 mkdir -p build/release
 mkdir build/debug               # Optional for debug build.
 cd build/release
-cmake -DCMAKE_BUILD_TYPE=Release \
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
         ../../
 make
 sudo make install
 ```
 
 If the CMake configuration fails, determine the missing dependencies and install them on your
-system.  By default, CMake sets the install path on Linux to /usr/local.  Use the
-CMAKE_INSTALL_PREFIX option to specify a different install path.
+system.  By default, CMake sets the install path on Linux to `/usr/local`.  Use the
+`CMAKE_INSTALL_PREFIX` option to specify a different install path.
+
+We recommend using the `RelWithDebInfo` build type for personal release builds, as this will
+include debugging symbols that will give you more useful stack traces in case you encounter a
+crash.
+
+Replace `RelWithDebInfo` with `Debug` for debug builds.
+
+=== Tips and Tricks
+
+==== Ninja
+
+KiCad builds faster using the Ninja build system in place of `make`.  To use Ninja,
+you can specify Ninja output on your CMake command line:
+
+[source,sh]
+```
+cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo ../../
+ninja
+sudo ninja install
+```
