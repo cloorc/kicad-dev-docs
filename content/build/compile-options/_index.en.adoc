@@ -14,26 +14,26 @@ These are options that are passed to cmake during configuration
 |Option                             | Description                                               | Default
 |KICAD_SCRIPTING                    | Build the Python scripting support inside KiCad binaries. | ON
 |KICAD_SCRIPTING_MODULES            | Build native portion of the pcbnew Python module: _pcbnew.{pyd,so} for OS command line use of Python. +
-                                      If using WXPYTHON, the python version must be the same as the version used to build wxPython 
+                                      If using WXPYTHON, the python version must be the same as the version used to build wxPython
                                                                                                 | ON
 |KICAD_SCRIPTING_PYTHON3            | Build for Python 3 instead of 2. | OFF
-|KICAD_SCRIPTING_WXPYTHON           | Build wxPython implementation for wx interface building in Python and py.shell. 
+|KICAD_SCRIPTING_WXPYTHON           | Build wxPython implementation for wx interface building in Python and py.shell.
                                                                                                 | ON
 |KICAD_SCRIPTING_WXPYTHON_PHOENIX   | Use new wxPython binding.                                 | OFF
-|KICAD_SCRIPTING_ACTION_MENU        | Build a tools menu with registered python plugins: actions plugins. 
+|KICAD_SCRIPTING_ACTION_MENU        | Build a tools menu with registered python plugins: actions plugins.
                                                                                                 | ON
 |KICAD_USE_OCE                      | Build tools and plugins related to OpenCascade Community Edition. +
-                                        Needed to support import/export STEP 
+                                        Needed to support import/export STEP
                                                                                                 | ON
 |KICAD_USE_OCC                      | Build tools and plugins related to OpenCascade Technology. +
-                                      Overrides KICAD_USE_OCE 
+                                      Overrides KICAD_USE_OCE
                                                                                                 | OFF
 |KICAD_INSTALL_DEMOS                | Install KiCad demos and examples.                         | ON
 |KICAD_BUILD_QA_TESTS               | Build software Quality assurance unit tests.              | ON
 |KICAD_SPICE                        | Build KiCad with internal Spice simulator.                | ON
-|KICAD_USE_FONT_REDUCED_SET         | Build KiCad with a reduced font set, without CKJ font. +
-                                      Avoid out of memory issue with some graphic cards on OpenGL.
-                                                                                                | OFF
+|KICAD_BUILD_I18N                   | Build the translation language libraries                  | OFF
+|KICAD_I18N_UNIX_STRICT_PATH        | Install the language libraries to the standard UNIX install path +
+                                      of ${CMAKE_INSTALL_PREFIX}/share/locale                   | OFF
 |BUILD_SMALL_DEBUG_FILES            | In debug build: create smaller binaries. +
                                       On Windows, binaries created by link option -g3 are *very large* +
                                       (more than 1Gb for pcbnew, and more than 3Gb for the full kicad suite) +
@@ -42,7 +42,7 @@ These are options that are passed to cmake during configuration
                                                                                                 | OFF
 |MAINTAIN_PNGS                      | Allow build/rebuild bitmap icons used in menus from the corresponding .svg file. +
                                       Set to true if you are a PNG maintainer and have the required tools given +
-                                      in the bitmaps_png/CMakeLists.txt file              
+                                      in the bitmaps_png/CMakeLists.txt file
                                                                                                 | OFF
 
 |===
@@ -61,7 +61,7 @@ These are options that are passed to cmake during configuration
 |KICAD_STDLIB_LIGHT_DEBUG           | Build KiCad with libstdc++ with -Wp,-D_GLIBCXX_ASSERTIONS flag enabled. +
                                       Not as intrusive as KICAD_STDLIB_DEBUG
                                                                                                 | OFF
-|KICAD_BUILD_PARALLEL_CL_MP         | Build in parallel using the /MP compiler option (Default OFF for safety reasons).          
+|KICAD_BUILD_PARALLEL_CL_MP         | Build in parallel using the /MP compiler option (Default OFF for safety reasons).
                                                                                                  | OFF
 |KICAD_USE_VALGRIND                 | Build KiCad with valgrind stack tracking enabled.          | OFF
 |===
@@ -119,3 +119,9 @@ the 2nd tier's control will be built. If it decides it wants to march in
 lockstep with `USE_KIWAY_DLLS`, then this local CMakeLists.txt file may pass a
 defined `BUILD_KIWAY_DLL` (singular) on the compiler command line to the
 pertinent set of compilation steps under its control.
+
+=== Note 4
+
+When building with `KICAD_BUILD_I18N` on Linux systems, gettext needs the rule files
+`shared-mime-info.its` and `metainfo.its`/`appdata.its` to translate the Linux
+metadata files.
