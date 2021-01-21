@@ -14,13 +14,17 @@ tags: ["windows"]
 You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with C++** feature set installed.
 Additionally, you'll need to make sure the optional component https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-160#installation[C{plus}{plus} CMake tools for Windows] is installed.
 
-==== vcpkg
+==== vcpkg (kicad fork required)
+
+KiCad maintains a fork of vcpkg to provide us with a wxPython port. 
+It also allows us to lock our dependencies as vcpkg updates fairly frequently.
+
 **If you are new to vcpkg** you must, pick a spot on your system to put it.
 Then run these three commands
 
 [source,powershell]
 ```
-git clone https://github.com/microsoft/vcpkg
+git clone https://gitlab.com/kicad/packaging/vcpkg
 .\vcpkg\bootstrap-vcpkg.bat
 .\vcpkg\vcpkg integrate install
 ```
