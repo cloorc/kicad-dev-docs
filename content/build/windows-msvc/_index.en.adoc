@@ -51,17 +51,21 @@ The following packages are required for vcpkg
 .\vcpkg install gettext
 .\vcpkg install glm
 .\vcpkg install icu
+.\vcpkg install libxslt
 .\vcpkg install ngspice
 .\vcpkg install opencascade
 .\vcpkg install opengl
 .\vcpkg install openssl
 .\vcpkg install python3
+.\vcpkg install wxpython
 .\vcpkg install wxwidgets
 .\vcpkg install zlib
 ```
 
 If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will have to append
 :x64-windows to end of each packages name, `boost:x64-windows` for example.
+
+NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg
 
 ==== 2. CMakeSettings.json
 Contained in the build root is a `CMakeSettings.json.sample`, copy and rename this file to `CMakeSettings.json`
