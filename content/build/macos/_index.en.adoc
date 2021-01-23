@@ -2,14 +2,14 @@
 title: macOS
 weight: 12
 summary: Instructions for macOS using cmake and clang
-tags: ["macos"] 
+tags: ["macos"]
 ---
 
 :toc:
 
 == Building KiCad on macOS
 
-As of V5, building and packaging for macOS can be done using https://github.com/KiCad/kicad-mac-builder[kicad-mac-builder],
+As of V5, building and packaging for macOS can be done using https://gitlab.com/kicad/packaging/kicad-mac-builder[kicad-mac-builder],
 which downloads, patches, builds, and packages for macOS.  It is used to create the official
 releases and nightlies, and it reduces the complexity of setting up a build environment to a command
 or two.  Usage of kicad-mac-builder is detailed at on its website.
