@@ -216,7 +216,7 @@ enables clever and concise Doxygen comments.
 **Example**
 [source,cpp]
 ----
-    /*/** */*
+    /**
      * Copy aFoo into this instance.
      */
     void SetFoo( int aFoo );
@@ -243,7 +243,7 @@ We do not use `this->` to access either member variables or member
 functions from within the containing class. We let C++ perform this for
 us.
 
-=== 2.8 Use of 'auto' ##
+=== 2.8 Use of 'auto'
 We do -not- use `auto` to reduce repetition.  We do use it to increase
 readability.  This generally means -only- use `auto` where std::lib gets
 overly verbose (such as iterators or `std::make_shared`), or when not using
@@ -261,6 +261,12 @@ line comments can use either the C++ or the C commenting style, but C++
 comments are preferred for single line comments or comments consisting
 of only a few lines.
 
+Avoid stating the obvious in comments.  Adding a comment that states this
+is a dtor, ctor, function, iterator, etc. just adds noise to the comment.
+Any sufficiently experience developer can recognize this.  Avoid comments
+that state what code does.  It should be obvious what code does or it
+should be rewritten so that it is obvious.
+
 === 3.1 Blank Lines Above Comments
 If a comment is the first thing on a line, then that comment should have
 one or more blank lines above them. One blank line is preferred.
@@ -268,8 +274,7 @@ one or more blank lines above them. One blank line is preferred.
 === 3.2 Doxygen
 Doxygen is a C++ source code documenting tool used by the project.  Descriptive
 *.html files can be generated from the source code by installing Doxygen and
-building the target named **doxygen-docs** and **dev-docs** that include this
-document.
+building the target named **doxygen-docs**.
 
 [source,sh]
 ```
@@ -277,44 +282,57 @@ document.
     make doxygen-docs
 ```
 
-The generated source \*.html files will be placed into
-\<kicad\_project\_base\>/Documentation/doxygen/html/ and the developer's
-\*.html files will be placed into
-\<kicad\_project\_base\>/Documentation/development/doxygen/html/
+The generated source *.html files will be placed into
+<kicad_project_base>/Documentation/doxygen/html/.
 
-Doxygen comments are used to build developer documentation from the
-source code. They should normally be only placed in header files and not
-in \*.cpp files. This eliminates the obligation to keep two comments in
-agreement with each other.  If the class, function, or enum, etc. is
-only defined in a \*.cpp source file and not present in any header file,
-in which case the Doxygen comments should go into the \*.cpp source file.
-Again, avoid duplicating the Doxygen comments in both the header and
-\*.cpp source files.
+Doxygen comments are used to build developer documentation from the source
+code. They should normally be only placed in header files (.h) and not in
+source files (.cpp). This eliminates the obligation to keep two comments
+in agreement with each other.  If the class, function, or enum, etc. is
+only defined in a source file and not present in any header file, in which
+case the Doxygen comments should go into the source file.  Again, avoid
+duplicating the Doxygen comments in both the header and source files.
 
-KiCad uses the JAVADOC comment style defined in the 
-http://www.doxygen.nl/manual/docblocks.html[doccode] 
+KiCad uses the JAVADOC comment style defined in the
+http://www.doxygen.nl/manual/docblocks.html[doccode]
 section of the Doxygen http://www.doxygen.nl/manual[manual]. Don't forget
-to use the special Doxygen tags: bug, todo, deprecated, etc., so other
-developers can quickly get useful information about your code. It is
-good practice to actually generate the Doxygen \*.html files by
-building target doxygen-docs, and then to review the quality of your
-Doxygen comments with a web browser before submitting a patch.
+to use the https://www.doxygen.nl/manual/commands.html[special Doxygen tags]
+: bug, todo, deprecated, etc., so other developers can quickly get useful
+information about your code. It is good practice to actually generate the
+Doxygen *.html files by building target doxygen-docs, and then to review the
+quality of your Doxygen comments with a web browser before submitting a
+patch.
 
+Avoid defining class and function names and argument and return data types.
+This redundant information can easily be read by other developers and shows
+up as redundant information in the generated documentation.
+
+Use https://www.doxygen.nl/manual/markdown.html[Doxygen's markdown]
+syntax where possible instead of HTML tags.  Markdown makes for more
+readable comments than mark up languages.
+
+Use https://www.doxygen.nl/manual/autolink.html[Doxygen links] when referring
+to other code in Doxygen comments.  This makes information easier to find for
+other developers.
+
+Group related sections of comments together as much as possible  using the
+https://www.doxygen.nl/manual/grouping.html[Doxygen grouping commands].  This
+makes finding related information easier than having it spread across
+multiple document pages.
 
 ==== 3.2.1 Function Comments
 These go into a header file, unless the function is a private (i.e.
-static) function known only to a \*.cpp file. The format of a function
+static) function known only to a source file. The format of a function
 comment is chosen to serve a dual purpose role: delineation of the
 function declaration within the source code and to create a consistent
-leading sentence in the doxygen html output. The chosen format is
-to use a descriptive single line sentence, followed by a blank line,
-followed by an optional detailed description as the shown in the example
-below.
+leading sentence in the Doxygen html output. The chosen format is to use
+a descriptive single line sentence, followed by a blank line, followed
+by an optional detailed description as the shown in the example below.
 
 **Example**
 [source,cpp]
 ----
-    /*/** */*
+    /**
      * Format and write text to an output stream.
      *
      * A really detailed description goes here if it's needed.
@@ -330,21 +348,22 @@ below.
 ----
 
 The single line description goes on the 2nd line of the comment. The
-\@return keyword if present, should describe the return value followed
-by a hyphen. The \@param keyword names a function parameter and the text
-following should flow like a normal English sentence.
+@return keyword if present, should describe the return value followed
+by a hyphen. The @param keyword names a function parameter and the text
+following should flow like a normal English sentence including proper
+punctuation.
 
 ==== 3.2.2 Class Comments
 A class comment describes a class declaration by giving the purpose and
 use of the class. Its format is similar to a function comment. Doxygen
 can use the html \<p\> (paragraph designation) to begin a new paragraph
 in its output. So if the text of the comment is large, break it put into
-multiple paragraphs.
+multiple paragraphs as required.
 
 **Example**
 [source,cpp]
 ----
-    /*/** */*
+    /**
      * An interface (abstract) class used to output UTF8 text in a
      * convenient way.
      *
@@ -374,12 +393,12 @@ The indentation level for the KiCad source code is defined as four
 spaces. Please do not use tabs.
 
 ==== 4.1.1 Defines
-There should be only one space after a \#define statement.
+There should be only one space after a `#define` statement.
 
 ==== 4.1.2 Column Alignment
 Please try to align multiple consecutive similar lines into consistent
-columns when possible, such as \#define lines which can be thought of as
-containing 4 columns: \#define, symbol, value, and comment. Notice how
+columns when possible, such as #define lines which can be thought of as
+containing 4 columns: `#define`, symbol, value, and comment. Notice how
 all 4 columns are aligned in the example below.
 
 **Example**
@@ -453,7 +472,7 @@ manually remove it. Trailing whitespace is known to break some text
 parsing tools. It also leads to unnecessary diffs in the version control
 system. Please remove trailing whitespace.
 
-=== 4.6 Multiple Statements per Line ## {#multiple_statements_per_line}
+=== 4.6 Multiple Statements per Line
 It is generally preferred that each statement be placed on its own line.
 This is especially true for statements without keywords.
 
@@ -617,7 +636,7 @@ Debugging output is a common method for validating code. However, it
 should not always active in debug builds. This makes it difficult for
 other developers to see their debugging output and can have a significant
 impact on the performance of debug builds. I you need to use debugging
-output, use link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug] 
+output, use link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug]
 instead of `printf` or C++ output stream.  If
 you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
@@ -635,17 +654,17 @@ variable string should be documented by either adding it to the
 comment `\ingroup trace_env_vars`.
 
 == 7. Header Files
-Project \*.h source files should:
+Project *.h source files should:
 
 - contain a license statement
-- contain a nested include \#ifndef
+- contain a nested include `#ifndef`
 - be fully self standing and not depend on other headers that are not
   included within it.
 
 The license statement was described above.
 
 === 7.1 Nested Include #ifndef
-Each header file should include an \#ifndef which is commonly used to
+Each header file should include an `#ifndef` which is commonly used to
 prevent compiler errors in the case where the header file is seen
 multiple times in the code stream presented to the compiler. Just
 after the license statement, at the top of the file there should be
@@ -665,10 +684,10 @@ And at the very bottom of the header file, use a line like this one:
     #endif // RICHIO_H_
 ----
 
-The \#ifndef wrapper begins after the license statement, and ends at
+The `#ifndef` wrapper begins after the license statement, and ends at
 the very bottom of the file. It is important that it wrap any nested
-\#include statements, so that the compiler can skip them if the
-\#ifndef evaluates to false, which will reduce compilation time.
+`#include` statements, so that the compiler can skip them if the
+`#ifndef` evaluates to false, which will reduce compilation time.
 
 === 7.2 Headers Without Unsatisfied Dependencies
 Any header file should include other headers that it depends on. (Note:
@@ -685,8 +704,8 @@ header file should compile without error.
     $ g++ wx-config --cxxflags -I . xnode.h -o /tmp/junk
 
 Such structuring of the header files removes the need within a client
-\*.cpp file to include some project header file before some other project
-header file. (A client \*.cpp file is one that intends to **use, not
+*.cpp file to include some project header file before some other project
+header file. (A client *.cpp file is one that intends to **use, not
 implement,** the public API exposed within the header file.)
 
 Client code should not have to piece together things that a header file
@@ -698,16 +717,16 @@ which is exposed needs to be fully usable merely by including the header
 file that exposes it, with no additional includes.
 
 For situations where there is a class header file and an
-implementation \*.cpp file, it is desirable to hide as much of the
+implementation *.cpp file, it is desirable to hide as much of the
 private implementation as is practical and any header file that is not
 needed as part of the public API can and should be included only in
-the implementation \*.cpp file. However, the number one concern of
+the implementation *.cpp file. However, the number one concern of
 this section is that client (using) code can use the public API which
 is exposed in the header file, merely by including that one header
 file.
 
 
-== 8. When in Doubt... 
+== 8. When in Doubt...
 When editing existing source code files and there are multiple acceptable
 code formatting options or no formatting is defined, follow the existing
 formatting in the file.
@@ -775,7 +794,7 @@ below was taken directly from the KiCad source.
 
 
 
-    /*/** */*
+    /**
      * A class used to hold an error message and may be used to throw exceptions
      * containing meaningful error messages.
      */
@@ -795,7 +814,7 @@ below was taken directly from the KiCad source.
     };
 
 
-    /*/** */*
+    /**
      * Read single lines of text into a buffer and increments a line number counter.
      */
     class LINE_READER
@@ -811,7 +830,7 @@ below was taken directly from the KiCad source.
 
     public:
 
-        /*/** */*
+        /**
          * @param aFile is an open file in "ascii" mode, not binary mode.
          * @param aMaxLineLength is the number of bytes to use in the line buffer.
          */
@@ -831,7 +850,7 @@ below was taken directly from the KiCad source.
         }
         */
 
-        /*/** */*
+        /**
          * Read a line of text into the buffer and increments the line number
          * counter.
          *
@@ -858,7 +877,7 @@ below was taken directly from the KiCad source.
 
 
 
-    /*/** */*
+    /**
      * An interface (abstract class) used to output ASCII text in a convenient way.
      *
      * The primary interface is printf() like with support for indentation control.
@@ -887,7 +906,7 @@ below was taken directly from the KiCad source.
 
     public:
 
-        /*/** */*
+        /**
          * Format and write text to the output stream.
          *
          * @param nestLevel is the multiple of spaces to preceed the output with.
@@ -899,7 +918,7 @@ below was taken directly from the KiCad source.
          */
         virtual int PRINTF_FUNC Print( int nestLevel, const char* fmt, ... ) = 0;
 
-        /*/** */*
+        /**
          * Return the quoting character required for aWrapee.
          *
          * Return the quote character as a single character string for a given
@@ -920,7 +939,7 @@ below was taken directly from the KiCad source.
 
         virtual ~OUTPUTFORMATTER() {}
 
-        /*/** */*
+        /**
          * Get the quote character according to the Specctra DSN specification.
          *
          * @param aWrapee is a string that might need wrapping on each end.
@@ -934,7 +953,7 @@ below was taken directly from the KiCad source.
     };
 
 
-    /*/** */*
+    /**
      * Implement an OUTPUTFORMATTER to a memory buffer.
      */
     class STRINGFORMATTER : public OUTPUTFORMATTER
@@ -947,7 +966,7 @@ below was taken directly from the KiCad source.
 
     public:
 
-        /*/** */*
+        /**
          * Reserve space in the buffer
          */
         STRINGFORMATTER( int aReserve = 300 ) :
@@ -956,7 +975,7 @@ below was taken directly from the KiCad source.
         }
 
 
-        /*/** */*
+        /**
          * Clears the buffer and empties the internal string.
          */
         void Clear()
@@ -964,7 +983,7 @@ below was taken directly from the KiCad source.
             mystring.clear();
         }
 
-        /*/** */*
+        /**
          * Remove whitespace, '(', and ')' from the internal string.
          */
         void StripUseless();
