@@ -48,7 +48,7 @@ In order for the discovery process to work, the following requirements must be m
   in `scripting/kicadplugins.i`.  You can always discover the search path for your
   setup by opening the scripting console and entering the command:
 
-`import pcbnew; print pcbnew.PLUGIN_DIRECTORIES_SEARCH`
+`import pcbnew; print(pcbnew.PLUGIN_DIRECTORIES_SEARCH)`
 
 Currently on a Linux Installation the plugins search path is
 
