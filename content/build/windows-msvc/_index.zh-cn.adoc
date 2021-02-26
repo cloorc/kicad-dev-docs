@@ -1,0 +1,92 @@
+---
+title: Windows (Visual Studio)
+weight: 14
+summary: 使用 Microsoft Visual Studio 和 vcpkg 编译 KiCad 的指南
+tags: ["windows"] 
+---
+:toc:
+
+== 使用 Visual Studio 编译 (2019 年)
+
+=== 环境设置
+
+==== Visual Studio
+您必须先安装 https://visualstudio.microsoft.com/vs/[Visual Studio]，并安装 **桌面开发和 C++** 功能集。
+此外，您还需要确保安装了可选组件 https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-160#installation[C{plus}{plus}CMake Tools for Windows]。
+
+==== vcpkg (需要使用 kicad fork)
+
+KiCad 维护一个 vcpkg 分支，为我们提供 wxPython 端口。
+它还允许我们在 vcpkg 更新相当频繁时锁定依赖项。
+
+**如果您是 vcpkg 新手** 您必须在您的系统上选择一个位置来放置它。
+然后运行以下三个命令
+
+[source,powershell]
+```
+git clone https://gitlab.com/kicad/packaging/vcpkg
+.\vcpkg\bootstrap-vcpkg.bat
+.\vcpkg\vcpkg integrate install
+```
+
+这将为您提供一个 vcpkg 安装，可以在接下来的步骤中使用
+
+=== KiCad 特定设置
+
+即使在 64 位机器上，vcpkg 也默认为 x86-windows，
+为便于使用，建议您设置一个名为 **VCPKG_DEFAULT_TRIPET**、
+值为 **x64-WINDOWS** 的 **USER** 或 **SYSTEM** 环境变量
+
+KiCad 目前仍支持 32 位版本，但将来可能不会支持，因此 64 位版本是首选。
+
+==== 1. 安装 vcpkg 包
+
+vcpkg 需要以下软件包
+
+[source,powershell]
+```
+.\vcpkg install boost
+.\vcpkg install cairo
+.\vcpkg install curl
+.\vcpkg install glew
+.\vcpkg install gettext
+.\vcpkg install glm
+.\vcpkg install icu
+.\vcpkg install libxslt
+.\vcpkg install ngspice
+.\vcpkg install opencascade
+.\vcpkg install opengl
+.\vcpkg install openssl
+.\vcpkg install python3
+.\vcpkg install wxpython
+.\vcpkg install wxwidgets
+.\vcpkg install zlib
+```
+
+如果您没有设置 **VCPKG_DEFAULT_TRIPET** 环境变量，则必须在每个包名称的末尾添加：x64-windows，例如 `Boost：x64-windows`。
+
+NOTE: 如果在 wxpython 上 vcpkg 安装失败，您没有从 `kicad` 分支 https://gitlab.com/kicad/packaging/vcpkg 克隆并检出 vcpkg 
+
+==== 2. CMakeSettings.json
+
+编译根目录中包含一个 `CMakeSettings.json.sample`，将该文件复制并重命名为 `CMakeSettings.json`
+编辑 `CMakeSettings.json` 向上更新 VcPkgDir 环境变量以匹配 vcpkg 克隆的位置。
+
+[source,json]
+----
+{ "VcPkgDir": "D:/vcpkg/" },
+----
+
+==== 3. 在 Visual Studio 中 "打开文件夹" 
+
+启动 Visual Studio (仅在完成上述步骤之后)。
+
+初始向导启动后，选择 **打开本地文件夹**
+这是让 Visual Studio 直接处理 *CMake* 工程的正确方式。
+
+=== Visual Studio 扩展
+
+==== 尾随空格删除
+
+强烈建议用户安装 link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[尾随空格观察器] 它不仅会在您键入时突出显示尾随空格，而且在保存文件时默认情况下会自动将其删除。
+
