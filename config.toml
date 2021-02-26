@@ -7,6 +7,7 @@ theme = "hugo-theme-learn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 ignoreFiles = [ "(^__|/__)(.+).adoc$" ]
+enableGitInfo = true 
 
 [params]
   editURL = "https://gitlab.com/kicad/services/kicad-dev-docs/-/edit/master/content/"
@@ -20,6 +21,7 @@ ignoreFiles = [ "(^__|/__)(.+).adoc$" ]
   customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
   titleSeparator = "|"
   themeVariant = "blue"
+  dateFormat = "2006-01-02"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
