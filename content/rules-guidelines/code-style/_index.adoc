@@ -307,6 +307,11 @@ Avoid defining class and function names and argument and return data types.
 This redundant information can easily be read by other developers and shows
 up as redundant information in the generated documentation.
 
+NOTE: Many legacy Doxygen comments in KiCad start with the function name on
+      a blank line before the rest of the comment.  This style is no longer
+      acceptable, and modifications to those legacy function signatures is
+      a good opportunity to remove these lines from the Doxygen comments.
+
 Use https://www.doxygen.nl/manual/markdown.html[Doxygen's markdown]
 syntax where possible instead of HTML tags.  Markdown makes for more
 readable comments than mark up languages.
