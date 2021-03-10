@@ -12,7 +12,7 @@ check that certain functionality works.
 
 Tests are registered using https://cmake.org/cmake/help/latest/module/CTest.html[CTest], 
 part of CMake. CTest gathers all the
-disparate test programs and runs them. Most C++ unit
+disparate test programs and runs them. Most {cpp} unit
 tests are written using the https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/index.html[Boost Unit Test framework],
 but this is not required to add a test to the testing suite.
 
@@ -177,7 +177,7 @@ python2 testcase/test_001_pcb_load.py
 
 ==== Diagnosing segfaults
 
-Although the module is Python, it links against a C++ library
+Although the module is Python, it links against a {cpp} library
 (the same one used by KiCad Pcbnew), so it can segfault if the library
 has a defect.
 

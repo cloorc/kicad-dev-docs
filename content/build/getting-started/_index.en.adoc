@@ -54,9 +54,9 @@ the wxWidgets version and platform name they should be applied against.  wxWidge
 with the --with-opengl option.  If you installed the packaged version of wxWidgets on your system,
 verify that it was built with this option.
 
-=== Boost C++ Libraries
+=== Boost {cpp} Libraries
 
-The https://www.boost.org/[Boost] C++ library is required only if you intend to build KiCad with the system installed
+The https://www.boost.org/[Boost] {cpp} library is required only if you intend to build KiCad with the system installed
 version of Boost instead of the default internally built version.  If you use the system installed
 version of Boost, version 1.56 or greater is required.  Please note there are some platform
 specific patches required to build a working Boost library.  These patches can be found in the
@@ -211,9 +211,9 @@ The KICAD_USE_VALGRIND option is used to enable Valgrind's stack annotation feat
 This provides the ability for Valgrind to trace memory allocations and accesses in the tool framework
 and reduce the number of false positives reported. This option is disabled by default.
 
-==== C++ standard library debugging
+==== {cpp} standard library debugging
 
-KiCad provides two options to enable debugging assertions contained in the GCC C++ standard library:
+KiCad provides two options to enable debugging assertions contained in the GCC {cpp} standard library:
 KICAD_STDLIB_DEBUG and KICAD_STDLIB_LIGHT_DEBUG. Both these options are disabled by default, and only
 one should be turned on at a time with KICAD_STDLIB_DEBUG taking precedence.
 
@@ -317,7 +317,7 @@ GitHub mirror: https://github.com/KiCad/kicad-source-mirror
 There are some known issues that effect all platforms.  This section provides a list of the
 currently known issues when building KiCad on any platform.
 
-=== Boost C++ Library Issues
+=== Boost {cpp} Library Issues
 
 As of version 5 of https://gcc.gnu.org/[GNU GCC], using the default configuration of downloading, patching, and
 building of Boost 1.54 will cause the KiCad build to fail.  Therefore a newer version of Boost

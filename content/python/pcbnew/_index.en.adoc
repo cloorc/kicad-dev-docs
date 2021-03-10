@@ -9,8 +9,8 @@ weight: 18
 KiCad implements a Python plugin interface so that external Python plugins can
 be run from within Pcbnew.  The interface is generated using the `Simplified
 Wrapper and Interface Generator` or http://www.swig.org[SWIG].  SWIG is
-instructed to translate specific C/C++ header files into other languages using
-`interface` files.  These files ultimately decide what C/C++ functions, classes
+instructed to translate specific C/{cpp} header files into other languages using
+`interface` files.  These files ultimately decide what C/{cpp} functions, classes
 and other declarations are exported and can be found in *pcbnew/swig/*.
 
 During build-time the SWIG interface files are used to generate the

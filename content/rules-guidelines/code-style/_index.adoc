@@ -240,7 +240,7 @@ like `p_module` would only make that harder to discern.
 
 === 2.7 Accessing Member Variables and Member Functions
 We do not use `this->` to access either member variables or member
-functions from within the containing class. We let C++ perform this for
+functions from within the containing class. We let {cpp} perform this for
 us.
 
 === 2.8 Use of 'auto'
@@ -257,7 +257,7 @@ rules other than they should have the same indent level as the code if
 they do not follow a statement. In line comments that follow statements
 should not exceed 99 columns unless absolutely necessary. The prevents
 word wrapping in an editor when the viewable columns is set to 100. In
-line comments can use either the C++ or the C commenting style, but C++
+line comments can use either the {cpp} or the C commenting style, but {cpp}
 comments are preferred for single line comments or comments consisting
 of only a few lines.
 
@@ -272,7 +272,7 @@ If a comment is the first thing on a line, then that comment should have
 one or more blank lines above them. One blank line is preferred.
 
 === 3.2 Doxygen
-Doxygen is a C++ source code documenting tool used by the project.  Descriptive
+Doxygen is a {cpp} source code documenting tool used by the project.  Descriptive
 *.html files can be generated from the source code by installing Doxygen and
 building the target named **doxygen-docs**.
 
@@ -438,11 +438,11 @@ includes `if`, `for`, `while`, `do`, and `switch` control blocks.
 === 4.3 Line Length
 The maximum line width is 99 columns. An exception to this is a long
 quoted string such as the internationalized text required to satisfy
-MSVC++, described below.
+MSV{cpp}, described below.
 
 === 4.4 Strings
 The KiCad project team no longer supports compiling with Microsoft
-Visual C++. When you need to break long strings into smaller substrings,
+Visual {cpp}. When you need to break long strings into smaller substrings,
 please use the C99 compliant method for improved readability. Using
 any of previously accepted methods defined below for breaking
 long internationalized strings will no longer be accepted.
@@ -642,7 +642,7 @@ should not always active in debug builds. This makes it difficult for
 other developers to see their debugging output and can have a significant
 impact on the performance of debug builds. I you need to use debugging
 output, use link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug]
-instead of `printf` or C++ output stream.  If
+instead of `printf` or {cpp} output stream.  If
 you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
 from the source tree before pushing changes to the main KiCad repo. Do not
@@ -897,9 +897,9 @@ below was taken directly from the KiCad source.
     class OUTPUTFORMATTER
     {
 
-    #if defined(__GNUG__)   // The GNU C++ compiler defines this
+    #if defined(__GNUG__)   // The GNU {cpp} compiler defines this
 
-    // When used on a C++ function, we must account for the "this" pointer,
+    // When used on a {cpp} function, we must account for the "this" pointer,
     // so increase the STRING-INDEX and FIRST-TO_CHECK by one.
     // See http://docs.freebsd.org/info/gcc/gcc.info.Function_Attributes.html
     // Then to get format checking during the compile, compile with -Wall or -Wformat
@@ -1012,14 +1012,14 @@ below was taken directly from the KiCad source.
 
 
 == 11. Resources
-There are plenty of excellent resources on the Internet on C++ coding
+There are plenty of excellent resources on the Internet on {cpp} coding
 styles and coding do's and don'ts. Here are a few useful ones. In most
 cases, the coding styles do not follow the KiCad coding style but there
 is plenty of other good information here. Besides, most of them have
 some great humor in them enjoyable to read. Who knows, you might even
 learn something new.
 
-- http://www.possibility.com/Cpp/CppCodingStandard.html[C++ Coding Standard]
+- http://www.possibility.com/Cpp/CppCodingStandard.html[{cpp} Coding Standard]
 - https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/coding-style.rst[Linux Kernel Coding Style]
-- http://www.cs.caltech.edu/courses/cs11/material/cpp/donnie/cpp-ops.html[C++ Operator Overloading Guidelines]
+- http://www.cs.caltech.edu/courses/cs11/material/cpp/donnie/cpp-ops.html[{cpp} Operator Overloading Guidelines]
 - http://en.wikipedia.org/wiki/Programming_style[Wikipedia's Programming Style Page]

@@ -47,7 +47,7 @@ remember to update the documentation descriptions. You can run
 
 The latest version of the same docs are also available on the Jenkins
 server, see
-link:http://docs.kicad.org/doxygen/namespaces.html[KiCad Developer Docs for the C++ API].
+link:http://docs.kicad.org/doxygen/namespaces.html[KiCad Developer Docs for the {cpp} API].
 
 You can also find various developer notes in the Doxygen docs, see
 link:http://docs.kicad.org/doxygen/pages.html[the

@@ -12,7 +12,7 @@ Most of the relevant code is in `common/settings` and `common/project`.
 
 [cols=2*,options="header"]
 |===
-|C++ Class                | Description
+|{cpp} Class              | Description
 |`SETTINGS_MANAGER`       | Loads and unloads settings files and projects
 |`JSON_SETTINGS`          | The base class for all settings objects.  Represents a single JSON file.
 |`NESTED_SETTINGS`        | A `JSON_SETTINGS` object stored within another (i.e. without its own file)
@@ -50,16 +50,16 @@ The `JSON_SETTINGS` class is the backbone of the settings infrastructure.  It is
 `nlohmann::json::basic_json` class provided by `thirdparty/nlohmann_json/nlohmann/json.hpp`.  As
 such, anytime raw manipulation of the underlying JSON data is needed, you can use the 
 https://nlohmann.github.io/json/api/basic_json/[standard nlohmann::json API].  The JSON contents represent
-the **state of the file on disk**, not the state of the data exposed to C++.  Synchronization
+the **state of the file on disk**, not the state of the data exposed to {cpp}.  Synchronization
 between the two is done via parameters (see below) and takes place right after loading from disk and
 right before saving to disk.
    
 == Parameters
 
-Parameters establish the link between C++ data and content in the JSON file. In general, parameters
+Parameters establish the link between {cpp} data and content in the JSON file. In general, parameters
 consist of a **path**, **pointer**, and **default value**.  The path is a string of the form
 `"x.y.z"`, where each component represents a nested JSON dictionary key.  The pointer is a pointer
-to the C++ member variable that holds the data accessible to consumers of the `JSON_SETTINGS`. The
+to the {cpp} member variable that holds the data accessible to consumers of the `JSON_SETTINGS`. The
 default value is used to update the pointer when the data is missing from the JSON file.
 
 Parameters are subclasses of `PARAM_BASE` in `include/settings/parameters.h`.  There are a number of

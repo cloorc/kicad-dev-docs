@@ -11,7 +11,7 @@ tags: ["windows"]
 === Environment Setup
 
 ==== Visual Studio
-You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with C++** feature set installed.
+You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with {cpp}** feature set installed.
 Additionally, you'll need to make sure the optional component https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-160#installation[{cpp} CMake tools for Windows] is installed.
 
 ==== vcpkg (kicad fork required)
