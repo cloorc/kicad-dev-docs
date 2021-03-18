@@ -32,7 +32,7 @@ link:http://learngitbranching.js.org/[这一个]
 主应用程序的仓库可以在 https://gitlab.com/kicad/code/kicad/[这里] 找到
 
 === 编译代码
-按照您的平台对应的 link:/build/[文档] 
+按照您的平台对应的 link:../build/[文档] 
 中的说明设置工作构建环境，
 并从源代码成功构建 KiCad。
 
@@ -51,12 +51,12 @@ link:http://docs.kicad.org/doxygen/namespaces.html[C++ API 的 KiCad 开发人�
 link:http://docs.kicad.org/doxygen/pages.html[这个相关页面]。
 
 === 提交之前
-进行更改后，请确保您的代码符合以下 link:/rules-guidelines/code-style/[KiCad 编码样式策略]。
+进行更改后，请确保您的代码符合以下 link:../rules-guidelines/code-style/[KiCad 编码样式策略]。
 
-您的提交消息应遵循说明的规则中 link:/rules-guidelines/commit/[KiCad 提交消息格式策略]
+您的提交消息应遵循说明的规则中 link:../rules-guidelines/commit/[KiCad 提交消息格式策略]
 
 如果您想在用户界面上工作，您会发现阅读
-link:/rules-guidelines/ui/[用户界面指南]。
+link:../rules-guidelines/ui/[用户界面指南]。
 
 
 让所有开发人员都能读懂代码库对我们来说很重要。

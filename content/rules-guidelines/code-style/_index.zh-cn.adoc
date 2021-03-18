@@ -580,7 +580,7 @@ KiCad 依靠版权法版权保护能力，也就是说源代码文件必须有�
 
 调试输出是验证代码的一个常用方法。但是他不应该在调试编译 (debug build) 中一直打开。
 不然会让其他开发者很难看到他们自己调试输出，还会严重影响调试编译的性能。 
-当你需要使用调试输出时，使用 link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug] ，
+当你需要使用调试输出时，使用 link:https://docs.wxwidgets.org/3.0/group$$__group__funcmacro__$$log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug] ，
 不要使用 `printf` 或者 C++ 输出流。 如果你不小心把调试输出遗留在代码中，
 他会在发布编译 (release builds) 中被扩展成空。在推送到 KiCad 仓库前，
 所有的调试输出都应该被删除，不要简单地将调试输出注释起来。这样会使代码库积累下繁琐的内容。
@@ -589,7 +589,7 @@ KiCad 依靠版权法版权保护能力，也就是说源代码文件必须有�
 === 6.1 用追踪输出代替调试输出
 
 有时候需要用调试数据来确保代码是否按照期望的那样工作了。这种情况下就需要用
-link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__log.html#gae28a46b220921cd87a6f75f0842294c5[wxLogTrace] 。
+link:https://docs.wxwidgets.org/3.0/group$$__group__funcmacro__$$log.html#gae28a46b220921cd87a6f75f0842294c5[wxLogTrace] 。
 这中方法可以允许调试输出被 `WXTRACE` 环境变量控制。当使用 wxLogTrace 时， 
 追踪环境变量字符串应当添加到 `trace_helper.{h/cpp}` 源代码文件中或者是本地使用 https://www.doxygen.nl/index.html[Doxygen]
 注释 `\ingroup trace_env_vars`。

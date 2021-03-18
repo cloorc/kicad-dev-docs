@@ -34,7 +34,7 @@ All repos can be found https://gitlab.com/kicad/[here].
 The repository for the main application can be found https://gitlab.com/kicad/code/kicad/[here]
 
 === Compiling the code
-Follow the instruction in the link:/build/[documentation]
+Follow the instruction in the link:../build/[documentation]
 corresponding to your platform to set up a working build environment
 and successfully build KiCad from source.
 
@@ -54,14 +54,14 @@ link:http://docs.kicad.org/doxygen/pages.html[the
 related pages].
 
 === Before you submit
-After you make changes, please ensure your code meets the link:/rules-guidelines/code-style/[KiCad
+After you make changes, please ensure your code meets the link:../rules-guidelines/code-style/[KiCad
 Coding Style Policy].
 
-Your commit messages should follow the rules stated in the link:/rules-guidelines/commit/[KiCad
+Your commit messages should follow the rules stated in the link:../rules-guidelines/commit/[KiCad
 Commit Message Format Policy]
 
 If you feel like working on the user interface, you will find useful reading the
-link:/rules-guidelines/ui/[User Interface Guidelines].
+link:../rules-guidelines/ui/[User Interface Guidelines].
 
 It's important for us to keep the codebase readable by
 all developers. Your patches will not be accepted until adhere to the rules set forth in these
