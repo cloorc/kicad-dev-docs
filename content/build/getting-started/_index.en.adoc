@@ -278,12 +278,24 @@ information as follows:
 
 The default KiCad configuration directory is `kicad`.  On Linux this is located at
 `~/.config/kicad`, on MSW, this is `C:\Documents and Settings\username\Application Data\kicad` and
-on MacOS, this is `~/Library/Preferences/kicad`.  If the installation package would like to, it may
-specify an alternate configuration name instead of `kicad`.  This may be useful for versioning
-the configuration parameters and allowing the use of, e.g. `kicad5` and `kicad6` concurrently without
-losing configuration data.
+on MacOS, this is `~/Library/Preferences/kicad`.  Inside the configuration directory,
+subdirectories will be created for each KiCad minor version, meaning that multiple versions of
+KiCad can share the same directory.
 
-This is set by specifying the KICAD_CONFIG_DIR string at compile time.
+The base configuration directory can be overridden by specifying the KICAD_CONFIG_DIR string at
+compile time.
+
+NOTE: Setting KICAD_CONFIG_DIR should be considered deprecated as of KiCad 5.99, as the config
+      directory is versioned and there should not be any need to set a custom directory.
+
+=== Running from the Build Directory
+
+Normally, KiCad needs to be installed before running in order to locate data files and shared
+libraries.  Developers may be interested in running specific KiCad binaries from inside the build
+directory instead of installing, as this can sometimes be a faster way to test things.  The
+environment variable `KICAD_RUN_FROM_BUILD_DIR` can be set in order to change how KiCad looks up
+paths for shared libraries, resources, and other data files.  Note that setting this variable does
+not change how KiCad looks for symbol/footprint/3D model libraries.
 
 == Getting the KiCad Source Code
 
@@ -323,6 +335,6 @@ As of version 5 of https://gcc.gnu.org/[GNU GCC], using the default configuratio
 building of Boost 1.54 will cause the KiCad build to fail.  Therefore a newer version of Boost
 must be used to build KiCad.  If your system has Boost 1.56 or greater installed, you job is
 straight forward.  If your system does not have Boost 1.56 or greater installed, you will have
-to download and http://www.boost.org/doc/libs/1_59_0/more/getting_started/index.html[build Boost] from source.  
+to download and http://www.boost.org/doc/libs/1_59_0/more/getting_started/index.html[build Boost] from source.
 If you are building Boost on windows using http://mingw.org/[MinGW]
 you will have to apply the Boost patches in the KiCad source https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder].
