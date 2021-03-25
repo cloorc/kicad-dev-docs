@@ -6,12 +6,25 @@ summary: Rules on how the user interface elements should be implemented
 
 :toc:
 
-== User Interface Guidelines
 
 This document defines the guidelines for user interface development in
 KiCad.  Developers are expected to following these guidelines as closely
 as possible when contributing user interface code to the KiCad project.
 
+
+== Follow platform-specific guidelines
+
+IMPORTANT: Aside from the cases listed below, KiCad follows the platform-specific
+user interface guidelines on all supported platforms.
+
+The user interface guidelines for each supported platform are:
+
+* GNOME (GTK): https://developer.gnome.org/hig/stable/
+* macOS: https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/
+* Windows: https://docs.microsoft.com/en-us/windows/win32/uxguide/guidelines
+
+
+== Text and strings
 
 === Text Capitalization
 For all visible text used within KiCad, follow recommendations in the
@@ -26,7 +39,7 @@ idea use this capitalization in source code comments as well to prevent
 confusion of new contributors.
 
 === Capitalization Styles
-There are two styles of capitalization are used in GNOME user interface
+There are two styles of capitalization used in the user interface
 elements: header capitalization and sentence capitalization.  This
 section defines the capitalization style and when each type of capitalization
 should be used.
@@ -35,6 +48,7 @@ should be used.
 
 When using header capitalization all words are capitalized with the following
 exceptions:
+
 * Articles: a, an, the.
 * Conjunctions: and, but, for, not, so, yet ...
 * Prepositions of three or fewer letters: at, for, by, in, to ...
@@ -98,7 +112,7 @@ key is pressed.
 
 === Dialog Layout with Sizers
 Use wxWidgets "sizers" in all dialogs, no matter how simple they are.  Using
-absolute sizing in dialogs is forbidden in KiCad.  See the link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview] 
+absolute sizing in dialogs is forbidden in KiCad.  See the link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview]
 for more information on using sizers.  Configure
 the sizers so that as the dialog window is expanded, the most sensible use of
 the increased dialog window occurs automatically by the sizers. For example,
