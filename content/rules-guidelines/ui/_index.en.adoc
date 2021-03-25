@@ -14,8 +14,10 @@ as possible when contributing user interface code to the KiCad project.
 
 == Follow platform-specific guidelines
 
-IMPORTANT: Aside from the cases listed below, KiCad follows the platform-specific
-user interface guidelines on all supported platforms.
+Except for the cases listed below, KiCad follows the platform-specific
+user interface guidelines for each supported platform on that platform.
+This means there may be differences in UI behavior/look-and-feel between
+the platforms where their guidelines differ.
 
 The user interface guidelines for each supported platform are:
 
@@ -23,6 +25,7 @@ The user interface guidelines for each supported platform are:
 * macOS: https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/
 * Windows: https://docs.microsoft.com/en-us/windows/win32/uxguide/guidelines
 
+IMPORTANT: UI behavior that is inconsistent with the platform default or that would override platform defaults/theme settings must be avoided.
 
 == Text and strings
 
