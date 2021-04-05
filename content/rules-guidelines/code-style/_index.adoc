@@ -1,7 +1,8 @@
 ---
 title: Code Style Policy
 weight: 2
-summary: The code style guidelines that must be met for any contribution to KiCad's application codebase.
+summary: The code style guidelines that must be met for any contribution to
+         KiCad's application codebase.
 ---
 
 :toc:
@@ -48,10 +49,10 @@ leader. All changes to this document require approval.**
 
 There are some tools that can help you format your code easily.
 
-https://clang.llvm.org/docs/ClangFormat.html[clang-format] is a formatting tool that can both be used to
-provide code-style automation to your editor of choice, as well as allow git to
-check formatting when committing (using a "Git hook"). You should install this
-program to be able to use the Git hooks.
+https://clang.llvm.org/docs/ClangFormat.html[clang-format] is a formatting tool
+that can both be used to provide code-style automation to your editor of choice,
+as well as allow git to check formatting when committing (using a "Git hook").
+You should install this program to be able to use the Git hooks.
 
 The style config file is `_clang-format`, and should be picked up automatically
 by `clang-format` when the `--style=file` option is set.
@@ -705,8 +706,8 @@ header file should compile without error.
 
 **Example**
 
-    $ cd /svn/kicad/testing.checkout/include
-    $ g++ wx-config --cxxflags -I . xnode.h -o /tmp/junk
+    $ cd path_to_kicad_source/include
+    $ g++ `wx-config --cxxflags` -I . xnode.h -o /tmp/junk
 
 Such structuring of the header files removes the need within a client
 *.cpp file to include some project header file before some other project
@@ -761,7 +762,7 @@ below was taken directly from the KiCad source.
      * This program source code file is part of KICAD, a free EDA CAD application.
      *
      * Copyright (C) 2007-2010 SoftPLC Corporation, Dick Hollenbeck <dick@softplc.com>
-     * Copyright (C) 2007 KiCad Developers, see change_log.txt for contributors.
+     * Copyright (C) 2007 KiCad Developers, see AUTHORS.txt for contributors.
      *
      * This program is free software; you can redistribute it and/or
      * modify it under the terms of the GNU General Public License
@@ -824,15 +825,6 @@ below was taken directly from the KiCad source.
      */
     class LINE_READER
     {
-    protected:
-
-        FILE*               fp;
-        int                 lineNum;
-        unsigned            maxLineLength;
-        unsigned            length;
-        char*               line;
-        unsigned            capacity;
-
     public:
 
         /**
@@ -878,6 +870,15 @@ below was taken directly from the KiCad source.
         {
             return length;
         }
+
+    protected:
+
+        FILE*               fp;
+        int                 lineNum;
+        unsigned            maxLineLength;
+        unsigned            length;
+        char*               line;
+        unsigned            capacity;
     };
 
 
@@ -963,12 +964,6 @@ below was taken directly from the KiCad source.
      */
     class STRINGFORMATTER : public OUTPUTFORMATTER
     {
-        std::vector<char>       buffer;
-        std::string             mystring;
-
-        int sprint( const char* fmt, ... );
-        int vprint( const char* fmt,  va_list ap );
-
     public:
 
         /**
@@ -1004,6 +999,14 @@ below was taken directly from the KiCad source.
         int PRINTF_FUNC Print( int nestLevel, const char* fmt, ... );
         const char* GetQuoteChar( const char* wrapee );
         //-----</OUTPUTFORMATTER>-----------------------------------------------
+
+    private:
+
+        std::vector<char>       buffer;
+        std::string             mystring;
+
+        int sprint( const char* fmt, ... );
+        int vprint( const char* fmt,  va_list ap );
     };
 
 
