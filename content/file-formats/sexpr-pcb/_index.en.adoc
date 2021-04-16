@@ -1,229 +1,394 @@
 ---
-title: kicad_pcb (sexpr) format
+title: PCB File Format
 weight: 5
 ---
 
-WARNING: This page is out of date with changes made for KiCad 6.0 but will eventually be updated
+WARNING: This page is a work in progress and is out of date with changes made for KiCad 6.0
+         but will eventually be updated to reflect the latest changes.
 
 NOTE: This file format was introduced with the launch of KiCad 4.0
 
 
-==	File format syntax:
-Based on the Specctra syntax.
-All tokens are lowercase.
-Strings such as board text and copper layer names can have upper case characters, but these will often be quoted.
-A special emphasis to readability considerations is made.
+== Syntax
+* Based on the Specctra DSN syntax.
+* Token definitions delimited by opening `(` and closing ')' parenthesis.
+* All tokens are lowercase.
+* Tokens cannot contain any white space characters or special characters other than the
+  underscore '_' character.
+* All strings are quoted using the double quote character (") and are UTF-8 encoded.
+* Tokens can have zero or more attributes.
+* Human readability is a design goal.
 
-==	Coordinates of objects and sizes:
-Coordinates are relative to the origin of their containing object.
-Values are given in millimeters.
-Exponential floating point values are not allowed and instead are presented as:
-"xxx.yyy" or "0.0x" or "0.x", or even "xy".  This was done because values like 4e-2 are not as easy for a human to read.
+NOTE: Prior to version 6 of KiCad, strings were only quoted when necessary.  Saving on older board
+      file to the latest file format will result in these strings being quoted even though there
+      is no functional change in the board itself.
 
-==	Keywords:
-Use only lowercase ASCII words (and trailing digits if needed).  ASCII characters are <= 127.
+=== Conventions
 
-==	Identifiers and Strings:
-Identifiers are variables used within the file such as layer names, net names, etc. +
-Strings are longer text sequences such as drawing labels. +
-They are handled the same, and will be referred to as strings henceforth. +
-From a purely syntactical perspective (and ignoring any limits imposed at a higher level by the user of the string), a string can contain embedded spaces and tabs, but may not contain an actual newline. +
-A string is to be encoded in UTF8 format, meaning that it may be ASCII or international characters sequences, since ASCII is a subset of UTF8.
-Note that this excludes LATIN characters >= 128. +
-To encode LATIN characters, a UTF8 sequence must be used. +
-A string may not contain an actual newline or carriage return, but it may use an escape sequence to encode a newline, such as \n. +
-If a string has any of the following conditions, then it must be quoted with a leading and trailing double quote character, otherwise it is acceptable to not quote the string:
+In order to use this document properly, there are a few notation conventions that must be
+understood.
 
-1. has one or more of the following 4 separator bytes:  ASCII space, tab, '(', or ')'.
-2. has one or more of the following bytes:  '%', '{', or '}'.
-3. has a length of zero bytes, and you need a place holder for the field, then use "".
-4. includes a byte of '-', and this byte is not in the first position of the string.
+* Token attributes are upper case descriptive names.  For example ```(at X Y)```, X is the
+  horizontal coordinate and Y is the vertical coordinate.
+* Some tokens have a limited number of possible attribute values which are separated by a
+  logical or character '|'.  For example ```(visible yes|no)``` the only valid attributes for
+  the `visible` token are `yes` or `no`.
+* Some tokens have optional attributes which are enclosed in square braces.  For example
+  ```(paper A0 [portrait])``` the page portrait setting is optional.
 
-Examples:
 
-* If the field has embedded spaces, tabs, '(' or ')', then it must be quoted like these samples:  "this is a sample", "con(14)", "(19".
-* If the field has an embedded #, then is must be quoted: "wire#123"
-* This string does not need to be quoted:  -CDC, but this one does: "C-DC"
-* If your string needs to convey multiple lines, escape the new line character like this: "line 1\nline 2".
-* Here is a legal string with an embedded quote:  leg"23
-* Here is the same string quoted, and because it is quoted the internal quote must be duplicated:  "leg""23"
-* Here is a string quoted that does not need to be but is acceptable anyways: "R1"
+== Coordinates and Sizes
+* All values are given in millimeters.
+* Exponential floating point values are not used for readability purposes.
+* The minimum internal unit is nanometers so there is maximum resolution of six decimal places
+  or 0.000001 mm.  Any precision beyond six places will be truncated.
+* All coordinates are relative to the origin of their containing object.
 
-==	Layer representation in files
-=== Layer capacity:
 
-* Copper layers 16
-* Technical layers 13 ( 8 paired layers, 4 user layers and 1 layer for board edges )
+== Layers
+* 60 total layers.
+* All layers can be renamed.
 
-=== Layer names in files
-In files the layers have a name, not a number.
+NOTE: Internally, all layer names are canonical.  User defined layer names are only used for
+      display and output purposes.
 
-Copper layers:
-For copper layers the name can be set by the user. +
-A copper layer name is defined as <layer name set by user>.Cu +
-However, for pads and vias which are on all copper layers, the full set of copper layers is defined as *.Cu.
+=== Capacity
 
-Paired technical layers:
-The name is fixed and built on the form. +
-B.<layer name> for a layer on the back side of the board. +
-F.<layer name> for a layer on the front side of the board. +
-The layer name is one of +
-Adhes Paste Paste SilkS Mask. +
-Or the translated name of these layers for non English users. +
-Like for Copper layers, *.<layer name> can be used to represent the 2 paired layers
+* 32 copper layers.
+* 8 paired technical layers for silk screen, solder mask, solder paste, and adhesive.
+* 4 user pre-defined layers for drawings, engineering change order (ECO), and comments.
+* 1 layer to define the board outline.
+* 1 layer to define the board margins.
+* 9 optional user definable layers.
 
-Other layers:
-The name is <layer name>.User like: +
-Dwgs.User Cmts.User Eco1.User Eco2.User +
-Or the translated name of these layers for non English users.
+=== Canonical Layer Names
 
-Board outlines:
-the name is Edge.Cuts
+The table below list all of the canonical layer names.
 
-== Typical structure of the board file:
-A board file includes different sections and list of board items:
+[options="header"]
+|====================================================
+|Canonical Name | Description
+|F.Cu | Front copper layer
+|In1.Cu | Inner copper layer 1
+|In2.Cu | Inner copper layer 2
+|In3.Cu | Inner copper layer 3
+|In4.Cu | Inner copper layer 4
+|In5.Cu | Inner copper layer 5
+|In6.Cu | Inner copper layer 6
+|In7.Cu | Inner copper layer 7
+|In8.Cu | Inner copper layer 8
+|In9.Cu | Inner copper layer 9
+|In10.Cu | Inner copper layer 10
+|In11.Cu | Inner copper layer 11
+|In12.Cu | Inner copper layer 12
+|In13.Cu | Inner copper layer 13
+|In14.Cu | Inner copper layer 14
+|In15.Cu | Inner copper layer 15
+|In16.Cu | Inner copper layer 16
+|In17.Cu | Inner copper layer 17
+|In18.Cu | Inner copper layer 18
+|In19.Cu | Inner copper layer 19
+|In20.Cu | Inner copper layer 20
+|In21.Cu | Inner copper layer 21
+|In22.Cu | Inner copper layer 22
+|In23.Cu | Inner copper layer 23
+|In24.Cu | Inner copper layer 24
+|In25.Cu | Inner copper layer 25
+|In26.Cu | Inner copper layer 26
+|In27.Cu | Inner copper layer 27
+|In28.Cu | Inner copper layer 28
+|In29.Cu | Inner copper layer 29
+|In30.Cu | Inner copper layer 30
+|B.Cu | Back copper layer
+|B.Adhesive | Back adhesive layer
+|F.Adhesive | Front adhesive layer
+|B.Paste | Back solder paste layer
+|F.Paste| Front solder paste layer
+|B.Silkscreen | Back silk screen layer
+|F.Silkscreen | Front silk screen layer
+|B.Mask | Back solder mask layer
+|F.Mask | Front solder mask layer
+|User.Drawings | User drawing layer
+|User.Comments | User comment layer
+|User.Eco1 | User engineering change order layer 1
+|User.Eco2 | User engineering change order layer 2
+|Edge.Cu | Board outline layer
+|F.Courtyard | Footprint front courtyard layer
+|B.Courtyard | Footprint back courtyard layer
+|F.Fab | Footprint front fabrication layer
+|B.Fab | Footprint back fabrication layer
+|User.1 | User definable layer 1
+|User.2 | User definable layer 2
+|User.3 | User definable layer 3
+|User.4 | User definable layer 4
+|User.5 | User definable layer 5
+|User.6 | User definable layer 6
+|User.7 | User definable layer 7
+|User.8 | User definable layer 8
+|User.9 | User definable layer 9
+|====================================================
 
-* The header line
-* The general section
-* The layers section (the mapping of layers)
-* The setup section
-* The list of nets
-* The list of net classes
-* The list of modules
-* The list of graphic items
-* The list of tracks
-* The list of zones
 
-The order of lists is not critical, and some sections can be omitted.
-=== Description of an item:
-The basic item syntax is an opening brace “(“ followed by a keyword with one or more parameters associated with the keyword separated by one or more spaces followed by a closing brace “)”.  Items can be nested but the opening and closing braces must be symmetrical.
-An item is described by
-(<keyword>  <parameter>)
+== Layout
 
-Examples:
+A board file includes the following sections:
+
+* Header
+* General
+* Layers
+* Setup
+* Nets
+* Net classes
+* Footprints
+* Graphic Items
+* Tracks
+* Zones
+
+NOTE: The section order is not critical other than the header must be the first token.  Some
+      sections can may omitted.
+
+=== Header Section
+
+This section defined the file version and generator information that defines the appropriate
+KiCad board file format.
+
+==== Header Syntax
 
 ```
-(via_drill 0.635)
-(area 57.924999 28.924999 74.075001 42.075001)
+(kicad_pcb (version VERSION) (generator GENERATOR)
+  ... contents of board file.
+)
 ```
 
-via_drill or area are keywords, followed by one or four values.
+* The `kicad_pcb` token defines this file as a KiCad board file and is required.
+* The `version` token defines the board version as YYYYMMDD date.
+* The `generator` token defines the program used to write the file.
+
+NOTE: Third party scripts should not use `pcbnew` as the generator identifier.  Please use some
+      other identifier so that bugs introduced by third party generators are not confused with
+      the board file created by KiCad.
+
+=== General Section
+
+This section contains general information about the board.
+
+==== General Section Syntax
 
 ```
-(fp_line (start -3.81 0) (end -3.302 0) (layer F.SilkS) (width 0.2032))
-```
-
-fp_line is a keyword, followed by parameters, which are 4 item descriptions.
-
-=== The header line
-(kicad_pcb (version 3) (host pcbnew "(2013-02-20 BZR 3963)-testing")
-
-=== The general section
   (general
-    (links 2)
-    (no_connects 0)
-    (area 57.924999 28.924999 74.075001 42.075001)
-    (thickness 1.6)
-    (drawings 5)
-    (tracks 5)
-    (zones 0)
-    (modules 2)
-    (nets 3)
+    (thickness THICKNESS)
   )
+```
 
-  (page A4)
+* The `thickness` token defines the overall board thickness.
 
-=== The layers section (the mapping of layers)
+NOTE: The general section only has a single setting.  Most of the previous general section
+      setting have been moved into the project file.
+
+=== Page Section
+
+This section defines the board page size and orientation.
+
+==== Page Section Syntax
+
+````
+  (paper PAPER_SIZE | WIDTH HEIGHT [portrait] )
+````
+
+* The `paper` token defines the board page size.  Valid pages sizes are A0, A1, A2, A3, A4, A5,
+  A, B, C, D, or E.
+* The width and height are used for custom user defined page sizes.
+
+=== Layers Section
+
+This section defines all of the layers used by the board.
+
+==== Layer Syntax
+
+```
   (layers
-    (15 top_side.Cu signal)
-    (2 Inner2.Cu signal)
-    (1 Inner1.Cu signal)
-    (0 bottom_side.Cu signal)
-    (16 B.Adhes user)
-    (17 F.Adhes user)
-    (18 B.Paste user)
-    (19 F.Paste user)
-    (20 B.SilkS user)
-    (21 F.SilkS user)
-    (22 B.Mask user)
-    (23 F.Mask user)
-    (24 Dwgs.User user)
-    (25 Cmts.User user)
-    (26 Eco1.User user)
-    (27 Eco2.User user)
-    (28 Edge.Cuts user)
+    (LAYER_ORDINAL "CANONICAL_NAME" LAYER_TYPE ["USER_NAME"])
+    ... remain layers
   )
+```
 
-This is an important section, because it defines the active layers, the layer types and attributes, the copper layer names (set by the user) and the numerical identifier used to associate the user defined layer names with the Pcbnew internal layer definition.
-All subsequent layer references are by name only.
+* The layer ordinal is a number used to associate the layer stack ordering.  This is mostly
+  to ensure correct mapping when the number of layers is increased in the future.
+* The canonical name is the name defined for internal board use.
+* The layer type can be defined as jumper, mixed, power, signal, user.
 
-=== The setup section
+=== Setup Section
+
+This section stores the current settings such as default item sizes and other options in use
+for this board.
+
+```
   (setup
-    (last_trace_width 0.254)
-    (trace_clearance 0.254)
-    (zone_clearance 0.2)
-    (zone_45_only no)
-    (trace_min 0.254)
-    (segment_width 0.2)
-    (edge_width 0.15)
-    (via_size 0.889)
-    (via_drill 0.635)
-    (via_min_size 0.889)
-    (via_min_drill 0.508)
-    (uvia_size 0.508)
-    (uvia_drill 0.127)
-    (uvias_allowed no)
-    (uvia_min_size 0.508)
-    (uvia_min_drill 0.127)
-    (pcb_text_width 0.3)
-    (pcb_text_size 1.5 1.5)
-    (mod_edge_width 0.15)
-    (mod_text_size 1.5 1.5)
-    (mod_text_width 0.15)
-    (pad_size 0.0005 0.0005)
-    (pad_drill 0)
-    (pad_to_mask_clearance 0.2)
-    (aux_axis_origin 0 0)
-    (visible_elements 7FFFFFFF)
+    [(stackup
+      ... see board stack up settings section
+    )]
+  (pad_to_mask_clearance CLEARANCE)
+  [(solder_mask_min_width MINIMUM_WIDTH)]
+  [(pad_to_paste_clearance CLEARANCE)]
+  [(pad_to_paste_clearance_ratio RATIO)]
+  [(aux_axis_origin X Y)]
+  [(grid_origin X Y)]
     (pcbplotparams
-      (layerselection 3178497)
-      (usegerberextensions true)
-      (excludeedgelayer true)
-      (linewidth 50000)
-      (plotframeref false)
-      (viasonmask false)
-      (mode 1)
-      (useauxorigin false)
-      (hpglpennumber 1)
-      (hpglpenspeed 20)
-      (hpglpendiameter 15)
-      (hpglpenoverlay 2)
-      (psnegative false)
-      (psa4output false)
-      (plotreference true)
-      (plotvalue true)
-      (plotothertext true)
-      (plotinvisibletext false)
-      (padsonsilk false)
-      (subtractmaskfromsilk false)
-      (outputformat 1)
-      (mirror false)
-      (drillshape 1)
-      (scaleselection 1)
-      (outputdirectory ""))
+      ... see plot settings section
   )
+```
 
-This section stores the current settings (default item sizes) and options in use for this board
+* The `pad_to_mask_clearance` token defines the clearance between footprint pads and the solder
+  mask.
+* The optional `solder_mask_min_width` defines the minimum solder mask width.  If not defined,
+  the minimum width is zero.
+* The optional `pad_to_paste_clearance` defines the clearance between footprint pads and the
+  solder paste layer.  If not defined, the clearance is zero.
+* The optional `pad_to_paste_clearance_ratio` is the percentage (from 0 to 100) of the footprint
+  pad to make the solder paste.  If not defined, the ratio is 100% (the same size as the pad).
+* The optional `aux_axis_origin` defines the auxiliary origin if it is set to anything other than
+  (0,0).
+* The optional `grid_origin` defines the grid original if it is set to anything other than (0,0).
 
-=== The list of nets
+==== Board Stack Up Settings Section
+
+This section defines the board stack up settings and is defined in the settings section.
+
+```
+    [(stackup
+       (layer "NAME" | dielectric NUMBER (type "DESCRIPTION") [(color "COLOR")]
+        [(thickness THICKNESS)] [(material "MATERIAL")] [(epsilon_r DIELECTRIC_RESISTANCE)]
+        [(loss_tangent LOSS_TANGENT)]
+       )
+       ... all remaining layers in the actual board stack up order
+       [(copper_finish "FINISH")]
+       [(dielectric_constraints yes | no)]
+       [(edge_connector yes | bevelled)]
+       [(castellated_pads yes)]
+       [(edge_plating yes)]
+    )]
+```
+
+* The `layer` token defines the settings for each layer required to manufacture a board including
+  the dielectric material between the actual layers defined in the board editor.
+** The layer name attribute is either one of the canonical copper or technical layer names listed
+   in the table above or `dielectric ID` if it is dielectric layer.
+** The layer `type` token defines a string that describes the layer.
+** The optional layer `color` token  defines a string that describes the layer color.  This is
+   only used on solder mask and silkscreen layers.
+** The optional layer `thickness` token defines the thickness of the layer where appropriate.
+** The optional layer `material` token defines a string that describes the layer material where
+   appropriate.
+** The optional layer `epsilon_r` token defines the dielectric constant of the layer material.
+** The optional layer `loss_tangent` token defines the dielectric loss tangent of the layer
+   material.
+* The optional `copper_finish` token is a string that defines the copper finish used to manufacture
+  the board.
+* The optional `dielectric_contraints` token define if the board should meet all dielectric
+  requirements.
+* The optional `edge_connector` token defines if the board has an edge connector and if the
+  edge connector is bevelled.
+* The optional `castellated_pads` token defines if the board edges contain castellated pads.
+* The optional `edge_plating` token defines if the board edges should be plated.
+
+==== Plot Settings Section
+
+This section defines the plotting and printing settings and is defined in the settings section.
+
+```
+    (pcbplotparams
+      (layerselection HEXADECIMAL_BIT_SET)
+      (disableapertmacros true | false)
+      (usegerberextensions true | false)
+      (usegerberattributes true | false)
+      (usegerberadvancedattributes true | false)
+      (creategerberjobfile true | false)
+      (svguseinch true | false)
+      (svgprecision PRECISION)
+      (excludeedgelayer true | false)
+      (plotframeref true | false)
+      (viasonmask true | false)
+      (mode MODE)
+      (useauxorigin true | false)
+      (hpglpennumber NUMBER)
+      (hpglpenspeed SPEED)
+      (hpglpendiameter DIAMETER)
+      (dxfpolygonmode true | false)
+      (dxfimperialunits true | false)
+      (dxfusepcbnewfont true | false)
+      (psnegative true | false)
+      (psa4output true | false)
+      (plotreference true | false)
+      (plotvalue true | false)
+      (plotinvisibletext true | false)
+      (sketchpadsonfab true | false)
+      (subtractmaskfromsilk true | false)
+      (outputformat FORMAT)
+      (mirror true | false)
+      (drillshape SHAPE)
+      (scaleselection 1)
+      (outputdirectory "PATH")
+    )
+```
+
+* The `layerselection` token defines a hexadecimal bit set of the layers to plot.
+* The `disableapertmacros` token defines if aperture macros are to be used in gerber plots.
+* The `usegerberextensions` token defines if the Protel layer file name extensions are to be used
+  in gerber plots.
+* The `usegerberattributes` token defines if the X2 extensions are used in gerber plots.
+* The `usegerberadvancedattributes` token defines if the netlist information should be included
+  in gerber plots.
+* The `creategerberjobfile` token defines if a job file should be created when plotting gerber
+  files.
+* The `svguseinch` token defines if inch units should be use when plotting SVG files.
+* The `svgprecision` token defines the units precision used when plotting SVG files.
+* The `excludeedgelayer` token defines if the board edge layer is plotted on all layers.
+* The `plotframeref` token defines if the border and title block should be plotted.
+* The `viasonmask` token defines if the vias are to be tented.
+* The `mode` token defines the plot mode. An attribute of 1 plots in the normal mode and an
+  attribute of 2 plots in the outline (sketch) mode.
+* The `useauxorigin` token determines if all coordinates are offset by the defined user origin.
+* The `hpglpennumber` token defines the integer pen number used for HPGL plots.
+* The `hpglpenspeed` token defines the integer pen speed used for HPGL plots.
+* The `hpglpendiameter` token defines the floating point pen size for HPGL plots.
+* The `dxfpolygonmode` token defines if the polygon mode should be used for DXF plots.
+* The `dxfimperialunits` token defines if imperial units should be used for DXF plots.
+* The `dxfusepcbnewfont` token defines if the Pcbnew font (vector font) or the default font
+  should be used for DXF plots.
+* The `psnegative` token defines if the output should be the negative for PostScript plots.
+* The `psa4output` token defines if the A4 page size should be used for PostScript plots.
+* The `plotreference` token defines if hidden reference field text should be plotted.
+* The `plotvalue` token defines if hidden value field text should be plotted.
+* The `plotinvisibletext` token defines if hidden text other than the reference and value fields
+  should be plotted.
+* The `sketchpadsonfab` token defines if pads should be plotted in the outline (sketch) mode.
+* The `subtractmaskfromsilk` toke defines if the solder mask layers should be subtracted from
+  the silk screen layers for gerber plots.
+* The `outputformat` token defines the last plot type.
+** 0 - gerber
+** 1 - PostScript
+** 2 - SVG
+** 3 - DXF
+** 4 - HPGL
+** 5 - PDF
+* The `mirror` token defines if the plot should be mirrored.
+* The `drillshape` token defines the type of drill marks used for drill files.
+* The `scaleselection` token defines *** Please define ***.
+* The `outputdirectory` token defines the path relative to the current project path where the
+  plot files will be saved.
+
+=== Nets Section
+
+This section contains the list of nets that define the connectivity for the board.
+
   (net 0 "")
   (net 1 /SIGNAL)
   (net 2 GND)
 
-This section includes the list of nets read from the schematic netlist.
-Each net has a net number and a name if in the schematic the net has a label.
+=== Net Class Section
 
-=== The list of net classes
+This section stores the net class setup.  Each netclass has a set of track and via and size
+and clearance settings and the name of net or nets assigned to the net class.
 
   (net_class Default "Ceci est la Netclass par dÃ©faut"
     (clearance 0.254)
@@ -245,9 +410,6 @@ Each net has a net number and a name if in the schematic the net has a label.
     (uvia_drill 0.127)
     (add_net GND)
   )
-
-This section stores the net classes setup.
-Each netclass has a set of track and via and size and clearance settings and the name of net or nets assigned to the net class.
 
 === The list of modules
 
