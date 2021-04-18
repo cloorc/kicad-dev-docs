@@ -19,7 +19,7 @@ NOTE: This file format was introduced with the launch of KiCad 4.0
 * Tokens can have zero or more attributes.
 * Human readability is a design goal.
 
-NOTE: Prior to version 6 of KiCad, strings were only quoted when necessary.  Saving on older board
+NOTE: Prior to version 6 of KiCad, strings were only quoted when necessary.  Saving an older board
       file to the latest file format will result in these strings being quoted even though there
       is no functional change in the board itself.
 
@@ -28,13 +28,13 @@ NOTE: Prior to version 6 of KiCad, strings were only quoted when necessary.  Sav
 In order to use this document properly, there are a few notation conventions that must be
 understood.
 
-* Token attributes are upper case descriptive names.  For example ```(at X Y)```, X is the
+* Token attributes are upper case descriptive names.  For example `(at X Y)`, X is the
   horizontal coordinate and Y is the vertical coordinate.
 * Some tokens have a limited number of possible attribute values which are separated by a
-  logical or character '|'.  For example ```(visible yes|no)``` the only valid attributes for
+  logical or character '|'.  For example `(visible yes|no)` the only valid attributes for
   the `visible` token are `yes` or `no`.
 * Some tokens have optional attributes which are enclosed in square braces.  For example
-  ```(paper A0 [portrait])``` the page portrait setting is optional.
+  `(paper A0 [portrait])` the page portrait setting is optional.
 
 
 == Coordinates and Sizes
@@ -46,14 +46,26 @@ understood.
 
 
 == Layers
-* 60 total layers.
-* All layers can be renamed.
+
+All drawable board items exist on a `layer` which is defined in the drawable item definition.
+All layers can be renamed by the user.
 
 NOTE: Internally, all layer names are canonical.  User defined layer names are only used for
       display and output purposes.
 
+Layers can be specified with the '*' wildcard to represent all layers that match the rest of
+the wildcard.  For instance, `*.Cu` represents all of the copper layers.  This only applies
+to canonical layers.
+
+=== Layer Syntax
+
+```
+(layer <<canonical-layer-names,CANONICAL_NAME>>)
+```
+
 === Capacity
 
+* 60 total layers.
 * 32 copper layers.
 * 8 paired technical layers for silk screen, solder mask, solder paste, and adhesive.
 * 4 user pre-defined layers for drawings, engineering change order (ECO), and comments.
@@ -61,6 +73,7 @@ NOTE: Internally, all layer names are canonical.  User defined layer names are o
 * 1 layer to define the board margins.
 * 9 optional user definable layers.
 
+[[canonical-layer-names]]
 === Canonical Layer Names
 
 The table below list all of the canonical layer names.
@@ -129,6 +142,28 @@ The table below list all of the canonical layer names.
 |====================================================
 
 
+[[text-effects]]
+== Text Effects
+
+All text objects can have an optional `effects` section that defines how the text is displayed.
+
+=== Text Effect Syntax
+
+```
+  (effects (font (size HEIGHT WIDTH ) [(thickness THICKNESS)] [bold] [italic])
+    [(justify [left | right] [top | bottom] [mirror])]
+    [hide]
+  )
+```
+
+* The `font` token defines the font height, width, line thickness, and if the text should be
+  drawn bold and/or italicized.
+* The optional `justify` token defines if the text is justified horizontal right or left and/or
+  vertically top or bottom and mirrored.  If the justification is not defined, then the text
+  is center justified both horizontally and vertically and not mirrored.
+* The optional `hide` token defines if the text is visible or hidden.
+
+
 == Layout
 
 A board file includes the following sections:
@@ -137,8 +172,8 @@ A board file includes the following sections:
 * General
 * Layers
 * Setup
+* Properties
 * Nets
-* Net classes
 * Footprints
 * Graphic Items
 * Tracks
@@ -191,9 +226,9 @@ This section defines the board page size and orientation.
 
 ==== Page Section Syntax
 
-````
+```
   (paper PAPER_SIZE | WIDTH HEIGHT [portrait] )
-````
+```
 
 * The `paper` token defines the board page size.  Valid pages sizes are A0, A1, A2, A3, A4, A5,
   A, B, C, D, or E.
@@ -221,6 +256,8 @@ This section defines all of the layers used by the board.
 
 This section stores the current settings such as default item sizes and other options in use
 for this board.
+
+=== Setup Syntax
 
 ```
   (setup
@@ -250,9 +287,11 @@ for this board.
   (0,0).
 * The optional `grid_origin` defines the grid original if it is set to anything other than (0,0).
 
-==== Board Stack Up Settings Section
+===== Board Stack Up Settings Section
 
 This section defines the board stack up settings and is defined in the settings section.
+
+===== Board Stack Up Syntax
 
 ```
     [(stackup
@@ -294,6 +333,8 @@ This section defines the board stack up settings and is defined in the settings 
 ==== Plot Settings Section
 
 This section defines the plotting and printing settings and is defined in the settings section.
+
+==== Plot Settings Syntax
 
 ```
     (pcbplotparams
@@ -377,168 +418,236 @@ This section defines the plotting and printing settings and is defined in the se
 * The `outputdirectory` token defines the path relative to the current project path where the
   plot files will be saved.
 
+=== Properties Section
+
+This section contains user defined properties for the board.  Properties are key/value pairs
+that allow the user to define properties for ** DEFINE ME **.  If no properties are defined,
+this section will not exist.
+
+=== Properties Syntax
+
+```
+  (property "KEY" "VALUE")
+```
+
 === Nets Section
 
-This section contains the list of nets that define the connectivity for the board.
+This section contains the list of one or more nets that define the connectivity for the board.
 
-  (net 0 "")
-  (net 1 /SIGNAL)
-  (net 2 GND)
+=== Net Syntax
 
-=== Net Class Section
+```
+  (net ORDINAL "NET_NAME")
+```
 
-This section stores the net class setup.  Each netclass has a set of track and via and size
-and clearance settings and the name of net or nets assigned to the net class.
+* The `net` token defines a net used for connectivity purposes.
+* The oridinal attribute is an increment integer that orders the net.
+* The net name is a string that defines the name of the net.
 
-  (net_class Default "Ceci est la Netclass par dÃ©faut"
-    (clearance 0.254)
-    (trace_width 0.254)
-    (via_dia 0.889)
-    (via_drill 0.635)
-    (uvia_dia 0.508)
-    (uvia_drill 0.127)
-    (add_net "")
-    (add_net /SIGNAL)
+NOTE: The net class section has been moved out of the board file into the design rules file.
+
+
+=== Footprints Section
+
+This section contains a list of all of the footprint on the board.
+
+NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
+
+=== Footprints Syntax
+
+```
+  (footprint "REFERENCE [locked] [placed] (layer "CANONICAL_NAME)
+    (tedit TIME_STAMP) (tstamp UUID)
+    (at X Y [ORIENTATION])
+    [(descr "DESCRIPTION")]
+    [(tags "NAME")]
+    [(property "KEY" "VALUE")]
+    (path "PATH")
+    [(autoplace_cost90 COST)]
+    [(autoplace_cost180 COST)]
+    [(solder_mask_margin MARGIN)]
+    [(solder_paste_margin MARGIN)]
+    [(solder_paste_ratio RATIO)]
+    [(clearance CLEARANCE)]
+    [(zone_connect CONNECTION_TYPE)]
+    [(thermal_width WIDTH)]
+    [(thermal_gap DISTANCE)]
+    (attr smd | through_hole [board_only] [exclude_from_pos_files] [exclude_from_bom])
+    (fp_text reference "REFERENCE" (at X Y) (layer "CANONICAL_NAME") [hide]
+      (<<text-effects,TEXT_EFFECTS>>)
+    )
+    (fp_text value "VALUE" (at X Y) (layer "CANONICAL_NAME")
+      (<<text-effects,TEXT_EFFECTS>>)
+    )
+    (fp_line (start X Y) (end X Y) (layer "CANONICAL_NAME") (width WIDTH) [(locked)] (tstamp UUID))
+    (fp_rect (start X Y) (end X Y) (layer "CANONICAL_NAME") (width WIDTH) [(fill TYPE)] [(locked)] (tstamp UUID))
+    (fp_circle (center X Y) (end X Y) (layer "CANONICAL_NAME") (width WIDTH) [(locked)] (tstamp UUID))
+    (fp_arc (start X Y) (end X Y) (angle ANGLE) (layer "CANONICAL_NAME") (width WIDTH) [(locked)] (tstamp UUID))
+    (fp_poly (pts (xy X Y) ... (xy X Y)) (layer "CANONICAL_NAME") (width WIDTH) [(locked)] (tstamp UUID))
+    (fp_curve (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y)) (layer "CANONICAL_NAME") (width WIDTH) [(locked)] (tstamp UUID))
+    (pad "NUMBER" TYPE SHAPE (at X Y [ORIENTATION]) [(locked)] (size X Y)
+      (drill [oval] DIAMETER [WIDTH] [(offset X Y)])
+      (layers "CANONICAL_LAYER_LIST")
+      [(property "KEY" "VALUE")]
+      [(remove_unused_layer)]
+      [(keep_end_layers)]
+      [(roundrect_rratio RATIO)]
+      [(chamfer_ration RATIO)]
+      [(chamfer [top_left] [top_right] [bottom_left] [bottom right])]
+    )
+    (net NUMBER "NAME") (tstamp UUID)
+    [(pinfunction PIN_FUNCTION)]
+    [(pintype PIN_TYPE)]
+    [(die_length LENGTH)]
+    [(solder_mask_margin MARGIN)]
+    [(solder_paste_margin MARGIN)]
+    [(solder_paste_margin_ratio RATIO)]
+    [(clearance CLEARANCE)]
+    [(zone_connect ZONE)]
+    [(thermal_width WIDTH)]
+    [(thermal_gap DISTANCE)]
+    [(options (clearance convexhull | outline) rect | circle (anchor PAD_SHAPE))]
+    [(primitives
+       (gr_line (start X Y) (end X Y))
+       (gr_rect (start X Y) (end X Y))
+       (gr_arc (start X Y) (end X Y) (angle ANGLE))
+       (gr_circle (center X Y) (end X Y))
+       (gr_curve (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y)))
+       (gr_poly (pts
+         (xy X Y) ... (xy X Y))
+       )
+       (width WIDTH) [(fill yes])]
+     )]
+    [(zone...)]
+    [(group...)]
+    (model "3D_MODEL_FILE"
+      (at (xyz X Y Z))
+      (scale (xyz X Y Z))
+      (rotate (xyz X Y Z))
+    )
   )
+```
 
-  (net_class POWER ""
-    (clearance 0.254)
-    (trace_width 0.5)
-    (via_dia 1.2)
-    (via_drill 0.635)
-    (uvia_dia 0.508)
-    (uvia_drill 0.127)
-    (add_net GND)
-  )
+=== Graphic Items Section
 
-=== The list of modules
+The graphical items section contains all board items that are outside of the connectivity defined
+in the net section.  This includes graphical items on technical, user, and copper layers.
 
-  (module R3 (layer top_side.Cu) (tedit 4E4C0E65) (tstamp 5127A136)
-    (at 66.04 33.3502)
-    (descr "Resitance 3 pas")
-    (tags R)
-    (path /5127A011)
-    (autoplace_cost180 10)
-    (fp_text reference R1 (at 0 0.127) (layer F.SilkS) hide
-      (effects (font (size 1.397 1.27) (thickness 0.2032)))
-    )
-    (fp_text value 330K (at 0 0.127) (layer F.SilkS)
-      (effects (font (size 1.397 1.27) (thickness 0.2032)))
-    )
-    (fp_line (start -3.81 0) (end -3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.81 0) (end 3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 0) (end 3.302 -1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 -1.016) (end -3.302 -1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 -1.016) (end -3.302 1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 1.016) (end 3.302 1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 1.016) (end 3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 -0.508) (end -2.794 -1.016) (layer F.SilkS) (width 0.2032))
-    (pad 1 thru_hole circle (at -3.81 0) (size 1.397 1.397) (drill 0.812799)
-      (layers *.Cu *.Mask F.SilkS)
-      (net 1 /SIGNAL)
-    )
-    (pad 2 thru_hole circle (at 3.81 0) (size 1.397 1.397) (drill 0.812799)
-      (layers *.Cu *.Mask F.SilkS)
-      (net 2 GND)
-    )
-    (model discret/resistor.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 0.3 0.3 0.3))
-      (rotate (xyz 0 0 0))
-    )
-  )
+==== Graphical Text
 
-This is the description of all modules (footprints) on the board.
-=== The list of graphic items
-
+```
   (gr_text TEST (at 62 31) (layer top_side.Cu)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
-  (gr_line (start 58 42) (end 58 29) (angle 90) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 74 42) (end 58 42) (angle 90) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 74 29) (end 74 42) (angle 90) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 58 29) (end 74 29) (angle 90) (layer Edge.Cuts) (width 0.15))
+```
 
-This is the list of “graphical” items on the board.
-Graphical items are text, lines, arcs, circles on copper and non copper layers, excluding tracks and vias.
-Only text is allowed on copper layers.
+==== Graphical Line
 
-=== The list of tracks
-  (segment (start 61.0616 36.8808) (end 61.0616 34.5186) (width 0.254) (layer bottom_side.Cu) (net 1))
-  (segment (start 61.0616 34.5186) (end 62.23 33.3502) (width 0.254) (layer bottom_side.Cu) (net 1) (tstamp 5127A159))
-  (segment (start 69.85 33.3502) (end 70.993 33.3502) (width 0.5) (layer bottom_side.Cu) (net 2))
-  (segment (start 71.2216 33.5788) (end 71.2216 36.8808) (width 0.5) (layer bottom_side.Cu) (net 2) (tstamp 5127A156))
-  (segment (start 70.993 33.3502) (end 71.2216 33.5788) (width 0.5) (layer bottom_side.Cu) (net 2) (tstamp 5127A155))
+```
+  (gr_line (start 58 42) (end 58 29) [(angle 90)] (layer Edge.Cuts) (width 0.15) [(locked)]
+    (tstamp UUID)
+  )
+```
 
-This is the list of tracks and vias (obviously, only on copper layers) on the board.
+==== Graphical Rectangle
 
-=== The list of zones
-  (zone (net 2) (net_name GND) (layer bottom_side.Cu) (tstamp 5127A1B2) (hatch edge 0.508)
-    (connect_pads (clearance 0.2))
-    (min_thickness 0.1778)
-    (fill (arc_segments 16) (thermal_gap 0.254) (thermal_bridge_width 0.4064))
+```
+  (gr_rect (start %s) (end %s) (layer Edge.Cuts) (width 0.15) [(fill MODE)] [(locked)]
+    (tstamp UUID)
+  )
+```
+
+==== Graphical Circle
+
+```
+  (gr_circle (center %s) (end %s) (layer Edge.Cuts) (width 0.15) [(fill MODE)] [(locked)]
+    (tstamp UUID)
+  )
+```
+
+==== Graphical Arc
+
+```
+  (gr_arc (start %s) (end %s) (angle %s) (layer Edge.Cuts) (width 0.15) [(locked)]
+    (tstamp UUID)
+  )
+```
+
+==== Graphical Polygon
+
+```
+  (gr_poly (pts
+    (xy X Y) ... (xy X Y))
+    (width 0.15) [(fill MODE)] [(locked)] (tstamp UUID)
+  )
+```
+
+==== Graphical Curve
+
+```
+  (gr_curve (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y)) (layer Edge.Cuts) (width 0.15) [(locked)]
+    (tstamp UUID)
+  )
+```
+
+=== Track Section
+
+This section lists all of segment, via, and arc objects that make up tracks on the board.
+
+==== Track Segment Syntax
+
+```
+  (segment (start X Y) (end X Y) (width WIDTH) (layer bottom_side.Cu)
+    [(locked)] (net 1) (tstamp UUID)
+  )
+```
+
+==== Track Via Syntax
+
+```
+  (via (at X Y) (size DIAMETER) (drill DIAMETER) (layers "F.Cu" "B.Cu")
+    [(locked)] (net 1) (tstamp UUID)
+  )
+```
+
+==== Track Arc Syntax
+
+```
+  (arc (start %s) (mid %s) (end %s) (width %s) (layers "F.Cu" "B.Cu")
+    [(locked)] (net 1) (tstamp UUID)
+  )
+```
+
+
+=== Zone Section
+
+This section contains the list of zones in the board.  This section is ommitted if there are no
+zones on the board.
+
+==== Zone Item Syntax
+
+```
+  (zone (net 3) (net_name "+5V") (layer "In1.Cu") (tstamp 00000000-0000-0000-0000-000056040b2c) (hatch edge 0.508)
+    (connect_pads (clearance 0.2794))
+    (min_thickness 0.2032)
+    (fill yes (thermal_gap 0.381) (thermal_bridge_width 0.381))
     (polygon
       (pts
-        (xy 59 30) (xy 73 30) (xy 73 41) (xy 59 41)
+        (xy 153.289 107.95)
+        ...
+        (xy 153.082553 110.309705)
+      )
+    )
+    (filled_polygon
+      (layer "In1.Cu")
+      (pts
+        (xy 142.394143 94.825161)
+        ...
+        (xy 144.892128 95.598417)
       )
     )
   )
-)
-
-=== Description of a module (footprint)
-Here is an example:
-
 ```
-  (module R3 (layer top_side.Cu) (tedit 4E4C0E65) (tstamp 5127A136)
-    (at 66.04 33.3502)
-    (descr "Resitance 3 pas")
-    (tags R)
-    (path /5127A011)
-    (autoplace_cost180 10)
-    (fp_text reference R1 (at 0 0.127) (layer F.SilkS) hide
-      (effects (font (size 1.397 1.27) (thickness 0.2032)))
-    )
-    (fp_text value 330K (at 0 0.127) (layer F.SilkS)
-      (effects (font (size 1.397 1.27) (thickness 0.2032)))
-    )
-    (fp_line (start -3.81 0) (end -3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.81 0) (end 3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 0) (end 3.302 -1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 -1.016) (end -3.302 -1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 -1.016) (end -3.302 1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 1.016) (end 3.302 1.016) (layer F.SilkS) (width 0.2032))
-    (fp_line (start 3.302 1.016) (end 3.302 0) (layer F.SilkS) (width 0.2032))
-    (fp_line (start -3.302 -0.508) (end -2.794 -1.016) (layer F.SilkS) (width 0.2032))
-    (pad 1 thru_hole circle (at -3.81 0) (size 1.397 1.397) (drill 0.812799)
-      (layers *.Cu *.Mask F.SilkS)
-      (net 1 /SIGNAL)
-    )
-    (pad 2 thru_hole circle (at 3.81 0) (size 1.397 1.397) (drill 0.812799)
-      (layers *.Cu *.Mask F.SilkS)
-      (net 2 GND)
-    )
-    (model discret/resistor.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 0.3 0.3 0.3))
-      (rotate (xyz 0 0 0))
-    )
-  )
-```
-
-A module has:
-
-* a reference
-* a layer (Front or Back layer)
-* a last edition time stamp (for user info)
-* a time stamp from the schematic
-* a position.
-
-Its description includes:
-
-* Text (at least reference and value)
-* Graphic outlines
-* Pads (with pad type, pad layers, pad size and position, net)
-* A link to a 3D model, if exists, for the 3D viewer.
 
 == Board Example:
 
