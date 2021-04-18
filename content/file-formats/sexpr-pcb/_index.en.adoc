@@ -257,7 +257,7 @@ This section defines all of the layers used by the board.
 This section stores the current settings such as default item sizes and other options in use
 for this board.
 
-=== Setup Syntax
+==== Setup Syntax
 
 ```
   (setup
@@ -424,7 +424,7 @@ This section contains user defined properties for the board.  Properties are key
 that allow the user to define properties for ** DEFINE ME **.  If no properties are defined,
 this section will not exist.
 
-=== Properties Syntax
+=== Property Syntax
 
 ```
   (property "KEY" "VALUE")
@@ -624,7 +624,7 @@ This section lists all of segment, via, and arc objects that make up tracks on t
 This section contains the list of zones in the board.  This section is ommitted if there are no
 zones on the board.
 
-==== Zone Item Syntax
+==== Zone Syntax
 
 ```
   (zone (net 3) (net_name "+5V") (layer "In1.Cu") (tstamp 00000000-0000-0000-0000-000056040b2c) (hatch edge 0.508)
