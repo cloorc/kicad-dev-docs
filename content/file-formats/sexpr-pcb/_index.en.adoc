@@ -11,7 +11,7 @@ NOTE: This file format was introduced with the launch of KiCad 4.0.
 
 == Syntax
 * Based on the Specctra DSN syntax.
-* Token definitions delimited by opening `(` and closing ')' parenthesis.
+* Token definitions are delimited by opening `(` and closing ')' parenthesis.
 * All tokens are lowercase.
 * Tokens cannot contain any white space characters or special characters other than the
   underscore '_' character.
@@ -149,54 +149,67 @@ All text objects can have an optional `effects` section that defines how the tex
 === Text Effect Syntax
 
 ```
-  (effects (font (size HEIGHT WIDTH ) [(thickness THICKNESS)] [bold] [italic])
-    [(justify [left | right] [top | bottom] [mirror])]
-    [hide]
+  (effects
+    (font                                                 <1>
+      (size HEIGHT WIDTH)                                 <2>
+      [(thickness THICKNESS)]                             <3>
+      [bold]                                              <4>
+      [italic]                                            <5>
+    )
+    [(justify [left | right] [top | bottom] [mirror])]    <6>
+    [hide]                                                <7>
   )
 ```
 
-* The `font` token defines the font height, width, line thickness, and if the text should be
-  drawn bold and/or italicized.
-* The optional `justify` token defines if the text is justified horizontally right or left and/or
-  vertically top or bottom and mirrored.  If the justification is not defined, then the text
-  is center justified both horizontally and vertically and not mirrored.
-* The optional `hide` token defines if the text is visible or hidden.
+<1> The `font` token attributes define how the text is shown.
+<2> The `size` token attributes define the font height and width.
+<3> The `thickness` token attribute defines the line thickness of the font.
+<4> The `bold` token specifies if the font should be bold.
+<5> The `italic` token specifies if the font should be italicized.
+<6> The optional `justify` token attributesdefine if the text is justified horizontally `right`
+    or `left` and/or vertically `top` or `bottom` and/or mirrored.  If the justification is not
+    defined, then the text is center justified both horizontally and vertically and not mirrored.
+<7> The optional `hide` token defines if the text is hidden.
 
 
 == Layout
 
 A board file includes the following sections:
 
-* Header
-* General
-* Layers
-* Setup
-* Properties
-* Nets
-* Footprints
-* Graphic Items
-* Tracks
-* Zones
+* <<_header_section,Header>>
+* <<_general_section,General>>
+* <<_layers_section,Layers>>
+* <<_setup_section,Setup>>
+* <<_properties_section,Properties>>
+* <<_nets_section,Nets>>
+* <<_footprints_section,Footprints>>
+* <<_graphic_items_section,Graphic Items>>
+* <<_tracks_section,Tracks>>
+* <<_zones_section,Zones>>
+* <<_groups_section,Groups>>
 
 NOTE: The section order is not critical other than the header must be the first token.  Some
       sections can may omitted.
 
 === Header Section
 
-This section defines the file version and generator information that defines the appropriate
-KiCad board file format.
+This section of the board the version and generator information of the KiCad board file format.
 
 ==== Header Syntax
 
 ```
-(kicad_pcb (version VERSION) (generator GENERATOR)
-  ... contents of board file.
+(kicad_pcb                                      <1>
+  (version VERSION)                             <2>
+  (generator GENERATOR)                         <3>
+
+  contents of board file...                     <4>
 )
 ```
 
-* The `kicad_pcb` token defines this file as a KiCad board file and is required.
-* The `version` token defines the board version using the YYYYMMDD date format.
-* The `generator` token defines the program used to write the file.
+<1> The `kicad_pcb` token defines this file as a KiCad board file and is required.
+<2> The `version` token attribute defines the board version using the YYYYMMDD date format.
+<3> The `generator` token attribute defines the program used to write the file.
+<4> The remaining sections of the board definition goes here.
 
 NOTE: Third party scripts should not use `pcbnew` as the generator identifier.  Please use some
       other identifier so that bugs introduced by third party generators are not confused with
@@ -206,32 +219,40 @@ NOTE: Third party scripts should not use `pcbnew` as the generator identifier.  
 
 This section contains general information about the board.
 
+NOTE: Most of the redundant information in the `general` section prior to version 6 has been
+      removed.  The removed information does not affect the board output.
+
 ==== General Section Syntax
 
 ```
-  (general
-    (thickness THICKNESS)
+  (general                                      <1>
+    (thickness THICKNESS)                       <2>
   )
 ```
 
-* The `thickness` token defines the overall board thickness.
+<1> The `general` token defines the overall board information.
+<2> The `thickness` token attribute defines the overall board thickness.
 
-NOTE: The general section only has a single setting.  Most of the previous general section
-      setting have been moved into the project file.
 
 === Page Section
 
 This section defines the board page size and orientation.
 
-==== Page Section Syntax
+==== Page Syntax
 
 ```
-  (paper PAPER_SIZE | WIDTH HEIGHT [portrait] )
+  (paper                                        <1>
+    PAPER_SIZE | WIDTH HEIGHT                   <2>
+    [portrait]                                  <3>
+  )
 ```
 
-* The `paper` token defines the board page size.  Valid pages sizes are A0, A1, A2, A3, A4, A5,
-  A, B, C, D, and E.
-* The width and height are used for custom user defined page sizes.
+<1> The `paper` token defines the board page size.
+<2> Valid pages sizes are A0, A1, A2, A3, A4, A5, A, B, C, D, and E or the WIDTH and HEIGHT
+    attributes are used for custom user defined page sizes.
+<3> The `portrait` token defines if the page is shown in the portrait mode.  If not defined,
+    the landscape page layout mode is used.
+
 
 === Layers Section
 
@@ -240,16 +261,27 @@ This section defines all of the layers used by the board.
 ==== Layer Syntax
 
 ```
-  (layers
-    (LAYER_ORDINAL "CANONICAL_NAME" LAYER_TYPE ["USER_NAME"])
-    ... remaining layers
+  (layers                                       <1>
+    (
+      ORDINAL                                   <2>
+      "CANONICAL_NAME"                          <3>
+      TYPE                                      <4>
+      ["USER_NAME"]                             <5>
+    )
+
+    remaining layers...
   )
 ```
 
-* The layer ordinal is an integer used to associate the layer stack ordering.  This is mostly
-  to ensure correct mapping when the number of layers is increased in the future.
-* The <<_canonical_layer_names,canonical name>> is the name defined for internal board use.
-* The layer type can be defined as `jumper`, `mixed`, `power`, `signal`, or `user`.
+<1> The `layers` token defines the list of layers used by the board.
+<2> The layer `ORDINAL` is an integer used to associate the layer stack ordering.  This is mostly
+    to ensure correct mapping when the number of layers is increased in the future.
+<3> The <<_canonical_layer_names,`CANONICAL_NAME`>> is the layer name defined for internal
+    board use.
+<4> The layer `TYPE` defines the type of layer and can be defined as `jumper`, `mixed`, `power`,
+    `signal`, or `user`.
+<5> The optional `USER_NAME` attribute defines the custom user name.
+
 
 === Setup Section
 
@@ -261,7 +293,7 @@ by the board.
 ```
   (setup
     [(stackup
-      ... see board stack up settings section
+      see board stack up settings section...
     )]
   (pad_to_mask_clearance CLEARANCE)
   [(solder_mask_min_width MINIMUM_WIDTH)]
@@ -270,7 +302,7 @@ by the board.
   [(aux_axis_origin X Y)]
   [(grid_origin X Y)]
     (pcbplotparams
-      ... see plot settings section
+      see plot settings section...
     )
   )
 ```
@@ -295,9 +327,15 @@ This section defines the board stack up settings and is defined in the settings 
 
 ```
     [(stackup
-       (layer "NAME" | dielectric NUMBER (type "DESCRIPTION") [(color "COLOR")]
-        [(thickness THICKNESS)] [(material "MATERIAL")] [(epsilon_r DIELECTRIC_RESISTANCE)]
-        [(loss_tangent LOSS_TANGENT)]
+       (layer
+         "NAME" | dielectric
+         NUMBER
+         (type "DESCRIPTION")
+         [(color "COLOR")]
+         [(thickness THICKNESS)]
+         [(material "MATERIAL")]
+         [(epsilon_r DIELECTRIC_RESISTANCE)]
+         [(loss_tangent LOSS_TANGENT)]
        )
        ... all remaining layers in the actual board stack up order
        [(copper_finish "FINISH")]
@@ -422,7 +460,7 @@ This section defines the plotting and printing settings and is defined in the se
 === Properties Section
 
 This section contains user defined properties for the board.  Properties are key/value pairs
-that allow the user to define properties for ** DEFINE ME **.  If no properties are defined,
+that allow the user to define properties at the board scope.  If no properties are defined,
 this section will not exist.
 
 === Property Syntax
@@ -454,11 +492,16 @@ This section contains a list of all of the footprints on the board.
 
 NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 
-=== Footprints Syntax
+=== Footprint Syntax
 
 ```
-  (footprint "REFERENCE" [locked] [placed] (layer LAYER_DEFINITIONS)
-    (tedit TIME_STAMP) (tstamp UUID)
+  (footprint
+    "REFERENCE"
+    [locked]
+    [placed]
+    (layer LAYER_DEFINITIONS)
+    (tedit TIME_STAMP)
+    (tstamp UUID)
     (at X Y [ORIENTATION])
     [(descr "DESCRIPTION")]
     [(tags "NAME")]
@@ -473,12 +516,18 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     [(zone_connect CONNECTION_TYPE)]
     [(thermal_width WIDTH)]
     [(thermal_gap DISTANCE)]
-    (attr TYPE [board_only] [exclude_from_pos_files] [exclude_from_bom])
-    (graphic items...)
-    (pads...)
-    [(zones...)]
-    [(groups...)]
-    (model "3D_MODEL_FILE"
+    (attr
+      TYPE
+      [board_only]
+      [exclude_from_pos_files]
+      [exclude_from_bom]
+    )
+    (GRAPHIC_ITEMS...)
+    (PADS...)
+    [(ZONES...)]
+    [(GROUPS...)]
+    (model
+      "3D_MODEL_FILE"
       (at (xyz X Y Z))
       (scale (xyz X Y Z))
       (rotate (xyz X Y Z))
@@ -511,8 +560,9 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
   is used.
 * The optional `clearance` token defines the clearance to all board copper objects for all pads
   in the footprint.  If not set, the board `clearance` setting is used.
-* The optional `zone_connect` token defines how all pads are connected to filled zone.  Valid
-  connection types are integers values from 0 to 3 which defines:
+* The optional `zone_connect` token defines how all pads are connected to filled zone.  If not
+  defined, then the zone `connect_pads` setting is used.  Valid connection types are integers
+  values from 0 to 3 which defines:
 ** 0 - Pads are not connect to zone.
 ** 1 - Pads are connected to zone using thermal reliefs.
 ** 2 - Pads are connected to zone using solid fill.
@@ -532,20 +582,29 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
    should not be included when creating position files.
 ** The optional `exclude_from_bom` token indicates that the footprint should be excluded when
    creating bill of materials (BOM) files.
-* The `graphic objects` section is a list of one or more
+* The graphic objects section is a list of one or more
   <<_footprint_graphics_items, graphical objects>> in the footprint.  At a minimum, the reference
   designator and value  <<_footprint_text, text objects>> are defined.  All other graphical
   objects are optional.
+* The optional pads section is a list of <<_footprint_pads, pads>> in the footprint.
+* The optional zones section is a list of <<_zone_syntax, keep out zones>> in the footprint.
+* The optional groups section is a list of <<_group_syntax, grouped objects>> in the footprint.
+* The `model` token defines the 3D model object associated with the footprint.
+** The 3D_MODEL_FILE attribute is the path and file name of the 3D model.
+** The `at` token specifies the 3D position coordinates of the model relative to the footprint.
+** The `scale` token specifies the model scale factor for each 3D axis.
+** The `rotate` token specifies the model rotation for each 3D axis relative to the footprint.
 
 ==== Footprint Graphics Items
 
 Footprint graphical item define all of the drawing items that are used specifically in footprint
-definitions.
+definitions.  This includes <<_footprint_text_syntax,text>>, <<_footprint_line_syntax,lines>>,
+<<footprint_rectangle_syntax,rectangles>>, <<_footprint_circle_syntax,circles>>,
+<<footprint_arc_syntax,arcs>>, <<_footprint_polygon_syntax,polygons>>, and
+<<footprint_curve_syntax,curves>>.
 
 NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
       footprint definition>>.
-
-===== Footprint Text
 
 ===== Footprint Text Syntax
 
@@ -565,8 +624,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
 * The TEXT_EFFECTS defines how the <<_text_effects, text is displayed>>.
 * The `tstamp` token defines the unique identifier of the text object.
 
-===== Footprint Line
-
 ===== Footprint Line Syntax
 
 ```
@@ -579,8 +636,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
 * The `width` token defines the line width.
 * The optional `locked` token defines if the line cannot be edited.
 * The `tstamp` token defines the unique identifier of the line object.
-
-===== Footprint Rectangle
 
 ===== Footprint Rectangle Syntax
 
@@ -600,8 +655,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
   and `none`.  If not defined, the rectangle is not filled.
 * The `tstamp` token defines the unique identifier of the rectangle object.
 
-===== Footprint Circle
-
 ===== Footprint Circle Syntax
 
 ```
@@ -620,8 +673,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
 * The optional `locked` token defines if the circle cannot be edited.
 * The `tstamp` token defines the unique identifier of the circle object.
 
-===== Footprint Arc
-
 ===== Footprint Arc Syntax
 
 ```
@@ -639,8 +690,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
 * The optional `locked` token defines if the arc cannot be edited.
 * The `tstamp` token defines the unique identifier of the arc object.
 
-===== Footprint Polygon
-
 ===== Footprint Polygon Syntax
 
 ```
@@ -657,8 +706,6 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
   and `none`.  If not defined, the polygon is not filled.
 * The optional `locked` token defines if the polygon cannot be edited.
 * The `tstamp` token defines the unique identifier of the polygon object.
-
-===== Footprint Curve
 
 ===== Footprint Curve Syntax.
 
@@ -678,21 +725,32 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
 
 ==== Footprint Pads
 
-==== Footprint Pads Syntax
+==== Footprint Pad Syntax
 
 ```
-    (pad "NUMBER" TYPE SHAPE (at X Y [ORIENTATION]) [(locked)] (size X Y)
-      (drill [oval] DIAMETER [WIDTH] [(offset X Y)])
+    (pad
+      "NUMBER"
+      TYPE
+      SHAPE
+      (at X Y [ORIENTATION])
+      [(locked)]
+      (size X Y)
+      (drill
+        [oval]
+        DIAMETER
+        [WIDTH]
+        [(offset X Y)]
+      )
       (layers "CANONICAL_LAYER_LIST")
-      [(property "KEY" "VALUE")]
+      [(property PROPERTY)]
       [(remove_unused_layer)]
       [(keep_end_layers)]
       [(roundrect_rratio RATIO)]
       [(chamfer_ration RATIO)]
       [(chamfer [top_left] [top_right] [bottom_left] [bottom right])]
       (net NUMBER "NAME") (tstamp UUID)
-      [(pinfunction PIN_FUNCTION)]
-      [(pintype PIN_TYPE)]
+      [(pinfunction "PIN_FUNCTION")]
+      [(pintype "PIN_TYPE")]
       [(die_length LENGTH)]
       [(solder_mask_margin MARGIN)]
       [(solder_paste_margin MARGIN)]
@@ -701,37 +759,98 @@ NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
       [(zone_connect ZONE)]
       [(thermal_width WIDTH)]
       [(thermal_gap DISTANCE)]
-      [(options (clearance convexhull | outline) rect | circle (anchor PAD_SHAPE))]
+      [(options
+        (clearance CLEARANCE_TYPE)
+        ANCHOR_PAD_SHAPE
+        (anchor PAD_SHAPE)
+      )]
       [(primitives
-         (gr_line (start X Y) (end X Y))
-         (gr_rect (start X Y) (end X Y))
-         (gr_arc (start X Y) (end X Y) (angle ANGLE))
-         (gr_circle (center X Y) (end X Y))
-         (gr_curve (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y)))
-         (gr_poly (pts
-           (xy X Y) ... (xy X Y))
-         )
-         (width WIDTH) [(fill yes)]
+         (GRAPHIC_ITEMS...)
+         (width WIDTH)
+         [(fill yes)]
        )]
     )
 ```
 
+* The "NUMBER" attribute is the pad number.
+* The pad TYPE can be defined as `thru_hole`, `smd`, `connect`, or `np_thru_hole`.
+* The pad SHAPE can be defined as `circle`, `rect`, `oval`, `trapezoid`, `roundrect`, or `custom`.
+* The `at` token defines the position coordinates and optional orientation angle.
+* The optional `locked` token defines if the footprint pad can be edited.
+* The `size` token defines the width and height of the pad.
+* The `layers` token defines the <<_layer_syntax,layer or layers>> the pad reside on.
+* The optional `property` token defines any special properties for the pad.  Valid properties are
+  `pad_prop_bga`, `pad_prop_fiducial_glob`, `pad_prop_fiducial_loc`, `pad_prop_testpoint`,
+  `pad_prop_heatsink`, `pad_prop_heatsink`, and `pad_prop_castellated`.
+* The optional `remove_unused_layer` token specifies that the copper should be removed from any
+  layers the pad is not connected to.
+* The optional `keep_end_layers` token specifies that the top and bottom layers should be retained
+  when removing the copper from unused layers.
+* The optional `roundrect_rratio` token defines the scaling factor of the pad to corner radius for
+  rounded rectangular and chamfered corner rectangular pads.  The scaling factor is a number
+  between 0 and 1.
+* The optional `chamfer_ratio` token defines the scaling factor of the pad to chamfer size.  The
+  scaling factor is a number between 0 and 1.
+* The optional `chamfer` token defines a list of one or more rectangular pad corners that get
+  chamfered.  Valid chamfer corner attributes are `top_left`, `top_right`, `bottom_left`, and
+  `bottom_right`.
+* The optional `net` token defines the integer number and name string of the net connection for
+  the pad.
+* The optional `pinfunction` token attribute defines the associated schematic symbol pin name.
+* The optional `pintype` token attribute defines the associated schematic pin electrical type.
+* The optional `die_length` token attribute defines the die lenth between the component pad and
+  physical chip inside the component package.
+* The optional `solder_mask_margin` token attribute defines the distance between the pad and the
+  solder mask for the pad.  If not set, the footprint `solder_mask_margin` is used.
+* The optional `solder_paste_margin` token attribute defines the distance the solder paste should
+  be changed for the pad.
+* The optional `solder_paste_margin_ratio` token attribute defines the percentage to reduce the
+  pad outline by to generate the solder paste size.
+* The optional `clearance` token attribute defines the clearance from all copper to the pad.  If
+  not set, the footprint `clearance` is used.
+* The optional `zone_connection` token attribute defines type of zone connect for the pad.  If not
+  defined, the footprint `zone_connection` setting is used.  Valid connection types are integers
+  values from 0 to 3 which defines:
+** 0 - Pad is not connect to zone.
+** 1 - Pad is connected to zone using thermal relief.
+** 2 - Pad is connected to zone using solid fill.
+** 3 - Only through hold pad is connected to zone using thermal relief.
+* The optional `thermal_width` token attribute defines the thermal relief spoke width used for
+  zone connection for the pad.  This only affects a pad connected to a zone with a thermal
+  relief.  If not set, the footprint `thermal_width` setting is used.
+* The optional `thermal_gap` token attribute defines the distance from the pad to the zone of
+  the thermal relief connection for the pad.  This only affects a pad connected to a zone with
+  a thermal relief.  If not set, the footprint `thermal_gap` setting is used.
+
 
 === Graphic Items Section
 
-The graphical items section contains all board items that are outside of the connectivity defined
-in the net section.  This includes graphical items on technical, user, and copper layers.
+The graphical items section contains all board items that are outside of the connectivity
+defined in the net section.  This includes graphical items on technical, user, and copper
+layers.  Graphical items are also used to define complex <<_footprint_pad_syntax,pad>>
+geometries.
 
 ==== Graphical Text
 
 ```
-  (gr_text "TEXT" (at X Y [ORIENTATION]) (layer LAYER_DEFINITION) (effects FONT_EFFECTS))
+  (gr_text
+    "TEXT"
+    (at X Y [ORIENTATION])
+    (layer LAYER_DEFINITION)
+    (effects FONT_EFFECTS)
+  )
 ```
 
 ==== Graphical Line
 
 ```
-  (gr_line (start 58 42) (end 58 29) [(angle 90)] (layer Edge.Cuts) (width 0.15) [(locked)]
+  (gr_line
+    (start X Y)
+    (end X Y)
+    [(angle ANGLE)]
+    (layer LAYER_DEFINITION)
+    (width WIDTH)
+    [(locked)]
     (tstamp UUID)
   )
 ```
@@ -739,15 +858,21 @@ in the net section.  This includes graphical items on technical, user, and coppe
 ==== Graphical Rectangle
 
 ```
-  (gr_rect (start %s) (end %s) (layer Edge.Cuts) (width 0.15) [(fill MODE)] [(locked)]
-    (tstamp UUID)
+  (gr_rect (start X Y) (end X Y) (layer LAYER_DEFINITION) (width WIDTH) [(fill MODE)]
+   [(locked)] (tstamp UUID)
   )
 ```
 
 ==== Graphical Circle
 
 ```
-  (gr_circle (center %s) (end %s) (layer Edge.Cuts) (width 0.15) [(fill MODE)] [(locked)]
+  (gr_circle
+    (center X Y)
+    (end X Y)
+    (layer LAYER_DEFINITION)
+    (width WIDTH)
+    [(fill MODE)]
+    [(locked)]
     (tstamp UUID)
   )
 ```
@@ -755,7 +880,13 @@ in the net section.  This includes graphical items on technical, user, and coppe
 ==== Graphical Arc
 
 ```
-  (gr_arc (start %s) (end %s) (angle %s) (layer Edge.Cuts) (width 0.15) [(locked)]
+  (gr_arc
+    (start X Y)
+    (end X Y)
+    (angle ANGLE)
+    (layer LAYER_DEFINITION)
+    (width WIDTH)
+    [(locked)]
     (tstamp UUID)
   )
 ```
@@ -763,50 +894,61 @@ in the net section.  This includes graphical items on technical, user, and coppe
 ==== Graphical Polygon
 
 ```
-  (gr_poly (pts
-    (xy X Y) ... (xy X Y))
-    (width 0.15) [(fill MODE)] [(locked)] (tstamp UUID)
+  (gr_poly
+    (pts
+      (xy X Y) ... (xy X Y)
+    )
+    (layer LAYER_DEFINITION)
+    (width WIDTH)
+    [(fill MODE)]
+    [(locked)]
+    (tstamp UUID)
   )
 ```
 
 ==== Graphical Curve
 
 ```
-  (gr_curve (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y)) (layer Edge.Cuts) (width 0.15) [(locked)]
+  (gr_curve
+    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))
+    (layer LAYER_DEFINITION)
+    (width WIDTH)
+    [(locked)]
     (tstamp UUID)
   )
 ```
 
-=== Track Section
+=== Tracks Section
 
-This section lists all of segment, via, and arc objects that make up tracks on the board.
+This section lists all of <<_track_segment_syntax,segment>>, <<_track_via_syntax,via>>, and
+<<_track_arc_syntax,arc>> objects that make up tracks on the board.
 
 ==== Track Segment Syntax
 
 ```
-  (segment (start X Y) (end X Y) (width WIDTH) (layer bottom_side.Cu)
-    [(locked)] (net 1) (tstamp UUID)
+  (segment (start X Y) (end X Y) (width WIDTH) (layer LAYER_DEFINITION)
+    [(locked)] (net NET_NUMBER) (tstamp UUID)
   )
 ```
 
 ==== Track Via Syntax
 
 ```
-  (via (at X Y) (size DIAMETER) (drill DIAMETER) (layers "F.Cu" "B.Cu")
-    [(locked)] (net 1) (tstamp UUID)
+  (via (at X Y) (size DIAMETER) (drill DIAMETER) (layers LAYER_DEFINITION)
+    [(locked)] (net NET_NUMBER) (tstamp UUID)
   )
 ```
 
 ==== Track Arc Syntax
 
 ```
-  (arc (start %s) (mid %s) (end %s) (width %s) (layers "F.Cu" "B.Cu")
-    [(locked)] (net 1) (tstamp UUID)
+  (arc (start X Y) (mid X Y) (end X Y) (width X Y) (layers LAYER_DEFINITION)
+    [(locked)] (net NET_NUMBER) (tstamp UUID)
   )
 ```
 
 
-=== Zone Section
+=== Zones Section
 
 This section contains the list of zones in the board.  This section is ommitted if there are no
 zones on the board.
@@ -814,44 +956,76 @@ zones on the board.
 ==== Zone Syntax
 
 ```
-  (zone (net NET_NUMBER) (net_name "NET_NAME") (layer LAYER_DEFINITION)
-    (tstamp UUID) (hatch STYLE PITCH)
+  (zone
+    (net NET_NUMBER)
+    (net_name "NET_NAME")
+    (layer LAYER_DEFINITION)
+    (tstamp UUID)
+    (hatch STYLE PITCH)
     (priority PRIORITY)
-    [(connect_pads [CONNECTION_TYPE] (clearance CLEARANCE))]
+    [(connect_pads
+      [CONNECTION_TYPE]
+      (clearance CLEARANCE)
+    )]
     (min_thickness THICKNESS)
     [(filled_areas_thickness no)]
-    [(keepout (tracks KEEPOUT) (vias KEEPOUT) (pads KEEPOUT) (copperpour KEEPOUT)
-       (footprints KEEPOUT)
-     )]
-    (fill [yes] [(mode FILL_MODE)] (thermal_gap GAP) (thermal_bridge_width WIDTH)
-      [(smoothing STYLE (radius RADIUS))]
-      [(island_removal_mode MODE) (island_area_min AREA)]
-      [(hatch_thickness THICKNESS) (hatch_gap GAP) (hatch_orientation ORIENTATION)]
-      [(hatch_smoothing_level LEVEL) (hatch_smoothing_value VALUE)]
-      [(hatch_border_algorithm TYPE) (hatch_min_hole_area AREA)]
+    [(keepout
+      (tracks KEEPOUT)
+      (vias KEEPOUT)
+      (pads KEEPOUT)
+      (copperpour KEEPOUT)
+      (footprints KEEPOUT)
+    )]
+    (fill
+      [yes]
+      [(mode FILL_MODE)]
+      (thermal_gap GAP)
+      (thermal_bridge_width WIDTH)
+      [(smoothing
+        STYLE
+        (radius RADIUS)
+      )]
+      [(island_removal_mode MODE)]
+      [(island_area_min AREA)]
+      [(hatch_thickness THICKNESS)
+      (hatch_gap GAP)
+      (hatch_orientation ORIENTATION)]
+      [(hatch_smoothing_level LEVEL)]
+      [(hatch_smoothing_value VALUE)]
+      [(hatch_border_algorithm TYPE)]
+      [(hatch_min_hole_area AREA)]
     )
     (polygon
       (pts
-        (xy X Y)...(xy X Y))
+        (xy X Y)...(xy X Y)
+      )
     )
     (filled_polygon
       (layer LAYER_DEFINITION)
-      (pts (xy X Y)...(xy X Y))
+      (pts
+        (xy X Y)...(xy X Y)
+      )
     )
     [(fill_segments
        (layer LAYER_DEFINITION)
-       (pts (xy X Y) (xy X Y))...(pts (xy X Y) (xy X Y))
+       (pts (xy X Y) (xy X Y))
      )]
   )
 ```
 
-=== Group Section
+=== Groups Section
+
+This section contains a list of item groups defined in the board.  This section will not exist
+if no groups have been defined.
 
 ==== Group Syntax
 
 ```
-  (group "NAME" (id UUID)
-    (members UUID_1...UUID_N)
+  (group "NAME"
+    (id UUID)
+    (members
+      UUID
+    )
   )
 ```
 
