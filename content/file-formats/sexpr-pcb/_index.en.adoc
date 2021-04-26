@@ -674,9 +674,9 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint_section,footpr
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the rectangle
     resides on.
 <4> The `width` token defines the line width of the rectangle.
-<5> The optional `locked` token defines if the rectangle cannot be edited.
-<6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
+<5> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
+<6> The optional `locked` token defines if the rectangle cannot be edited.
 <7> The `tstamp` token defines the unique identifier of the rectangle object.
 
 ==== Footprint Circle
@@ -956,91 +956,158 @@ geometries.
 
 === Graphical Text
 
+The `gr_text` token defines graphical text.
+
 ```
   (gr_text
-    "TEXT"
-    (at X Y [ORIENTATION])
-    (layer LAYER_DEFINITION)
-    (effects FONT_EFFECTS)
+    "TEXT"                                                      <1>
+    (at X Y [ORIENTATION])                                      <2>
+    (layer LAYER_DEFINITION)                                    <3>
+    (tstamp UUID)                                               <4>
+    (effects FONT_EFFECTS)                                      <5>
   )
 ```
+
+<1> The "TEXT" attribute is a quoted string that defines the text.
+<2> The `at` token defines the position coordinates and optional orientation angle of the text.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
+<4> The `tstamp` token defines the unique identifier of the text object.
+<5> The TEXT_EFFECTS defines how the <<_text_effects, text is displayed>>.
 
 === Graphical Line
 
+The `gr_line` token defines a graphical line.
+
 ```
   (gr_line
-    (start X Y)
-    (end X Y)
-    [(angle ANGLE)]
-    (layer LAYER_DEFINITION)
-    (width WIDTH)
-    [(locked)]
-    (tstamp UUID)
+    (start X Y)                                                 <1>
+    (end X Y)                                                   <2>
+    [(angle ANGLE)]                                             <3>
+    (layer LAYER_DEFINITION)                                    <4>
+    (width WIDTH)                                               <5>
+    (tstamp UUID)                                               <6>
   )
 ```
+
+<1> The `start` token defines the coordinates of the beginning of the line.
+<2> The `end` token defines the coordinates of the end of the line.
+<3> The optional `angle` token defines the rotational angle of the line.
+<4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides on.
+<5> The `width` token defines the line width.
+<6> The `tstamp` token defines the unique identifier of the line object.
 
 === Graphical Rectangle
 
+The `gr_rect` token defines a graphical rectangle.
+
 ```
-  (gr_rect (start X Y) (end X Y) (layer LAYER_DEFINITION) (width WIDTH) [(fill MODE)]
-   [(locked)] (tstamp UUID)
+  (gr_rect
+    (start X Y)                                                 <1>
+    (end X Y)                                                   <2>
+    (layer LAYER_DEFINITION)                                    <3>
+    (width WIDTH)                                               <4>
+    [(fill MODE)]                                               <5>
+    (tstamp UUID)                                               <6>
   )
 ```
+
+<1> The `start` token defines the coordinates of the upper left corner of the rectangle.
+<2> The `end` token defines the coordinates of the low right corner of the rectangle.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the rectangle
+    resides on.
+<4> The `width` token defines the line width of the rectangle.
+<5> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
+    and `none`.  If not defined, the rectangle is not filled.
+<6> The `tstamp` token defines the unique identifier of the rectangle object.
 
 === Graphical Circle
 
+The `gr_circle` token defines a graphical circle.
+
 ```
   (gr_circle
-    (center X Y)
-    (end X Y)
-    (layer LAYER_DEFINITION)
-    (width WIDTH)
-    [(fill MODE)]
-    [(locked)]
-    (tstamp UUID)
+    (center X Y)                                                <1>
+    (end X Y)                                                   <2>
+    (layer LAYER_DEFINITION)                                    <3>
+    (width WIDTH)                                               <4>
+    [(fill MODE)]                                               <5>
+    (tstamp UUID)                                               <6>
   )
 ```
+
+<1> The `center` token defines the coordinates of the center of the circle.
+<2> The `end` token defines the coordinates of the end of the radius of the circle.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the circle
+    resides on.
+<4> The `width` token defines the line width of the circle.
+<5> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
+    and `none`.  If not defined, the circle is not filled.
+<6> The `tstamp` token defines the unique identifier of the circle object.
 
 === Graphical Arc
 
+The `gr_arc` token defines a graphical arc.
+
 ```
   (gr_arc
-    (start X Y)
-    (end X Y)
-    (angle ANGLE)
-    (layer LAYER_DEFINITION)
-    (width WIDTH)
-    [(locked)]
-    (tstamp UUID)
+    (start X Y)                                                 <1>
+    (end X Y)                                                   <2>
+    (angle ANGLE)                                               <3>
+    (layer LAYER_DEFINITION)                                    <4>
+    (width WIDTH)                                               <5>
+    (tstamp UUID)                                               <6>
   )
 ```
+
+<1> The `start` token defines the coordinates of the start position of the arc radius.
+<2> The `end` token defines the coordinates of the end position of the arc radius.
+<3> The `angle` token defines the rotation angle from the end position around the start position
+    of the arc.
+<4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
+<5> The `width` token defines the line width of the arc.
+<6> The `tstamp` token defines the unique identifier of the arc object.
 
 === Graphical Polygon
 
+The `gr_poly` token defines a graphical polygon.
+
 ```
   (gr_poly
-    (pts
-      (xy X Y) ... (xy X Y)
-    )
-    (layer LAYER_DEFINITION)
-    (width WIDTH)
-    [(fill MODE)]
-    [(locked)]
-    (tstamp UUID)
+    (pts (xy X Y) ... (xy X Y))                                 <1>
+    (layer LAYER_DEFINITION)                                    <2>
+    (width WIDTH)                                               <3>
+    [(fill MODE)]                                               <4>
+    (tstamp UUID)                                               <5>
   )
 ```
+
+<1> The `pts` token defines the list of `xy` coordinates of the polygon outline.
+<2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
+    on.
+<3> The `width` token defines the line width of the polygon.
+<4> The optional `fill` toke defines how the polygn is filled.  Valid fill types are `solid`
+    and `none`.  If not defined, the polygon is not filled.
+<5> The `tstamp` token defines the unique identifier of the polygon object.
 
 === Graphical Curve
 
+The `gr_curve` token defines a graphic
+https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve].
+
 ```
   (gr_curve
-    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))
-    (layer LAYER_DEFINITION)
-    (width WIDTH)
-    [(locked)]
-    (tstamp UUID)
+    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))                   <1>
+    (layer LAYER_DEFINITION)                                    <2>
+    (width WIDTH)                                               <3>
+    (tstamp UUID)                                               <4>
   )
 ```
+
+<1> The `pts` token defines the four `xy` coordinates of each point of the curve.
+<2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
+<3> The `width` token defines the line width of the curve.
+<4> The `tstamp` token defines the unique identifier of the curve object.
+
 
 == Tracks Section
 
@@ -1049,125 +1116,287 @@ This section lists all of <<_track_segment_syntax,segment>>, <<_track_via_syntax
 
 === Track Segment
 
+The `segment` token defines a track segment.
+
 ```
   (segment
-    (start X Y)
-    (end X Y)
-    (width WIDTH)
-    (layer LAYER_DEFINITION)
-    [(locked)]
-    (net NET_NUMBER)
-    (tstamp UUID)
+    (start X Y)                                                 <1>
+    (end X Y)                                                   <2>
+    (width WIDTH)                                               <3>
+    (layer LAYER_DEFINITION)                                    <4>
+    [(locked)]                                                  <5>
+    (net NET_NUMBER)                                            <6>
+    (tstamp UUID)                                               <7>
   )
 ```
+
+<1> The `start` token defines the coordinates of the beginning of the line.
+<2> The `end` token defines the coordinates of the end of the line.
+<3> The `width` token defines the line width.
+<4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the track segment
+    resides on.
+<5> The optional `locked` token defines if the line cannot be edited.
+<6> The `net` token defines by the net ordinal number which net in the
+    <<_net_section,net section>> that the segment is part of.
+<7> The `tstamp` token defines the unique identifier of the line object.
 
 === Track Via
 
+The `via` token defines a track via.
+
 ```
   (via
-    TYPE
-    (at X Y)
-    (size DIAMETER)
-    (drill DIAMETER)
-    (layers LAYER_DEFINITION)
-    [(locked)]
-    (net NET_NUMBER)
-    (tstamp UUID)
+    [TYPE]                                                      <1>
+    [(locked)]                                                  <2>
+    (at X Y)                                                    <3>
+    (size DIAMETER)                                             <4>
+    (drill DIAMETER)                                            <5>
+    (layers LAYER1 LAYER2)                                      <6>
+    [(remove_unused_layers)]                                    <7>
+    [(keep_end_layers)]                                         <8>
+    [(free)]                                                    <9>
+    (net NET_NUMBER)                                            <10>
+    (tstamp UUID)                                               <11>
   )
 ```
+
+<1> The optional type attribute specifies the via type.  Valid via types are `blind` and `micro`.
+    If no type is defined, the via is a through hole type.
+<2> The optional `locked` token defines if the line cannot be edited.
+<3> The `at` token attributes define the coordinates of the center of the via.
+<4> The `size` token attribute defines the diameter of the via annular ring.
+<5> The `drill` token attribute defines the drill diameter of the via.
+<6> The `layers` token attributes define the <<_canonical_layer_names, canonical layer set>> the
+    via connects.
+<7> The optional `remove_unused_layers` token specifies **DOCUMENT ME**.
+<8> The optional `keep_end_layers` token specifies **DOCUMENT ME**.  This token is only defined
+    when the `remove_unused_layers` token is defined.
+<9> The optional `free` token indicates that the via is free to be moved outside it's assigned
+    net.
+<10> The `net` token attribute defines by net ordinal number which net in the
+     <<_net_section,net section>> that the segment is part of.
+<11> The `tstamp` token defines the unique identifier of the line object.
 
 === Track Arc
 
+The `arc` token defines a track arc.
+
 ```
   (arc
-    (start X Y)
-    (mid X Y)
-    (end X Y)
-    (width X Y)
-    (layers LAYER_DEFINITION)
-    [(locked)]
-    (net NET_NUMBER)
-    (tstamp UUID)
+    (start X Y)                                                 <1>
+    (mid X Y)                                                   <2>
+    (end X Y)                                                   <3>
+    (width X Y)                                                 <4>
+    (layer LAYER_DEFINITION)                                    <5>
+    [(locked)]                                                  <6>
+    (net NET_NUMBER)                                            <7>
+    (tstamp UUID)                                               <8>
   )
 ```
+
+<1> The `start` token defines the coordinates of the beginning of the arc.
+<2> The `mid` toke defines the coordinates of the mid point of the radius of the arc.
+<3> The `end` token defines the coordinates of the end of the arc.
+<4> The `width` token defines the line width.
+<5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the track arc
+    resides on.
+<6> The optional `locked` token defines if the line cannot be edited.
+<7> The `net` token defines by the net ordinal number which net in the
+    <<_net_section,net section>> that the segment is part of.
+<8> The `tstamp` token defines the unique identifier of the line object.
 
 
 == Zones Section
 
-This section contains the list of zones in the board.  This section is ommitted if there are no
-zones on the board.
+The `zone` token defines a zone on the board.  This section is omitted if there are no zones on
+the board.  Zones serve two purposes in KiCad: filled copper zones and keep out areas.
 
 ```
   (zone
-    (net NET_NUMBER)
-    (net_name "NET_NAME")
-    (layer LAYER_DEFINITION)
-    (tstamp UUID)
-    (hatch STYLE PITCH)
-    (priority PRIORITY)
-    [(connect_pads
-      [CONNECTION_TYPE]
-      (clearance CLEARANCE)
-    )]
-    (min_thickness THICKNESS)
-    [(filled_areas_thickness no)]
-    [(keepout
-      (tracks KEEPOUT)
-      (vias KEEPOUT)
-      (pads KEEPOUT)
-      (copperpour KEEPOUT)
-      (footprints KEEPOUT)
-    )]
-    (fill
-      [yes]
-      [(mode FILL_MODE)]
-      (thermal_gap GAP)
-      (thermal_bridge_width WIDTH)
-      [(smoothing
-        STYLE
-        (radius RADIUS)
-      )]
-      [(island_removal_mode MODE)]
-      [(island_area_min AREA)]
-      [(hatch_thickness THICKNESS)
-      (hatch_gap GAP)
-      (hatch_orientation ORIENTATION)]
-      [(hatch_smoothing_level LEVEL)]
-      [(hatch_smoothing_value VALUE)]
-      [(hatch_border_algorithm TYPE)]
-      [(hatch_min_hole_area AREA)]
-    )
-    (polygon
-      (pts
-        (xy X Y)...(xy X Y)
-      )
-    )
-    (filled_polygon
-      (layer LAYER_DEFINITION)
-      (pts
-        (xy X Y)...(xy X Y)
-      )
-    )
-    [(fill_segments
-       (layer LAYER_DEFINITION)
-       (pts (xy X Y) (xy X Y))
-     )]
+    (net NET_NUMBER)                                            <1>
+    (net_name "NET_NAME")                                       <2>
+    (layer LAYER_DEFINITION)                                    <3>
+    (tstamp UUID)                                               <4>
+    [(name "NAME")]                                             <5>
+    (hatch STYLE PITCH)                                         <6>
+    [(priority PRIORITY)]                                       <7>
+    (connect_pads [CONNECTION_TYPE] (clearance CLEARANCE))      <8>
+    (min_thickness THICKNESS)                                   <9>
+    [(filled_areas_thickness no)]                               <10>
+    [(ZONE_KEEPOUT_SETTINGS)]                                   <11>
+    (ZONE_FILL_SETTINGS)]                                       <12>
+    (polygon (pts (xy X Y)...(xy X Y)))                         <13>
+    [(ZONE_FILL_POLYGONS)]                                      <14>
+    [(ZONE_FILL_SEGMENTS)]                                      <15>
   )
 ```
+
+<1> The `net` token attribute defines by the net ordinal number which net in the
+    <<_net_section,net section>> that the zone is part of.
+<2> The `net_name` token attribute defines the <<_net_section,name of the net>> if the zone is
+    not a keep out area.  The net name attribute will be an empty string if the zone is a keep
+    out area.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the zone resides on.
+<4> The `tstamp` token defines the unique identifier of the zone object.
+<5> The optional `name` token attribute defines the name of the zone if one has been assigned.
+<6> The `hatch` token attributes define the zone outline display hatch style and pitch.  Valid
+    hatch styles are `none`, `edge`, and `full`.
+<7> The optional `priority` attribute defines the zone priority if it is not zero.
+<8> The `connect_pads` token attributes define the pad connection type and clearance.  Valid pad
+    connection types are `thru_hole_only`, `full`, and `no`.  If the pad connection type is not
+    defined, thermal relief pad connections are used.
+<9> The `min_thickness` token attributed defines the minimum fill width allowed in the zone.
+<10> The optional `filled_areas_thickness` attribute `no` specifies if the zone like width is
+     not used when determining the zone fill area.  This is to maintain compatibility with older
+     board files that included the line thickness when performing zone fills when it is not
+     defined.
+<11> The optional <<_zone_keep_out_settings,zone keep out settings>> section defines the keep
+     out items if the zone defines as a keep out area.
+<12> The <<_zone_fill_settings,zone fill settings section>> defines how the zone is to be filled.
+<13> The `polygon` token attributes define the corners of the zone outline polygon.
+<14> The optional <<_zone_fill_polygons,zone fill polygons section>> defines all of the polygons
+     used to fill the zone.  This section will not exist if the zone has not been filled or is
+     filled with segments.
+<15> The optional <<_zone_fill_segments, zone fill segments section>> defines a list of track
+     segments used to fill the zone.  This is only used when boards prior to version 4 of KiCad
+     are loaded.
+
+=== Zone Keep Out Settings
+
+The optional `keepout` token attributes define which objects should be kept out of the zone.  This
+section only applies to keep out zones.
+
+```
+    (keepout
+      (tracks KEEPOUT)                                          <1>
+      (vias KEEPOUT)                                            <2>
+      (pads KEEPOUT)                                            <3>
+      (copperpour KEEPOUT)                                      <4>
+      (footprints KEEPOUT)                                      <5>
+    )
+```
+
+<1>  The `tracks` token attribute defines whether or not tracks should be exlcuded from the keep
+     out area.  Valid attributes are `allowed` and `not_allowed`.
+<2>  The `vias` token attribute defines whether or not vias should be exlcuded from the keep
+     out area.  Valid attributes are `allowed` and `not_allowed`.
+<3>  The `pads` token attribute defines whether or not pads should be exlcuded from the keep
+     out area.  Valid attributes are `allowed` and `not_allowed`.
+<4>  The `copperpour` token attribute defines whether or not copper pours should be exlcuded from
+     the keep out area.  Valid attributes are `allowed` and `not_allowed`.
+<5>  The `footprints` token attribute defines whether or not footprintss should be exlcuded from
+     the keep out area.  Valid attributes are `allowed` and `not_allowed`.
+
+=== Zone Fill Settings
+
+The `fill` token attributes define how the zone is to be filled.
+
+
+```
+    (fill
+      [yes]                                                     <1>
+      [(mode FILL_MODE)]                                        <2>
+      (thermal_gap GAP)                                         <3>
+      (thermal_bridge_width WIDTH)                              <4>
+      [(smoothing STYLE (radius RADIUS))]                       <5>
+      [(island_removal_mode MODE)]                              <6>
+      [(island_area_min AREA)]                                  <7>
+      [(hatch_thickness THICKNESS)]                             <8>
+      [(hatch_gap GAP)]                                         <9>
+      [(hatch_orientation ORIENTATION)]                         <10>
+      [(hatch_smoothing_level LEVEL)]                           <11>
+      [(hatch_smoothing_value VALUE)]                           <12>
+      [(hatch_border_algorithm TYPE)]                           <13>
+      [(hatch_min_hole_area AREA)]                              <14>
+    )
+```
+
+<1> The `yes` token specifies if the zone should be filled.  If not specified, the zone is not
+    filled and no additional attributes are required.
+<2> The optional `mode` token attribute defines how the zone is filled.  The only valid fill
+    mode is `hatched`.  When not defined, the fill mode is solid.
+<3> The optional `thermal_gap` token attribute defines the distance from the zone to all pad
+    thermal relief connections to the zone.
+<4> The optional `thermal_bridge_width` token attribute defines the spoke width for all pad
+    thermal relief connection to the zone.
+<5> The optional `smoothing` token attributes define the style of corner smoothing and the
+    radius of the smoothing.  Valid smoothing styles are `chamfer` and `fillet`.
+<6> The optional `island_removal_mode` token attribute defines the island removal mode.  Valid
+    island removal modes are:
+* 0 - Always remove islands.
+* 1 - Never remove islands.
+* 2 - Minimum area island to allow.
+<7> The optional `island_area_min` token attribute defines the minimum allowable zone island.
+    This only valid when the remove islands mode is set to 2.
+<8> The optional `hatch_thickness` token attribute defines the thickness for hatched fills.
+<9> The optional `hatch_gap` token attribute defines the distance between lines for hatched fills.
+<10> The optional `hatch_orientation` token attribute defines the line angle for hatched fills.
+<11> The optional `hatch_smoothing_level` token attribute defines how hatch outlines are smoothed.
+     Valid hatch smoothing levels are:
+* 0 - No smoothing.
+* 1 - Fillet.
+* 2 - Arc minimum.
+* 3 - Arc maximum.
+<12> The optional `hatch_smoothing_value` token attribute defines the ratio between the hole
+     and the chamfer/fillet size.
+<13> The optional `hatch_border_algorithm` token attribute defines the if the zone line thickness
+     is used when performing a hatch fill.  Valid values for the hatch border algorithm are:
+* 0 - Use zone minimum thickness.
+* 1 - Use hatch thickness.
+<14> The optional `hatch_min_hole_area` token attribute defines the minimum area a hatch file
+     hole can be.
+
+=== Zone Fill Polygons
+
+The `filled_polygon` token defines the polygons used to fill the zone.  This token will not exist
+if the zone has not been filled.
+
+```
+    (filled_polygon
+      (layer LAYER_DEFINITION)                                  <1>
+      (pts (xy X Y)...(xy X Y))                                 <2>
+    )
+```
+
+<1> The `layer` token attirbute defines the <<_canonical_layer_names, canonical layer>> the zone
+    fill resides on.
+<2> The `pts` token attributes define a list of polygon `xy` coordinates used to fill the zone.
+
+=== Zone Fill Segments
+
+The `filled_segments` token defines the segments used to fill the zone.  This is only used when
+loading boards prior to version 4 which filled zones with segments.  Once the zone has been
+refilled, it will be filled with polygons and this token will not exist.
+
+```
+    (fill_segments
+      (layer LAYER_DEFINITION)                                  <1>
+      (pts (xy X Y) (xy X Y))                                   <2>
+    )
+```
+
+<1> The `layer` token attirbute defines the <<_canonical_layer_names, canonical layer>> the zone
+    fill resides on.
+<2> The `pts` token attributes define a list of segment `xy` coordinates used to fill the zone.
+
 
 == Group Section
 
-This section contains a list of item groups defined in the board.  This section will not exist
-if no groups have been defined.
+The `group` token defines a group of items on the board.  This section will not exist if no
+groups have been defined.
 
 ```
-  (group "NAME"
-    (id UUID)
-    (members
-      UUID
-    )
+  (group
+    "NAME"                                                      <1>
+    (id UUID)                                                   <2>
+    (members UUID1 ... UUIDN)                                   <3>
   )
 ```
+
+<1> The name attribute defines the name of the group.
+<2> The `id` token attribute defines the unique identifier of the group.
+<3> The `members` token attributes define a list of unique identifiers of the objects belonging
+    to the group.
 
 
 == Board Example:
