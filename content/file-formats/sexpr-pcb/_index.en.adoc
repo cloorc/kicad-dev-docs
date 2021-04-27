@@ -10,8 +10,9 @@ NOTE: This file format was introduced with the launch of KiCad 4.0.
 
 
 == Syntax
+
 * Syntax is based on the Specctra DSN file format.
-* Token definitions are delimited by opening `(` and closing ')' parenthesis.
+* Token definitions are delimited by opening `(` and closing `)` parenthesis.
 * All tokens are lowercase.
 * Tokens cannot contain any white space characters or special characters other than the
   underscore '_' character.
@@ -38,6 +39,7 @@ understood.
 
 
 === Coordinates and Sizes
+
 * All values are given in millimeters.
 * Exponential floating point values are not used for readability purposes.
 * The minimum internal unit is nanometers so there is maximum resolution of six decimal places
@@ -190,6 +192,7 @@ A board file includes the following sections:
 NOTE: The section order is not critical other than the header must be the first token.  Some
       sections can may omitted.
 
+
 == Header Section
 
 The `kicad_pcb` token indicates that it is KiCad board file.  This section is required.
@@ -199,7 +202,7 @@ The `kicad_pcb` token indicates that it is KiCad board file.  This section is re
   (version VERSION)                                             <1>
   (generator GENERATOR)                                         <2>
 
-  contents of board file...                                     <3>
+  ;; contents of board file...                                  <3>
 )
 ```
 
@@ -210,6 +213,7 @@ The `kicad_pcb` token indicates that it is KiCad board file.  This section is re
 NOTE: Third party scripts should not use `pcbnew` as the generator identifier.  Please use some
       other identifier so that bugs introduced by third party generators are not confused with
       the board file created by KiCad.
+
 
 == General Section
 
@@ -257,7 +261,7 @@ The `layers` token defines all of the layers used by the board.  This section is
       ["USER_NAME"]                                             <4>
     )
 
-    remaining layers...
+    ;; remaining layers...
   )
 ```
 
@@ -309,14 +313,14 @@ The optional `stackup` toke defines the board stack up settings and is defined i
 <<_setup_section,setup section>>.
 
 ```
-    [(stackup
-       (LAYER_STACK_UP_DEFINITIONS)                             <1>
-       [(copper_finish "FINISH")]                               <2>
-       [(dielectric_constraints yes | no)]                      <3>
-       [(edge_connector yes | bevelled)]                        <4>
-       [(castellated_pads yes)]                                 <5>
-       [(edge_plating yes)]                                     <6>
-    )]
+    (stackup
+      (LAYER_STACK_UP_DEFINITIONS)                              <1>
+      [(copper_finish "FINISH")]                                <2>
+      [(dielectric_constraints yes | no)]                       <3>
+      [(edge_connector yes | bevelled)]                         <4>
+      [(castellated_pads yes)]                                  <5>
+      [(edge_plating yes)]                                      <6>
+    )
 ```
 
 <1> The layer stack up definitions is a list of layer
@@ -895,10 +899,10 @@ The optional `options` token attributes define the settings used for custom pads
 is only used when a <<_footprint_pad,custom pad>> is defined.
 
 ```
-      [(options
+      (options
         (clearance CLEARANCE_TYPE)                              <1>
         (anchor PAD_SHAPE)                                      <2>
-      )]
+      )
 ```
 
 <1> The `clearance` token defines the type of clearance used for a custom pad.  Valid clearance
@@ -912,11 +916,11 @@ The optional `primitives` token defines a list of graphical items used to define
 a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>> is defined.
 
 ```
-      [(primitives
-         (GRAPHIC_ITEMS...)                                     <1>
-         (width WIDTH)                                          <2>
-         [(fill yes)]                                           <3>
-       )]
+      (primitives
+        (GRAPHIC_ITEMS...)                                      <1>
+        (width WIDTH)                                           <2>
+        [(fill yes)]                                            <3>
+      )
 ```
 
 <1> The graphical items is a list of graphical <<_graphical_line,lines>>,
