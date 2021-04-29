@@ -1112,6 +1112,112 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 <3> The `width` token defines the line width of the curve.
 <4> The `tstamp` token defines the unique identifier of the curve object.
 
+=== Dimension
+
+The `dimension` token defines a dimension object.
+
+```
+  (dimension
+    [locked]                                                    <1>
+    (type DIMENSION_TYPE)                                       <2>
+    (layer LAYER_DEFINITION)                                    <3>
+    (tstamp UUID)                                               <4>
+    (pts (xy X Y) (xy X Y))                                     <5>
+    [(height HEIGHT)]                                           <6>
+    [(orientation ORIENTATION)]                                 <7>
+    [(gr_text GRAPHICAL_TEXT)]                                  <8>
+    [(format DIMENSION_FORMAT)]                                 <9>
+    (style DIMENSION_STYLE)                                     <10>
+  )
+```
+
+<1> The optional `locked` token specifies if the dimension can be moved.
+<2> The `type` token attribute defines the type of dimension.  Valid dimension types are
+    `aligned`, `leader`, `center`, and `orthogonal`.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
+    on.
+<4> The `tstamp` token defines the unique identifier of the dimension object.
+<5> The `pts` token attributes define the list of `xy` coordinates of the dimension.
+<6> The optional `height` token attribute defines the height of aligned dimensions.
+<7> The optional `orientation` token attribute defines the rotation angle for orthogonal
+    dimensions.
+<8> The optional `gr_text` token attributes define the dimension text formatting for all dimension
+    types except center dimensions.
+<9> The optional `format` token attributes define the <<_dimension_format,dimension formatting>>
+    for all dimension types except center dimensions.
+<10> The `style` token attributes define the <<_dimension_style,dimension style>> information.
+
+==== Dimension Format
+
+The `format` token attributes define the text formatting of the dimension.
+
+```
+    (format
+      [(prefix "PREFIX")]                                       <1>
+      [(suffix "SUFFIX")]                                       <2>
+      (units UNITS)                                             <3>
+      (units_format UNITS_FORMAT)                               <4>
+      (precision PRECISION)                                     <5>
+      [(override_value "VALUE")]                                <6>
+      [suppress_zeros]                                          <7>
+    )
+```
+
+<1> The optional `prefix` token attribute defines the string to add to the beginning of the
+    dimension text.
+<2> The optional `suffix` token attribute defines the string to add to the end of the dimension
+    text.
+<3> The `units` token attribute defines the dimension units used to display the dimension text.
+    Valid units are as follows:
+* 0 - Inches.
+* 1 - Mils.
+* 2 - Millimeters.
+* 3 - Automatic.
+<4> The `units_format` token attribute defines how the unit's suffix is formatted.  Valid units
+    formats are as follows:
+* 0 - No suffix.
+* 1 - Bare suffix.
+* 2 - Wrap suffix in parenthesis.
+<5> The `precision` token attribute defines the number of significant digits to display.
+<6> The optional `override_value` token attribute defines the text to substitute for the actual
+    physical dimension.
+<7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
+
+==== Dimension Style
+
+```
+    (style
+      (thickness THICKNESS)                                     <1>
+      (arrow_length LENGTH)                                     <2>
+      (text_position_mode MODE)                                 <3>
+      [(extension_height HEIGHT)]                               <4>
+      [(text_frame TEXT_FRAME_TYPE)]                            <5>
+      [(extension_offset OFFSET)]                               <6>
+      [(keep_text_aligned)]                                     <7>
+    )
+```
+
+<1> The `thickness` token attribute defines the line thickness of the dimension.
+<2> The `arrow_length` token attribute defines the length of the dimension arrows.
+<3> The `text_position_mode` token attribute defines the position mode of the dimension text.
+    Valid position modes are as follows:
+* 0 - Text is outside the dimension line.
+* 1 - Text is in line with the dimension line.
+* 2 - Text has been manually placed by the user.
+<4> The optional `extension_height` token attribute defines the length of the extension lines
+    past the dimension crossbar.
+<5> The optional `text_frame` token attribute defines the style of the frame around the dimension
+    text.  This only applies to `leader` dimensions.  Valid text frames are as follows:
+* 0 - No text frame.
+* 1 - Rectangle.
+* 2 - Circle.
+* 3 - Rounded rectangle.
+<6> The optional `extension_offset` token attribute defines the distance from feature points to
+    extension line start.
+<7> The optional `keep_text_aligned` token indicates that the dimension text should be kept in
+    line with the dimension crossbar.  When not defined, the dimension text is shown horizontally
+    regardless of the orientation of the dimension.
+
 
 == Tracks Section
 
