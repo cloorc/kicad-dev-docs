@@ -1,3 +1,10 @@
 == Welcome to the KiCad Developer Documentation
 
-This page is intended only for developers, if you simply want to use KiCad this is not what you want.
+This site contains information for contributors to the KiCad source code, translations, and Python
+plugins.
+
+Before starting your contribution, please read over the link:./contribute/[contribution guide] and
+the link:./rules-guidelines/[rules and guidelines] sections relevant to your contribution.
+All significant new features should be discussed with the development team via email or in a GitLab
+issue before development begins, so that we can ensure they will be implemented in a way that is
+consistent with the direction of the proejct.
