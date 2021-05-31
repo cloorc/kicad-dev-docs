@@ -9,96 +9,76 @@ tags: ["macos"]
 
 == Building KiCad on macOS
 
-As of V5, building and packaging for macOS can be done using https://gitlab.com/kicad/packaging/kicad-mac-builder[kicad-mac-builder],
-which downloads, patches, builds, and packages for macOS.  It is used to create the official
-releases and nightlies, and it reduces the complexity of setting up a build environment to a command
-or two.  Usage of kicad-mac-builder is detailed at on its website.
+Building on macOS requires care, as specific versions of dependencies are required in order for all
+KiCad features to compile and work properly. To simplify this process, we strongly recommend that
+all macOS users use our https://gitlab.com/kicad/packaging/kicad-mac-builder[kicad-mac-builder]
+utility, which contains the toolchain that produces the official macOS release builds of KiCad.
 
-If you wish to build without kicad-mac-builder, please use the following and its source code
-as reference. Building on macOS requires building dependency libraries that require patching
-in order to work correctly.
+This utility can be used to set up a development environment for KiCad even if you just wish to
+build the sources without creating a full release package (DMG containing the KiCad applications 
+and libraries).
 
-In the following set of commands, replace the macOS version number (i.e. 10.11) with the desired
-minimum version.  It may be easiest to build for the same version you are running.
+Building without `kicad-mac-builder` is possible but is not supported by the KiCad development
+team. If you wish to pursue this route, please use the latest state of the kicad-mac-builder
+repository for guidance as to which packages to install and how to configure and build them.
 
-KiCad currently won't work with a stock version of wxWidgets that can be downloaded or
-installed by package managers like MacPorts or Homebrew. To avoid having to deal with
-patches a https://github.com/KiCad/wxWidgets[KiCad fork of wxWidgets] is being maintained on GitHub. All the needed patches
-and some other fixes/improvements are contained in the `kicad/macos-wx-3.0` branch.
+NOTE: KiCad requires a custom fork of wxWidgets on macOS to work properly. This fork is hosted at
+      https://gitlab.com/kicad/code/wxWidgets[the KiCad GitLab].  Currently, the
+      `kicad/macos-wx-3.1` branch should be used to build the master branch of KiCad.  If you use
+      `kicad-mac-builder` to set up your build environment, the correct version of wxWidgets will
+      be downloaded and built for you automatically.
 
-To perform a wxWidgets build, execute the following commands:
+=== Setting up development environment using kicad-mac-builder
 
-[source,sh]
-```
-cd <your wxWidgets build folder>
-git clone -b kicad/macos-wx-3.0 https://gitlab.com/kicad/code/wxWidgets.git
-mkdir wx-build
-cd wx-build
-../wxWidgets/configure \
-    --prefix=`pwd`/../wx-bin \
-    --with-opengl \
-    --enable-aui \
-    --enable-html \
-    --enable-stl \
-    --enable-richtext \
-    --with-libjpeg=builtin \
-    --with-libpng=builtin \
-    --with-regex=builtin \
-    --with-libtiff=builtin \
-    --with-zlib=builtin \
-    --with-expat=builtin \
-    --without-liblzma \
-    --with-macosx-version-min=10.11 \
-    --enable-universal-binary=i386,x86_64 \
-    CC=clang \
-    CXX=clang++
-make
-make install
-```
+This guide assumes you already have the appropriate Apple C++ development toolchain (Xcode) for
+your macOS release installed.  See Apple's documentation for details on how to install Xcode or the
+Xcode command-line tools.  `kicad-mac-builder` will not install this for you.
 
-If everything works you will find the wxWidgets binaries in `<your wxWidgets build folder>/wx-bin`.
-Now, build a basic KiCad without Python scripting using the following commands:
-
+To obtain `kicad-mac-builder` and set up the KiCad build dependencies, run the following:
 
 [source,sh]
 ```
-cd <your kicad source mirror>
+cd <your preferred working directory>
+git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
+cd kicad-mac-builder
+./ci/src/bootstrap.sh
+./build.py --target setup-kicad-dependencies
+```
+
+NOTE: The first command, `boostrap.sh`, will install Homebrew if it is not already installed, and
+      install all the KiCad dependencies that are available as Homebrew packages.  You may wish to
+      manually install the required dependencies instead of running this script.  If so, simply
+      inspect the script to see the current list of required Homebrew packages to install.
+
+At the end of the `kicad-mac-builder` build process, `build.py` will print a list of suggested
+CMake arguments to the terminal.  **Copy this output to a safe place: you will need to refer to it
+when you set up your KiCad build.**
+
+Now you are ready to build KiCad itself.  Run the following to obtain and build KiCad:
+
+[source,sh]
+```
+cd <your preferred working directory>
+git clone https://gitlab.com/kicad/code/kicad.git
+cd kicad
 mkdir -p build/release
 mkdir build/debug               # Optional for debug build.
 cd build/release
-cmake -DCMAKE_C_COMPILER=clang \
-        -DCMAKE_CXX_COMPILER=clang++ \
-        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 \
-        -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
-        -DKICAD_SCRIPTING=OFF \
-        -DKICAD_SCRIPTING_MODULES=OFF \
-        -DKICAD_SCRIPTING_WXPYTHON=OFF \
-        -DCMAKE_INSTALL_PREFIX=../bin \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../../
+cmake <arguments from kicad-mac-builder> ../..
 make
 make install
 ```
 
-If the CMake configuration fails, determine the missing dependencies and install them on your
-system or disable the corresponding KiCad feature. If everything works you will get self-contained
-application bundles in the `build/bin` folder.
+Paste in the arguments you saved from earlier after the `cmake` command.  Note that you may want to
+inspect and modify some of the arguments before using them:
 
-Building KiCad with Python scripting is more complex and won't be covered in detail here.
-You will have to build wxPython against the wxWidgets source of the KiCad fork - a stock wxWidgets
-that might be bundled with the wxPython package won't work. Please see wxPython documentation
-or [macOS bundle build scripts][] (`compile_wx.sh`) on how to do this. Then, use a CMake
-configuration as follows to point it to your own wxWidgets/wxPython:
+By default, `kicad-mac-builder` will set the `CMAKE_INSTALL_PREFIX` to `./build/kicad-dest` inside
+your `kicad-mac-builder` directory.  Edit the arguments provided by `kicad-mac-builder` if you want
+to install KiCad to a different location.
 
-[source,sh]
-```
-cmake -DCMAKE_C_COMPILER=clang \
-        -DCMAKE_CXX_COMPILER=clang++ \
-        -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
-        -DwxWidgets_CONFIG_EXECUTABLE=<your wxWidgets build folder>/wx-bin/bin/wx-config \
-        -DPYTHON_EXECUTABLE=<path-to-python-exe>/python \
-        -DPYTHON_SITE_PACKAGE_PATH=<your wxWidgets build folder>/wx-bin/lib/python2.7/site-packages \
-        -DCMAKE_INSTALL_PREFIX=../bin \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../../
-```
+By default, `kicad-mac-builder` will set `CMAKE_BUILD_TYPE` to `RelWithDebInfo` to create an 
+optimized release build with debugging symbols.  Change this to `Debug` to create an unoptimized
+build that can be debugged using `lldb`.
+
+NOTE: We recommend using Ninja instead of `make` for faster builds.  To do so, run
+      `brew install ninja` and then add `-G Ninja` to your `cmake` arguments.
