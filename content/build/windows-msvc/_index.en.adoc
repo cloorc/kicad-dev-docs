@@ -39,8 +39,8 @@ with the name **VCPKG_DEFAULT_TRIPLET** and value **x64-windows**
 
 KiCad still supports 32-bit builds for now but may not in the future, thus 64-bit is preferred.
 
-==== 1. Install vcpkg packages
-The following packages are required for vcpkg
+==== 1. Install dependencies
+Most of KiCad's dependencies can be installed using `vcpkg` as described below:
 
 [source,powershell]
 ```
@@ -67,6 +67,10 @@ If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will 
 
 NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg
 
+Additionally, SWIG must be installed manually.  Obtain the latest `swigwin` package from
+https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
+`swigwin-4.0.2`) and extract the zip file to a known location.
+
 ==== 2. CMakeSettings.json
 Contained in the build root is a `CMakeSettings.json.sample`, copy and rename this file to `CMakeSettings.json`
 Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to match the location of your vcpkg clone.
@@ -82,6 +86,17 @@ Launch Visual Studio (only after completing the above steps).
 When the initial wizard launches, select to **Open a local folder**
 This is the correct way to make Visual Studio directly handle *CMake* projects.
 
+==== 4. Configure paths to Python and SWIG
+
+At present, you must add CMake arguments to the location of Python installed by `vcpkg` and SWIG
+that you downloaded in a previous step.  Open the CMake Settings editor (Project menu > CMake
+Settings for kicad) and add the following items to the CMake Command Arguments option field:
+
+`-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe -DPYTHON_EXECUTABLE=C:\\PATH\\TO\\vcpkg\\installed\\x64-windows\\tools\\python3\\python.exe`
+
+Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your 
+installation.  Make sure to change single backslashes to double backslashes if you are pasting in
+a path from Windows Explorer.
 
 === Visual Studio Extensions
 

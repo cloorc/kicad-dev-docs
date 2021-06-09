@@ -45,23 +45,16 @@ documentation to perform these tasks.
 
 === wxWidgets Cross Platform GUI Library
 
-http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library used by KiCad.  The current minimum
-version is 3.0.0.  However, 3.0.2 should be used whenever possible as there are some known bugs
-in prior versions that can cause problems on some platforms.  Please note that there are also
-some platform specific patches that must be applied before building wxWidgets from source.  These
-patches can be found in the https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder] in the KiCad source.  These patches are named by
-the wxWidgets version and platform name they should be applied against.  wxWidgets must be built
-with the --with-opengl option.  If you installed the packaged version of wxWidgets on your system,
-verify that it was built with this option.
+http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library used by KiCad. On
+Windows and MacOS, we use the development branch of wxWidgets (3.1) due to it containing numerous
+bugfixes compared to the latest stable release series (3.0).  On Linux, we rely on the wxWidgets
+version packaged by each distribution, which tends to be something in the 3.0 series.  Note that on
+MacOS we use a custom fork of wxWidgets with some patches applied - see the MacOS build
+instructions for details.
 
 === Boost {cpp} Libraries
 
-The https://www.boost.org/[Boost] {cpp} library is required only if you intend to build KiCad with the system installed
-version of Boost instead of the default internally built version.  If you use the system installed
-version of Boost, version 1.56 or greater is required.  Please note there are some platform
-specific patches required to build a working Boost library.  These patches can be found in the
-https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder] in the KiCad source.  These patches are named by the platform name they should
-be applied against.
+The https://www.boost.org/[Boost] {cpp} library version 1.59 or greater is required to build KiCad.
 
 === GLEW OpenGL Extension Wrangler Library
 
@@ -322,19 +315,3 @@ Stable release archives: https://kicad.org/download/source/
 Development branch: https://gitlab.com/kicad/code/kicad/tree/master
 
 GitHub mirror: https://github.com/KiCad/kicad-source-mirror
-
-
-== Known Issues
-
-There are some known issues that effect all platforms.  This section provides a list of the
-currently known issues when building KiCad on any platform.
-
-=== Boost {cpp} Library Issues
-
-As of version 5 of https://gcc.gnu.org/[GNU GCC], using the default configuration of downloading, patching, and
-building of Boost 1.54 will cause the KiCad build to fail.  Therefore a newer version of Boost
-must be used to build KiCad.  If your system has Boost 1.56 or greater installed, you job is
-straight forward.  If your system does not have Boost 1.56 or greater installed, you will have
-to download and http://www.boost.org/doc/libs/1_59_0/more/getting_started/index.html[build Boost] from source.
-If you are building Boost on windows using http://mingw.org/[MinGW]
-you will have to apply the Boost patches in the KiCad source https://gitlab.com/kicad/code/kicad/-/tree/master/patches[patches folder].
