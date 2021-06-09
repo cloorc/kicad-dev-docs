@@ -98,6 +98,49 @@ Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG o
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
 a path from Windows Explorer.
 
+==== 5. Running and debugging
+
+Running or debugging KiCad directly from the build directory through Visual Studio requires that
+you set certain environment variables so that KiCad can find runtime dependencies and Python works.
+To configure the runtime environment for programs run from Visual Studio, edit the `launch.vs.json`
+file in the project root directory.  To open this file, select Debug and Launch Settings for kicad
+from the Debug menu.
+
+NOTE: If you have multiple launch configurations, for example to debug standalone pcbnew or
+      eeschema in addition to kicad, you will need to configure each one separately.
+
+The variable `KICAD_RUN_FROM_BUILD_DIR` must be present (it can be set to any value).
+
+The variable `PYTHONHOME` must be present and set to the location of the Python installed by vcpkg.
+
+The variable `PYTHONPATH` must be present and set to include the paths to the `pcbnew` python
+module and the `kicad_pyshell` module.  The former is built next to `pcbnew.exe` in the build
+directory, and the latter lives in the source tree in the `scripting` directory.
+
+For launching 
+
+Use the `env` section of each configuration entry to set the required environment variables. For
+example, the below configuration allows running and debugging `kicad.exe` from the build directory,
+assuming `vcpkg` is installed at `C:\code\vcpkg`.
+
+[source,json]
+```
+{
+    "type": "default",
+    "project": "CMakeLists.txt",
+    "projectTarget": "kicad.exe (kicad\\kicad.exe)",
+    "name": "kicad.exe (kicad\\kicad.exe)",
+    "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "PYTHONHOME": "C:\\code\\vcpkg\\installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "C:\\code\\kicad\\build\\x64-Debug\\pcbnew;C:\\code\\kicad\\scripting"
+    }
+}
+```
+
+Modify the value of `PYTHONPATH` and `PYTHONHOME` depending on where `vcpkg` is installed and
+where your `kicad` source and build directories are located.
+
 === Visual Studio Extensions
 
 ==== Trailing Whitespace Remover
