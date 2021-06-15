@@ -290,6 +290,17 @@ environment variable `KICAD_RUN_FROM_BUILD_DIR` can be set in order to change ho
 paths for shared libraries, resources, and other data files.  Note that setting this variable does
 not change how KiCad looks for symbol/footprint/3D model libraries.
 
+=== Setting the path to Python
+
+KiCad relies on a specific Python version on Windows and macOS.  Normally, the path to this Python
+installation is set by the corresponding packaging scripts for those platforms, but in some
+situations, it can be preferable to set a custom Python interpreter for development or testing
+purposes.  On Windows, you must set the environment variable `KICAD_USE_EXTERNAL_PYTHONHOME` in
+order for KiCad to use the `PYTHONHOME` environment variable instead of the default (hard-coded)
+path to Python.  This is so that `PYTHONHOME` set on user machines does not inadvertently break
+KiCad.   See the Windows build instructions for details on how to use this variable to run KiCad
+from the build directory.
+
 == Getting the KiCad Source Code
 
 There are several ways to get the KiCad source.  If you want to build the stable version you
