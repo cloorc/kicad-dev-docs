@@ -12,15 +12,7 @@ These are options that are passed to cmake during configuration
 [cols="4,12,1",options="header"]
 |===
 |Option                             | Description                                               | Default
-|KICAD_SCRIPTING                    | Build the Python scripting support inside KiCad binaries. | ON
-|KICAD_SCRIPTING_MODULES            | Build native portion of the pcbnew Python module: _pcbnew.{pyd,so} for OS command line use of Python. +
-                                      If using WXPYTHON, the python version must be the same as the version used to build wxPython
-                                                                                                | ON
-|KICAD_SCRIPTING_PYTHON3            | Build for Python 3 instead of 2. | OFF
 |KICAD_SCRIPTING_WXPYTHON           | Build wxPython implementation for wx interface building in Python and py.shell.
-                                                                                                | ON
-|KICAD_SCRIPTING_WXPYTHON_PHOENIX   | Use new wxPython binding.                                 | OFF
-|KICAD_SCRIPTING_ACTION_MENU        | Build a tools menu with registered python plugins: actions plugins.
                                                                                                 | ON
 |KICAD_USE_OCE                      | Build tools and plugins related to OpenCascade Community Edition. +
                                         Needed to support import/export STEP
@@ -68,29 +60,14 @@ These are options that are passed to cmake during configuration
 
 
 == Notes
-When option `KICAD_SCRIPTING` OR `KICAD_SCRIPTING_MODULES` is enabled:
-
-`PYTHON_EXECUTABLE` can be defined when invoking cmake
-( use `-DPYTHON_EXECUTABLE=<python path>/python.exe` or python2 )
-when not defined by user, the Default is python.exe under Windows and python2 for others
-python binary file should be in exec path.
 
 === Note 1
 
-KICAD_SCRIPTING controls the entire python scripting system.
-If it is off, no other scripting is allowed
-
-Therefore, if `KICAD_SCRIPTING` is OFF, these other option are forced to OFF:
-`KICAD_SCRIPTING_MODULES, KICAD_SCRIPTING_ACTION_MENU,KICAD_SCRIPTING_PYTHON3
-KICAD_SCRIPTING_WXPYTHON, KICAD_SCRIPTING_WXPYTHON_PHOENIX`
+Python 3 is required to build KiCad.  The path to Python is normally determined automatically by a
+CMake script, but if needed, `PYTHON_EXECUTABLE` can be defined when invoking cmake
+( use `-DPYTHON_EXECUTABLE=<python path>` ) to specify a particular Python binary.
 
 === Note 2
-
-`KICAD_SCRIPTING_WXPYTHON_PHOENIX` requires enabling the `KICAD_SCRIPTING_WXPYTHON` flag
-so that the wxWidgets library is properly versioned
-
-
-=== Note 3
 
 These Symbols are always defined, and are not an option for cmake invocation:
 
@@ -120,7 +97,7 @@ lockstep with `USE_KIWAY_DLLS`, then this local CMakeLists.txt file may pass a
 defined `BUILD_KIWAY_DLL` (singular) on the compiler command line to the
 pertinent set of compilation steps under its control.
 
-=== Note 4
+=== Note 3
 
 When building with `KICAD_BUILD_I18N` on Linux systems, gettext needs the rule files
 `shared-mime-info.its` and `metainfo.its`/`appdata.its` to translate the Linux
