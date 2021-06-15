@@ -109,7 +109,15 @@ from the Debug menu.
 NOTE: If you have multiple launch configurations, for example to debug standalone pcbnew or
       eeschema in addition to kicad, you will need to configure each one separately.
 
-The variable `KICAD_RUN_FROM_BUILD_DIR` must be present (it can be set to any value).
+The variable `KICAD_RUN_FROM_BUILD_DIR` must be present (it can be set to any value) to run from
+the build directory. Setting this variable allows KiCad to find dynamic libraries when running from
+the build directory.
+
+The variable `KICAD_USE_EXTERNAL_PYTHONHOME` must be present (it can be set to any value) when
+running from either the build or the install directory, which allows you to specify `PYTHONHOME` in
+the environment.  Normally, KiCad on Windows uses a Python that is bundled and placed in a specific
+location by the installer, and when running from Visual Studio, Python will be in a different 
+location.
 
 The variable `PYTHONHOME` must be present and set to the location of the Python installed by vcpkg.
 
@@ -117,11 +125,16 @@ The variable `PYTHONPATH` must be present and set to include the paths to the `p
 module and the `kicad_pyshell` module.  The former is built next to `pcbnew.exe` in the build
 directory, and the latter lives in the source tree in the `scripting` directory.
 
-For launching 
-
 Use the `env` section of each configuration entry to set the required environment variables. For
 example, the below configuration allows running and debugging `kicad.exe` from the build directory,
 assuming `vcpkg` is installed at `C:\code\vcpkg`.
+
+Additionally, use the `environment` section to add the path to the `vcpkg` installed packages
+directory, which will allow KiCad to find dynamic libraries from dependencies.
+
+This snippet shows an example launch configuration for running `kicad.exe` from the build
+directory.  To run from the install directory, the configuration will look the same except the
+`KICAD_RUN_FROM_BUILD_DIR` variable should not be set.
 
 [source,json]
 ```
@@ -132,14 +145,21 @@ assuming `vcpkg` is installed at `C:\code\vcpkg`.
     "name": "kicad.exe (kicad\\kicad.exe)",
     "env": {
         "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "C:\\code\\vcpkg\\installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "C:\\code\\kicad\\build\\x64-Debug\\pcbnew;C:\\code\\kicad\\scripting"
-    }
+    },
+    "environment": [
+        {
+            "name": "Path",
+            "value": "${env.Path};C:\\code\\vcpkg\\installed\\x64-windows\\debug\\bin"
+        }
+    ]
 }
 ```
 
-Modify the value of `PYTHONPATH` and `PYTHONHOME` depending on where `vcpkg` is installed and
-where your `kicad` source and build directories are located.
+Modify the value of `PYTHONPATH`, `PYTHONHOME`, and `Path` depending on where `vcpkg` is installed
+and where your `kicad` source and build directories are located.
 
 === Visual Studio Extensions
 
