@@ -2,7 +2,7 @@
 title: Windows (MSYS2)
 weight: 13
 summary: Guide on building KiCad using MSYS2
-tags: ["windows"] 
+tags: ["windows"]
 ---
 
 :toc:
@@ -11,9 +11,9 @@ tags: ["windows"]
 
 === Setup
 
-The https://www.msys2.org/[MSYS2] project provides packages for all of the require dependencies to build KiCad. 
+The https://www.msys2.org/[MSYS2] project provides packages for all of the require dependencies to build KiCad.
 To setup the MSYS2
-build environment, download and run  the *MSYS2 64-bit Installer* available from the msys2 home page.  
+build environment, download and run  the *MSYS2 64-bit Installer* available from the msys2 home page.
 After the installer is finished, update to the latest
 package versions by running the `msys2_shell.cmd` file located in the MSYS2 install path and
 running the command `pacman -Syu`.  If the msys2-runtime package is updated, close the shell
@@ -28,44 +28,47 @@ install path. At the command prompt run the the following commands:
 [source,bash]
 ----
 pacman -S base-devel \
-            git \
-            mingw-w64-x86_64-cmake \
-            mingw-w64-x86_64-doxygen \
-            mingw-w64-x86_64-gcc \
-            mingw-w64-x86_64-python2 \
-            mingw-w64-x86_64-pkg-config \
-            mingw-w64-x86_64-swig \
-            mingw-w64-x86_64-boost \
-            mingw-w64-x86_64-cairo \
-            mingw-w64-x86_64-glew \
-            mingw-w64-x86_64-curl \
-            mingw-w64-x86_64-wxPython \
-            mingw-w64-x86_64-wxWidgets \
-            mingw-w64-x86_64-toolchain \
-            mingw-w64-x86_64-glm \
-            mingw-w64-x86_64-oce \
-            mingw-w64-x86_64-ngspice \
-            mingw-w64-x86_64-zlib
+          git \
+          mingw-w64-x86_64-cmake \
+          mingw-w64-x86_64-doxygen \
+          mingw-w64-x86_64-gcc \
+          mingw-w64-x86_64-python2 \
+          mingw-w64-x86_64-pkg-config \
+          mingw-w64-x86_64-swig \
+          mingw-w64-x86_64-boost \
+          mingw-w64-x86_64-cairo \
+          mingw-w64-x86_64-glew \
+          mingw-w64-x86_64-curl \
+          mingw-w64-x86_64-wxPython \
+          mingw-w64-x86_64-wxWidgets \
+          mingw-w64-x86_64-toolchain \
+          mingw-w64-x86_64-glm \
+          mingw-w64-x86_64-opencascade \
+          mingw-w64-x86_64-ngspice \
+          mingw-w64-x86_64-zlib
 cd kicad-source
 mkdir -p build/release
 mkdir build/debug               # Optional for debug build.
 cd build/release
 cmake -DCMAKE_BUILD_TYPE=Release \
-        -G "MSYS Makefiles" \
-        -DCMAKE_PREFIX_PATH=/mingw64 \
-        -DCMAKE_INSTALL_PREFIX=/mingw64 \
-        -DDEFAULT_INSTALL_PATH=/mingw64 \
-        ../../
-make -j N install   # Where N is the number of concurrent threads that your system can handle
+      -G "MSYS Makefiles" \
+      -DCMAKE_PREFIX_PATH=/mingw64 \
+      -DCMAKE_INSTALL_PREFIX=/mingw64 \
+      -DDEFAULT_INSTALL_PATH=/mingw64 \
+      -DOCC_INCLUDE_DIR=/mingw64/include/opencascade \
+      ../../
+make -j N install   # Where N is the number of concurrent threads that your system can handle.
 ----
 
 For 32-bit builds, run `mingw32.exe` and change `x86_64` to `i686` in the package names and
 change the paths in the cmake configuration from `/mingw64` to `/mingw32`.
 
-For debug builds, run the cmake command with `-DCMAKE_BUILD_TYPE=Debug` from the `build/debug` folder.
+For debug builds, run the cmake command with `-DCMAKE_BUILD_TYPE=Debug` from the `build/debug`
+folder.
 
 === MSYS2 with CLion
-KiCad in combiation with MSYS2 can be configured to be used with CLion to provide a nice IDE experience.
+KiCad in combiation with MSYS2 can be configured to be used with CLion to provide a nice
+IDE experience.
 
 ==== Toolchain Setup
 First you must register MSYS2 as a toolchain, or namely, the compiler.
@@ -107,8 +110,9 @@ You want to create a Debug configuration as such
 
 
 You may now trigger the "Reload CMake Cache" option in CLion to generate the cmake project
-You should delete the "junk" build folder (usually name cmake-build-debug-xxxx) it may have created in the source before it was changed above.
-We change the build folder because we have a gitignore for `/build`
+You should delete the "junk" build folder (usually name cmake-build-debug-xxxx) it may have
+created in the source before it was changed above.  We change the build folder because we
+have a gitignore for `/build`
 
 Warning: Receiving warning messages about Boost versions is normal.
 
@@ -123,17 +127,6 @@ currently known issues when building KiCad using MSYS2.
 There is an issue building KiCad with Boost version 1.70 due to CMake not defining the proper
 link libraries during configuration.  Boost 1.70 can be used but `-DBoost_NO_BOOST_CMAKE=ON`
 needs to be added during CMake configuration to insure the link libraries are properly generated.
-
-==== Building OCE from source
-
-KiCad requires OCE by default, and the version installed by `pacman` can cause build errors in
-x86_64 systems as of March 2018.  In order to work around this, you can build OCE from source on
-these systems.  Building OCE on Windows requires that you place the source code in a very short
-directory path, otherwise you will run into errors caused by the maximum path length on Windows.
-In the example below, the `MINGW-packages` repository is cloned to `/c/mwp`, which is equivalent to
-`C:\mwp` in Windows path terminology.  You may wish to change the destination of the `git clone`
-command if you do not want to place it on the root of your C drive, but if you run in to strange
-compilation errors about missing files, it is probably because your path is too long.
 
 [source,bash]
 ----

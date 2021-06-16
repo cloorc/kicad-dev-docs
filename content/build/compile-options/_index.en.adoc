@@ -16,10 +16,10 @@ These are options that are passed to cmake during configuration
                                                                                                 | ON
 |KICAD_USE_OCE                      | Build tools and plugins related to OpenCascade Community Edition. +
                                         Needed to support import/export STEP
-                                                                                                | ON
+                                                                                                | OFF
 |KICAD_USE_OCC                      | Build tools and plugins related to OpenCascade Technology. +
                                       Overrides KICAD_USE_OCE
-                                                                                                | OFF
+                                                                                                | ON
 |KICAD_INSTALL_DEMOS                | Install KiCad demos and examples.                         | ON
 |KICAD_BUILD_QA_TESTS               | Build software Quality assurance unit tests.              | ON
 |KICAD_SPICE                        | Build KiCad with internal Spice simulator.                | ON
@@ -28,7 +28,7 @@ These are options that are passed to cmake during configuration
                                       of ${CMAKE_INSTALL_PREFIX}/share/locale                   | OFF
 |BUILD_SMALL_DEBUG_FILES            | In debug build: create smaller binaries. +
                                       On Windows, binaries created by link option -g3 are *very large* +
-                                      (more than 1Gb for pcbnew, and more than 3Gb for the full kicad suite) +
+                                      (more than 1Gb for Pcbnew, and more than 3Gb for the full KiCad suite) +
                                       This option create binaries using link option -g1 that create much smaller files, but +
                                       there are less info in debug (However the file names and line numbers are available) +
                                                                                                 | OFF

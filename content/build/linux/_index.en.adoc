@@ -2,7 +2,7 @@
 title: Linux
 weight: 11
 summary: Instructions for Linux using gcc
-tags: ["linux"] 
+tags: ["linux"]
 ---
 
 
