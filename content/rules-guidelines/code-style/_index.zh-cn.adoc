@@ -820,7 +820,7 @@ uncrustify 不会纠正你的几个具体问题，但是它在美化代码方面
     class OUTPUTFORMATTER
     {
 
-    #if defined(__GNUG__)   // The GNU C++ compiler defines this
+    #if defined( __GNUG__ )   // The GNU C++ compiler defines this
 
     // When used on a C++ function, we must account for the "this" pointer,
     // so increase the STRING-INDEX and FIRST-TO_CHECK by one.
