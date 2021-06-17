@@ -2,7 +2,7 @@
 title: Windows (Visual Studio)
 weight: 14
 summary: Guide on building KiCad using Microsoft Visual Studio and vcpkg
-tags: ["windows"] 
+tags: ["windows"]
 ---
 :toc:
 
@@ -16,7 +16,7 @@ Additionally, you'll need to make sure the optional component https://docs.micro
 
 ==== vcpkg (kicad fork required)
 
-KiCad maintains a fork of vcpkg to provide us with a wxPython port. 
+KiCad maintains a fork of vcpkg to provide us with a wxPython port.
 It also allows us to lock our dependencies as vcpkg updates fairly frequently.
 
 **If you are new to vcpkg** you must, pick a spot on your system to put it.
@@ -44,26 +44,18 @@ Most of KiCad's dependencies can be installed using `vcpkg` as described below:
 
 [source,powershell]
 ```
-.\vcpkg install boost
-.\vcpkg install cairo
-.\vcpkg install curl
-.\vcpkg install glew
-.\vcpkg install gettext
-.\vcpkg install glm
-.\vcpkg install icu
-.\vcpkg install libxslt
-.\vcpkg install ngspice
-.\vcpkg install opencascade
-.\vcpkg install opengl
-.\vcpkg install openssl
-.\vcpkg install python3
-.\vcpkg install wxpython
-.\vcpkg install wxwidgets
-.\vcpkg install zlib
+.\vcpkg install boost cairo curl glew gettext glm icu libxslt ngspice opencascade opengl openssl python3 wxpython wxwidgets zlib
 ```
 
 If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will have to append
-:x64-windows to end of each packages name, `boost:x64-windows` for example.
+:x64-windows to end of each packages name as below:
+
+[source,powershell]
+```
+.\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows `
+icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows openssl:x64-windows `
+python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows
+```
 
 NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg
 
@@ -94,7 +86,7 @@ Settings for kicad) and add the following items to the CMake Command Arguments o
 
 `-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe -DPYTHON_EXECUTABLE=C:\\PATH\\TO\\vcpkg\\installed\\x64-windows\\tools\\python3\\python.exe`
 
-Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your 
+Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
 a path from Windows Explorer.
 
@@ -116,7 +108,7 @@ the build directory.
 The variable `KICAD_USE_EXTERNAL_PYTHONHOME` must be present (it can be set to any value) when
 running from either the build or the install directory, which allows you to specify `PYTHONHOME` in
 the environment.  Normally, KiCad on Windows uses a Python that is bundled and placed in a specific
-location by the installer, and when running from Visual Studio, Python will be in a different 
+location by the installer, and when running from Visual Studio, Python will be in a different
 location.
 
 The variable `PYTHONHOME` must be present and set to the location of the Python installed by vcpkg.
