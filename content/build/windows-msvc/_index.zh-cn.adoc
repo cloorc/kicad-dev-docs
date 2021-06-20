@@ -56,7 +56,6 @@ vcpkg 需要以下软件包
 .\vcpkg install ngspice
 .\vcpkg install opencascade
 .\vcpkg install opengl
-.\vcpkg install openssl
 .\vcpkg install python3
 .\vcpkg install wxpython
 .\vcpkg install wxwidgets

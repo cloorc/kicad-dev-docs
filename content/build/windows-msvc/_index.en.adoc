@@ -53,7 +53,7 @@ If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will 
 [source,powershell]
 ```
 .\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows `
-icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows openssl:x64-windows `
+icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows `
 python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows
 ```
 
