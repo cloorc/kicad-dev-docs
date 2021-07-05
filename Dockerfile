@@ -1,4 +1,4 @@
-FROM alpine:3.14 as build-env
+FROM alpine:3.10 as build-env
 
 WORKDIR /site
 
