@@ -239,6 +239,10 @@ purpose.
 The purpose of the variable is that it represents a MODULE. Something
 like `p_module` would only make that harder to discern.
 
+Use smart pointers where it makes sense to simplify memory management.
+Where using smart pointers, the STL types `std::shared_ptr` / `std::unique_ptr`
+are preferred.  Do not use Boost smart pointers.
+
 === 2.7 Accessing Member Variables and Member Functions
 We do not use `this->` to access either member variables or member
 functions from within the containing class. We let {cpp} perform this for
@@ -250,6 +254,26 @@ readability.  This generally means -only- use `auto` where std::lib gets
 overly verbose (such as iterators or `std::make_shared`), or when not using
 `auto` would cause line-wraps that can't otherwise be avoided.
 
+**Example**
+[source,cpp]
+----
+auto   board = m_frame->GetBoard();         // Not permitted, use the actual type name
+BOARD* board = m_frame->GetBoard();         // OK
+auto   it    = someComplexSTLType.begin();  // OK, improves readability
+----
+
+=== 2.9 Casting
+
+In most circumstances, use of C-style casting is not permitted.  Explicit
+{cpp}-style casting should be used instead.
+
+**Example**
+[source,cpp]
+----
+PCB_TRACK* track = ( PCB_TRACK* )item;               // Not permitted
+PCB_TRACK* track = static_cast<PCB_TRACK*>( item );  // OK (when used safely)
+PCB_TRACK* track = dynamic_cast<PCB_TRACK*>( item ); // OK
+----
 
 == 3. Commenting
 Comments in KiCad typically fall into two categories: in line code
