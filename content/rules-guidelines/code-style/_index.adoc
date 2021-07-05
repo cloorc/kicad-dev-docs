@@ -407,11 +407,11 @@ columns when possible, such as #define lines which can be thought of as
 containing 4 columns: `#define`, symbol, value, and comment. Notice how
 all 4 columns are aligned in the example below.
 
-**Example**
-~~~~~~~~~~~~~{.cpp}
+[source,cpp]
+----
     #define LN_RED        12        // my favorite
     #define LN_GREEN      13        // eco friendly
-~~~~~~~~~~~~~
+----
 
 Another common case is the declaration of automatic variables. These are
 preferably shown in columns of type and variable name.
@@ -435,6 +435,31 @@ There should be one blank line before the opening statement and after
 the closing curly brace or statement for all control statement blocks
 so that it is easy to see where control blocks begin and end. This
 includes `if`, `for`, `while`, `do`, and `switch` control blocks.
+
+For example, a blank line is required here between the variable
+declaration and the `if` statement:
+
+[source,cpp]
+----
+bool isTrue = checkSomething();
+
+if( isTrue )
+    doSomething();
+----
+
+Curly braces themselves count as blank lines for the purposes of this
+style rule.  For example, a nested control statement may be written as:
+
+[source,cpp]
+----
+while( aCondition )
+{
+    if( checkSomething() )
+    {
+        break;
+    }
+}
+----
 
 === 4.3 Line Length
 The maximum line width is 99 columns. An exception to this is a long
