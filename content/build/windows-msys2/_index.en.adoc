@@ -9,7 +9,7 @@ tags: ["windows"]
 
 == Building using MSYS2
 
-NOTE: MSYS2 is the legacy build system for Windows due to KiCad's historical roots. KiCad has switched to MSVC for nightly builds for 6.0 and will release under 6.0. MSYS2 is still supported but your mileage may vary.
+NOTE: MSYS2 is the legacy build system for Windows due to KiCad's historical roots. KiCad has switched to MSVC for nightly builds (5.99) and for the eventual 6.0. MSYS2 is still supported but your mileage may vary.
 
 === Setup
 
