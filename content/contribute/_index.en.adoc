@@ -95,7 +95,7 @@ link:++https://gitlab.com/kicad/code/kicad/issues?scope=all&utf8=%E2%9C%93&state
 == Internet Relay Chat (_IRC_)
 
 Feel free to join the IRC channel at
-irc://irc.freenode.net/#kicad[#kicad@freenode]. A nice bunch of people
+ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. A nice bunch of people
 are casually hanging around in there, so if you have any questions and
 don't know where to ask, you should try asking in here. There are all
 kinds of people in all kinds of time zones, both people who develop KiCad
