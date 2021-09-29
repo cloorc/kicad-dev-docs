@@ -490,7 +490,7 @@ The maximum line width is 99 columns. An exception to this is a long
 quoted string such as the internationalized text required to satisfy
 MSV{cpp}, described below.
 
-=== 4.4 Strings
+=== 4.4 Line-breaking Strings
 The KiCad project team no longer supports compiling with Microsoft
 Visual {cpp}. When you need to break long strings into smaller substrings,
 please use the C99 compliant method for improved readability. Using
@@ -518,7 +518,18 @@ line, even if it exceeds the 99 character line length limit. However,
 the preferred method is to break strings within the 99 character limit
 whenever possible to prevent wrapping.
 
-=== 4.5 Trailing Whitespace
+=== 4.5 Line-breaking Expressions
+
+When line breaking expressions the operators should appear at the beginning
+of a line, not at the end.
+
+[source,cpp]
+----
+    if( SomeMethodCall( some_parameter, other_parameter )
+            || some_local_variable == foo )
+----
+
+=== 4.6 Trailing Whitespace
 Many programming editors conveniently indent your code for you. Some of
 them do it rather poorly and leave trailing whitespace. Thankfully, most
 editors come with a remove trailing whitespace macro or at least a
@@ -527,7 +538,7 @@ manually remove it. Trailing whitespace is known to break some text
 parsing tools. It also leads to unnecessary diffs in the version control
 system. Please remove trailing whitespace.
 
-=== 4.6 Multiple Statements per Line
+=== 4.7 Multiple Statements per Line
 It is generally preferred that each statement be placed on its own line.
 This is especially true for statements without keywords.
 
@@ -536,7 +547,7 @@ This is especially true for statements without keywords.
     x=1; y=2; z=3; // Bad, should be on separate lines.
 ----
 
-=== 4.7 Braces
+=== 4.8 Braces
 Braces should be placed on the line proceeding the keyword and indented
 to the same level. It is not necessary to use braces if there is only a
 single line statement after the keyword. In the case of if..else
@@ -561,7 +572,20 @@ if..else, indent all to the same level.
     }
 ----
 
-=== 4.8 Parenthesis
+Braces are required if the control statement spans more than one line,
+even if the control block is a single line.  This makes it easier to
+visually parse.
+
+[source,cpp]
+----
+    if( GetSomeProperty( parameter ) == SOME_CONSTANT_VALUE
+            || GetSomeProperty( parameter ) == SOME_OTHER_CONSTANT_VALUE )
+    {
+        single_statement;
+    }
+----
+
+=== 4.9 Parenthesis
 Parenthesis should be placed immediately after function names and
 keywords. Spaces should be placed after the opening parenthesis, before
 the closing parenthesis, and between the comma and the next argument in
@@ -581,7 +605,7 @@ functions. No space is needed if a function has no arguments.
     }
 ----
 
-=== 4.9 Switch Formatting
+=== 4.10 Switch Formatting
 The case statement is to be indented to the same level as the switch.
 
 [source,cpp]
@@ -615,7 +639,7 @@ reject clang-format's suggested changes, if you use it:
     }
 ----
 
-=== 4.10 Lamdas
+=== 4.11 Lamdas
 The braces and statements of the body should be indented as you would a method,
 with the braces lined up under the capture block:
 
@@ -632,13 +656,13 @@ or:
 [source,cpp]
 ----
     auto belowCondition =
-        []( const SELECTION& aSel )
-        {
-            return g_CurrentSheet->Last() != g_RootSheet;
-        };
+            []( const SELECTION& aSel )
+            {
+                return g_CurrentSheet->Last() != g_RootSheet;
+            };
 ----
 
-=== 4.11 Class Definition Layout
+=== 4.12 Class Definition Layout
 When defining classes, member variables should be placed at the bottom
 and methods should be placed above the member variables.  The scope
 ordering of the class should be public, protect, then private.  Do not
@@ -664,7 +688,7 @@ class definition:
     };
 ----
 
-=== 4.12 Getters and Setters
+=== 4.13 Getters and Setters
 Class methods used to read and write from private class members
 without any other side effects are permitted to violate several
 of the normal formatting rules in order to improve legibility.
