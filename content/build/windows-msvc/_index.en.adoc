@@ -29,7 +29,7 @@ git clone https://gitlab.com/kicad/packaging/vcpkg
 .\vcpkg\vcpkg integrate install
 ```
 
-which will give you a vcpkg install ready to use with the next steps
+which will give you a vcpkg install ready to use with the next steps.
 
 === KiCad Specific Setup
 
@@ -57,7 +57,7 @@ icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows 
 python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows
 ```
 
-NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg
+NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg.
 
 Additionally, SWIG must be installed manually.  Obtain the latest `swigwin` package from
 https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
@@ -73,22 +73,25 @@ Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to mat
 ----
 
 ==== 3. "Open Folder" in Visual Studio
-Launch Visual Studio (only after completing the above steps).
-
-When the initial wizard launches, select to **Open a local folder**
+* Launch Visual Studio (only after completing the above steps).
+* When the initial wizard launches, select to **Open a local folder**. 
 This is the correct way to make Visual Studio directly handle *CMake* projects.
+* Select the build root folder.
+* Wait until the "CMake in Visual Studio" tab appears and the CMake process hits an error, which we'll fix in the next step.
 
 ==== 4. Configure paths to Python and SWIG
 
 At present, you must add CMake arguments to the location of Python installed by `vcpkg` and SWIG
-that you downloaded in a previous step.  Open the CMake Settings editor (Project menu > CMake
-Settings for kicad) and add the following items to the CMake Command Arguments option field:
+that you downloaded in a previous step.  Choose the Configuration you want to use (e.g. x64-Debug) in the toolbar. Then, open the CMake Settings editor (Project menu > CMake
+Settings), and add the following items to the CMake Command Arguments option field:
 
 `-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe -DPYTHON_EXECUTABLE=C:\\PATH\\TO\\vcpkg\\installed\\x64-windows\\tools\\python3\\python.exe`
 
 Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
 a path from Windows Explorer.
+
+Save the changes. CMake configuration should now succeed, showing "CMake generation finished" in the output window at the bottom.  You can now build! (Build menu > Build all)
 
 ==== 5. Running and debugging
 
@@ -124,7 +127,7 @@ assuming `vcpkg` is installed at `C:\code\vcpkg`.
 Additionally, use the `environment` section to add the path to the `vcpkg` installed packages
 directory, which will allow KiCad to find dynamic libraries from dependencies.
 
-This snippet shows an example launch configuration for running `kicad.exe` from the build
+This snippet shows an example launch configuration for running x64-Debug `kicad.exe` from the build
 directory.  To run from the install directory, the configuration will look the same except the
 `KICAD_RUN_FROM_BUILD_DIR` variable should not be set.
 
@@ -157,3 +160,9 @@ and where your `kicad` source and build directories are located.
 
 ==== Trailing Whitespace Remover
 It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
+
+=== Troubleshooting
+
+==== Could NOT find GLEW (missing: GLEW_INCLUDE_DIR GLEW_LIBRARY)
+
+You might be trying to perform a 32-bit build (x86-*) despite only having a 64-bit GLEW installed by vcpkg. Switch your configuration to x64-Debug or x64-Release.
