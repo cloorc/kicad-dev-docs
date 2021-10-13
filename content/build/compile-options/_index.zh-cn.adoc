@@ -22,12 +22,8 @@ summary: 通过 CMake 配置编译选项摘要
 |KICAD_SCRIPTING_WXPYTHON_PHOENIX   | 使用新的 wxPython 绑定。                                    | OFF
 |KICAD_SCRIPTING_ACTION_MENU        | 使用注册的 python 插件编译工具菜单：操作插件。
                                                                                                 | ON
-|KICAD_USE_OCE                      | 编译与 OpenCascade Community Edition 相关的工具和插件。 +
-                                      需要支持导入/导出 STEP
+|KICAD_USE_OCC                      | 编译与 OpenCascade 技术相关的工具和插件。 
                                                                                                 | ON
-|KICAD_USE_OCC                      | 编译与 OpenCascade 技术相关的工具和插件。 +
-                                      覆盖 KICAD_USE_OCE
-                                                                                                | OFF
 |KICAD_INSTALL_DEMOS                | 安装 KiCad 演示和示例。                                     | ON
 |KICAD_BUILD_QA_TESTS               | 编译软件质量保证单元测试。                                    | ON
 |KICAD_SPICE                        | 使用内部 Spice 仿真器编译 KiCad。                            | ON

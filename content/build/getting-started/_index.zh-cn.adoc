@@ -99,12 +99,8 @@ http://curl.haxx.se/libcurl/[Curl 多协议文件传输库] 用于为 [GitHub][]
 
 === OpenCascade 库
 
-https://github.com/tpaviot/oce[OpenCascade 社区版] 用于提供对加载和保存 3D 模型文件格式(如 STEP)的支持。
-除非禁用 OCE 编译选项，否则需要安装此库。
-
-https://www.opencascade.com/content/overview[Open CASCSADE 技术 (OCC)] 也应该作为 OCE 的替代方案。
-可以在编译时指定库级联库的选择。参见[STEP/IGES 支持](#OCE_OPT) 部分。
-使用选项 BUILD_MODULE_DRAW=OFF 编译 OCC 时，使编译更加容易
+https://www.opencascade.com/content/overview[Open CASCSADE 技术 (OCC)] 用于提供对加载和保存 3D 模型文件格式(如 STEP)的支持。
+除非禁用 OCC 编译选项，否则需要安装此库。使用选项 BUILD_MODULE_DRAW=OFF 编译 OCC 时，使编译更加容易
 
 ==== Ngspice 库
 
@@ -154,12 +150,10 @@ KICAD_SPICE 选项用于控制是否为 EesChema 编译 Spice 仿真器接口。
 
 === 对 3D 查看器的 STEP/IGES 支持
 
-KICAD_USE_OCE 用于 3D 查看器插件以支持 STEP 和 IGES 3D 模型。
-此选项启用与 OpenCascade Community Edition(OCE) 相关的编译工具和插件。
-启用时，它要求 [liboce][] 可用，并通过OCE_DIR标志传递已安装的 OCE 库的位置。
+KICAD_USE_OCC 用于 3D 查看器插件以支持 STEP 和 IGES 3D 模型。
+此选项启用与 OpenCascade (OCC) 相关的编译工具和插件。
+启用时，它要求 [libocct][] 可用。
 默认情况下，此选项处于启用状态。
-
-或者，可以使用 KICAD_USE_OCC 代替 OCE。不应同时启用这两个选项。
 
 === Wayland EGL 支持
 

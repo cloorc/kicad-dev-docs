@@ -103,13 +103,9 @@ the GitHub plug build option is disabled.
 
 === OpenCascade Library
 
-The https://github.com/tpaviot/oce[OpenCascade Community Edition (OCE)] is used to provide support for loading and saving
-3D model file formats such as STEP.  This library needs to be installed unless the OCE build
-option is disabled.
-
-https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] should also work as an alternative to OCE. Selection of
-library Cascade library can be specified at build time.  See the [STEP/IGES support](#oce_opt)
-section.  When building OCC using the option BUILD_MODULE_Draw=OFF make building more easy
+https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] is used to provide support for loading and saving
+3D model file formats such as STEP.  This library needs to be installed unless the OCC build
+option is disabled.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make building easier
 
 ==== Ngspice Library
 
@@ -169,13 +165,9 @@ library.  This option is enabled by default.
 
 === STEP/IGES support for the 3D viewer
 
-The KICAD_USE_OCE is used for the 3D viewer plugin to support STEP and IGES 3D models. Build tools
-and plugins related to OpenCascade Community Edition (OCE) are enabled with this option. When
-enabled it requires [liboce][] to be available, and the location of the installed OCE library to be
-passed via the OCE_DIR flag.  This option is enabled by default.
-
-Alternatively KICAD_USE_OCC can be used instead of OCE. Both options are not supposed to be enabled
-at the same time.
+The KICAD_USE_OCC is used for the 3D viewer plugin to support STEP and IGES 3D models. Build tools
+and plugins related to OpenCascade (OCC) are enabled with this option. When
+enabled it requires [libocct][] to be available.  This option is enabled by default.
 
 === Wayland EGL support
 
