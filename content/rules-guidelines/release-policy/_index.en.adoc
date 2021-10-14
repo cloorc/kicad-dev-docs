@@ -1,0 +1,94 @@
+---
+title: Stable Release Policy
+weight: 2
+summary: The stable release policy provides guidelines for stable releases
+         provided by the KiCad project.
+---
+
+:toc:
+
+== 1 Introduction
+The purpose of this document is to provide the guidelines for creating releases
+for the KiCad project.
+
+NOTE: This document is applicable to all stable releases after version 6.0.0.
+
+WARNING: Do not modify this document without the consent of the project leader.
+         All changes to this document require approval.
+
+=== 1.1 Versioning Scheme
+KiCad uses a typical [major].[minor].[bug fix] versioning scheme.  Each new
+version is a simple incremental integer of the previous version.  New major
+releases will reset the minor and bug fix version back to 0.
+
+=== 1.2 Restrictions
+No board, schematic, footprint library, symbol library, or project file format
+changes are allowed during a major release cycle except to fix known bugs.
+Changes to configuration files are acceptable.
+
+Minor and bug fix releases are only valid for the current stable major release.
+Once a new stable major version is released, the previous stable version is
+considered a no longer supported (dead) branch.
+
+== 2 Major Release Policy
+Major releases will occur annually by January 31st of a given calendar year.
+This corresponds with the annual https://fosdem.org/[FOSDEM] conference.
+
+Once the next major stable version is released, the
+https://gitlab.com/kicad/code/kicad[development branch] of the KiCad source
+code will be open for new feature merges on February 1st.  The new feature
+merge window will be open for eight months until September 30th.
+
+WARNING: No feature freeze exceptions will be made. Features not ready by the
+         freeze date will have to wait until the next merge cycle.
+
+Once the feature freeze date has passed, three months are allocated for bug
+fixing by December 31st.  All known critical, major, and medium priority bugs
+must be fixed before the release.  Low priority bugs can be pushed to a bug
+fix release as determined by the development team.
+
+A string freeze will occur two months after the feature freeze to allow one
+month for translations to be updated before the next major version is tagged
+for release.  During this time, no user interface strings can be changed in
+the source repository.
+
+Once the bug fix schedule is complete, the next major version will be tagged
+and a new stable branch created by the project lead developer.
+
+The footprint library, symbol library, documentation, and translations can
+continue to be merged up to December 31st.  At this time all of the repositories
+must be tagged with the new release version.  Branching of these repositories
+is only necessary if determined by the development team and repository
+maintainers.
+
+Once all of the repositories are tagged, the month of January is to allow
+the package team to create and upload packages to the KiCad download page,
+the documentation on the website to be updated, and any announcements about
+the new release to made.
+
+== 3 Minor Release Policy
+Features from the current development branch of KiCad can be back ported to
+the current stable branch provided the following criteria is met:
+
+- The the last feature commit was pushed to the development branch at least
+  60 days prior to merging into the current stable branch.
+- The the last known issue filed against the feature occurred at least 30 days
+  prior to merging into the current stable branch.
+- The cherry pick to current stable can be performed without pulling any other
+  dependent code that does meets the file format change criteria above.
+
+A new minor release will include all of the bug fixes included in the current
+bug fix release so the bug fix version will be reset to 0 for new minor version
+releases.
+
+NOTE: Back ports from the development branch can only be applied to the
+      current stable branch.  Back porting to older stable versions is not
+      allowed.
+
+== 4 Bug Fix Release Policy
+Bug fix releases are at the discretion of the lead development team.
+
+Bug fix releases will be announced 30 days in advance of the release by the
+project manager to allow time for all required release actions to be completed.
+
+NOTE: Bug fixes are only applied to the current stable release.
