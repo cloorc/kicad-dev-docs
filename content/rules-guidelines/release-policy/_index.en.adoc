@@ -33,38 +33,48 @@ considered a no longer supported (dead) branch.
 == 2 Major Release Policy
 Major releases will occur annually by January 31st of a given calendar year.
 This corresponds with the annual https://fosdem.org/[FOSDEM] conference.
+The following table outlines the release schedule dates.
 
-Once the next major stable version is released, the
-https://gitlab.com/kicad/code/kicad[development branch] of the KiCad source
-code will be open for new feature merges on February 1st.  The new feature
-merge window will be open for eight months until September 30th.
+.Major Release Schedule
+[%header,cols="1,5"]
+|===
+|Date
+|Milestone
 
-WARNING: No feature freeze exceptions will be made. Features not ready by the
-         freeze date will have to wait until the next merge cycle.
+|February 1st
+|New feature merge window opens.
 
-Once the feature freeze date has passed, three months are allocated for bug
-fixing by December 31st.  All known critical, major, and medium priority bugs
-must be fixed before the release.  Low priority bugs can be pushed to a bug
-fix release as determined by the development team.
+|September 30th
+|New feature merge window closes.
 
-A string freeze will occur two months after the feature freeze to allow one
-month for translations to be updated before the next major version is tagged
-for release.  During this time, no user interface strings can be changed in
-the source repository.
+Bug fixing only period begins.
 
-Once the bug fix schedule is complete, the next major version will be tagged
-and a new stable branch created by the project lead developer.
+|December 1st
+|String freeze begins.
 
-The footprint library, symbol library, documentation, and translations can
-continue to be merged up to December 31st.  At this time all of the repositories
-must be tagged with the new release version.  Branching of these repositories
-is only necessary if determined by the development team and repository
-maintainers.
+|December 15th
+|Release candidate 1 tagged.
 
-Once all of the repositories are tagged, the month of January is to allow
-the package team to create and upload packages to the KiCad download page,
-the documentation on the website to be updated, and any announcements about
-the new release to made.
+|January 14th
+|Library, documentation, and, translation repository freeze.
+
+Bug fix freeze.
+
+|January 15th
+|Source code repository tagged with next major version and branched.
+
+Begin package build and upload to website.
+
+|January 31st
+|New version release announcement.
+|===
+---
+WARNING: Features not ready by the merge window close will have to wait until
+         the next merge window. *No exceptions.*
+
+NOTE: Only the source code repository branch is mandatory.  All other
+      repositories are branched if the development team determines it is
+      necessary.
 
 == 3 Minor Release Policy
 Features from the current development branch of KiCad can be back ported to
@@ -91,4 +101,7 @@ Bug fix releases are at the discretion of the lead development team.
 Bug fix releases will be announced 30 days in advance of the release by the
 project manager to allow time for all required release actions to be completed.
 
-NOTE: Bug fixes are only applied to the current stable release.
+NOTE: Bug fixes cannot contain translatable string changes except for spelling
+      and grammar errors.
+
+NOTE: Bug fixes can only applied to the current stable release.
