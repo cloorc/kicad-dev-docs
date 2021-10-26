@@ -716,8 +716,8 @@ The `fp_arc` token defines a graphic arc in a <<_footprint_section,footprint def
 ```
     (fp_arc
       (start X Y)                                               <1>
-      (end X Y)                                                 <2>
-      (angle ANGLE)                                             <3>
+      (mid X Y)                                                 <2>
+      (end X Y)                                                 <3>
       (layer LAYER_DEFINITION)                                  <4>
       (width WIDTH)                                             <5>
       [(locked)]                                                <6>
@@ -726,9 +726,8 @@ The `fp_arc` token defines a graphic arc in a <<_footprint_section,footprint def
 ```
 
 <1> The `start` token defines the coordinates of the start position of the arc radius.
-<2> The `end` token defines the coordinates of the end position of the arc radius.
-<3> The `angle` token defines the rotation angle from the end position around the start position
-    of the arc.
+<2> The `mid` token defines the coordinates of the midpoint along the arc.
+<3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
 <5> The `width` token defines the line width of the arc.
 <6> The optional `locked` token defines if the arc cannot be edited.
@@ -1055,8 +1054,8 @@ The `gr_arc` token defines a graphical arc.
 ```
   (gr_arc
     (start X Y)                                                 <1>
-    (end X Y)                                                   <2>
-    (angle ANGLE)                                               <3>
+    (mid X Y)                                                   <2>
+    (end X Y)                                                   <3>
     (layer LAYER_DEFINITION)                                    <4>
     (width WIDTH)                                               <5>
     (tstamp UUID)                                               <6>
@@ -1064,9 +1063,8 @@ The `gr_arc` token defines a graphical arc.
 ```
 
 <1> The `start` token defines the coordinates of the start position of the arc radius.
-<2> The `end` token defines the coordinates of the end position of the arc radius.
-<3> The `angle` token defines the rotation angle from the end position around the start position
-    of the arc.
+<2> The `mid` token defines the coordinates of the midpoint along the arc.
+<3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
 <5> The `width` token defines the line width of the arc.
 <6> The `tstamp` token defines the unique identifier of the arc object.
