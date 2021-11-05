@@ -276,7 +276,7 @@ com.github.username.packagename.  The package identifier should match the reposi
 
 - Packages that link to or provide commercial services, including but not limited to PCB fabrication,
   component lookup and order management, must first contact the KiCad team at plugins@kicad.org to
-  discuss commericial plugin options.
+  discuss commercial plugin options.
 
 === Submitting your package
 
