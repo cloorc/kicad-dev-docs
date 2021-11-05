@@ -272,6 +272,12 @@ com.github.username.packagename.  The package identifier should match the reposi
   violation of new or updated content policies will receive advance notice and have the opportunity
   to make changes to meet the updated policies.
 
+==== Commercial Services
+
+- Packages that link to or provide commercial services, including but not limited to PCB fabrication,
+  component lookup and order management, must first contact the KiCad team at plugins@kicad.org to
+  discuss commericial plugin options.
+
 === Submitting your package
 
 Once you have created a package following the guidelines above, and confirmed that your package is
