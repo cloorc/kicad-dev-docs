@@ -1,0 +1,296 @@
+---
+title: KiCad Addons
+weight: 18
+pre: "<i class='fas fa-chevron-right'></i> "
+---
+
+
+== Publishing KiCad Addons
+
+This document is a guide for users and plugin developers who are interested in creating addon
+packages that can be installed by the KiCad plugin and content manager.
+
+=== The Plugin and Content Manager
+
+The plugin and content manager (PCM) allows KiCad users to discover and install addon packages from
+public or private repositories.  These addon packages may contain Python plugins, symbol or
+footprint libraries, color themes, and other KiCad content.
+
+The KiCad team operates an official repository of addon content that is available by default to
+KiCad users.  Users may also add other repositories, either hosted publicly by third parties or
+privately (for example, an internal corporate repository).
+
+=== Packaging your content
+
+A KiCad addon package consists of a compressed archive file containing a metadata file, the package
+content, and several optional files.  The archive must be in ZIP format (compatible with the ISO
+21320-1 standard).  The contents of the archive file depend on the package type, but all packages
+must include a control file called `metadata.json` that is described in detail below.
+
+==== Python plugins
+
+The structure of a Python plugin archive must look like:
+
+```
+Archive root
+|- plugins
+   |- __init__.py
+   |- ...
+|- resources
+   |- icon.png
+|- metadata.json
+```
+
+`icon.png` is an optional 64x64-pixel icon that will be displayed alongside your package in the PCM
+dialog.  If no icon is supplied, the `resources` subdirectory may be empty or omitted.
+
+The contents of the `plugins` subdirectory should include any Python source files and resources
+required by your plugin.  Place your plugin directly inside the `plugins` subdirectory, not inside
+a second level of subdirectory.
+
+NOTE: For action plugins that supply a toolbar button icon, this icon should be smaller (24x24) and
+      located inside the `plugins` subdirectory.  The action plugin toolbar icon will not be used
+      by the PCM.
+
+==== Content libraries
+
+The structure of a content library package must look like:
+
+```
+Archive root
+|- footprints
+   |- first-library.pretty
+      |- my-footprint.kicad_mod
+      |- ...
+   |- second-library.pretty
+      |- another-footprint.kicad_mod
+      |- ...
+|- 3dmodels
+   |- 3d-library.3dshapes
+      |- my-model.stp
+      |- my-model.wrl
+      |- ...
+|- symbols
+      |- my-symbols.kicad_sym
+      |- ...
+|- templates
+      |- my_worksheet.kicad_wks
+      |- ...
+|- resources
+   |- icon.png
+|- metadata.json
+```
+
+Each content library package must contain one or more of the `footprints`, `3dmodels`, `symbols`,
+or `templates` subdirectories.  Each of these subdirectories may contain one or more libraries of
+the corresponding type.
+
+`icon.png` is an optional 64x64-pixel icon that will be displayed alongside your package in the PCM
+dialog.  If no icon is supplied, the `resources` subdirectory may be empty or omitted.
+
+==== Color themes
+
+The structure of a color theme package must look like:
+
+```
+Archive root
+|- colors
+   |- my-theme.json
+|- resources
+   |- icon.png
+|- metadata.json
+```
+
+`icon.png` is an optional 64x64-pixel icon that will be displayed alongside your package in the PCM
+dialog.  If no icon is supplied, the `resources` subdirectory may be empty or omitted.  For color
+themes, it is best if the icon somehow represents the theme, for example by using the same primary
+colors and background color as the theme.
+
+==== Metadata file format
+
+The metadata file, `metadata.json`, follows a JSON schema, currently published at 
+https://go.kicad.org/pcm/schemas/v1
+
+Unless otherwise noted all fields are limited to valid UTF-8 code points and 1000 characters.
+
+Example `metadata.json` for a color theme:
+
+```
+{
+    "$schema": "https://go.kicad.org/pcm/schemas/v1",
+    "name": "My Beautiful Theme",
+    "description": "A theme that makes KiCad truly beautiful",
+    "description_full": "I came up with this theme in a dream one night.",
+    "identifier": "com.github.kicad-user.kicad-beautiful-theme",
+    "type": "colortheme",
+    "author": {
+        "name": "KiCad User",
+        "contact": {
+            "web": "https://mywebsite.com"
+        }
+    },
+    "maintainer": {
+        "name": "KiCad User",
+        "contact": {
+            "web": "https://mywebsite.com"
+        }
+    },
+    "license": "CC0-1.0",
+    "resources": {
+        "homepage": "https://github.com/kicad-user/kicad-beautiful-theme"
+    },
+    "versions": [
+        {
+            "version": "1.0",
+            "status": "stable",
+            "kicad_version": "5.99",
+            "download_sha256": "YOUR_SHA256_HERE",
+            "download_size": 1234,
+            "download_url": "https://github.com/YOUR/DOWNLOAD/URL/kicad-beautiful-theme.zip",
+            "install_size": 5678
+        }
+    ]
+}
+```
+
+===== Mandatory fields
+
+`$schema`: must contain the URL to the current KiCad addon JSON schema
+           (https://go.kicad.org/pcm/schemas/v1)
+
+`name`: the human-readable name of the package (may contain any valid UTF-8 characters)
+
+`description`: a short free-form description of the package that will be shown in the PCM alongside
+               the package name.  May contain a maximum of 150 characters.
+
+`description_full`: a long free-form description of the package that will be shown in the PCM when
+                    the package is selected by the user.  May include line breaks.
+
+`identifier`: the unique identifier for the package.  May contain only alphanumeric characters and
+              the dash (`-`) symbol.  Must be between 2 and 50 characters in length.  Must start
+              with a latin character and end with a latin character or a numeral.  See instructions
+              below on namespaces for guidelines for selecting an identifier.
+
+`type`: the type of the package; one of `plugin`, `library`, or `colortheme`.
+
+`author`: object containing one mandatory field, `name`, containing the name of the package
+          creator. An optional `contact` field may be present, containing free-form fields with
+          contact information.
+
+`maintainer`: same as `author`, but containing information about the maintainer of the package.
+
+`license`: a list of licenses under which the package is distributed.
+
+When multiple licenses are specified, it is assumed that users may choose any of the listed licenses.  Each license must be a valid string under link:https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/#license-specification[Debian license rules]
+with the following modifications:
+
+- The MIT license is always taken to mean the
+    link:https://www.debian.org/legal/licenses/mit[Expat license].
+- The Creative Commons licenses are permitted without a version number, indicating the
+    author did not specify which version applies.
+- Stripping of trailing zeroes is not recognized.
+- `CERN-OHL` is recognized as a valid license.
+- `WTFPL` is recognized as a valid license.
+- `Unlicense` is recognized as a valid license.
+
+The following license strings are also valid and indicate other licensing not described
+above:
+
+- `open-source`: Other Open Source Initiative (OSI) approved license.
+- `unrestricted`: Not an OSI approved license, but not restricted.
+
+`versions`: a list of objects describing package versions
+
+TODO: Describe optional fields
+
+=== Submission to the official repository
+
+KiCad hosts an official addons repository that is available by default to all KiCad users.  To be
+included in the official repository, your package must meet several requirements beyond the
+technical requirements described above.
+
+==== Namespacing and naming
+
+- Your package identifier **must** be namespaced using reverse-DNS format.  For example, official
+  KiCad addons use the namespace org.kicad.packagename.
+
+- If your addon content is hosted on a publicly-visible code-hosting service such as GitHub or
+    GitLab, your namespace should be based on this service.  For example,
+com.github.username.packagename.  The package identifier should match the repository name.
+
+- Your package namespace may also be based on a domain name that you control. If there is no
+  obvious link between the domain name you submit and the download location of your package, or if
+  it is not otherwise clear that you control the domain name, the KiCad team may request further
+  information before approving your submission. - Your package identifier **must** be unique.  The
+  namespacing requirements above should make this easy.
+
+==== Licensing
+
+- Packages **must** be licensed under a valid open-source license.  Closed-source packages may be
+  used with KiCad under a third-party repository, but all packages in the official KiCad repository
+  must be open-source to allow for code review, issue reporting, and to maintain license
+  compatibility with KiCad itself.
+
+- Packages containing code (Python plugins) **must** be licensed under an open-source license
+  link:https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses[compatible with  the
+  GNU GPL].
+
+- Packages containing data (color themes, libraries, etc) should be licensed under a Creative
+  Commons or similar license.
+
+==== Technical requirements
+
+- Metadata files submitted to the official repository must include the `download_sha256` key in the
+  metadata, containing a valid SHA-256 hash of the archive file.
+
+- The `download_url` must point to a publicly-accessible URL.
+
+- Package metadata must be in English.  Package contents (for example, the language used inside a
+  dialog created by a Python plugin) may be in any language, but the package description should
+  clearly state if the contents are in a language other than English.  At this time, KiCad does not
+  have a built-in mechanism to allow for plugins to offer multiple language translations.
+
+- The package source must be hosted in a location that allows issue reporting and tracking.
+  Examples that meet this requirement include GitHub, GitLab, Bitbucket and Sourceforge.
+
+==== Content policy
+
+- Packages added to the official KiCad addon repository must follow our community
+  link:https://www.kicad.org/contribute/code-of-conduct/[Code of Conduct].
+  The KiCad team reserves the right to review package content and metadata and reject submissions
+  that violate this code of conduct.
+
+- The KiCad team makes no guarantees about the quality, security, or safety of any addon content,
+  but will strive to maintain a general standard of security and safety.  If a security, safety, or
+  privacy issue related to a package is brought to our attention, we reserve the right to take
+  corrective actions up to and including removing a package from the repository without advance
+  notice.  In this case, the package can be submitted to the repository again once the issue has
+  been resolved to the satisfaction of the KiCad team.
+
+- The KiCad team reserves the right to modify or expand on this policy in the future in order to
+  best meet the needs of the KiCad user community.  Publishers of existing packages that become in
+  violation of new or updated content policies will receive advance notice and have the opportunity
+  to make changes to meet the updated policies.
+
+=== Submitting your package
+
+Once you have created a package following the guidelines above, and confirmed that your package is
+available for download using the URL listed in the metadata file, you can submit your package to
+the official KiCad addon repository.
+
+To do so, you must have an account at GitLab, and submit your metadata file as a merge request to
+the Package Metadata repository at https://gitlab.com/kicad/addons/metadata.  Create a directory
+inside the packages directory named the same as your package identifier, and containing the
+`metadata.json` file and any additional optional metadata files (for example, an icon) as described
+above.  You may submit more than one new package in a single merge request as long as the packages
+share a namespace.
+
+NOTE: Do not submit merge requests to the public-facing repository at
+      https://gitlab.com/kicad/addons/repository - changes to this repository are made
+      automatically based on changes to the metadata repository.
+
+=== Updating your package
+
+Updates should be submitted as additional merge requests that change the metadata.json file (and
+any other package files that need updating).  You may submit updates to more than one package in a
+single merge request as long as the packages share a namespace.
