@@ -241,22 +241,22 @@ technical requirements described above.
 
 ==== Technical requirements
 
-- Metadata files submitted to the official repository must include the `download_sha256` key in the
-  metadata, containing a valid SHA-256 hash of the archive file.
+- Metadata files submitted to the official repository **must** include the `download_sha256` key in
+  the metadata, containing a valid SHA-256 hash of the archive file.
 
-- The `download_url` must point to a publicly-accessible URL.
+- The `download_url` **must** point to a publicly-accessible URL.
 
-- Package metadata must be in English.  Package contents (for example, the language used inside a
-  dialog created by a Python plugin) may be in any language, but the package description should
+- Package metadata **must** be in English.  Package contents (for example, the language used inside
+  a dialog created by a Python plugin) may be in any language, but the package description should
   clearly state if the contents are in a language other than English.  At this time, KiCad does not
   have a built-in mechanism to allow for plugins to offer multiple language translations.
 
-- The package source must be hosted in a location that allows issue reporting and tracking.
+- The package source **must** be hosted in a location that allows issue reporting and tracking.
   Examples that meet this requirement include GitHub, GitLab, Bitbucket and Sourceforge.
 
 ==== Content policy
 
-- Packages added to the official KiCad addon repository must follow our community
+- Packages added to the official KiCad addon repository **must** follow our community
   link:https://www.kicad.org/contribute/code-of-conduct/[Code of Conduct].
   The KiCad team reserves the right to review package content and metadata and reject submissions
   that violate this code of conduct.
@@ -275,9 +275,8 @@ technical requirements described above.
 
 ==== Commercial Services
 
-- Packages that link to or provide commercial services, including but not limited to PCB fabrication,
-  component lookup and order management, must first contact the KiCad team at plugins@kicad.org to
-  discuss commercial plugin options.
+- Packages that link to or provide commercial services, including but not limited to PCB
+  fabrication, component lookup and order management, **must** first contact the KiCad team at plugins@kicad.org to discuss commercial plugin options.
 
 === Submitting your package
 
@@ -298,6 +297,6 @@ NOTE: Do not submit merge requests to the public-facing repository at
 
 === Updating your package
 
-Updates should be submitted as additional merge requests that change the metadata.json file (and
+Updates should be submitted as additional merge requests that change the `metadata.json` file (and
 any other package files that need updating).  You may submit updates to more than one package in a
 single merge request as long as the packages share a namespace.
