@@ -181,7 +181,7 @@ Example `metadata.json` for a color theme:
 
 `license`: a string containing the license under which the package is distributed.
 
-When multiple licenses are specified, it is assumed that users may choose any of the listed licenses.  Each license must be a valid string under link:https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/#license-specification[Debian license rules]
+The license must be a valid string under link:https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/#license-specification[Debian license rules]
 with the following modifications:
 
 - The MIT license is always taken to mean the
@@ -222,8 +222,10 @@ technical requirements described above.
 - Your package namespace may also be based on a domain name that you control. If there is no
   obvious link between the domain name you submit and the download location of your package, or if
   it is not otherwise clear that you control the domain name, the KiCad team may request further
-  information before approving your submission. - Your package identifier **must** be unique.  The
-  namespacing requirements above should make this easy.
+  information before approving your submission.
+  
+- Your package identifier **must** be unique. The namespacing requirements above should make this
+  easy.
 
 ==== Licensing
 
