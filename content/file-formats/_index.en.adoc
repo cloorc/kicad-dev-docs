@@ -1,11 +1,11 @@
 ---
 title: File Formats
-weight: 17
+weight: 40
 pre: "<i class='fas fa-chevron-right'></i> "
 ---
 
+:TOC:
 
-== Legacy Format Documentation
-New file format documentation is currently a work in progress.
+== Formats
 
-Older documentation for the non-sexpr schematic file format and older pcb sexpr format is link:legacy_file_format_documentation.pdf[available here]
+{{% children description="false" sort="weight" %}}

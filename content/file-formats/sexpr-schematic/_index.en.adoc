@@ -1,0 +1,48 @@
+---
+title:  Schematic Library File Format
+weight: 45
+---
+
+.Summary The s-expression schematic file format.
+<!--more-->
+
+
+== Introduction
+
+This documents the s-expression schematic file format for all versions of KiCad from 6.0.
+
+* Schematic files use the `.kicad_sch` extension.
+
+
+== Layout
+
+A schematic file includes the following sections:
+
+* <<_header_section,Header>>
+* <<_symbol_section,Symbol Definition>>
+
+
+== Header Section
+
+The `kicad_sch` token indicates that it is KiCad schematic file.  This section is required.
+
+NOTE: Third party scripts should not use `eeschema` as the generator identifier.  Please use
+      some other identifier so that bugs introduced by third party generators are not confused
+      with a schematic file created by KiCad.
+
+```
+(kicad_sch
+  (version VERSION)                                             <1>
+  (generator GENERATOR)                                         <2>
+
+  ;; contents of the schematic file...                          <3>
+)
+```
+
+<1> The `version` token attribute defines the schematic version using the YYYYMMDD date format.
+<2> The `generator` token attribute defines the program used to write the file.
+<3> The schematic sections go here.
+
+
+== Symbol Section
+

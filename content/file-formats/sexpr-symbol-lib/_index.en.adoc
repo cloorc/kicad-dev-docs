@@ -1,0 +1,50 @@
+---
+title:  Symbol Library File Format
+weight: 44
+---
+
+.Summary The s-expression symbol library file format.
+<!--more-->
+
+== Introduction
+
+This documents the s-expression symbol library file format for all versions of KiCad from 6.0.
+
+* Symbol library files use the `.kicad_sym` extension.
+* Symbol library files can only define one or more footprints.
+
+
+== Layout
+
+A symbol library file includes the following sections:
+
+* <<_header_section,Header>>
+* <<_symbol_section,Symbol Definition>>
+
+
+== Header Section
+
+The `kicad_symbol_lib` token indicates that it is KiCad symbol library file.  This section is
+required.
+
+NOTE: Third party scripts should not use `kicad_symbol_edigor` as the generator identifier.
+      Please use some other identifier so that bugs introduced by third party generators are
+      not confused with a footprint library file created by KiCad.
+
+```
+(kicad_symbol_lib
+  (version VERSION)                                             <1>
+  (generator GENERATOR)                                         <2>
+
+  ;; contents of the symbol library file...                     <3>
+)
+```
+
+<1> The `version` token attribute defines the symbol library version using the YYYYMMDD date
+    format.
+<2> The `generator` token attribute defines the program used to write the file.
+<3> The symbol definitions go here.
+
+
+== Symbol Section
+

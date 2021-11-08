@@ -1,11 +1,14 @@
 ---
-title: Legacy PCB (pre 4.0)
-weight: 10
+title: Legacy Board Format (pre 4.0)
+weight: 50
 ---
 
-WARNING: This is is for the PCB file format before the sexpr format introduced in KiCad 4.0. 
-This documentation is a mostly verbatim copy of what was written back then and the quality may be poor.
-This is only included as a reference and is not maintained.
+.Summary The printed circuit board file format prior to version 4.0.
+<!--more-->
+
+WARNING: This is for the PCB file format before the S expression format introduced in KiCad 4.0.
+         This documentation is a mostly verbatim copy of what was written back then and the
+         quality may be poor.  This is only included as a reference and is not maintained.
 
 
 ==	Information about V1 version:
@@ -23,9 +26,11 @@ some data
 $endDESCRIPTION
 ```
 
-when <DESCRIPTION> is an identifier which gives the meaning of the data between $DESCRIPTION and $endDESCRIPTION.
+When <DESCRIPTION> is an identifier which gives the meaning of the data between $DESCRIPTION
+and $endDESCRIPTION.
 
 *Example:*
+
 ```
 $GENERAL
 encoding utf-8
@@ -57,9 +62,10 @@ $EndSHEETDESCR
 == 	Information about V2 version:
 The file format is exactly the same format, and the extension is still .brd.
 However, dimensions are in mm (floating notation), except for the page size (in 1/1000 inch).
-Because the internal Pcbnew unit is now 1nm, the integer coordinates in 1/10000 inch cannot be used in files.
-Of course, the Pcbnew versions which are in nm are able to read the V1 version files, but can only write files in V2 version.
-The V2 version should be seen as a temporary way to store boards without loss of resolution.
+Because the internal Pcbnew unit is now 1nm, the integer coordinates in 1/10000 inch cannot be
+used in files.  Of course, the Pcbnew versions which are in nm are able to read the V1 version
+files, but can only write files in V2 version.  The V2 version should be seen as a temporary
+way to store boards without loss of resolution.
 
 First line is something as:
 
@@ -100,8 +106,9 @@ $EndGENERAL
 == Information about new “S expression” version:
 
 For Pcbnew versions in nanometers, the default file format is now using “S expressions”.
-This new format uses mm for coordinates, fixes issues (like spaces in names) in V1 and V2 versions, and is more human readable than the older format.
-The new file extension is .kicad_pcb
+This new format uses mm for coordinates, fixes issues (like spaces in names) in V1 and V2
+versions, and is more human readable than the older format. The new file extension is .kicad_pcb
+
 Here is a sample:
 
 ```
@@ -182,10 +189,10 @@ It is used by Pcbnew for displaying activity when loading data.
 |NoConn 0	|Remaining connections
 |Di 24940 20675 73708 40323	|Bounding box coordinates: +
                              X_start Y_start X_end Y_end
-|Ndraw 16	|Number of draw items like eged segments, texts...
+|Ndraw 16	|Number of draw items like edge segments, texts...
 |Ntrack 267	|Number of track segments
 |Nzone 1929	|Number of zone segments
-|Nmodule 29	|Number of modulss
+|Nmodule 29	|Number of modules
 |Nnets 26	|Number of nets
 |$EndGENERAL	End description
 |===
@@ -264,7 +271,7 @@ $EndSETUP
 | ViaSizeHistory 450 .3+|Last used via sizes
 | ViaSizeHistory 650
 | ViaSizeHistory 700
-	
+
 | TextPcbWidth 120 | Current text width for texts on copper or technical layers. This is not for text on footprints
 | TextPcbSize 600 600 | Current text X Y size
 | EdgeModWidth 120 | Current Segment width for footprint edition
@@ -283,7 +290,7 @@ $EQUIPOT describes a net name.
 |===
 |$EQUIPOT | Start block
 |Na 2 "N-000026"| Na <internal net number> « net name »
-|St ~ | 
+|St ~ |
 |$EndEQUIPOT | End block
 |===
 
@@ -328,12 +335,13 @@ Module description has four sections:
 2.	Field description (variable size)
 3.	Drawing description (variable size)
 4.	Pad description. (variable size)
-5.	3D shape informations.
+5.	3D shape information.
 
 *Note:*
 All coordinates are relative to the module position.
-Its means the coordinates of segments, pads, texts ... are given for a module in position 0, rotation 0.
-If a module is rotated or mirrored, real coordinates must be computed according to the real position and rotation.
+Its means the coordinates of segments, pads, texts ... are given for a module in position 0,
+rotation 0.  If a module is rotated or mirrored, real coordinates must be computed according
+to the real position and rotation.
 
 === 	General description:
 
@@ -428,14 +436,17 @@ All the pads of this footprint are listed here (Many $PAD/$EndPAD sections here)
 See $PAD description.
 
 ==== 	$SHAPE3D
-3D shape informations:
+3D shape information:
 The real shape description is a vrml file, build by Wings3d.
 This shape can be scaled, moved and rotated.
-This is because a single 3D shape can be used for many footprints (for instance, we use the shape resistor.wrl for several resistor footprints, by tuning the X, Y, Z scale of the 3D shape according to the different size of resistor footprints).
-Some smd footprints are using this feature.
-For the same reasons, the 3D shape can be moved (by the move factor) and/or rotated.
-*Real shape unit is 0.1 inch (1 unit vrml = 0.1 inch = 2.54 millimeter).*
-An other reason exists: when a footprint is very big ( a big connector) or very small (a small SMD resistor) we must create a 3D shape small or bigger than real size, in order to use easily the 3D modeler.
+This is because a single 3D shape can be used for many footprints (for instance, we use the
+shape resistor.wrl for several resistor footprints, by tuning the X, Y, Z scale of the 3D
+shape according to the different size of resistor footprints).  Some smd footprints are
+using this feature.  For the same reasons, the 3D shape can be moved (by the move factor)
+and/or rotated. *Real shape unit is 0.1 inch (1 unit vrml = 0.1 inch = 2.54 millimeter).*
+An other reason exists: when a footprint is very big ( a big connector) or very small (a
+small SMD resistor) we must create a 3D shape small or bigger than real size, in order to
+use easily the 3D modeler.
 
 |===
 |$SHAPE3D | Start description
@@ -449,9 +460,10 @@ An other reason exists: when a footprint is very big ( a big connector) or very 
 The 3D shape coordinates are relative to the footprint coordinates.
 The 3D shape must be scale, moved and rotated according to the parameters Sc Of and Ro,
 and after moved and rotated according to the footprint coordinates and rotation.
-If the footprint is « inverted » (that is, located on copper side) the 3D shape must be « inverted » too.
-Note:
-A footprint may have several 3D shapes (for instance an integrated circuit and his socket).
+If the footprint is « inverted » (that is, located on copper side) the 3D shape must be
+ « inverted » too.
+
+NOTE: A footprint may have several 3D shapes (for instance an integrated circuit and his socket).
 
 ====	$PAD
 Pads have different shapes and attributes.
@@ -476,7 +488,7 @@ The hole shale is round or oblong
 |Sh "2" C 1500 1500 0 0 2700 | Shape: <pad name> shape Xsize Ysize Xdelta Ydelta Orientation
 |Dr 600 0 0 +
 or (oblong hole) +
-Dr 600 0 0 O 600 650	
+Dr 600 0 0 O 600 650
                         | Drill <Pad drill> Xoffset Yoffset (round hole) +
                             or (oblong hole) +
                             Drill <Pad drill.x> Xoffset Yoffset <Hole shape> <Pad drill.x> <Pad drill.y>
@@ -558,7 +570,9 @@ Note:
 Note:
 
 * shape = 2
-* start and end are the 2 points of the arc. angle is the arc angle (in 0.1 degree). Center coordinates are computed by pcbnew from start, end and angle.
+* start and end are the 2 points of the arc. angle is the arc angle (in 0.1 degree).
+  Center coordinates are computed by pcbnew from start, end and angle.
+
 Currently, only 90 degrees arcs are supported.(thereby, angle = 900)
 
 Example:
@@ -603,7 +617,7 @@ $EndTEXTPCB
 |===
 
 === 	$COTATION
- 
+
 |===
 | $COTATION	| Start description
 | Ge 0 24 0	| General shape layer timestamp +
@@ -640,10 +654,11 @@ For a via, layer parameter gives :
 On the 4 less significant bits: the starting layer of the via +
 On the 4 next bits: the ending layer.
 
-For instance, a via starting at copper kayer (layer 0) end ending at component layer (layer 15 has the layer parametre set to F0 hexadecimal or 240 decimal. +
-Shape parameter is the via type (through = 3, blind = 2, buried = 1) +
-Timestamp parameters are set to 0 (reserved for future changes). +
-Status parameter can be set to 0 (Used internally for routing infos)..
+For instance, a via starting at copper kayer (layer 0) end ending at component layer
+(layer 15 has the layer parameter set to F0 hexadecimal or 240 decimal. + Shape parameter
+is the via type (through = 3, blind = 2, buried = 1) + Timestamp parameters are set to 0
+(reserved for future changes). +
+Status parameter can be set to 0 (Used internally for routing information).
 
 |===
 |$TRACK	                            | Start description
@@ -671,9 +686,11 @@ It is used to handle a zone filling, from a zone outline.
 |===
 
 ===	$CZONE_OUTLINE
-Describes the main outlines of a zone and the outlines of filled areas (solid polygons) inside the zone main outlines.
-Outlines of filled areas can be missing (if the zone is not currently filled)
-Because a zone handles thermal reliefs, there are options to describe pads in zones options and thermal reliefs parameters.
+Describes the main outlines of a zone and the outlines of filled areas (solid polygons)
+inside the zone main outlines.  Outlines of filled areas can be missing (if the zone is
+not currently filled).  Because a zone handles thermal reliefs, there are options to
+describe pads in zones options and thermal reliefs parameters.
+
 Example:
 ```
 $CZONE_OUTLINE
@@ -712,12 +729,12 @@ $endCZONE_OUTLINE
 |arc approx = 16 or 32 (segments count to approximate a 360 arc)
 |ZCorner 49450 19150 0	First corner (external outline)
 |ZCorner 40600 19150 0	Next corner
-|ZCorner 40600 22850 0	
+|ZCorner 40600 22850 0
 |ZCorner 49450 22850 1	End corner (flag = 1)
 |$POLYSCORNERS	Start of filled areas outlines
 |74655 51655 0 0	First corner (first filled area outline)
 |74655 13345 0 0	Next corner
-|$endPOLYSCORNERS	
+|$endPOLYSCORNERS
 |$endCZONE_OUTLINE	End description
 |===
 
@@ -725,23 +742,23 @@ Other example:
 
 ```
 $CZONE_OUTLINE	Start description of an other outline
-ZInfo 47B3E800 3 "VCC"	
-ZLayer 1	
-ZAux 8 F	
-ZClearance 200 T	
+ZInfo 47B3E800 3 "VCC"
+ZLayer 1
+ZAux 8 F
+ZClearance 200 T
 ZMinThickness 190	Zone min thickness (for copper zone)
-ZOptions 0 32 F 200 200	
+ZOptions 0 32 F 200 200
 ZCorner 49704 23032 0	First corner (external outline)
-ZCorner 49704 18940 0	
-ZCorner 46140 19024 0	
-ZCorner 46148 20000 0	
-ZCorner 45250 20000 0	
-ZCorner 44750 21250 0	
-ZCorner 43750 22250 0	
+ZCorner 49704 18940 0
+ZCorner 46140 19024 0
+ZCorner 46148 20000 0
+ZCorner 45250 20000 0
+ZCorner 44750 21250 0
+ZCorner 43750 22250 0
 ZCorner 46176 23068 1	End corner (flag = 1)
 ZCorner 48450 19900 0	First corner (this is a hole)
-ZCorner 48450 20800 0	
-ZCorner 47350 20800 0	
+ZCorner 48450 20800 0
+ZCorner 47350 20800 0
 ZCorner 47250 19900 1	End corner (flag = 1)
 $endCZONE_OUTLINE	End description
 ```
