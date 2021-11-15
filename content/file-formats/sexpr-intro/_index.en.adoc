@@ -9,7 +9,7 @@ weight: 41
 == Introduction
 
 KiCad uses an s-expression file format for symbol libraries, footprint libraries,
-schematics, printed circut boards, and title block and border worksheets.
+schematics, printed circuit boards, and title block and border worksheets.
 
 === Syntax
 
@@ -49,6 +49,20 @@ This section defines all syntax that is shared across the symbol library, footpr
 schematic, board, and work sheet file formats.
 
 
+=== Library Identifier
+
+The xref:../sexpr-symbol-lib/index.adoc#_introduction[schematic symbol library] and
+xref:../sexpr-footprint/index.adoc#_introduction[printed circuit board footprint library]
+file formats use library identifiers.  Library identifiers are defined as a quoted string
+using the "LIBRARY_NICKNAME:ENTRY_NAME" format where "LIBRARY_NICKNAME" is the nickname
+of the library in the symbol or footprint library table and "ENTRY_NAME" is the name of
+the symbol or footprint in the library separated by a colon.
+
+NOTE: The "LIBRARY_NICKNAME" is not stored in the library files because a library cannot know
+      what the assigned library table nickname is in advance.  Only the "ENTRY_NAME" is saved
+      in the library files.
+
+
 === Text Effects
 
 All text objects can have an optional `effects` section that defines how the text is displayed.
@@ -71,7 +85,7 @@ All text objects can have an optional `effects` section that defines how the tex
 <3> The `thickness` token attribute defines the line thickness of the font.
 <4> The `bold` token specifies if the font should be bold.
 <5> The `italic` token specifies if the font should be italicized.
-<6> The optional `justify` token attributesdefine if the text is justified horizontally `right`
+<6> The optional `justify` token attributes define if the text is justified horizontally `right`
     or `left` and/or vertically `top` or `bottom` and/or mirrored.  If the justification is not
     defined, then the text is center justified both horizontally and vertically and not mirrored.
 <7> The optional `hide` token defines if the text is hidden.
@@ -370,7 +384,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
     the upright orientation.
 <5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
 <6> The optional [hide] token, defines if the text is hidden.
-<7> The TEXT_EFFECTS defines how the xref:../sexpr-intro/index.adoc#_text_effects[text is displayed].
+<7> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
 ===== Footprint Line
@@ -490,7 +504,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon.
-<4> The optional `fill` toke defines how the polygn is filled.  Valid fill types are `solid`
+<4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
 <5> The optional `locked` token defines if the polygon cannot be edited.
 <6> The `tstamp` token defines the unique identifier of the polygon object.
@@ -649,7 +663,7 @@ is only used when a <<_footprint_pad,custom pad>> is defined.
 
 ===== Custom Pad Primitives
 
-The optional `primitives` token defines a list of graphical items used to define the outling of
+The optional `primitives` token defines a list of graphical items used to define the outline of
 a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>> is defined.
 
 ```
@@ -824,7 +838,7 @@ The `gr_poly` token defines a graphical polygon.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon.
-<4> The optional `fill` toke defines how the polygn is filled.  Valid fill types are `solid`
+<4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
 <5> The `tstamp` token defines the unique identifier of the polygon object.
 
@@ -918,15 +932,15 @@ section only applies to keep out zones.
     )
 ```
 
-<1>  The `tracks` token attribute defines whether or not tracks should be exlcuded from the keep
+<1>  The `tracks` token attribute defines whether or not tracks should be excluded from the keep
      out area.  Valid attributes are `allowed` and `not_allowed`.
-<2>  The `vias` token attribute defines whether or not vias should be exlcuded from the keep
+<2>  The `vias` token attribute defines whether or not vias should be excluded from the keep
      out area.  Valid attributes are `allowed` and `not_allowed`.
-<3>  The `pads` token attribute defines whether or not pads should be exlcuded from the keep
+<3>  The `pads` token attribute defines whether or not pads should be excluded from the keep
      out area.  Valid attributes are `allowed` and `not_allowed`.
-<4>  The `copperpour` token attribute defines whether or not copper pours should be exlcuded from
+<4>  The `copperpour` token attribute defines whether or not copper pours should be excluded from
      the keep out area.  Valid attributes are `allowed` and `not_allowed`.
-<5>  The `footprints` token attribute defines whether or not footprintss should be exlcuded from
+<5>  The `footprints` token attribute defines whether or not footprints should be excluded from
      the keep out area.  Valid attributes are `allowed` and `not_allowed`.
 
 ==== Zone Fill Settings
@@ -1000,7 +1014,7 @@ if the zone has not been filled.
     )
 ```
 
-<1> The `layer` token attirbute defines the <<_canonical_layer_names, canonical layer>> the zone
+<1> The `layer` token attribute defines the <<_canonical_layer_names, canonical layer>> the zone
     fill resides on.
 <2> The `pts` token attributes define a list of polygon `xy` coordinates used to fill the zone.
 
@@ -1017,7 +1031,7 @@ refilled, it will be filled with polygons and this token will not exist.
     )
 ```
 
-<1> The `layer` token attirbute defines the <<_canonical_layer_names, canonical layer>> the zone
+<1> The `layer` token attribute defines the <<_canonical_layer_names, canonical layer>> the zone
     fill resides on.
 <2> The `pts` token attributes define a list of segment `xy` coordinates used to fill the zone.
 
@@ -1040,3 +1054,344 @@ The `group` token defines a group of items.
 <2> The `id` token attribute defines the unique identifier of the group.
 <3> The `members` token attributes define a list of unique identifiers of the objects belonging
     to the group.
+
+
+== Schematic and Symbol Library Common Syntax
+
+This section defines all syntax that is shared across the symbol library and schematic file
+formats.
+
+
+=== Symbol Unit Identifier
+
+Symbol unit identifiers define how symbol units are identified.  The unit identifier is a quoted
+string have the format "NAME_UNIT_STYLE".  "NAME" is the parent symbol name.  "UNIT" is an integer
+that identifies which unit the symbol represents.  A "UNIT" value of zero (0) indicates that the
+symbol is common to all units.  The "STYLE" indicates which body style the unit represents.
+
+NOTE: This identifier is a temporary solution until the full symbol inheritance model is
+      implemented.
+
+NOTE: KiCad only supports two body styles so the only valid values for the "STYLE" are 1 and 2.
+
+
+=== Stroke Definition
+
+The `stroke` token defines how the outlines of graphical objects are drawn.
+
+```
+  (stroke
+    (width WIDTH)                                               <1>
+    (type TYPE)                                                 <2>
+    (color R G B A)                                             <3>
+  )
+```
+
+<1> The `width` token attribute defines the line width of the graphic object.
+<2> The `type` token attribute defines the line type of the graphic object.  Valid stroke types
+    are `dash`, `dash_dot`, `dot`, `default`, and `solid`.
+<3> The `color` token attributes define the line red, green, blue, and alpha color settings.
+
+
+=== Fill Definition
+
+The `fill` token defines how schematic and symbol library graphical items are filled.
+
+```
+  (fill
+    (type none | outline | background)                          <1>
+  )
+```
+
+<1> The `fill` token attributes define how the arc is filled.  The table below describes the fill
+    type modes.
+
+The table below defines the schematic and symbol graphical object fill modes.
+
+[options="header"]
+|===
+|Token |Description
+|none |Graphic item not filled.
+|outline |Graphic item filled with the line color.
+|background |Graphic filled with the theme background color.
+|===
+
+
+=== Symbols
+
+The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can be zero or more
+`symbol` tokens in a symbol library file.
+
+```
+  (symbol
+    "LIBRARY_ID" | "UNIT_ID"                                    <1>
+    [(extends "LIBRARY_ID")]                                    <2>
+    [(pin_numbers hide)]                                        <3>
+    [(pin_names [(offset OFFSET)] hide)]                        <4>
+    (in_bom yes | no)                                           <5>
+    (on_board yes | no)                                         <6>
+    SYMBOL_PROPERTIES...                                        <7>
+    GRAPHIC_ITEMS...                                            <8>
+    PINS...                                                     <9>
+    UNITS...                                                    <10>
+  )
+```
+
+<1> Each symbol must have a unique
+    <<_library_identifier,"LIBRARY_ID">> for each top level symbol in the library or a unique
+    <<_symbol_unit_identifier,"UNIT_ID">> for each unit embedded in a parent symbol.  Library
+    identifiers are only valid it top level symbols and unit identifiers are on valid as unit
+    symbols inside a parent symbol.
+<2> The optional `extends` token attribute defines the <<_library_identifier,"LIBRARY_ID">>
+    of another symbol inside the current library from which to derive a new symbol.  Extended
+    symbols currently can only have different <<_symbol_properties, SYMBOL_PROPERTIES>> than
+    their parent symbol.
+<3> The optional `pin_numbers` token defines the visibility setting of the symbol pin numbers
+    for the entire symbol.  If not defined, the all of the pin numbers in the symbol are visible.
+<4> The optional `pin_names` token defines the attributes for all of the pin names of the symbol.
+    The optional `offset` token defines the pin name offset for all pin names of the symbol.  If
+    not defined, the pin name offset is 0.508mm (0.020").  If the `pin_name` token is not defined,
+    the all symbol pins are shown with the default offset.
+<5> The `in_bom` token, defines if a symbol is to be include in the bill of material output.  The
+    only valid attributes are yes and no.
+<6> The `on_board` token, defines if a symbol is to be exported from the schematic to the printed
+    circuit board.  The only valid attributes are yes and no.
+<7> The <<_symbol_properties,SYMBOL_PROPERTIES>> is a list of properties that define the symbol.
+    The following properties are mandatory when defining a parent symbol: "Reference", "Value",
+    "Footprint", and "Datasheet".  All other properties are optional.  Unit symbols cannot have
+    any properties.
+<8> The <<_symbol_graphic_items,GRAPHIC ITEMS>> section is list of graphical arcs, circles,
+    curves, lines, polygons, rectangles and text that define the symbol drawing.  This section
+    can be empty if the symbol has no graphical items.
+<9> The <<_symbol_pin,PINS>> section is a list of pins that are used by the symbol. This section
+    can be empty if the symbol does not have any pins.
+<10> The optional UNITS can be one or more child `symbol` tokens embedded in a parent `symbol`.
+
+
+==== Symbol Properties
+
+The `property` token defines a symbol property when used inside a `symbol` definition.
+
+NOTE: Symbol properties are different than <<_properties,general purpose properties>> defined
+      above.
+
+```
+    (property
+      "KEY"                                                     <1>
+      "VALUE"                                                   <2>
+      (id N)                                                    <3>
+      (at X Y ANGLE)                                            <4>
+      TEXT_EFFECTS                                              <5>
+    }
+```
+
+<1> The "KEY" string defines the name of the property and must be unique.
+<2> The "VALUE" string defines the value of the property.
+<3> The `id` token defines an integer ID for the property and must be unique.
+<4> The `at` token attributes define the X and Y coordinates and ANGLE of rotation of the
+    property.
+<5> The TEXT_EFFECTS section defines how the <<_text_effects,text is displayed>>.
+
+===== Mandatory Symbol Properties
+
+The table below defines the mandatory properties for parent symbols.
+
+.Mandatory Properties
+[options="header",cols="25%,15%,60%,20%"]
+|===
+|Key |Ordinal |Description |Empty Allowed
+|Reference |0 |Symbol reference designator |No
+|Value |1 |Symbol value sting |No
+|Footprint |2 |Symbol footprint <<_library_identifier,library identifier>> |Yes
+|Datasheet |3 |Symbol datasheet link |Yes
+|===
+
+===== Reserved Symbol Property Keys
+
+The list below is the list of property keys reserve by KiCad and cannot be user for user defined
+properties.
+
+ * `ki_keywords`
+ * `ki_description`
+ * `ki_locked`
+ * `ki_fp_filters`
+
+
+==== Symbol Graphic Items
+
+This section documents the various graphical objects used in symbol definitions.
+
+==== Symbol Arc
+
+The `arc` token defines a graphical arc in a symbol definition.
+
+```
+  (arc
+    (start X Y)                                                 <1>
+    (mid X Y)                                                   <2>
+    (end X Y)                                                   <3>
+    STROKE_DEFINITION                                           <4>
+    FILL_DEFINITION                                             <5>
+  )
+```
+
+<1> The `start` token defines the coordinates of start point of the arc.
+<2> The `mid` token defines the coordinates of mid point of the arc.
+<3> The `end` token defines the coordinates of end point of the arc.
+<4> The STROKE_DEFINITION defines how the arc <<_stroke_definition,outline is drawn>>.
+<5> The `fill` token attributes define how the arc is <<_fill_definition,filled>>.
+
+==== Symbol Circle
+
+The `circle` token defines a graphical circle in a symbol definition.
+
+```
+  (circle
+    (center X Y)                                                <1>
+    (radius RADIUS)                                             <2>
+    STROKE_DEFINITION                                           <3>
+    FILL_DEFINITION                                             <4>
+  )
+```
+
+<1> The `center` token defines the coordinates of center point of the circle.
+<2> The radius token defines the length of the radius of the circle.
+<3> The STROKE_DEFINITION defines how the circle <<_stroke_definition,outline is drawn>>.
+<4> The FILL_DEFINTION defines how the circle is <<_fill_definition,filled>>.
+
+==== Symbol Curve
+
+The `curve` token defines a graphical .
+https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve].
+
+```
+  (gr_curve
+    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))                   <1>
+    STROKE_DEFINITION                                           <2>
+    FILL_DEFINITION                                             <3>
+  )
+```
+
+<1> The `pts` token defines the four `xy` coordinates of each point of the curve.
+<2> The STROKE_DEFINITION defines how the curve <<_stroke_definition,outline is drawn>>.
+<3> The FILL_DEFINTION defines how the curve is <<_fill_definition,filled>>.
+
+==== Symbol Line
+
+The `polyline` token defines one or more graphical lines that may or may not define a polygon.
+
+```
+  (polyline
+    (pts                                                        <1>
+      (xy X Y)                                                  <2>
+      (xy X Y)
+      ...
+    )
+    STROKE_DEFINITION                                           <3>
+    FILL_DEFINITION                                             <4>
+  )
+```
+
+<1> The `pts` token defines the list of points used to draw the line(s).  There must be a
+    minimum of two points.
+<2> The `xy` token defines the X and Y coordinates of a point.
+<3> The STROKE_DEFINITION defines how the polygon formed by the lines
+    <<_stroke_definition,outline is drawn>>.
+<4> The `fill` token attributes define how the polygon formed by the lines is
+    <<_fill_definition,filled>>.
+
+==== Symbol Rectangle
+
+The `rectangle` token defines a graphical rectangle in a symbol definition.
+
+```
+  (rectangle
+    (start X Y)                                                 <1>
+    (end X Y)                                                   <2>
+    STROKE_DEFINTION                                            <3>
+    FILL_DEFINITION                                             <4>
+  )
+```
+
+<1> The `start` token attributes define the coordinates of the start point of the rectangle.
+<2> The `end` token attributes define the coordinates of the end point of the rectangle.
+<3> The STROKE_DEFINITION defines how the rectangle <<_stroke_definition,outline is drawn>>.
+<4> The FILL_DEFINTION defines how the rectangle is <<_fill_definition,filled>>.
+
+==== Symbol Text
+
+The `text` token defines graphical text in a symbol definition.
+
+```
+  (text
+    "TEXT"                                                      <1>
+    (at X Y ORIENTATION)                                        <2>
+    (effects FONT_EFFECTS)                                      <3>
+  )
+```
+
+<1> The "TEXT" attribute is a quoted string that defines the text.
+<2> The `at` token defines the position coordinates and orientation angle of the text.
+<3> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
+
+==== Symbol Pin
+
+The `pin` token defines a pin in a symbol definition.
+
+```
+  (pin
+    PIN_ELECTRICAL_TYPE                                         <1>
+    PIN_GRAPHIC_STYLE                                           <2>
+    (at X Y ANGLE)                                              <3>
+    (length LENGTH)                                             <4>
+    (name "NAME" FONT_EFFECTS)                                  <5>
+    (number "NUMBER" FONT_EFFECTS)                              <6>
+  )
+```
+
+<1> The PIN_ELECTRICAL_TYPE defines the pin electrical connection.  See table below for valid pin
+    electrical connection types and descriptions.
+<2> The PIN_GRAPHICAL_STYLE defines the graphical style used to draw the pin.  See table below for
+    valid pin graphical styles and descriptions.
+<3> The `at` token attributes define the X and Y coordinates and rotation ANGLE of the connection
+    point of the pin relative to the symbol origin position.
+<4> The `length` token attribute defines the LENGTH of the pin.
+<5> The `name` token defines a quoted string containing the NAME of the pin and the FONT_EFFECTS
+    defines how the <<_text_effects,text is displayed>>.
+<6> The `number` token defines a quoted string containing the NUMBER of the pin and the
+    FONT_EFFECTS defines how the <<_text_effects,text is displayed>>.
+
+The table below defines the pin electrical types.
+
+[%header,cols="1,3"]
+|===
+| Token| Description
+| input| Pin is an input.
+| output| Pin is an output.
+| bidirectional| Pin can be both input and output.
+| tri_state| Pin is a tri-state output.
+| passive| Pin is electrically passive.
+| free| ???
+| unspecified| Pin does not have a specified electrical type.
+| power_in| Pin is a power input.
+| power_out| Pin is a power output.
+| open_collector| Pin is an open collector output.
+| open_emitter| Pin is an open emitter output.
+| no_connect| Pin has no electrical connection.
+|===
+
+The table below defines the pin graphical styles.
+
+[%header,cols="20%,80%"]
+|===
+| Token| Pin Image
+| line| image:images/pinshape_normal_16.png[images/pinshape_normal_16]
+| inverted| image:images/pinshape_invert_16.png[images/pinshape_invert_16]
+| clock| image:images/pinshape_clock_normal_16.png[images/pinshape_clock_normal_16]
+| inverted_clock| image:images/pinshape_clock_invert_16.png[images/pinshape_clock_invert_16]
+| input_low| image:images/pinshape_active_low_input_16.png[images/pinshape_active_low_input_16]
+| clock_low| image:images/pinshape_clock_active_low_16.png[images/pinshape_clock_active_low_16]
+| output_low| image:images/pinshape_active_low_output_16.png[images/pinshape_active_low_output_16]
+| edge_clock_high| image:images/pinshape_clock_fall_16.png[images/pinshape_clock_fall_16]
+| non_logic| image:images/pinshape_nonlogic_16.png[images/pinshape_nonlogic_16]
+|===
