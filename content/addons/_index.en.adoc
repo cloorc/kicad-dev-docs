@@ -73,17 +73,14 @@ Archive root
 |- symbols
       |- my-symbols.kicad_sym
       |- ...
-|- templates
-      |- my_worksheet.kicad_wks
-      |- ...
 |- resources
    |- icon.png
 |- metadata.json
 ```
 
-Each content library package must contain one or more of the `footprints`, `3dmodels`, `symbols`,
-or `templates` subdirectories.  Each of these subdirectories may contain one or more libraries of
-the corresponding type.
+Each content library package must contain one or more of the `footprints`, `3dmodels`, or `symbols`
+subdirectories.  Each of these subdirectories may contain one or more libraries of the
+corresponding type.
 
 `icon.png` is an optional 64x64-pixel icon that will be displayed alongside your package in the PCM
 dialog.  If no icon is supplied, the `resources` subdirectory may be empty or omitted.
