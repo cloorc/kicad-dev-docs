@@ -95,27 +95,46 @@ exist in the generated bitmaps due to blending).
 [%header,cols="1,1a,4a"]
 |===
 |Color Name     |Color Value |Uses/Notes
-|Dark Gray      |`#545454`   |This is the default color to use for all strokes.
+|Primary Gray   |`#545454`   |This is the default color to use for all strokes.
 
 Note that in dense fills (e.g. Save, Print, Paste icons) it will appear
 darker than the identical grey in other icons.  For these cases we
 use #`606060`.
 |Medium Grey    |`#848484`   |Used for inactive objects to reduce contrast compared to Dark Grey
-|Light Grey     |`#B9B9B9`   |Used for the hole inside a via and the fill inside graphic shapes
+|Accent Grey    |`#B9B9B9`   |Used for the hole inside a via and the fill inside graphic shapes
 |Primary Blue   |`#1A81C4`   |Used to accentuate certain details and for "back copper" in PcbNew
-|Light Blue     |`#39B4EA`   |Used to show zone fill in some places, and as an accent color
+|Accent Blue    |`#39B4EA`   |Used to show zone fill in some places, and as an accent color
 |Primary Red    |`#BF2641`   |Used for accents, badges, and "front copper" in PcbNew
 |Gold           |`#F29100`   |Used for via copper, and (rarely) as an accent
 |PCB Green      |`#489648`   |Used in the PcbNew program icon for traces
 |PCB Dark Green |`#006400`   |Used in the PcbNew program icon for soldermask
 |Schematic Tan  |`#D0C5AC`   |Used in the Eeschema icon and to represent schematic sheets
 |Pure White     |`#FFFFFF`   |Used for contrast against dark colors and separation between objects
-|Off White      |`#F3F3F3`   |Used for large fills of white (e.g. New) instead of Pure White
+|Area Fill      |`#F3F3F3`   |Used for large fills of white (e.g. New) instead of Pure White
 |===
 
 === 6.2. Dark Theme
 
-*Not yet designed*
+[%header,cols="1,1a,4a"]
+|===
+|Color Name     |Color Value |Uses/Notes
+|Primary Gray   |`#DED3DD`   |This is the default color to use for all strokes.
+
+Note that in dense fills (e.g. Save, Print, Paste icons) it will appear
+darker than the identical grey in other icons.  For these cases we
+use #`606060`.
+|Medium Grey    |`#848484`   |Used for inactive objects to reduce contrast compared to Dark Grey
+|Accent Grey    |`#E0E0E0`   |Used for the hole inside a via and the fill inside graphic shapes
+|Primary Blue   |`#42B8EB`   |Used to accentuate certain details and for "back copper" in PcbNew
+|Accent Blue    |`#1A81C4`   |Used to show zone fill in some places, and as an accent color
+|Primary Red    |`#F2647E`   |Used for accents, badges, and "front copper" in PcbNew
+|Gold           |`#F29100`   |Used for via copper, and (rarely) as an accent
+|PCB Green      |`#489648`   |Used in the PcbNew program icon for traces
+|PCB Dark Green |`#006400`   |Used in the PcbNew program icon for soldermask
+|Schematic Tan  |`#D0C5AC`   |Used in the Eeschema icon and to represent schematic sheets
+|Pure White     |`#FFFFFF`   |Used for contrast against dark colors and separation between objects
+|Area Fill      |`#545454`   |Used for large fills of white (e.g. New) instead of Pure White
+|===
 
 == 7. Lines and Fills
 
