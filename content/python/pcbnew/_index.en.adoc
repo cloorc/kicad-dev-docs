@@ -117,8 +117,12 @@ SimplePlugin().register() # Instantiate and register to Pcbnew
 ----
 
 Note that if specified `icon_file_name` must contain absolute path to the plugin icon.
-It must be png file, recommended size is 26x26 pixels. Alpha channel for opacity is supported.
+It must be png file, recommended size is 24x24 pixels. Alpha channel for opacity is supported.
 If icon is not specified a generic tool icon will be used.
+
+An additional property `self.dark_icon_file_name` may be specified to provide an alternate icon for
+dark window themes.  If this property is not present, the icon specified in `icon_file_name` will
+be used when the dark theme is active;
 
 `show_toolbar_button` only defines a default state for plugin toolbar button. Users can override
 it in pcbnew preferences.
