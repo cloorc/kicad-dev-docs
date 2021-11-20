@@ -27,6 +27,9 @@ content, and several optional files.  The archive must be in ZIP format (compati
 21320-1 standard).  The contents of the archive file depend on the package type, but all packages
 must include a control file called `metadata.json` that is described in detail below.
 
+NOTE: Addon archives must follow the exact folder structure listed below.  Extra files that are not
+      related to your addon are not permitted and must be stripped out of the archive.  
+
 ==== Python plugins
 
 The structure of a Python plugin archive must look like:
@@ -196,7 +199,35 @@ above:
 - `open-source`: Other Open Source Initiative (OSI) approved license.
 - `unrestricted`: Not an OSI approved license, but not restricted.
 
-`versions`: a list of objects describing package versions
+`versions`: a list of objects describing package versions.  Each version object can contain the
+following keys:
+
+`version`: A string containing the version of the package (format of this is up to you).
+
+`status`: A string containing one of the following:
+
+- `stable`: This package is stable for general use.
+- `testing`: This package is in a testing phase, users should be cautious and report issues.
+- `development`: This package is in a development phase and should not be expected to work fully.
+- `deprecated`: This package is no longer maintained.
+- `invalid`: This package is no longer available.
+
+`kicad_version`: The minimum required KiCad version for this package (major.minor).
+
+`kicad_version_max` (optional): The latest KiCad version this package is compatible with (major.minor).
+
+`download_sha256`: A string containing a SHA-256 hash of the package archive.
+
+`download_url`: A string containing a direct download URL for the package archive.
+
+`download_size`: The size of the package archive, in bytes.
+
+`install_size`: The size of the package (uncompressed), in bytes.
+
+NOTE: The `download_*` keys must only be present in the version of the `metadata.json` that you
+      submit to the package metadata repository, not in the version of the file that is actually
+      present in the package archive.  It is not possible to put a valid `download_sha256` value in
+      the `metadata.json` file inside the archive.
 
 TODO: Describe optional fields
 
