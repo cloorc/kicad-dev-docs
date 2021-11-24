@@ -63,6 +63,40 @@ NOTE: The "LIBRARY_NICKNAME" is not stored in the library files because a librar
       in the library files.
 
 
+=== Position Identifier
+
+The `at` token defines the positional coordinates and rotation of an object.
+
+```
+  (at
+    X                                                           <1>
+    Y                                                           <2>
+    [ANGLE]                                                     <3>
+  )
+```
+
+<1> The X attribute defines the horizontal position of the object.
+<2> The Y attribute defines the vertical position of the object.
+<3> The optional ANGLE attribute defines the rotational angle of the object.  Not all objects have
+    rotational position definitions.
+
+
+=== Coordinate Point List
+
+The `pts` token defines a list of X/Y coordinate points.
+
+```
+  (pts
+    (xy X Y)                                                    <1>
+    ...
+    (xy X Y)
+  )
+```
+
+<1> The `xy` token defines a single X and Y coordinate pair.  The number of points is determined
+    by the object type.
+
+
 === Text Effects
 
 All text objects can have an optional `effects` section that defines how the text is displayed.
@@ -108,6 +142,29 @@ The `paper` token defines the drawing page size and orientation.
     the landscape page layout mode is used.
 
 
+=== Title Block
+
+The `title_block` token defines the contents of the title block.
+
+```
+  (title_block
+    (title "TITLE")                                             <1>
+    (date "DATE")                                               <2>
+    (rev "REVISION")                                            <3>
+    (company "COMPANY_NAME")                                    <4>
+    (comment N "COMMENT")                                       <5>
+  )
+```
+
+<1> The `title` token attribute is a quoted string that defines the document title.
+<2> The `date` token attribute is a quoted string that defines the document date using the
+    YYYY-MM-DD format.
+<3> The `rev` token attribute is a quoted string that defines the document revision.
+<4> The `company` token attribute is a quoted string that defines the document company name.
+<5> The `comment` token attributes define the document comments where N is a number from 1
+    to 9 and COMMENT is a quoted string.
+
+
 === Properties
 
 The `property` token defines a key value pair for storing user defined information.
@@ -122,6 +179,20 @@ The `property` token defines a key value pair for storing user defined informati
 <1> The property key attribute is a string that defines the name of the property.  Property keys
     must be unique.
 <2> The property value attribute is a string associated with the key attribute.
+
+
+=== Universally Unique Identifier
+
+The `uuid` token defines an universally unique identifier.
+
+```
+  (uuid
+    UUID                                                        <1>
+  )
+```
+
+<1> The UUID attribute is a https://en.wikipedia.org/wiki/SHA-2[SHA256] hash that is unique for
+    every object in a KiCad file format.
 
 
 == Board Common Syntax
@@ -491,7 +562,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 
 ```
     (fp_poly
-      (pts (xy X Y) ... (xy X Y))                               <1>
+      COORDINATE_POINT_LIST                                     <1>
       (layer LAYER_DEFINITION)                                  <2>
       (width WIDTH)                                             <3>
       [(fill TYPE)]                                             <4>
@@ -500,8 +571,9 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
     )
 ```
 
-<1> The `pts` token defines the list of `xy` coordinates of the polygon outline.
-<2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
+<1> The COORDINATE_POINT_LIST defines the list of
+    <<_coordinate_point_list, X/Y coordinates>> of the polygon outline.
+<2> The `layer` token defines the <<_canonical_layer_names,canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon.
 <4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
@@ -512,12 +584,12 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 ===== Footprint Curve
 
 The `fp_curve` token defines a graphic
-https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve]
+https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Cubic Bezier curve]
 in a <<_footprint,footprint definition>>.
 
 ```
     (fp_curve
-      (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))                 <1>
+      COORDINATE_POINT_LIST                                     <1>
       (layer LAYER_DEFINITION)                                  <2>
       (width WIDTH)                                             <3>
       [(locked)]                                                <4>
@@ -525,7 +597,8 @@ in a <<_footprint,footprint definition>>.
     )
 ```
 
-<1> The `pts` token defines the four `xy` coordinates of each point of the curve.
+<1> The COORDINATE_POINT_LIST defines the four
+    <<_coordinate_point_list, X/Y coordinates>> of each point of the curve.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
 <3> The `width` token defines the line width of the curve.
 <4> The optional `locked` token defines if the curve cannot be edited.
@@ -718,7 +791,7 @@ The `gr_text` token defines graphical text.
     (at X Y [ORIENTATION])                                      <2>
     (layer LAYER_DEFINITION)                                    <3>
     (tstamp UUID)                                               <4>
-    (effects FONT_EFFECTS)                                      <5>
+    (effects TEXT_EFFECTS)                                      <5>
   )
 ```
 
@@ -826,7 +899,7 @@ The `gr_poly` token defines a graphical polygon.
 
 ```
   (gr_poly
-    (pts (xy X Y) ... (xy X Y))                                 <1>
+    COORDINATE_POINT_LIST                                       <1>
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
     [(fill MODE)]                                               <4>
@@ -834,7 +907,8 @@ The `gr_poly` token defines a graphical polygon.
   )
 ```
 
-<1> The `pts` token defines the list of `xy` coordinates of the polygon outline.
+<1> The COORDINATE_POINT_LIST defines the list of
+    <<_coordinate_point_list, X/Y coordinates>> of the polygon outline.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon.
@@ -849,14 +923,15 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 
 ```
   (gr_curve
-    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))                   <1>
+    COORDINATE_POINT_LIST                                       <1>
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
     (tstamp UUID)                                               <4>
   )
 ```
 
-<1> The `pts` token defines the four `xy` coordinates of each point of the curve.
+<1> The COORDINATE_POINT_LIST defines the list of
+    <<_coordinate_point_list, X/Y coordinates>> of the four pointS of the curve.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
 <3> The `width` token defines the line width of the curve.
 <4> The `tstamp` token defines the unique identifier of the curve object.
@@ -881,7 +956,7 @@ filled copper zones and keep out areas.
     [(filled_areas_thickness no)]                               <10>
     [(ZONE_KEEPOUT_SETTINGS)]                                   <11>
     (ZONE_FILL_SETTINGS)]                                       <12>
-    (polygon (pts (xy X Y)...(xy X Y)))                         <13>
+    (polygon COORDINATE_POINT_LIST)                             <13>
     [(ZONE_FILL_POLYGONS)]                                      <14>
     [(ZONE_FILL_SEGMENTS)]                                      <15>
   )
@@ -909,7 +984,9 @@ filled copper zones and keep out areas.
 <11> The optional <<_zone_keep_out_settings,zone keep out settings>> section defines the keep
      out items if the zone defines as a keep out area.
 <12> The <<_zone_fill_settings,zone fill settings section>> defines how the zone is to be filled.
-<13> The `polygon` token attributes define the corners of the zone outline polygon.
+<13> The `polygon` token attribute defines the COORDINATE_POINT_LIST of
+     <<_coordinate_point_list, X/Y coordinates>> of corner points of the polygon outline.
+the corners of the zone outline polygon.
 <14> The optional <<_zone_fill_polygons,zone fill polygons section>> defines all of the polygons
      used to fill the zone.  This section will not exist if the zone has not been filled or is
      filled with segments.
@@ -1010,13 +1087,14 @@ if the zone has not been filled.
 ```
     (filled_polygon
       (layer LAYER_DEFINITION)                                  <1>
-      (pts (xy X Y)...(xy X Y))                                 <2>
+      COORDINATE_POINT_LIST                                     <2>
     )
 ```
 
 <1> The `layer` token attribute defines the <<_canonical_layer_names, canonical layer>> the zone
     fill resides on.
-<2> The `pts` token attributes define a list of polygon `xy` coordinates used to fill the zone.
+<2> The COORDINATE_POINT_LIST defines the list of polygon
+    <<_coordinate_point_list, X/Y coordinates>> used to fill the zone.
 
 ==== Zone Fill Segments
 
@@ -1027,13 +1105,14 @@ refilled, it will be filled with polygons and this token will not exist.
 ```
     (fill_segments
       (layer LAYER_DEFINITION)                                  <1>
-      (pts (xy X Y) (xy X Y))                                   <2>
+      COORDINATED_POINT_LIST                                    <2>
     )
 ```
 
-<1> The `layer` token attribute defines the <<_canonical_layer_names, canonical layer>> the zone
+<1> The `layer` token attribute defines the <<_canonical_layer_names,canonical layer>> the zone
     fill resides on.
-<2> The `pts` token attributes define a list of segment `xy` coordinates used to fill the zone.
+<2> The COORDINATE_POINT_LIST defines the list of
+    <<_coordinate_point_list,X and Y coordinates>> of the segments used to fill the zone.
 
 
 
@@ -1060,6 +1139,13 @@ The `group` token defines a group of items.
 
 This section defines all syntax that is shared across the symbol library and schematic file
 formats.
+
+
+=== Schematic Coordinates
+
+* The minimum internal unit for schematic and symbol library files is one nanometer so there is
+  maximum resolution of four decimal places or 0.0001 mm.  Any precision beyond four places will
+  be truncated.
 
 
 === Symbol Unit Identifier
@@ -1168,7 +1254,7 @@ The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can b
 <10> The optional UNITS can be one or more child `symbol` tokens embedded in a parent `symbol`.
 
 
-==== Symbol Properties
+==== Symbol Property
 
 The `property` token defines a symbol property when used inside a `symbol` definition.
 
@@ -1266,13 +1352,14 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 
 ```
   (gr_curve
-    (pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))                   <1>
+    COORDINATE_POINT_LIST                                       <1>
     STROKE_DEFINITION                                           <2>
     FILL_DEFINITION                                             <3>
   )
 ```
 
-<1> The `pts` token defines the four `xy` coordinates of each point of the curve.
+<1> The COORDINATE_POINT_LIST defines the four
+    <<_coordinate_point_list, X/Y coordinates>> of each point of the curve.
 <2> The STROKE_DEFINITION defines how the curve <<_stroke_definition,outline is drawn>>.
 <3> The FILL_DEFINTION defines how the curve is <<_fill_definition,filled>>.
 
@@ -1282,22 +1369,18 @@ The `polyline` token defines one or more graphical lines that may or may not def
 
 ```
   (polyline
-    (pts                                                        <1>
-      (xy X Y)                                                  <2>
-      (xy X Y)
-      ...
-    )
-    STROKE_DEFINITION                                           <3>
-    FILL_DEFINITION                                             <4>
+    COORDINATE_POINT_LIST                                       <1>
+    STROKE_DEFINITION                                           <2>
+    FILL_DEFINITION                                             <3>
   )
 ```
 
-<1> The `pts` token defines the list of points used to draw the line(s).  There must be a
-    minimum of two points.
-<2> The `xy` token defines the X and Y coordinates of a point.
-<3> The STROKE_DEFINITION defines how the polygon formed by the lines
+<1> The COORDINATE_POINT_LIST defines the list of
+    <<_coordinate_point_list, X/Y coordinates>> of the line(s).  There must be a minimum of two
+    points.
+<2> The STROKE_DEFINITION defines how the polygon formed by the lines
     <<_stroke_definition,outline is drawn>>.
-<4> The `fill` token attributes define how the polygon formed by the lines is
+<3> The `fill` token attributes define how the polygon formed by the lines is
     <<_fill_definition,filled>>.
 
 ==== Symbol Rectangle
@@ -1308,7 +1391,7 @@ The `rectangle` token defines a graphical rectangle in a symbol definition.
   (rectangle
     (start X Y)                                                 <1>
     (end X Y)                                                   <2>
-    STROKE_DEFINTION                                            <3>
+    STROKE_DEFINITION                                           <3>
     FILL_DEFINITION                                             <4>
   )
 ```
@@ -1326,7 +1409,7 @@ The `text` token defines graphical text in a symbol definition.
   (text
     "TEXT"                                                      <1>
     (at X Y ORIENTATION)                                        <2>
-    (effects FONT_EFFECTS)                                      <3>
+    (effects TEXT_EFFECTS)                                      <3>
   )
 ```
 
@@ -1344,8 +1427,8 @@ The `pin` token defines a pin in a symbol definition.
     PIN_GRAPHIC_STYLE                                           <2>
     (at X Y ANGLE)                                              <3>
     (length LENGTH)                                             <4>
-    (name "NAME" FONT_EFFECTS)                                  <5>
-    (number "NUMBER" FONT_EFFECTS)                              <6>
+    (name "NAME" TEXT_EFFECTS)                                  <5>
+    (number "NUMBER" TEXT_EFFECTS)                              <6>
   )
 ```
 
@@ -1356,14 +1439,14 @@ The `pin` token defines a pin in a symbol definition.
 <3> The `at` token attributes define the X and Y coordinates and rotation ANGLE of the connection
     point of the pin relative to the symbol origin position.
 <4> The `length` token attribute defines the LENGTH of the pin.
-<5> The `name` token defines a quoted string containing the NAME of the pin and the FONT_EFFECTS
+<5> The `name` token defines a quoted string containing the NAME of the pin and the TEXT_EFFECTS
     defines how the <<_text_effects,text is displayed>>.
 <6> The `number` token defines a quoted string containing the NUMBER of the pin and the
-    FONT_EFFECTS defines how the <<_text_effects,text is displayed>>.
+    TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
 The table below defines the pin electrical types.
 
-[%header,cols="1,3"]
+[options=header,cols="1,3"]
 |===
 | Token| Description
 | input| Pin is an input.
@@ -1382,7 +1465,7 @@ The table below defines the pin electrical types.
 
 The table below defines the pin graphical styles.
 
-[%header,cols="20%,80%"]
+[options=header,cols="30%,^70%"]
 |===
 | Token| Pin Image
 | line| image:images/pinshape_normal_16.png[images/pinshape_normal_16]
