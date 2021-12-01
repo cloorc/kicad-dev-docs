@@ -320,7 +320,7 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     (layer LAYER_DEFINITIONS)                                   <4>
     (tedit TIME_STAMP)                                          <5>
     [(tstamp UUID)]                                             <6>
-    [(at X Y [ORIENTATION])]                                    <7>
+    [POSITION_IDENTIFIER]                                       <7>
     [(descr "DESCRIPTION")]                                     <8>
     [(tags "NAME")]                                             <9>
     [(property "KEY" "VALUE") ...]                              <10>
@@ -352,8 +352,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <5> The `tedit` token defines a the last time the footprint was edited.
 <6> The `tstamp` token defines the unique identifier for the footprint.  This only applies to
     footprints defined in the board file format.
-<7> The `at` token defines the position coordinates and rotational angle of the footprint.
-    This only applies to footprints defined in the board file format.
+<7> The POSITION_IDENTIFIER the <<_position_identifier,X and Y coordinates and rotational angle]
+    of the footprint.  This only applies to footprints defined in the board file format.
 <8> The optional `tags` token defines a string of search tags for the footprint.
 <9> The optional `descr` token defines a string containing the description of the footprint.
 <10> The optional `property` token defines a property for the footprint.
@@ -439,7 +439,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
     (fp_text
       TYPE                                                      <1>
       "TEXT"                                                    <2>
-      (at X Y [ORIENTATION])                                    <3>
+      POSITION_IDENTIFIER                                       <3>
       [unlocked]                                                <4>
       (layer LAYER_DEFINITION)                                  <5>
       [hide]                                                    <6>
@@ -450,7 +450,9 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 
 <1> The TYPE attribute defines the type of text.  Valid types are `reference`, `value`, and `user`.
 <2> The "TEXT" attribute is a quoted string that defines the text.
-<3> The `at` token defines the position coordinates and optional orientation angle of the text.
+<3> The POSITION_IDENTIFIER defines the
+    <<_position_identifier,X and Yposition coordinates and optional orientation angle>> of the
+    text.
 <4> The optional `unlocked` token indicates if the text orientation can be anything other than
     the upright orientation.
 <5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
@@ -613,7 +615,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
       "NUMBER"                                                  <1>
       TYPE                                                      <2>
       SHAPE                                                     <3>
-      (at X Y [ORIENTATION])                                    <4>
+      POSITION_IDENTIFIER                                       <4>
       [(locked)]                                                <5>
       (size X Y)                                                <6>
       [(drill DRILL_DEFINITION)]                                <7>
@@ -644,7 +646,8 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
 <1> The "NUMBER" attribute is the pad number.
 <2> The pad TYPE can be defined as `thru_hole`, `smd`, `connect`, or `np_thru_hole`.
 <3> The pad SHAPE can be defined as `circle`, `rect`, `oval`, `trapezoid`, `roundrect`, or `custom`.
-<4> The `at` token defines the position coordinates and optional orientation angle.
+<4> The POSITION_IDENTIFIER defines the
+    <<_position_identifier,X and Y coordinates and optional orientation angle>> of the pad.
 <5> The optional `locked` token defines if the footprint pad can be edited.
 <6> The `size` token defines the width and height of the pad.
 <7> The optional <<_pad_drill_definition,pad DRILL_DEFINITION>> defines the pad drill
@@ -788,7 +791,7 @@ The `gr_text` token defines graphical text.
 ```
   (gr_text
     "TEXT"                                                      <1>
-    (at X Y [ORIENTATION])                                      <2>
+    POSITION_INDENTIFIER                                        <2>
     (layer LAYER_DEFINITION)                                    <3>
     (tstamp UUID)                                               <4>
     (effects TEXT_EFFECTS)                                      <5>
@@ -796,7 +799,8 @@ The `gr_text` token defines graphical text.
 ```
 
 <1> The "TEXT" attribute is a quoted string that defines the text.
-<2> The `at` token defines the position coordinates and optional orientation angle of the text.
+<2> The POSITION_IDENTIFER defines the
+    <<_position_identifier,X and Y coordinates and optional orientation angle>> of the text.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
 <4> The `tstamp` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
@@ -1266,7 +1270,7 @@ NOTE: Symbol properties are different than <<_properties,general purpose propert
       "KEY"                                                     <1>
       "VALUE"                                                   <2>
       (id N)                                                    <3>
-      (at X Y ANGLE)                                            <4>
+      POSITION_IDENTIFIER                                       <4>
       TEXT_EFFECTS                                              <5>
     }
 ```
@@ -1274,8 +1278,8 @@ NOTE: Symbol properties are different than <<_properties,general purpose propert
 <1> The "KEY" string defines the name of the property and must be unique.
 <2> The "VALUE" string defines the value of the property.
 <3> The `id` token defines an integer ID for the property and must be unique.
-<4> The `at` token attributes define the X and Y coordinates and ANGLE of rotation of the
-    property.
+<4> The POSITION_IDENTIFIER defines the
+    <<_position_identifier,X and Y coordinates and rotation angle>> of the property.
 <5> The TEXT_EFFECTS section defines how the <<_text_effects,text is displayed>>.
 
 ===== Mandatory Symbol Properties
@@ -1408,13 +1412,14 @@ The `text` token defines graphical text in a symbol definition.
 ```
   (text
     "TEXT"                                                      <1>
-    (at X Y ORIENTATION)                                        <2>
+    POSITION_IDENTIFIER                                         <2>
     (effects TEXT_EFFECTS)                                      <3>
   )
 ```
 
 <1> The "TEXT" attribute is a quoted string that defines the text.
-<2> The `at` token defines the position coordinates and orientation angle of the text.
+<2> The POSITION_IDENTIFIER defines the
+    <<_position_identifier,X and Y coordinates and rotation angle>> of the text.
 <3> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
 ==== Symbol Pin
@@ -1425,7 +1430,7 @@ The `pin` token defines a pin in a symbol definition.
   (pin
     PIN_ELECTRICAL_TYPE                                         <1>
     PIN_GRAPHIC_STYLE                                           <2>
-    (at X Y ANGLE)                                              <3>
+    POSITION_IDENTIFIER                                         <3>
     (length LENGTH)                                             <4>
     (name "NAME" TEXT_EFFECTS)                                  <5>
     (number "NUMBER" TEXT_EFFECTS)                              <6>
@@ -1436,8 +1441,9 @@ The `pin` token defines a pin in a symbol definition.
     electrical connection types and descriptions.
 <2> The PIN_GRAPHICAL_STYLE defines the graphical style used to draw the pin.  See table below for
     valid pin graphical styles and descriptions.
-<3> The `at` token attributes define the X and Y coordinates and rotation ANGLE of the connection
-    point of the pin relative to the symbol origin position.
+<3> The POSITION_IDENTIFIER defines the
+    <<_position_identifier,X and Y coordinates and rotation angle>> of the connection point of
+    the pin relative to the symbol origin position.
 <4> The `length` token attribute defines the LENGTH of the pin.
 <5> The `name` token defines a quoted string containing the NAME of the pin and the TEXT_EFFECTS
     defines how the <<_text_effects,text is displayed>>.
