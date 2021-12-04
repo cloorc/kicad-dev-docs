@@ -3,6 +3,8 @@ title:  Schematic File Format
 weight: 45
 ---
 
+:TOC:
+
 .Summary The s-expression schematic file format.
 <!--more-->
 

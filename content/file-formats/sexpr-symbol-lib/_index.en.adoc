@@ -3,6 +3,8 @@ title:  Symbol Library File Format
 weight: 44
 ---
 
+:TOC:
+
 .Summary The s-expression symbol library file format.
 <!--more-->
 

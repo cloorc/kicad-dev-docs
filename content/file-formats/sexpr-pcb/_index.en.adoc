@@ -3,6 +3,8 @@ title: Board File Format
 weight: 43
 ---
 
+:TOC:
+
 .Summary The s-expression printed circuit board file format.
 <!--more-->
 

@@ -3,6 +3,8 @@ title: Footprint Library File Format
 weight: 42
 ---
 
+:TOC:
+
 .Summary The s-expression footprint library file format.
 <!--more-->
 

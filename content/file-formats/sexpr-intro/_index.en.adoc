@@ -3,6 +3,8 @@ title: S-Expression Format
 weight: 41
 ---
 
+:TOC:
+
 .Summary An introduction to the s-expression file format.
 <!--more-->
 
@@ -1460,7 +1462,7 @@ The table below defines the pin electrical types.
 | bidirectional| Pin can be both input and output.
 | tri_state| Pin is a tri-state output.
 | passive| Pin is electrically passive.
-| free| ???
+| free| Not internally connected.
 | unspecified| Pin does not have a specified electrical type.
 | power_in| Pin is a power input.
 | power_out| Pin is a power output.

@@ -3,6 +3,8 @@ title:  Work Sheet File Format
 weight: 46
 ---
 
+:TOC:
+
 .Summary The s-expression work sheet file format.
 <!--more-->
 
@@ -19,8 +21,8 @@ WARNING: This document is incomplete and is a work in progress.
 
 === Work Sheet Coordinates
 
-* The minimum internal unit for work sheet files is ??? so there is maximum resolution of ???
-  decimal places or ??? mm.  Any precision beyond ??? places will be truncated.
+* The minimum internal unit for work sheet files is 1 micrometer so there is maximum resolution
+  of three decimal places or 0.001 mm.  Any precision beyond three places will be truncated.
 
 
 === Object Incrementing
