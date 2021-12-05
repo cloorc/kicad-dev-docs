@@ -17,8 +17,6 @@ boards.
 
 * Work sheet files use the `.kicad_wks` extension.
 
-WARNING: This document is incomplete and is a work in progress.
-
 === Work Sheet Coordinates
 
 * The minimum internal unit for work sheet files is 1 micrometer so there is maximum resolution
@@ -194,11 +192,11 @@ The `rect` token attributes define how a rectangle is drawn in the work sheet.
 
 === Graphical Polygon
 
-The `polyline` token defines one or more lines that may or may not represent a polygon.  This
-section will not exist if there are no lines in the schematic.
+The `polygon` token defines a graphical polygon.  This section will not exist if there are no
+polygons in the work sheet.
 
 ```
-  (polyline
+  (polygon
     (name "NAME")                                               <1>
     (pos X Y [CORNER])                                          <2>
     [(rotate ANGLE)]                                            <3>
@@ -229,7 +227,7 @@ section will not exist if there are no lines in the schematic.
 === Image
 
 The `image` token defines on or more embedded images.  This section will not exist if no images
-are in the schematic.
+are in the work sheet.
 
 ```
   (bitmap
