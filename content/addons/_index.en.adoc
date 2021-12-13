@@ -308,6 +308,54 @@ technical requirements described above.
 - Packages that link to or provide commercial services, including but not limited to PCB
   fabrication, component lookup and order management, **must** first contact the KiCad team at plugins@kicad.org to discuss commercial plugin options.
 
+===== Commercial Service FAQ
+
+.Why do we need to e-mail the KiCad Team?
+[%collapsible]
+====
+We need to have a simple contract on file with the commercial service provider.  This protects
+both the KiCad project and the commercial service provider.
+====
+
+.I wrote a plugin that only uses public APIs of a service provider.  Do I need to e-mail the KiCad Team?
+[%collapsible]
+====
+In general, we will only deal with the service provider.  They may be interested in contracting
+with you to build a plugin or in allowing third-party plugins generally.  Either way, we
+need to discuss this directly with the service provider.
+====
+
+.What if the API terms of service already allow my plugin?
+[%collapsible]
+====
+We are not lawyers.  We pay lawyers to review our contracts and make sure that the KiCad
+project and, by extension, our users are legally safe.  We do not have the resources to review
+other entities' terms of service or to watch them for changes.  This is one reason why we need
+a direct contract with the commercial service provider.
+====
+
+.Doesn't this process go against the spirit of Open Source?
+[%collapsible]
+====
+No.  We place no restrictions on users publishing and publicising their own plugins.  Open
+Source does require us to distribute or publish others' content.
+====
+
+.My plugin formats KiCad data for easier use by a commercial service provider.  Do I need to e-mail the KiCad Team?
+[%collapsible]
+====
+No.  As long as your plugin doesn't connect to the commercial service provider, we do not need
+a contract with the provider.
+====
+
+.I represent a commercial service provider. Can we provide a blanket allowance for developers to use our API?
+[%collapsible]
+====
+Yes!  We love it when we can make the process of PCB creation easier for our users.  Please
+e-mail the KiCad team at plugins@kicad.org and we'll help to make this happen.
+====
+
+
 === Submitting your package
 
 Once you have created a package following the guidelines above, and confirmed that your package is
