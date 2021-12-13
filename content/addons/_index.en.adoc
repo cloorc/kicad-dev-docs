@@ -338,7 +338,7 @@ a direct contract with the commercial service provider.
 [%collapsible]
 ====
 No.  We place no restrictions on users publishing and publicising their own plugins.  Open
-Source does require us to distribute or publish others' content.
+Source does not require us to distribute or publish others' content.
 ====
 
 .My plugin formats KiCad data for easier use by a commercial service provider.  Do I need to e-mail the KiCad Team?
