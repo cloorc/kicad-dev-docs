@@ -28,7 +28,7 @@ RUN apk add --update --no-cache \
 # install gems
 RUN gem install \
 		asciidoctor:${ASCIIDOCTOR_VERSION} \
-		nokogiri \
+		nokogiri:1.12.5 \
 	--no-document && \
 	apk del build-dependencies
 
