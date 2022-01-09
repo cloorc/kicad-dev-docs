@@ -17,12 +17,12 @@ Here you can ask broad questions and present your ideas or plans if it's beyond 
 
 
 === Obtaining the code
-KiCad uses link:https://git-scm.com/book/en/v2/Getting-Started-What-is-Git[Git] 
+KiCad uses link:https://git-scm.com/book/en/v2/Getting-Started-What-is-Git[Git]
 for source control.
 
-If you are new to git, it is highly suggested you 
+If you are new to git, it is highly suggested you
 find and follow the many tutorials available online like
-link:http://learngitbranching.js.org/[this one] 
+link:http://learngitbranching.js.org/[this one]
 and/or read the git link:https://git-scm.com/doc[documentation].
 
 
@@ -70,7 +70,7 @@ policies.
 Programming is an iterative process, don't worry if you have to go back and make changes to your patches, we all do.
 
 === Submitting the code
-All patches should be submitted as a *merge request* on GitLab. 
+All patches should be submitted as a *merge request* on GitLab.
 See this https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html[How to create a merge request] for new users on how.
 
 *Note: There is a GitHub mirror of KiCad but all pull requests are ignored, we only accept changes on GitLab*
@@ -95,7 +95,7 @@ link:++https://gitlab.com/kicad/code/kicad/issues?scope=all&utf8=%E2%9C%93&state
 == Internet Relay Chat (_IRC_)
 
 Feel free to join the IRC channel at
-ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. A nice bunch of people
+link:ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. A nice bunch of people
 are casually hanging around in there, so if you have any questions and
 don't know where to ask, you should try asking in here. There are all
 kinds of people in all kinds of time zones, both people who develop KiCad
