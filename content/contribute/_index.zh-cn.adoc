@@ -87,6 +87,6 @@ link:++https://gitlab.com/kicad/code/kicad/issues?scope=all&utf8=%E2%9C%93&state
 
 == 互联网中继聊天(_IRC_)
 
-欢迎在 ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. 上加入 irc 频道。
+欢迎在 link:ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. 上加入 irc 频道。
 那里有一群不错的人在闲聊，所以如果你有任何问题，不知道去哪里问，你应该试着在这里问。
 在各种时区都有各种各样的人，既有开发 KiCad 的人，也有普通的热心用户。
