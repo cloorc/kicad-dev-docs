@@ -1,4 +1,4 @@
-FROM alpine:3.10 as build-env
+FROM alpine:3.15 as build-env
 
 WORKDIR /site
 
@@ -28,7 +28,7 @@ RUN apk add --update --no-cache \
 # install gems
 RUN gem install \
 		asciidoctor:${ASCIIDOCTOR_VERSION} \
-		nokogiri:1.12.5 \
+		nokogiri \
 	--no-document && \
 	apk del build-dependencies
 
