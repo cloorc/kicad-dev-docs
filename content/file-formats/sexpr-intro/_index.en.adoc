@@ -193,8 +193,12 @@ The `uuid` token defines an universally unique identifier.
   )
 ```
 
-<1> The UUID attribute is a https://en.wikipedia.org/wiki/SHA-2[SHA256] hash that is unique for
-    every object in a KiCad file format.
+<1> The UUID attribute is a Version 4 (random) UUID that should be globally unique.  KiCad 
+UUIDs are generated using the https://en.wikipedia.org/wiki/Mersenne_Twister[mt19937 Mersenne Twister] 
+algorithm.
+
+<2> Files converted from legacy versions of KiCad (prior to 6.0) have their locally-unique 
+timestamps re-encoded in UUID format.
 
 
 == Board Common Syntax
