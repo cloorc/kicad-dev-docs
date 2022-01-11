@@ -189,7 +189,7 @@ The `uuid` token defines an universally unique identifier.
 
 ```
   (uuid
-    UUID                                                        <1>
+    UUID                                                        <1,2>
   )
 ```
 
