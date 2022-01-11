@@ -44,7 +44,7 @@ Most of KiCad's dependencies can be installed using `vcpkg` as described below:
 
 [source,powershell]
 ```
-.\vcpkg install boost cairo curl glew gettext glm icu libxslt ngspice opencascade opengl openssl python3 wxpython wxwidgets zlib
+.\vcpkg install boost cairo curl glew gettext glm icu libxslt ngspice opencascade opengl openssl python3 wxpython wxwidgets zlib harfbuzz
 ```
 
 If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will have to append
@@ -54,7 +54,7 @@ If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will 
 ```
 .\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows `
 icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows `
-python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows
+python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows harfbuzz:x64-windows
 ```
 
 NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg.
