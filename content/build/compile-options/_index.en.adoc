@@ -1,61 +1,148 @@
 ---
-title: Compile Options
+title: Build Options
 weight: 17
-summary: Summary of compile options via CMake Config
+summary: Summary of CMake build configuration options.
 ---
 
-These are options that are passed to cmake during configuration
+These are the build options that can be passed to CMake during configuration.
 
 == All Platforms
 
 
 [cols="4,12,1",options="header"]
 |===
-|Option                             | Description                                               | Default
-|KICAD_SCRIPTING_WXPYTHON           | Build wxPython implementation for wx interface building in Python and py.shell.
-                                                                                                | ON
-|KICAD_USE_OCE                      | Build tools and plugins related to OpenCascade Community Edition. +
-                                        Needed to support import/export STEP
-                                                                                                | OFF
-|KICAD_USE_OCC                      | Build tools and plugins related to OpenCascade Technology. +
-                                      Overrides KICAD_USE_OCE
-                                                                                                | ON
-|KICAD_INSTALL_DEMOS                | Install KiCad demos and examples.                         | ON
-|KICAD_BUILD_QA_TESTS               | Build software Quality assurance unit tests.              | ON
-|KICAD_SPICE                        | Build KiCad with internal Spice simulator.                | ON
-|KICAD_BUILD_I18N                   | Build the translation language libraries                  | OFF
-|KICAD_I18N_UNIX_STRICT_PATH        | Install the language libraries to the standard UNIX install path +
-                                      of ${CMAKE_INSTALL_PREFIX}/share/locale                   | OFF
-|BUILD_SMALL_DEBUG_FILES            | In debug build: create smaller binaries. +
-                                      On Windows, binaries created by link option -g3 are *very large* +
-                                      (more than 1Gb for Pcbnew, and more than 3Gb for the full KiCad suite) +
-                                      This option create binaries using link option -g1 that create much smaller files, but +
-                                      there are less info in debug (However the file names and line numbers are available) +
-                                                                                                | OFF
-|MAINTAIN_PNGS                      | Allow build/rebuild bitmap icons used in menus from the corresponding .svg file. +
-                                      Set to true if you are a PNG maintainer and have the required tools given +
-                                      in the bitmaps_png/CMakeLists.txt file
-                                                                                                | OFF
+
+|Option
+|Description
+|Default
+
+|KICAD_SCRIPTING_WXPYTHON
+|Build wxPython implementation for wx interface building in Python and py.shell.
+|ON
+
+|KICAD_USE_OCE
+|Build tools and plugins related to OpenCascade Community Edition. Needed to support
+ import/export STEP
+|OFF
+
+|KICAD_USE_OCC
+|Build tools and plugins related to OpenCascade Technology. Overrides KICAD_USE_OCE.
+|ON
+
+|KICAD_INSTALL_DEMOS
+|Install KiCad demos and examples.
+|ON
+
+|KICAD_BUILD_QA_TESTS
+|Build software Quality assurance unit tests.
+|ON
+
+|KICAD_SPICE
+|Build KiCad with internal Spice simulator.
+|ON
+
+|KICAD_BUILD_I18N
+|Build the translation language libraries
+|OFF
+
+|KICAD_I18N_UNIX_STRICT_PATH
+|Install the language libraries to the standard UNIX install path of
+ ${CMAKE_INSTALL_PREFIX}/share/locale
+|OFF
+|
+BUILD_SMALL_DEBUG_FILES
+|In debug build: create smaller binaries.  On Windows, binaries created by link option -g3 are
+ *very large* (more than 1Gb for Pcbnew, and more than 3Gb for the full KiCad suite).  This
+ option create binaries using link option -g1 that create much smaller files, but  there are
+ less info in debug (However the file names and line numbers are available).
+|OFF
+
+|MAINTAIN_PNGS
+|Allow build/rebuild bitmap icons used in menus from the corresponding .svg file.  Set to
+ true if you are a PNG maintainer and have the required tools given  in the
+ bitmaps_png/CMakeLists.txt file.
+|OFF
 
 |===
 
 
-== Not supported by all platforms
+== Platform Specific
 
 
 [cols="4,12,1",options="header"]
 |===
-|Option                             | Description                                               | Default
-|KICAD_SANITIZE                     | Build KiCad with sanitizer options. +
-                                      WARNING: Not compatible with gold linker.
-                                                                                                | OFF
-|KICAD_STDLIB_DEBUG                 | Build KiCad with libstdc++ debug flags enabled.           | OFF
-|KICAD_STDLIB_LIGHT_DEBUG           | Build KiCad with libstdc++ with -Wp,-D_GLIBCXX_ASSERTIONS flag enabled. +
-                                      Not as intrusive as KICAD_STDLIB_DEBUG
-                                                                                                | OFF
-|KICAD_BUILD_PARALLEL_CL_MP         | Build in parallel using the /MP compiler option (Default OFF for safety reasons).
-                                                                                                 | OFF
-|KICAD_USE_VALGRIND                 | Build KiCad with valgrind stack tracking enabled.          | OFF
+
+|Option
+|Description
+|Default
+
+|KICAD_WIN32_DPI_AWARE
+|Turn on DPI awareness for Windows builds only.
+|OFF
+
+|KICAD_WIN32_CONTEXT_WINFIBER
+|Use win32 fibers for libcontext.
+|OFF
+
+|KICAD_USE_EGL
+|Build KiCad with EGL backend support for Wayland.
+|OFF
+
+|KICAD_USE_BUNDLED_GLEW
+|Use the bundled version of GLEW - only available when KICAD_USE_EGL is set.
+|OFF
+
+|===
+
+
+== Developer Specific
+
+
+[cols="4,12,1",options="header"]
+|===
+
+|Option
+|Description
+|Default
+
+|KICAD_SANITIZE
+|Build KiCad with sanitizer options. +
+ WARNING: Not compatible with gold linker.
+|OFF
+
+|KICAD_STDLIB_DEBUG
+|Build KiCad with libstdc++ debug flags enabled.
+|OFF
+
+|KICAD_STDLIB_LIGHT_DEBUG
+|Build KiCad with libstdc++ with -Wp,-D_GLIBCXX_ASSERTIONS flag enabled. +
+ Not as intrusive as KICAD_STDLIB_DEBUG
+|OFF
+
+|KICAD_NETLIST_QA
+|Run eeschema netlist QA tests (requires Python 3).
+|OFF
+
+|KICAD_DRC_PROTO
+|Build the DRC prototype QA tool.
+|OFF
+
+|KICAD_BUILD_PNS_DEBUG_TOOL
+|Build the P&S debugging/playground QA tool.
+|OFF
+
+|KICAD_GAL_PROFILE
+|Enable profiling info for GAL.
+|OFF
+
+|KICAD_STEP_EXPORT_LIB
+|Build and use kicad2step as a library, meant for debugging.
+|OFF
+
+|KICAD_USE_VALGRIND
+|Build KiCad with valgrind stack tracking enabled.
+|OFF
+
 |===
 
 
