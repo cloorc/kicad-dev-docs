@@ -347,7 +347,7 @@ The `dimension` token defines a dimension object.
 
 <1> The optional `locked` token specifies if the dimension can be moved.
 <2> The `type` token attribute defines the type of dimension.  Valid dimension types are
-    `aligned`, `leader`, `center`, `orthogonal` and `radial` (KiCad version 7).
+    `aligned`, `leader`, `center`, `orthogonal` (and `radial` in KiCad version 7).
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <4> The `tstamp` token defines the unique identifier of the dimension object.
