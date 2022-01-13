@@ -81,6 +81,9 @@ The `at` token defines the positional coordinates and rotation of an object.
 <2> The Y attribute defines the vertical position of the object.
 <3> The optional ANGLE attribute defines the rotational angle of the object.  Not all objects have
     rotational position definitions.
+    
+NOTE: Symbol `text` ANGLEs are stored in tenth's of a degree.  All other ANGLEs are stored in 
+      degrees.
 
 
 === Coordinate Point List
