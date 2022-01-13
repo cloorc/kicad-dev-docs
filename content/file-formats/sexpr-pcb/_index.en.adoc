@@ -338,15 +338,16 @@ The `dimension` token defines a dimension object.
     (pts (xy X Y) (xy X Y))                                     <5>
     [(height HEIGHT)]                                           <6>
     [(orientation ORIENTATION)]                                 <7>
-    [(gr_text GRAPHICAL_TEXT)]                                  <8>
-    [(format DIMENSION_FORMAT)]                                 <9>
-    (style DIMENSION_STYLE)                                     <10>
+    [(leader_length LEADER_LENGTH)]                             <8>
+    [(gr_text GRAPHICAL_TEXT)]                                  <9>
+    [(format DIMENSION_FORMAT)]                                 <10>
+    (style DIMENSION_STYLE)                                     <11>
   )
 ```
 
 <1> The optional `locked` token specifies if the dimension can be moved.
 <2> The `type` token attribute defines the type of dimension.  Valid dimension types are
-    `aligned`, `leader`, `center`, and `orthogonal`.
+    `aligned`, `leader`, `center`, `orthogonal` and `radial` (KiCad version 7).
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <4> The `tstamp` token defines the unique identifier of the dimension object.
@@ -354,11 +355,13 @@ The `dimension` token defines a dimension object.
 <6> The optional `height` token attribute defines the height of aligned dimensions.
 <7> The optional `orientation` token attribute defines the rotation angle for orthogonal
     dimensions.
-<8> The optional `gr_text` token attributes define the dimension text formatting for all dimension
+<8> The optional `leader_length` token attribute defines the distance from the marked radius to
+    the knee for radial dimensions.
+<9> The optional `gr_text` token attributes define the dimension text formatting for all dimension
     types except center dimensions.
-<9> The optional `format` token attributes define the <<_dimension_format,dimension formatting>>
+<10> The optional `format` token attributes define the <<_dimension_format,dimension formatting>>
     for all dimension types except center dimensions.
-<10> The `style` token attributes define the <<_dimension_style,dimension style>> information.
+<11> The `style` token attributes define the <<_dimension_style,dimension style>> information.
 
 === Dimension Format
 
