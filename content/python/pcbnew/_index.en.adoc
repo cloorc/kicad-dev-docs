@@ -15,7 +15,7 @@ and other declarations are exported and can be found in *pcbnew/swig/*.
 
 During build-time the SWIG interface files are used to generate the
 corresponding .py files.  These files are installed into Python's system-wide
-*dist-packages* repository, thus they can be imported by any Python 2
+*dist-packages* repository, thus they can be imported by any Python 3
 interpreter installed on the system.
 
 == Existing Pcbnew Python API documentation

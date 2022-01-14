@@ -14,7 +14,7 @@ SWIG 被指令使用 `interface` 文件将特定的 C/C++ 头文件翻译成其�
 
 在构建时，SWIG 界面文件用于生成相应的 .py 文件。
 这些文件被安装到 Python 的系统级 *dist-Packages* 库中，
-因此它们可以由系统上安装的任何 Python2 解释器导入。
+因此它们可以由系统上安装的任何 Python3 解释器导入。
 
 == 现有 Pcbnew Python API 文档
 
