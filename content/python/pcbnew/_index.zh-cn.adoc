@@ -20,7 +20,7 @@ SWIG 被指令使用 `interface` 文件将特定的 C/C++ 头文件翻译成其�
 
 Pcbnew Python API 可以独立使用，即没有 Pcbnew 实例在运行，
 要操作的电路板工程被加载并保存到文件中。
-此方法通过 https://docs.kicad.org/master/en/pcbnew/pcbnew.html#kicad_scripting_reference[用户文档] 
+此方法通过 https://docs.kicad.org/master/en/pcbnew/pcbnew.html##scripting[用户文档] 
 中的一些示例进行了说明。
 
 另一个文档源是 API 的自动生成的 DOORT 参考。
