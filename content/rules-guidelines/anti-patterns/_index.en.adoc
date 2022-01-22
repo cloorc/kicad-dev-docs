@@ -1,0 +1,68 @@
+---
+title: Anti-Patterns
+weight: 11
+summary: Anti-pattern guidelines for writing code for the KiCad project.
+---
+
+:toc:
+
+== Introduction
+
+The purpose of this document is to provide the guidelines for how **not** to
+write code for the KiCad project.  Anti-patterns are code practices that seem
+to occur often but shouldn't.  If your code contains any of these patterns,
+please fix them.
+
+WARNING: Do not modify this document without the consent of the project leader.
+         All changes to this document require approval.
+
+=== Dereferencing Pointers
+
+Dereferencing an invalid pointer almost always results in a crash.  **Never**
+assume a pointer is valid.  Even if the code in question has never crashed
+before, that doesn't mean that someone wont break something in the future.  Use
+assertions to help developers catch invalid pointers during development.  Even
+better than assertions, you can use the
+link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__debug.html[
+wxWidgets debugging macros] which can raise assertions on debug builds and
+gracefully handle run time issues in release builds.  If you are concerned
+about pulling in wxWidgets user interface code, there are header only C++
+assertion libraries available.
+
+Avoid the temptation to silently hide potentially bad pointers.  The following
+code:
+
+```c++
+void SomeFunction( SomeObject* somePointer )
+{
+    if( somePointer )
+    {
+        somePointer->DeReferencedMethod();
+    }
+}
+```
+
+should be replaced with:
+
+```c++
+void SomeFunction( SomeObject* somePointer )
+{
+    assert( somePointer )
+
+    somePointer->DeReferencedMethod();
+}
+```
+
+=== wxUpdateUIEvent Abuse
+
+Avoid using https://docs.wxwidgets.org/3.0/classwx_update_u_i_event.html[`wxUpdateUIEvent`]
+for anything other than the methods provided by the event object.  Updating controls
+in a `wxUpdateUIEvent` handler will typically trigger other control events that in turn will
+fire more wxUpdateUIEvents which results in an infinite event loop that can cause the user
+interface to become less responsive.
+
+If you are not sure you are abusing `wxUpdateUIEvent`, the advanced configuration setting
+`UpdateUIEventInterval` allows you to set the time in milliseconds which the update events
+are generated or -1 to disable all update events.  If slowing or disabling the update events
+makes the user interface more responsive, a `wxUpdateUIEvent` handler is the problem.
+
