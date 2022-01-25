@@ -91,12 +91,9 @@ Or for example if you are an macOS user, you might want to check the
 following
 link:++https://gitlab.com/kicad/code/kicad/issues?scope=all&utf8=%E2%9C%93&state=opened&label_name[]=macos++[issues tagged as 'macos'].
 
+== Help
 
-== Internet Relay Chat (_IRC_)
-
-Feel free to join the IRC channel at
-link:ircs://irc.libera.chat:6697/#kicad[#kicad@liberachat]. A nice bunch of people
-are casually hanging around in there, so if you have any questions and
-don't know where to ask, you should try asking in here. There are all
-kinds of people in all kinds of time zones, both people who develop KiCad
-and plain enthusiastic users.
+If you encounter any problems with building or developing KiCad, you may ask for guidance on our
+link:++https://launchpad.net/~kicad-developers++[mailing list]. If you prefer real-time
+communication, you may also ask on our link:++https://discord.gg/xEPC8QXFnS++[unofficial developer
+help channel on Discord].
