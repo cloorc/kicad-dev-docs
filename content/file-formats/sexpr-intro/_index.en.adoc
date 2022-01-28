@@ -1300,7 +1300,7 @@ The table below defines the mandatory properties for parent symbols.
 |===
 |Key |Ordinal |Description |Empty Allowed
 |Reference |0 |Symbol reference designator |No
-|Value |1 |Symbol value sting |No
+|Value |1 |Symbol value string |No
 |Footprint |2 |Symbol footprint <<_library_identifier,library identifier>> |Yes
 |Datasheet |3 |Symbol datasheet link |Yes
 |===
