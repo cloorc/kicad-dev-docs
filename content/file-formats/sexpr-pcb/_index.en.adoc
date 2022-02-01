@@ -372,12 +372,11 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
 <5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners must
     be in order, but the winding can be either direction.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
-<7> The `layer` token defines the <<https://dev-docs.kicad.org/en/file-formats/sexpr-intro/#_canonical_layer_names, canonical layer>> 
-    the text box resides
-    on.
+<7> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer]
+    the text box resides on.
 <8> The `tstamp` token defines the unique identifier of the text box.
-<9> The `effects` token describes the <<https://dev-docs.kicad.org/en/file-formats/sexpr-intro/#_text_effects, text style>>
-    of the text in the text box.
+<9> The `effects` token describes the xref:../sexpr-intro/index.adoc#_text_effects[text style] of the text 
+    in the text box.
 <10> The optional `stroke` token describes the <<_stroke, stroke properties>> of a border to be drawn around
      the text box.
 <11> If the `effects` token describes an outline font then a render cache should be given in case the
@@ -410,9 +409,8 @@ The `dimension` token defines a dimension object.
 <1> The optional `locked` token specifies if the dimension can be moved.
 <2> The `type` token attribute defines the type of dimension.  Valid dimension types are
     `aligned`, `leader`, `center`, `orthogonal` (and `radial` in KiCad version 7).
-<3> The `layer` token defines the <<https://dev-docs.kicad.org/en/file-formats/sexpr-intro/#_canonical_layer_names, canonical layer>> 
-    the polygon resides
-    on.
+<3> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer] 
+    the polygon resides on.
 <4> The `tstamp` token defines the unique identifier of the dimension object.
 <5> The `pts` token attributes define the list of `xy` coordinates of the dimension.
 <6> The optional `height` token attribute defines the height of aligned dimensions.
