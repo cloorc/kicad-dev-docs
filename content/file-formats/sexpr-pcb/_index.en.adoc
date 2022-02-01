@@ -130,7 +130,7 @@ options used by the board.  This section is required.
   )
 ----
 
-<1> The optional <<_stack_up_settings,board stack up settings>> define the parameters required to
+<1> The optional <<_stack_up_settings,`STACK_UP_SETTINGS`>> define the parameters required to
     manufacture the board.
 <2> The `pad_to_mask_clearance` token defines the clearance between footprint pads and the solder
     mask.
@@ -143,7 +143,7 @@ options used by the board.  This section is required.
 <6> The optional `aux_axis_origin` defines the auxiliary origin if it is set to anything other than
     (0,0).
 <7> The optional `grid_origin` defines the grid original if it is set to anything other than (0,0).
-<8> The <<_plot_settings,plot settings>> define how the board was last plotted.
+<8> The <<_plot_settings,`PLOT_SETTINGS`>> define how the board was last plotted.
 
 === Stack Up Settings
 
@@ -375,11 +375,11 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
 <7> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer]
     the text box resides on.
 <8> The `tstamp` token defines the unique identifier of the text box.
-<9> The xref:../sexpr-intro/index.adoc#_text_effects[TEXT_EFFECTS] describe the style of the text in the
+<9> The xref:../sexpr-intro/index.adoc#_text_effects[`TEXT_EFFECTS`] describe the style of the text in the
     text box.
-<10> The xref:../sexpr-intro/index.adoc#_stroke_definition[STROKE_DEFINITION] describes the style of an
+<10> The xref:../sexpr-intro/index.adoc#_stroke_definition[`STROKE_DEFINITION`] describes the style of an
      optional border to be drawn around the text box.
-<11> If the TEXT_EFFECTS prescribe a TrueType font then a render cache should be given in case the
+<11> If the `TEXT_EFFECTS` prescribe a TrueType font then a render cache should be given in case the
      font can not be found on the current system.
 
 NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST 
