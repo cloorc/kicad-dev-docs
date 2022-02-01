@@ -126,7 +126,7 @@ options used by the board.  This section is required.
     [(pad_to_paste_clearance_ratio RATIO)]                      <5>
     [(aux_axis_origin X Y)]                                     <6>
     [(grid_origin X Y)]                                         <7>
-    (PLOT_SETTINGS))                                            <8>
+    (PLOT_SETTINGS)                                             <8>
   )
 ----
 
@@ -321,11 +321,57 @@ definitions.  This section will not exist if there are no footprints on the boar
 
 == Graphic Items Section
 
-See the xref:../sexpr-intro/index.doc#_graphic_items[footprint] in the s-expression board common
-definitions.  This section will not exist if there are no footprints on the board.
+=== Rectangle
 
+=== Circle
 
-== Dimension
+=== Line
+
+=== Arc
+
+=== Curve
+
+=== Polygon
+
+=== Text Box
+
+The `gr_text_box` token defines a rectangle with optional border containing line-wrapped text.
+
+```
+  (gr_text_box
+    [locked]                                                    <1>
+    "TEXT"                                                      <2>
+    [(start X Y)]                                               <3>
+    [(end X Y)]                                                 <4>
+    [(pts POLYGON_DEFINITION)]                                  <5>
+    [(angle ROTATION)]                                          <6>
+    (width WIDTH)                                               <7>
+    (layer LAYER_DEFINITION)                                    <8>
+    (tstamp UUID)                                               <9>
+    (effects TEXT_STYLE)                                        <10>
+    [(render_cache RENDER_CACHE)]                               <11>
+  )
+```
+
+<1> The optional `locked` token specifies if the text box can be moved.
+<2> The content of the text box
+<3> The `start` token defines the top-left of a cardinally oriented text box.
+<4> The `end` token defines the bottom-right of a cardinally oriented text box.
+<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.
+<6> The optional `angle` token defines the rotation of the text box in degrees.
+<7> The `width` token defines the line-width of the border.  If -1, no border is drawn.
+<8> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
+    on.
+<9> The `tstamp` token defines the unique identifier of the text box.
+<10> The `effects` token describes the text style of the text in the text box.
+<11> If the `effects` token describes an outline font then a render cache should be given in case the
+     font can not be found on the current system.
+
+NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST 
+      have `start` and `end` tokens.  If the angle is given and is not a cardinal angle, then the 
+      text box MUST have a `pts` token (with 4 pts).
+
+=== Dimension
 
 The `dimension` token defines a dimension object.
 
@@ -363,7 +409,7 @@ The `dimension` token defines a dimension object.
     for all dimension types except center dimensions.
 <11> The `style` token attributes define the <<_dimension_style,dimension style>> information.
 
-=== Dimension Format
+==== Dimension Format
 
 The `format` token attributes define the text formatting of the dimension.
 
@@ -399,7 +445,7 @@ The `format` token attributes define the text formatting of the dimension.
     physical dimension.
 <7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
 
-=== Dimension Style
+==== Dimension Style
 
 ```
     (style
