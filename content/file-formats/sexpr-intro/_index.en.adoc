@@ -102,6 +102,30 @@ The `pts` token defines a list of X/Y coordinate points.
     by the object type.
 
 
+=== Stroke Definition
+
+The `stroke` token defines how the outlines of graphical objects are drawn.
+
+```
+  (stroke
+    (width WIDTH)                                               <1>
+    (type TYPE)                                                 <2>
+    (color R G B A)                                             <3>
+  )
+```
+
+<1> The `width` token attribute defines the line width of the graphic object.
+<2> The `type` token attribute defines the line style of the graphic object.  Valid stroke line styles
+    are:
+* `dash`
+* `dash_dot`
+* `dash_dot_dot`  (version 7)
+* `dot`
+* `default`
+* `solid`
+<3> The `color` token attributes define the line red, green, blue, and alpha color settings.
+
+
 === Text Effects
 
 All text objects can have an optional `effects` section that defines how the text is displayed.
@@ -1172,24 +1196,6 @@ NOTE: This identifier is a temporary solution until the full symbol inheritance 
       implemented.
 
 NOTE: KiCad only supports two body styles so the only valid values for the "STYLE" are 1 and 2.
-
-
-=== Stroke Definition
-
-The `stroke` token defines how the outlines of graphical objects are drawn.
-
-```
-  (stroke
-    (width WIDTH)                                               <1>
-    (type TYPE)                                                 <2>
-    (color R G B A)                                             <3>
-  )
-```
-
-<1> The `width` token attribute defines the line width of the graphic object.
-<2> The `type` token attribute defines the line type of the graphic object.  Valid stroke types
-    are `dash`, `dash_dot`, `dot`, `default`, and `solid`.
-<3> The `color` token attributes define the line red, green, blue, and alpha color settings.
 
 
 === Fill Definition
