@@ -377,8 +377,8 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
 <8> The `tstamp` token defines the unique identifier of the text box.
 <9> The `effects` token describes the xref:../sexpr-intro/index.adoc#_text_effects[text style] of the text 
     in the text box.
-<10> The `stroke` token describes the xref:../sexpr-intro/index.adoc#_stroke[stroke properties] of an optional
-     border to be drawn around the text box.
+<10> The `stroke` token describes the xref:../sexpr-intro/index.adoc#_stroke_definition[stroke properties] 
+     of an optional border to be drawn around the text box.
 <11> If the `effects` token describes an outline font then a render cache should be given in case the
      font can not be found on the current system.
 
