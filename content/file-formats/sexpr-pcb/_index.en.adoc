@@ -323,19 +323,31 @@ definitions.  This section will not exist if there are no footprints on the boar
 
 === Rectangle
 
+**DOCUMENT ME**
+
 === Circle
+
+**DOCUMENT ME**
 
 === Line
 
+**DOCUMENT ME**
+
 === Arc
+
+**DOCUMENT ME**
 
 === Curve
 
+**DOCUMENT ME**
+
 === Polygon
+
+**DOCUMENT ME**
 
 === Text Box
 
-The `gr_text_box` token defines a rectangle with optional border containing line-wrapped text.
+The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad version 7.)
 
 ```
   (gr_text_box
@@ -343,7 +355,7 @@ The `gr_text_box` token defines a rectangle with optional border containing line
     "TEXT"                                                      <2>
     [(start X Y)]                                               <3>
     [(end X Y)]                                                 <4>
-    [(pts POLYGON_DEFINITION)]                                  <5>
+    [(pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))]                 <5>
     [(angle ROTATION)]                                          <6>
     (width WIDTH)                                               <7>
     (layer LAYER_DEFINITION)                                    <8>
@@ -357,13 +369,14 @@ The `gr_text_box` token defines a rectangle with optional border containing line
 <2> The content of the text box
 <3> The `start` token defines the top-left of a cardinally oriented text box.
 <4> The `end` token defines the bottom-right of a cardinally oriented text box.
-<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.
+<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners must
+    be in order, but the winding can be either direction.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
 <7> The `width` token defines the line-width of the border.  If -1, no border is drawn.
 <8> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
     on.
 <9> The `tstamp` token defines the unique identifier of the text box.
-<10> The `effects` token describes the text style of the text in the text box.
+<10> The `effects` token describes the <<_text_style, text style>> of the text in the text box.
 <11> If the `effects` token describes an outline font then a render cache should be given in case the
      font can not be found on the current system.
 
