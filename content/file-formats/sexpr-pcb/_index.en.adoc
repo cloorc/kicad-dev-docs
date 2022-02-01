@@ -357,10 +357,10 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
     [(end X Y)]                                                 <4>
     [(pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))]                 <5>
     [(angle ROTATION)]                                          <6>
-    (width WIDTH)                                               <7>
-    (layer LAYER_DEFINITION)                                    <8>
-    (tstamp UUID)                                               <9>
-    (effects TEXT_STYLE)                                        <10>
+    (layer LAYER_DEFINITION)                                    <7>
+    (tstamp UUID)                                               <8>
+    (effects TEXT_STYLE)                                        <9>
+    [(stroke STROKE_DEFINITION)]                                <10>
     [(render_cache RENDER_CACHE)]                               <11>
   )
 ```
@@ -372,11 +372,12 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
 <5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners must
     be in order, but the winding can be either direction.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
-<7> The `width` token defines the line-width of the border.  If -1, no border is drawn.
-<8> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
+<7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
     on.
-<9> The `tstamp` token defines the unique identifier of the text box.
-<10> The `effects` token describes the <<_text_style, text style>> of the text in the text box.
+<8> The `tstamp` token defines the unique identifier of the text box.
+<9> The `effects` token describes the <<_text_style, text style>> of the text in the text box.
+<10> The optional `stroke` token describes the <<_stroke, stroke properties>> of a border to be drawn around
+     the text box.
 <11> If the `effects` token describes an outline font then a render cache should be given in case the
      font can not be found on the current system.
 
