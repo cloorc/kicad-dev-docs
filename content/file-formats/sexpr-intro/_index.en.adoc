@@ -493,7 +493,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 <7> The `effects` token defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
-=== Footprint Text Box
+===== Footprint Text Box
 
 The `fp_text_box` token defines a rectangle containing line-wrapped text. (KiCad version 7)
 
