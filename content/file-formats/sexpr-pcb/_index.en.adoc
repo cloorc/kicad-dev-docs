@@ -383,8 +383,9 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad
      font can not be found on the current system.
 
 NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST 
-      have `start` and `end` tokens.  If the angle is given and is not a cardinal angle, then the 
-      text box MUST have a `pts` token (with 4 pts).
+      have `start` and `end` tokens.  
+NOTE: If `angle` is given and is not a cardinal angle, then the text box MUST have a `pts` token (with 
+      4 pts).
 
 
 === Dimension
