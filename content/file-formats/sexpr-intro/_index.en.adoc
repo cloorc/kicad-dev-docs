@@ -452,7 +452,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
       [unlocked]                                                <4>
       (layer LAYER_DEFINITION)                                  <5>
       [hide]                                                    <6>
-      (TEXT_EFFECTS)                                            <7>
+      (effects TEXT_EFFECTS)                                    <7>
       (tstamp UUID)                                             <8>
     )
 ```
@@ -466,7 +466,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
     the upright orientation.
 <5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
 <6> The optional [hide] token, defines if the text is hidden.
-<7> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
+<7> The `effects` token defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
 ===== Footprint Line
