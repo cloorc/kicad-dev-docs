@@ -315,7 +315,7 @@ NOTE: The net class section has been moved out of the board file into the design
 
 == Footprint Section
 
-See the xref:../sexpr-intro/index.doc#_footprint[footprint] in the s-expression board common
+See the xref:../sexpr-intro/index.adoc#_footprint[footprint] in the s-expression board common
 definitions.  This section will not exist if there are no footprints on the board.
 
 
