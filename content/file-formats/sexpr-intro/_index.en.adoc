@@ -133,25 +133,31 @@ All text objects can have an optional `effects` section that defines how the tex
 ```
   (effects
     (font                                                       <1>
-      (size HEIGHT WIDTH)                                       <2>
-      [(thickness THICKNESS)]                                   <3>
-      [bold]                                                    <4>
-      [italic]                                                  <5>
+      [(face FACE_NAME)]                                        <2>
+      (size HEIGHT WIDTH)                                       <3>
+      [(thickness THICKNESS)]                                   <4>
+      [bold]                                                    <5>
+      [italic]                                                  <6>
+      [(line_spacing LINE_SPACING)]                             <7>
     )
-    [(justify [left | right] [top | bottom] [mirror])]          <6>
-    [hide]                                                      <7>
+    [(justify [left | right] [top | bottom] [mirror])]          <8>
+    [hide]                                                      <9>
   )
 ```
 
 <1> The `font` token attributes define how the text is shown.
-<2> The `size` token attributes define the font height and width.
-<3> The `thickness` token attribute defines the line thickness of the font.
-<4> The `bold` token specifies if the font should be bold.
-<5> The `italic` token specifies if the font should be italicized.
-<6> The optional `justify` token attributes define if the text is justified horizontally `right`
+<2> The optional `face` token indicates the font family.  It should be a TrueType font family
+    name or "KiCad Font" for the KiCad stroke font.  (Kicad version 7)
+<3> The `size` token attributes define the font height and width.
+<4> The `thickness` token attribute defines the line thickness of the font.
+<5> The `bold` token specifies if the font should be bold.
+<6> The `italic` token specifies if the font should be italicized.
+<7> The `line_spacing` token specifies the spacing between lines as a ratio of standard line-spacing. 
+    (Not yet supported)
+<8> The optional `justify` token attributes define if the text is justified horizontally `right`
     or `left` and/or vertically `top` or `bottom` and/or mirrored.  If the justification is not
     defined, then the text is center justified both horizontally and vertically and not mirrored.
-<7> The optional `hide` token defines if the text is hidden.
+<9> The optional `hide` token defines if the text is hidden.
 
 
 === Page Settings
