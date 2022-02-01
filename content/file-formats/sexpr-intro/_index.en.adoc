@@ -391,8 +391,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <5> The `tedit` token defines a the last time the footprint was edited.
 <6> The `tstamp` token defines the unique identifier for the footprint.  This only applies to
     footprints defined in the board file format.
-<7> The POSITION_IDENTIFIER the <<_position_identifier,X and Y coordinates and rotational angle>>
-    of the footprint.  This only applies to footprints defined in the board file format.
+<7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational 
+    angle of the footprint.  This only applies to footprints defined in the board file format.
 <8> The optional `tags` token defines a string of search tags for the footprint.
 <9> The optional `descr` token defines a string containing the description of the footprint.
 <10> The optional `property` token defines a property for the footprint.
@@ -489,9 +489,8 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 
 <1> The TYPE attribute defines the type of text.  Valid types are `reference`, `value`, and `user`.
 <2> The "TEXT" attribute is a quoted string that defines the text.
-<3> The POSITION_IDENTIFIER defines the
-    <<_position_identifier,X and Yposition coordinates and optional orientation angle>> of the
-    text.
+<3> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y position coordinates and 
+    optional orientation angle of the text.
 <4> The optional `unlocked` token indicates if the text orientation can be anything other than
     the upright orientation.
 <5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
@@ -551,17 +550,19 @@ The `fp_line` token defines a graphic line in a <<_footprint,footprint definitio
       (end X Y)                                                 <2>
       (layer LAYER_DEFINITION)                                  <3>
       (width WIDTH)                                             <4>
-      [(locked)]                                                <5>
-      (tstamp UUID)                                             <6>
+      STROKE_DEFINITION                                         <5>
+      [(locked)]                                                <6>
+      (tstamp UUID)                                             <7>
     )
 ```
 
 <1> The `start` token defines the coordinates of the beginning of the line.
 <2> The `end` token defines the coordinates of the end of the line.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides on.
-<4> The `width` token defines the line width.
-<5> The optional `locked` token defines if the line cannot be edited.
-<6> The `tstamp` token defines the unique identifier of the line object.
+<4> The `width` token defines the line width. (prior to version 7)
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line.  (version 7)
+<6> The optional `locked` token defines if the line cannot be edited.
+<7> The `tstamp` token defines the unique identifier of the line object.
 
 ===== Footprint Rectangle
 
@@ -573,9 +574,10 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
       (end X Y)                                                 <2>
       (layer LAYER_DEFINITION)                                  <3>
       (width WIDTH)                                             <4>
-      [(fill TYPE)]                                             <5>
-      [(locked)]                                                <6>
-      (tstamp UUID)                                             <7>
+      STROKE_DEFINITION                                         <5>
+      [(fill TYPE)]                                             <6>
+      [(locked)]                                                <7>
+      (tstamp UUID)                                             <8>
     )
 ```
 
@@ -583,11 +585,13 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
 <2> The `end` token defines the coordinates of the low right corner of the rectangle.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the rectangle
     resides on.
-<4> The `width` token defines the line width of the rectangle.
-<5> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
+<4> The `width` token defines the line width of the rectangle. (prior to version 7)
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the 
+    rectangle.  (version 7)
+<6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
-<6> The optional `locked` token defines if the rectangle cannot be edited.
-<7> The `tstamp` token defines the unique identifier of the rectangle object.
+<7> The optional `locked` token defines if the rectangle cannot be edited.
+<8> The `tstamp` token defines the unique identifier of the rectangle object.
 
 ===== Footprint Circle
 
@@ -599,9 +603,10 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
       (end X Y)                                                 <2>
       (layer LAYER_DEFINITION)                                  <3>
       (width WIDTH)                                             <4>
-      [(fill TYPE)]                                             <5>
-      [(locked)]                                                <6>
-      (tstamp UUID)                                             <7>
+      STROKE_DEFINITION                                         <5>
+      [(fill TYPE)]                                             <6>
+      [(locked)]                                                <7>
+      (tstamp UUID)                                             <8>
     )
 ```
 
@@ -609,11 +614,13 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
 <2> The `end` token defines the coordinates of the end of the radius of the circle.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the circle
     resides on.
-<4> The `width` token defines the line width of the circle.
-<5> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
+<4> The `width` token defines the line width of the circle. (prior to version 7)
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the circle.
+    (version 7)
+<6> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the circle is not filled.
-<6> The optional `locked` token defines if the circle cannot be edited.
-<7> The `tstamp` token defines the unique identifier of the circle object.
+<7> The optional `locked` token defines if the circle cannot be edited.
+<8> The `tstamp` token defines the unique identifier of the circle object.
 
 ===== Footprint Arc
 
@@ -626,8 +633,9 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
       (end X Y)                                                 <3>
       (layer LAYER_DEFINITION)                                  <4>
       (width WIDTH)                                             <5>
-      [(locked)]                                                <6>
-      (tstamp UUID)                                             <7>
+      STROKE_DEFINITION                                         <6>
+      [(locked)]                                                <7>
+      (tstamp UUID)                                             <8>
     )
 ```
 
@@ -635,9 +643,10 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
 <2> The `mid` token defines the coordinates of the midpoint along the arc.
 <3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
-<5> The `width` token defines the line width of the arc.
-<6> The optional `locked` token defines if the arc cannot be edited.
-<7> The `tstamp` token defines the unique identifier of the arc object.
+<5> The `width` token defines the line width of the arc. (prior to version 7)
+<6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc.  (version 7)
+<7> The optional `locked` token defines if the arc cannot be edited.
+<8> The `tstamp` token defines the unique identifier of the arc object.
 
 ===== Footprint Polygon
 
@@ -648,9 +657,10 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
       COORDINATE_POINT_LIST                                     <1>
       (layer LAYER_DEFINITION)                                  <2>
       (width WIDTH)                                             <3>
-      [(fill TYPE)]                                             <4>
-      [(locked)]                                                <5>
-      (tstamp UUID)                                             <6>
+      STROKE_DEFINITION                                         <4>
+      [(fill TYPE)]                                             <5>
+      [(locked)]                                                <6>
+      (tstamp UUID)                                             <7>
     )
 ```
 
@@ -658,11 +668,13 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
     <<_coordinate_point_list, X/Y coordinates>> of the polygon outline.
 <2> The `layer` token defines the <<_canonical_layer_names,canonical layer>> the polygon resides
     on.
-<3> The `width` token defines the line width of the polygon.
-<4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
+<3> The `width` token defines the line width of the polygon. (prior to version 7)
+<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the polygon.  
+    (version 7)
+<5> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
-<5> The optional `locked` token defines if the polygon cannot be edited.
-<6> The `tstamp` token defines the unique identifier of the polygon object.
+<6> The optional `locked` token defines if the polygon cannot be edited.
+<7> The `tstamp` token defines the unique identifier of the polygon object.
 
 ===== Footprint Curve
 
@@ -675,17 +687,20 @@ in a <<_footprint,footprint definition>>.
       COORDINATE_POINT_LIST                                     <1>
       (layer LAYER_DEFINITION)                                  <2>
       (width WIDTH)                                             <3>
-      [(locked)]                                                <4>
-      (tstamp UUID)                                             <5>
+      STROKE_DEFINITION                                         <4>
+      [(locked)]                                                <5>
+      (tstamp UUID)                                             <6>
     )
 ```
 
 <1> The COORDINATE_POINT_LIST defines the four
     <<_coordinate_point_list, X/Y coordinates>> of each point of the curve.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
-<3> The `width` token defines the line width of the curve.
-<4> The optional `locked` token defines if the curve cannot be edited.
-<5> The `tstamp` token defines the unique identifier of the curve object.
+<3> The `width` token defines the line width of the curve. (prior to version 7)
+<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the curve.  
+    (version 7)
+<5> The optional `locked` token defines if the curve cannot be edited.
+<6> The `tstamp` token defines the unique identifier of the curve object.
 
 ==== Footprint Pad
 
