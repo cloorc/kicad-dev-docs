@@ -194,8 +194,8 @@ p {
     margin: 1rem 0;
 }
 
-ul>li p {
-    margin: 0.2rem 0;
+td ul>li p {
+    margin: 0.2rem 0 !important;
 }
 
 figcaption h4 {
