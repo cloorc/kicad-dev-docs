@@ -194,8 +194,12 @@ p {
     margin: 1rem 0;
 }
 
+td ul {
+  margin-block-start: 0.2rem !important;
+  margin-block-end: 0.2rem !important;
+}
 td ul>li p {
-    margin: 0.2rem 0 !important;
+    margin: 0.1rem 0 !important;
 }
 
 figcaption h4 {
