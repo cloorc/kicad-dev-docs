@@ -373,12 +373,12 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     [(zone_connect CONNECTION_TYPE)]                            <18>
     [(thermal_width WIDTH)]                                     <19>
     [(thermal_gap DISTANCE)]                                    <20>
-    (ATTRIBUTES)                                                <21>
-    (GRAPHIC_ITEMS...)                                          <22>
-    (PADS...)                                                   <23>
-    [(ZONES...)]                                                <24>
-    [(GROUPS...)]                                               <25>
-    (3D_MODEL)                                                  <26>
+    [ATTRIBUTES]                                                <21>
+    GRAPHIC_ITEMS...                                            <22>
+    PADS...                                                     <23>
+    ZONES...                                                    <24>
+    GROUPS...                                                   <25>
+    3D_MODEL                                                    <26>
   )
 ```
 
@@ -426,7 +426,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <20> The optional `thermal_gap` is the distance from the pad to the zone of thermal relief
      connections for all pads in the footprint.  If not set, the zone `thermal_gap` setting is
      used.  If not set, the zone `thermal_gap` setting is used.
-<21> The <<_footprint_attributes,attributes section>> defines the attributes of the footprint.
+<21> The optional <<_footprint_attributes,attributes section>> defines the attributes of the 
+    footprint.
 <22> The graphic objects section is a list of one or more
      <<_footprint_graphics_items, graphical objects>> in the footprint.  At a minimum, the
      reference designator and value  <<_footprint_text, text objects>> are defined.  All other
@@ -464,11 +465,11 @@ Footprint `attr` token defines the list of attributes of the footprint.
 
 Footprint graphical items define all of the drawing items that are used in the
 <<_footprint,footprint definition>>.  This includes <<_footprint_text,text>>,
-<<_footprint_line,lines>>, <<_footprint_rectangle,rectangles>>, <<_footprint_circle,circles>>,
-<<_footprint_arc,arcs>>, <<_footprint_polygon,polygons>>, and <<_footprint_curve,curves>>.
+<<_footprint_text_box,text boxes>>, <<_footprint_line,lines>>, <<_footprint_rectangle,rectangles>>, 
+<<_footprint_circle,circles>>, <<_footprint_arc,arcs>>, <<_footprint_polygon,polygons>>, 
+<<_footprint_curve,curves>>, and <<_dimension,dimensions>>.
 
-NOTE: Footprint graphic items are not valid outside of a <<_footprint_syntax,
-      footprint definition>>.
+NOTE: Footprint graphic items starting with `fp_` are not valid outside of a footprint definition.
 
 ===== Footprint Text
 
@@ -734,8 +735,8 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
       [(zone_connect ZONE)]                                     <24>
       [(thermal_width WIDTH)]                                   <25>
       [(thermal_gap DISTANCE)]                                  <26>
-      [(CUSTOM_PAD_OPTIONS)]                                    <27>
-      [(CUSTOM_PAD_PRIMITIVES)]                                 <28>
+      [CUSTOM_PAD_OPTIONS]                                      <27>
+      [CUSTOM_PAD_PRIMITIVES]                                   <28>
     )
 ```
 
@@ -840,7 +841,7 @@ a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>
 
 ```
       (primitives
-        (GRAPHIC_ITEMS...)                                      <1>
+        GRAPHIC_ITEMS...                                        <1>
         (width WIDTH)                                           <2>
         [(fill yes)]                                            <3>
       )
@@ -1206,11 +1207,11 @@ filled copper zones and keep out areas.
     (connect_pads [CONNECTION_TYPE] (clearance CLEARANCE))      <8>
     (min_thickness THICKNESS)                                   <9>
     [(filled_areas_thickness no)]                               <10>
-    [(ZONE_KEEPOUT_SETTINGS)]                                   <11>
-    (ZONE_FILL_SETTINGS)]                                       <12>
+    [ZONE_KEEPOUT_SETTINGS]                                     <11>
+    ZONE_FILL_SETTINGS                                          <12>
     (polygon COORDINATE_POINT_LIST)                             <13>
-    [(ZONE_FILL_POLYGONS)]                                      <14>
-    [(ZONE_FILL_SEGMENTS)]                                      <15>
+    [ZONE_FILL_POLYGONS...]                                     <14>
+    [ZONE_FILL_SEGMENTS...]                                     <15>
   )
 ```
 
@@ -1275,7 +1276,6 @@ section only applies to keep out zones.
 ==== Zone Fill Settings
 
 The `fill` token attributes define how the zone is to be filled.
-
 
 ```
     (fill
