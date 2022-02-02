@@ -437,7 +437,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     text-align: center;
 }
 #chapter h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     border-bottom: 4px solid #F0F2F4;
 }
 #chapter p {
@@ -539,6 +539,9 @@ div.notices.tip p {
 }
 div.notices.tip p:first-child:after {
     content: 'Tip';
+}
+ul>li p {
+    margin: 0.2rem 0
 }
 
 /* attachments shortcode */
