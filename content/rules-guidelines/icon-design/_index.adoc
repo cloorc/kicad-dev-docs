@@ -1,7 +1,7 @@
 ---
 title: Icon Design Guidelines
-weight: 2
-summary: The icon style guidelines that should be used for icon changes or additions
+weight: 5
+summary: The icon style guidelines that should be used for icon changes or additions.
 ---
 
 :toc:

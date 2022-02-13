@@ -1,6 +1,6 @@
 ---
 title: Stable Release Policy
-weight: 2
+weight: 4
 summary: The stable release policy provides guidelines for stable releases
          provided by the KiCad project.
 ---

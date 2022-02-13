@@ -1,11 +1,12 @@
 ---
-title: UI Policy
+title: User Interface Policy
 weight: 10
-summary: Rules on how the user interface elements should be implemented
+summary: Rules on how the user interface elements should be implemented.
 ---
 
 :toc:
 
+== Introduction
 
 This document defines the guidelines for user interface development in
 KiCad.  Developers are expected to following these guidelines as closely
@@ -25,15 +26,18 @@ The user interface guidelines for each supported platform are:
 * macOS: https://developer.apple.com/design/human-interface-guidelines/macos/overview/themes/
 * Windows: https://docs.microsoft.com/en-us/windows/win32/uxguide/guidelines
 
-IMPORTANT: UI behavior that is inconsistent with the platform default or that would override platform defaults/theme settings must be avoided.
+IMPORTANT: UI behavior that is inconsistent with the platform default or that
+would override platform defaults/theme settings must be avoided.
 
 == Text and strings
 
 === Text Capitalization
+
 For all visible text used within KiCad, follow recommendations in the
-capitalization section in the https://developer.gnome.org/hig/stable/writing-style.html.en[writing style section of the GNOME User
-Interface Guidelines].  This applies to all Menus, Titles,
-Labels, Tooltips, Buttons, etc.
+capitalization section in the
+https://developer.gnome.org/hig/stable/writing-style.html.en[writing style section of the GNOME User
+Interface Guidelines].  This applies to all Menus, Titles, Labels, Tooltips,
+Buttons, etc.
 
 The capitalization for the application names is KiCad, Eeschema, CvPcb,
 GerbView, and Pcbnew.  All strings that have application names that are
@@ -42,6 +46,7 @@ idea use this capitalization in source code comments as well to prevent
 confusion of new contributors.
 
 === Capitalization Styles
+
 There are two styles of capitalization used in the user interface
 elements: header capitalization and sentence capitalization.  This
 section defines the capitalization style and when each type of capitalization
@@ -57,10 +62,12 @@ exceptions:
 * Prepositions of three or fewer letters: at, for, by, in, to ...
 
 ==== Sentence Capitalization
+
 When capitalizing sentences, capitalize the first letter of the first word,
 and any other words normally capitalized in sentences such as proper nouns.
 
 === Capitalization Table
+
 The following table indicates the capitalization style to use for each type
 of user interface element.
 
@@ -105,6 +112,7 @@ implemented.  Please use https://github.com/wxFormBuilder/wxFormBuilder/releases
 to avoid version mismatch between developers.
 
 === Escape Key Termination
+
 Please note that the escape key termination only works properly if there is a
 dialog button defined with an ID of wxID_CANCEL or setting the escape button
 ID using link:http://docs.wxwidgets.org/3.0/classwx_dialog.html#a585869988e308f549128a6a065f387c6[wxDialog::SetEscapeID( MY_ESCAPE_BUTTON_ID )]
@@ -114,20 +122,21 @@ for setting the "default" control, and this is the one fired when the "enter"
 key is pressed.
 
 === Dialog Layout with Sizers
+
 Use wxWidgets "sizers" in all dialogs, no matter how simple they are.  Using
 absolute sizing in dialogs is forbidden in KiCad.  See the link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview]
-for more information on using sizers.  Configure
-the sizers so that as the dialog window is expanded, the most sensible use of
-the increased dialog window occurs automatically by the sizers. For example,
-in the DRC dialog of Pcbnew, sizers should be used to expand the text control
-to use the full available free window area, so that the user's view of the
-items in the text control is maximized as he/she expands the dialog window,
-making it easier to read more DRC error messages.  In other dialogs without
-one component more important than the others, the sizers might be configured
-to position the controls to sensible positions near the perimeter of the
-increasingly larger dialog box, not necessarily leaving them all bundled
-tightly together.  The dialog box should look nice at any size large enough
-to show all the user interface elements.
+for more information on using sizers.  Configure the sizers so that as the
+dialog window is expanded, the most sensible use of the increased dialog
+window occurs automatically by the sizers. For example, in the DRC dialog
+of Pcbnew, sizers should be used to expand the text control to use the full
+available free window area, so that the user's view of the items in the text
+control is maximized as he/she expands the dialog window, making it easier
+to read more DRC error messages.  In other dialogs without one component more
+important than the others, the sizers might be configured to position the
+controls to sensible positions near the perimeter of the increasingly larger
+dialog box, not necessarily leaving them all bundled tightly together.  The
+dialog box should look nice at any size large enough to show all the user
+interface elements.
 
 Avoid defining initial dialog sizes if possible.  Let the sizers do their
 job.  After the dialog is fit to the sizers, set the minimum size to the
@@ -147,6 +156,7 @@ exceeds this limit, please redesign the dialog using tabs or some other
 paging method to reduce the size of the dialog.
 
 === Dialog Base Class
+
 The KiCad project has a base class which most if not all dialogs should be
 derived from.  When using wxFormBuilder, please add the following settings
 to the "Dialog" tab:
@@ -168,12 +178,13 @@ Dialog data must be transferred to the dialog controls on dialog initialization
 and transferred from controls when the dialog is dismissed by the default
 affirmative action (typically clicking the wxID_OK button) or the clicking the
 wxID_APPLY button.  The wxWidgets dialog framework has support for this by
-using validators.  Please read the https://docs.wxwidgets.org/3.0/overview_validator.html[wxValidator Overview]
-in the http://docs.wxwidgets.org/3.0/[wxWidgets documentation].  In the past, data transfer
-was handled in various default button handlers virtually all of which were
-broken.  Do not implement default button handlers in your dialog code.  Use
-validators to transfer data to and from controls and allow the default dialog
-button handlers work the way they were designed.
+using validators.  Please read the
+https://docs.wxwidgets.org/3.0/overview_validator.html[wxValidator Overview]
+in the http://docs.wxwidgets.org/3.0/[wxWidgets documentation].  In the past,
+data transfer was handled in various default button handlers virtually all of
+which were broken.  Do not implement default button handlers in your dialog
+code.  Use validators to transfer data to and from controls and allow the
+default dialog button handlers work the way they were designed.
 
 ==== Internationalization
 
@@ -182,6 +193,7 @@ To generate a list of strings occurring in a dialog, one needs to enable
 be possible to translate the dialog.
 
 == String Quoting
+
 Often text strings will be quoted for display which use may used in controls
 that render HTML.  Using angle brackets will cause grief for HTML rendering
 controls so text should be quoted with single quotes ''.  e.g.:

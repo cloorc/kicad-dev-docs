@@ -1,59 +1,58 @@
 ---
-title: Commit Policy
-weight: 2
-summary: The guidelines describing how git commit messages should be formatted
+title: Commit Message Format Policy
+weight: 3
+summary: The guidelines describing how git commit messages should be formatted.
 ---
 
 :toc:
 
 == Commit Message Format Policy
 
+Commit messages must begin with a brief subject line.  The subject line limit
+is 72 characters.  If there is a body message, it must be separated from the
+subject line by a blank line and wrapped at 75 characters.
 
-Commit messages should begin with a brief subject line.  Try to limit this
-to no more than 72 characters.  The body of the message should be separated
-from the subject line by a blank line and wrapped at 72 characters. The body
-of a commit message should explain what the commit does and why.  Do not
-explain *how* the changes work as the code itself should do that.
+The body of a commit message should explain what the commit does and why.  Do
+not explain **how** the changes work as the code itself should do that.
 
-== Linking a commit to an issue
+== Linking a Commit to an Issue
 
-If your commit fixes an issue that has been reported in the 
-https://gitlab.com/kicad/code/kicad/issues[issue tracker], add a line indicating the
-fixed issue number to your commit message. In such case, Gitlab will
-automatically close the issue and add a link to your commit in the issue.
+If your commit fixes an issue that has been reported in the
+https://gitlab.com/kicad/code/kicad/issues[issue tracker], add a blank line
+after the subject line or message body and add a line indicating the fixed
+issue number to your commit message. In such cases, GitLab will automatically
+close the issue and add a link to the commit in the issue.
 
 For example, the following line will automatically close issue #1234567:
 
     Fixes https://gitlab.com/kicad/code/kicad/issues/1234567
 
 There is an <<commit_fixes_alias, alias>> to simplify this step.
-You can read more about automatic issue closing in the
-https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically[Gitlab documentation].
+Read more about automatic issue closing in the
+https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically[GitLab documentation].
 
-== Changelog tags
+== Changelog Tags
 
-To facilitate following the code changes, you should include a changelog tag
-to indicate modifications noticeable by the users.  There are three types of
-changelog tags:
+To facilitate following the code changes, include a changelog tag to indicate
+modifications noticeable by the users.  There are three types of changelog tags:
 
-- `ADDED` to denote a new feature
-- `CHANGED` to indicate a modification of an existing feature
-- `REMOVED` to inform about removal of an existing feature
+- `ADDED` to denote a new feature.
+- `CHANGED` to indicate a modification of an existing feature.
+- `REMOVED` to inform about removal of an existing feature.
 
 There is no need to add changelog tags for commits that do not modify the way
-the users interact with the software, such as code refactoring or a bugfix for
-unexpected behavior.  The main purpose of the changelog tags is to generate the
-release notes and notify the documentation maintainers about changes.  Keep that
-in mind when deciding whether to add a changelog tag.
+the users interact with the software, such as code refactoring or a bug fix for
+unexpected behavior.  The purpose of the changelog tags is to generate release
+notes and notify the documentation maintainers about changes.
 
 === Making the Documentation Developers Aware of Changes
 
 When a commit with changelog tag is pushed, the committer should create a new
 issue in the http://github.com/KiCad/kicad-doc/issues[documentation repository] to notify the
-documentation maintainers.  You should include a link to the commit containing
-the reported changes.
+documentation maintainers.  Include a link to the commit containing the reported
+changes.
 
-=== Extracting changelog
+=== Extracting Changelogs
 
 Thanks to the changelog tags, it is easy to extract the changelog using git
 commands:
@@ -83,7 +82,7 @@ Following is an example of a properly formatted commit message:
     Fixes https://gitlab.com/kicad/code/kicad/issues/1405026
 ----
 
-== Git aliases file
+== Git Aliases File
 
 There is a file containing helpful git aliases located at
 `helpers/git/fixes_alias`. To install it, run in the source repository:
@@ -93,7 +92,7 @@ There is a file containing helpful git aliases located at
 ```
 
 [[commit_fixes_alias]]
-=== 'fixes' alias 
+=== 'fixes' Alias
 
 Once the alias configuration file is installed, it may be used to amend the
 most recent commit to include the bug report link:
@@ -105,9 +104,10 @@ For example, the command below will append a line to the last commit message:
     Fixes https://gitlab.com/kicad/code/kicad/issues/1234567
 
 [[commit_changelog_alias]]
-=== 'changelog' alias
+=== 'changelog' Alias
 
-With the alias configuration file installed, you get an alias to extract the changelog:
+With the alias configuration file installed, changelogs can be extracted
+by running the following:
 
 ```sh
     git changelog --since="1 Jan 2017"
