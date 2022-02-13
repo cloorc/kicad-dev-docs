@@ -105,9 +105,14 @@ BUILD_SMALL_DEBUG_FILES
 |Description
 |Default
 
-|KICAD_SANITIZE
-|Build KiCad with sanitizer options. +
- WARNING: Not compatible with gold linker.
+|KICAD_SANITIZE_ADDRESS
+|Build KiCad with address sanitizer (ASan) options. +
+ WARNING: May cause errors with Gold, Lld, Mold linkers.
+|OFF
+
+|KICAD_SANITIZE_THREADS
+|Build KiCad with thread sanitizer (TSan) options. +
+ WARNING: May cause errors with Gold, Lld, Mold linkers.
 |OFF
 
 |KICAD_STDLIB_DEBUG

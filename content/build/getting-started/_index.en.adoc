@@ -119,43 +119,10 @@ KiCad has many build options that can be configured to build different options d
 the availability of support for each option on a given platform.  This section documents
 these options and their default values.
 
-=== Scripting Support
-
-The KICAD_SCRIPTING option is used to enable building the Python scripting support into Pcbnew.
-This options is enabled by default, and will disable all other KICAD_SCRIPTING_* options when
-it is disabled.
-
-=== Python 3 Scripting Support
-
-The KICAD_SCRIPTING_PYTHON3 option is used to enable using Python 3 for the scripting support
-instead of Python 2.  This option is disabled by default and only is relevant if
-[KICAD_SCRIPTING](#scripting_opt) is enabled.
-
-=== Scripting Module Support
-
-The KICAD_SCRIPTING_MODULES option is used to enable building and installing the Python modules
-supplied by KiCad.  This option is enabled by default, but will be disabled if
-[KICAD_SCRIPTING](#scripting_opt) is disabled.
-
 === wxPython Scripting Support
 
 The KICAD_SCRIPTING_WXPYTHON option is used to enable building the wxPython interface into
-Pcbnew including the wxPython console.  This option is enabled by default, but will be disabled if
-[KICAD_SCRIPTING](#scripting_opt) is disabled.
-
-=== wxPython Phoenix Scripting Support
-
-The KICAD_SCRIPTING_WXPYTHON_PHOENIX option is used to enable building the wxPython interface with
-the new Phoenix binding instead of the legacy one.  This option is disabled by default, and
-enabling it requires [KICAD_SCRIPTING](#scripting_opt) to be enabled.
-
-=== Python Scripting Action Menu Support
-
-The KICAD_SCRIPTING_ACTION_MENU option allows Python scripts to be added directly to the Pcbnew
-menu.  This option is enabled by default, but will be disabled if
-[KICAD_SCRIPTING](#scripting_opt) is disabled.  Please note that this option is highly
-experimental and can cause Pcbnew to crash if Python scripts create an invalid object state
-within Pcbnew.
+Pcbnew including the wxPython console. 
 
 === Integrated Spice simulator
 
@@ -211,13 +178,19 @@ The KICAD_STDLIB_DEBUG option enables the full set of standard library assertion
 
 ==== Address Sanitizer support
 
-The KICAD_SANITIZE option enables Address Sanitizer support to trace memory allocations and
-accesses to identify problems. This option is disabled by default. The Address Sanitizer
-contains several runtime options to tailor its behavior that are described in more detail in its
+The KICAD_SANITIZE_ADDRESS option enables https://clang.llvm.org/docs/AddressSanitizer.html[Address
+Sanitizer (ASan)] support to trace memory allocations and accesses to identify problems. This
+option is disabled by default. The Address Sanitizer contains several runtime options to tailor its
+behavior that are described in more detail in its
 https://github.com/google/sanitizers/wiki/AddressSanitizerFlags[documentation].
 
-This option is not supported on all build systems, and is known to have problems when using
-mingw.
+Analogously, the KICAD_SANITIZE_THREADS option enables
+https://clang.llvm.org/docs/ThreadSanitizer.html[Thread Sanitizer (TSan)]. Its runtime options are
+described https://github.com/google/sanitizers/wiki/ThreadSanitizerFlags[here].
+
+These options are not supported on all build systems, and are known to have problems when using
+MinGW. They may also cause errors when using a linker other than the GNU linker, for example Gold,
+Lld, Mold.
 
 === Demos and Examples
 
