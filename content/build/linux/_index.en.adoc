@@ -37,8 +37,7 @@ Replace `RelWithDebInfo` with `Debug` for debug builds.
 The distribution-specific packages that have to be installed to build KiCad can be found in the
 nightly package sources:
 
-* https://gitlab.com/kicad/packaging/kicad-ubuntu-builder/kicad-daily-package/-/blob/dailybuild/debian/control[Debian/Ubuntu/Linux
-* Mint] (`Depends` and `Build-Depends` fields)
+* https://gitlab.com/kicad/packaging/kicad-ubuntu-builder/kicad-daily-package/-/blob/dailybuild/debian/control[Debian/Ubuntu/Linux Mint] (`Depends` and `Build-Depends` fields)
 * https://gitlab.com/kicad/packaging/kicad-fedora-builder/-/blob/master/templates/kicad-nightly.spec[Fedora Linux] (`Requires` and `BuildRequires` fields)
 * https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=kicad-nightly[Arch Linux/Manjaro] (`depends` and `makedepends` fields)
 
@@ -60,7 +59,7 @@ sudo ninja install
 
 Build speed will be further improved by using a linker different than the default BFD linker (`ld`),
 for example `gold` (fast), `lld` (faster), or `mold` (fastest). To change the linker, specify it
-by passing the `-fuse-ld` flag via the `-DCMAKE_CXX_FLAGS` CMake option:
+by passing the `-fuse-ld=<linker name>` flag via the `-DCMAKE_CXX_FLAGS` CMake option:
 
 [source,sh]
 ```
