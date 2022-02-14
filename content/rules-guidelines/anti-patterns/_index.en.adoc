@@ -66,3 +66,48 @@ If you are not sure you are abusing `wxUpdateUIEvent`, the advanced configuratio
 are generated or -1 to disable all update events.  If slowing or disabling the update events
 makes the user interface more responsive, a `wxUpdateUIEvent` handler is the problem.
 
+
+=== Translating Partial Sentences
+
+Never break an translated sentence into multiple `_()` tags.  This prevents translations from
+understanding your intention and from creating grammatically correct sentences in languages
+other than English.
+
+For example the following is incorrect:
+
+```c++
+ShowReport( _( "Duplicate instances of " ) + m_changeArray[j].NewRefDes );
+```
+
+This should be replaced by the following:
+
+```c++
+ShowReport( wxString::Format( _( "Duplicate instances of %s" ), m_changeArray[j].NewRefDes ) );
+```
+
+The new formulation allows a translator to move the object of the sentence.  In the 
+original formulation, the object (the `NewRefDes` string) would always appear at the end of the
+sentence, which may not be grammatically correct in non-English languages.
+
+Similarly, do not break sentences into parts like this:
+
+```c++
+wxString verb  = updateMode ? _( "Update" ) : _( "Change" );
+wxString warning = _( "%s all items on the board?" );
+
+wxMsgBox( wxString::Format( warning, verb ) );
+```
+
+In English, the word `Update` is both a noun and a verb.  Without context, the translator will
+not know which version to use.  Additionally, it will not be clear to the translator that
+the `verb` string is used by the `warning` string as they will not appear together in
+the translation file.
+
+Instead, we must write the sentences explicitly:
+
+```c++
+wxString msg = updateMode ? _( "Update all items on the board?" ) :
+                            _( "Change all items on the board?" );
+
+wxMsgBox( msg );
+```
