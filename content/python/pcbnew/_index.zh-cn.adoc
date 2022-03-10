@@ -147,11 +147,11 @@ SimplePlugin().register() # 实例化并注册到 Pcbnew
 import pcbnew
 import os
 
-class ComplexPluginAction(pcbnew.ActionPlugin)
+class ComplexPluginAction(pcbnew.ActionPlugin):
     def defaults(self):
         self.name = "一个复杂的动作插件"
         self.category = "描述性类别名称"
-        self.description "该插件的说明"
+        self.description = "该插件的说明"
         self.show_toolbar_button = True # 可选，默认为 False
         self.icon_file_name = os.path.join(os.path.dirname(__file__), 'icon.png') # 可选
 
