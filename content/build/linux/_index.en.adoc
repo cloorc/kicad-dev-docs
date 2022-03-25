@@ -14,7 +14,7 @@ To perform a full build on Linux, run the following commands:
 ```
 cd <your kicad source mirror>
 mkdir -p build/release
-mkdir build/debug               # Optional for debug build.
+mkdir -p build/debug               # Optional for debug build.
 cd build/release
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
         ../../
