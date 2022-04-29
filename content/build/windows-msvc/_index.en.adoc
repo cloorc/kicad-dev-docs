@@ -6,7 +6,7 @@ tags: ["windows"]
 ---
 :toc:
 
-== Building using Visual Studio (2019)
+== Building using Visual Studio (2019, 2022)
 
 === Environment Setup
 
@@ -52,9 +52,7 @@ If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will 
 
 [source,powershell]
 ```
-.\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows `
-icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows `
-python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows harfbuzz:x64-windows
+.\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows harfbuzz:x64-windows
 ```
 
 NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg.
@@ -166,3 +164,7 @@ It is *highly recommended* users install the link:https://marketplace.visualstud
 ==== Could NOT find GLEW (missing: GLEW_INCLUDE_DIR GLEW_LIBRARY)
 
 You might be trying to perform a 32-bit build (x86-*) despite only having a 64-bit GLEW installed by vcpkg. Switch your configuration to x64-Debug or x64-Release.
+
+==== vcpkg cannot finish installing a dependency
+
+Antivirus software is known to block interim steps in the package build process. Try temporarily disabling your antivirus or adding an exception.
