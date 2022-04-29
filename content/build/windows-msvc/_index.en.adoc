@@ -14,22 +14,19 @@ tags: ["windows"]
 You must first install https://visualstudio.microsoft.com/vs/[Visual Studio] with the **Desktop development with {cpp}** feature set installed.
 Additionally, you'll need to make sure the optional component https://docs.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-160#installation[{cpp} CMake tools for Windows] is installed.
 
-==== vcpkg (kicad fork required)
+==== vcpkg
 
-KiCad maintains a fork of vcpkg to provide us with a wxPython port.
-It also allows us to lock our dependencies as vcpkg updates fairly frequently.
+KiCad uses vcpkg for dependencies and uses *manifest mode* to declare the dependencies and our kicad registry on top of vcpkg.
 
-**If you are new to vcpkg** you must, pick a spot on your system to put it.
-Then run these three commands
-
+Obtain vcpkg for your system from https://github.com/microsoft/vcpkg
+or 
 [source,powershell]
 ```
-git clone https://gitlab.com/kicad/packaging/vcpkg
+git clone https://github.com/microsoft/vcpkg.git
 .\vcpkg\bootstrap-vcpkg.bat
-.\vcpkg\vcpkg integrate install
 ```
 
-which will give you a vcpkg install ready to use with the next steps.
+NOTE: KiCad requires a vcpkg.exe tool released since Jan 2022, therefore ensure any existing copy of vcpkg is up to date and bootstrap it again if required.
 
 === KiCad Specific Setup
 
@@ -39,29 +36,7 @@ with the name **VCPKG_DEFAULT_TRIPLET** and value **x64-windows**
 
 KiCad still supports 32-bit builds for now but may not in the future, thus 64-bit is preferred.
 
-==== 1. Install dependencies
-Most of KiCad's dependencies can be installed using `vcpkg` as described below:
-
-[source,powershell]
-```
-.\vcpkg install boost cairo curl glew gettext glm icu libxslt ngspice opencascade opengl openssl python3 wxpython wxwidgets zlib harfbuzz
-```
-
-If you did not set the **VCPKG_DEFAULT_TRIPLET** environment variable, you will have to append
-:x64-windows to end of each packages name as below:
-
-[source,powershell]
-```
-.\vcpkg install boost:x64-windows cairo:x64-windows curl:x64-windows glew:x64-windows gettext:x64-windows glm:x64-windows icu:x64-windows libxslt:x64-windows ngspice:x64-windows opencascade:x64-windows opengl:x64-windows python3:x64-windows wxpython:x64-windows wxwidgets:x64-windows zlib:x64-windows harfbuzz:x64-windows
-```
-
-NOTE: If the vcpkg install fails on wxpython, you did not clone and checkout the `kicad` branch from https://gitlab.com/kicad/packaging/vcpkg for vcpkg.
-
-Additionally, SWIG must be installed manually.  Obtain the latest `swigwin` package from
-https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
-`swigwin-4.0.2`) and extract the zip file to a known location.
-
-==== 2. CMakeSettings.json
+==== 1. CMakeSettings.json
 Contained in the build root is a `CMakeSettings.json.sample`, copy and rename this file to `CMakeSettings.json`
 Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to match the location of your vcpkg clone.
 
@@ -70,14 +45,18 @@ Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to mat
 { "VcPkgDir": "D:/vcpkg/" },
 ----
 
-==== 3. "Open Folder" in Visual Studio
+==== 2. "Open Folder" in Visual Studio
 * Launch Visual Studio (only after completing the above steps).
 * When the initial wizard launches, select to **Open a local folder**. 
 This is the correct way to make Visual Studio directly handle *CMake* projects.
 * Select the build root folder.
 * Wait until the "CMake in Visual Studio" tab appears and the CMake process hits an error, which we'll fix in the next step.
 
-==== 4. Configure paths to Python and SWIG
+==== 3. Configure paths to Python and SWIG
+
+SWIG must be installed manually.  Obtain the latest `swigwin` package from
+https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
+`swigwin-4.0.2`) and extract the zip file to a known location.
 
 At present, you must add CMake arguments to the location of Python installed by `vcpkg` and SWIG
 that you downloaded in a previous step.  Choose the Configuration you want to use (e.g. x64-Debug) in the toolbar. Then, open the CMake Settings editor (Project menu > CMake
@@ -91,7 +70,7 @@ a path from Windows Explorer.
 
 Save the changes. CMake configuration should now succeed, showing "CMake generation finished" in the output window at the bottom.  You can now build! (Build menu > Build all)
 
-==== 5. Running and debugging
+==== 4. Running and debugging
 
 Running or debugging KiCad directly from the build directory through Visual Studio requires that
 you set certain environment variables so that KiCad can find runtime dependencies and Python works.
@@ -160,10 +139,6 @@ and where your `kicad` source and build directories are located.
 It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
 
 === Troubleshooting
-
-==== Could NOT find GLEW (missing: GLEW_INCLUDE_DIR GLEW_LIBRARY)
-
-You might be trying to perform a 32-bit build (x86-*) despite only having a 64-bit GLEW installed by vcpkg. Switch your configuration to x64-Debug or x64-Release.
 
 ==== vcpkg cannot finish installing a dependency
 
