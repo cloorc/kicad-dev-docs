@@ -30,12 +30,6 @@ NOTE: KiCad requires a vcpkg.exe tool released since Jan 2022, therefore ensure 
 
 === KiCad Specific Setup
 
-vcpkg defaults to x86-windows even on 64-bit machines,
-it is advised for ease of use you set a **USER** or **SYSTEM** environment variable
-with the name **VCPKG_DEFAULT_TRIPLET** and value **x64-windows**
-
-KiCad still supports 32-bit builds for now but may not in the future, thus 64-bit is preferred.
-
 ==== 1. CMakeSettings.json
 Contained in the build root is a `CMakeSettings.json.sample`, copy and rename this file to `CMakeSettings.json`
 Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to match the location of your vcpkg clone.
@@ -143,3 +137,8 @@ It is *highly recommended* users install the link:https://marketplace.visualstud
 ==== vcpkg cannot finish installing a dependency
 
 Antivirus software is known to block interim steps in the package build process. Try temporarily disabling your antivirus or adding an exception.
+
+==== Error: Couldn't find the versions database file
+
+If this occurs, a mismatch between vcpkg and registries occurred when it was checking your already installed libraries within the kicad build repo.
+The easiest fix is to simply `Delete Cache and Reconfigure` under the Project menu option
