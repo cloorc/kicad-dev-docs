@@ -7,9 +7,8 @@ pre: "<i class='fas fa-chevron-right'></i> "
 
 == Building KiCad from Source
 If you are a user and not a developer, please consider using one of the prebuilt packages
-of KiCad which can be found at the https://kicad.org/download/[download] page on the https://kicad.org/[KiCad website].  Building KiCad
-from source is not for the faint of heart and is not recommended unless you have reasonable
-software development experience.  This document contains the instructions on how to build KiCad
+of KiCad which can be found at the https://kicad.org/download/[download] page on the https://kicad.org/[KiCad website].
+This document contains the instructions on how to build KiCad
 from source on the supported platforms.  It is not intended as a guide for installing or building
 [library dependencies](#library_dependencies).  Please consult your platforms documentation for
 installing packages or the source code when building the library dependencies.  Currently the
