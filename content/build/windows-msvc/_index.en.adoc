@@ -98,29 +98,106 @@ assuming `vcpkg` is installed at `C:\code\vcpkg`.
 Additionally, use the `environment` section to add the path to the `vcpkg` installed packages
 directory, which will allow KiCad to find dynamic libraries from dependencies.
 
-This snippet shows an example launch configuration for running x64-Debug `kicad.exe` from the build
-directory.  To run from the install directory, the configuration will look the same except the
-`KICAD_RUN_FROM_BUILD_DIR` variable should not be set.
 
+Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working default launch configuration
 [source,json]
 ```
 {
-    "type": "default",
-    "project": "CMakeLists.txt",
-    "projectTarget": "kicad.exe (kicad\\kicad.exe)",
-    "name": "kicad.exe (kicad\\kicad.exe)",
-    "env": {
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "kicad.exe (kicad\\kicad.exe)",
+      "name": "kicad.exe (kicad\\kicad.exe)",
+      "env": {
         "KICAD_RUN_FROM_BUILD_DIR": "1",
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
-        "PYTHONHOME": "C:\\code\\vcpkg\\installed\\x64-windows\\tools\\python3",
-        "PYTHONPATH": "C:\\code\\kicad\\build\\x64-Debug\\pcbnew;C:\\code\\kicad\\scripting"
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
     },
-    "environment": [
-        {
-            "name": "Path",
-            "value": "${env.Path};C:\\code\\vcpkg\\installed\\x64-windows\\debug\\bin"
-        }
-    ]
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "pcbnew.exe (pcbnew\\pcbnew.exe)",
+      "name": "pcbnew.exe (pcbnew\\pcbnew.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "eeschema.exe (eeschema\\eeschema.exe)",
+      "name": "eeschema.exe (eeschema\\eeschema.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "gerbview.exe (gerbview\\gerbview.exe)",
+      "name": "gerbview.exe (gerbview\\gerbview.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "pl_editor.exe (pl_editor\\pl_editor.exe)",
+      "name": "pl_editor.exe (pl_editor\\pl_editor.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "pcb_calculator.exe (pcb_calculator\\pcb_calculator.exe)",
+      "name": "pcb_calculator.exe (pcb_calculator\\pcb_calculator.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "bitmap2component.exe (bitmap2component\\bitmap2component.exe)",
+      "name": "bitmap2component.exe (bitmap2component\\bitmap2component.exe)",
+      "env": {
+        "KICAD_RUN_FROM_BUILD_DIR": "1",
+        "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
+        "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.installRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+      }
+    }
+  ]
 }
 ```
 
