@@ -5,6 +5,8 @@ stages:
   - build
 
 build_site_docker:
+  tags:
+    - docker
   image: docker:stable
   services:
     - docker:dind
