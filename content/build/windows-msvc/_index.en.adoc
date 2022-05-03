@@ -58,7 +58,7 @@ Settings), and add the following items to the CMake Command Arguments option fie
 
 `-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe`
 
-Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your
+Replace the `PATH\\TO\\` section with the appropriate paths to SWIG on your
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
 a path from Windows Explorer.
 
