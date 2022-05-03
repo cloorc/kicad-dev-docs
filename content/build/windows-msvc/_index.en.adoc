@@ -46,17 +46,17 @@ This is the correct way to make Visual Studio directly handle *CMake* projects.
 * Select the build root folder.
 * Wait until the "CMake in Visual Studio" tab appears and the CMake process hits an error, which we'll fix in the next step.
 
-==== 3. Configure paths to Python and SWIG
+==== 3. Configure paths to SWIG
 
 SWIG must be installed manually.  Obtain the latest `swigwin` package from
 https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
 `swigwin-4.0.2`) and extract the zip file to a known location.
 
-At present, you must add CMake arguments to the location of Python installed by `vcpkg` and SWIG
+At present, you must add CMake arguments SWIG
 that you downloaded in a previous step.  Choose the Configuration you want to use (e.g. x64-Debug) in the toolbar. Then, open the CMake Settings editor (Project menu > CMake
 Settings), and add the following items to the CMake Command Arguments option field:
 
-`-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe -DPYTHON_EXECUTABLE=C:\\PATH\\TO\\vcpkg\\installed\\x64-windows\\tools\\python3\\python.exe`
+`-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe`
 
 Replace the `PATH\\TO\\` section with the appropriate paths to Python and SWIG on your
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
@@ -201,13 +201,26 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
 }
 ```
 
-Modify the value of `PYTHONPATH`, `PYTHONHOME`, and `Path` depending on where `vcpkg` is installed
-and where your `kicad` source and build directories are located.
-
 === Visual Studio Extensions
 
 ==== Trailing Whitespace Remover
 It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
+
+=== Additional Notes
+
+==== vcpkg binary caching
+By default vcpkg will bundle up each dependency and store it in a *binary cache* which maintains copies of all past built dependencies by version.
+
+The binary cache is located usually in %LOCALAPPDATA%\vcpkg\archives
+
+If storage space consumed is a problem.
+
+You may change the location of the binary cache by setting the environment variable `VCPKG_DEFAULT_BINARY_CACHE` to a different path.
+
+or
+
+You may disable binary caching by setting the environment variable `VCPKG_FEATURE_FLAGS` with value `-binarycaching`. This is not advisable as the intention of the cache is to avoid rebuilds if the application cmake cache is destroyed and rebuilt and rebuilding kicad dependencies is quite time consuming.
+
 
 === Troubleshooting
 
