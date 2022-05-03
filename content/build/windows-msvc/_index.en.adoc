@@ -204,7 +204,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
 === Visual Studio Extensions
 
 ==== Trailing Whitespace Remover
-It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
+It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] (edition for Visual Studio 2022 link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespace64[here]) which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
 
 === Additional Notes
 
