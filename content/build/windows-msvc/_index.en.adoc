@@ -161,8 +161,8 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
     {
       "type": "default",
       "project": "CMakeLists.txt",
-      "projectTarget": "pl_editor.exe (pl_editor\\pl_editor.exe)",
-      "name": "pl_editor.exe (pl_editor\\pl_editor.exe)",
+      "projectTarget": "pl_editor.exe (pagelayout_editor\\pl_editor.exe)",
+      "name": "pl_editor.exe (pagelayout_editor\\pl_editor.exe)",
       "env": {
         "KICAD_RUN_FROM_BUILD_DIR": "1",
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
