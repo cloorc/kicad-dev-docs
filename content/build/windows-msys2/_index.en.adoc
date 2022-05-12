@@ -42,7 +42,7 @@ pacman -S base-devel \
           mingw-w64-x86_64-glew \
           mingw-w64-x86_64-curl \
           mingw-w64-x86_64-wxPython \
-          mingw-w64-x86_64-wxWidgets \
+          mingw-w64-x86_64-wxmsw3.1 \
           mingw-w64-x86_64-toolchain \
           mingw-w64-x86_64-glm \
           mingw-w64-x86_64-opencascade \
@@ -64,6 +64,8 @@ make -j N install   # Where N is the number of concurrent threads that your syst
 
 For 32-bit builds, run `mingw32.exe` and change `x86_64` to `i686` in the package names and
 change the paths in the cmake configuration from `/mingw64` to `/mingw32`.
+
+NOTE: msys2 has deprecated 32-bit support due to cygwin, it's upstream dependency eliminating 32-bit support.
 
 For debug builds, run the cmake command with `-DCMAKE_BUILD_TYPE=Debug` from the `build/debug`
 folder.
@@ -124,15 +126,11 @@ Warning: Receiving warning messages about Boost versions is normal.
 There are some known issues that are specific to MSYS2.  This section provides a list of the
 currently known issues when building KiCad using MSYS2.
 
-==== Building with Boost 1.70
+==== wxwidgets 3.1
+You get an error that wxwidgets 3.1 is not found
 
-There is an issue building KiCad with Boost version 1.70 due to CMake not defining the proper
-link libraries during configuration.  Boost 1.70 can be used but `-DBoost_NO_BOOST_CMAKE=ON`
-needs to be added during CMake configuration to insure the link libraries are properly generated.
-
-[source,bash]
-----
-git clone https://github.com/Alexpux/MINGW-packages /c/mwp
-cd /c/mwp/mingw-w64-oce
-makepkg-mingw -is
-----
+```
+pacman -R mingw-w64-x86_64-wxwidgets
+rm -rf build/release    # change to your cmake cache folder
+pacman -S mingw-w64-x86_64-wxmsw3.1
+```
