@@ -234,7 +234,7 @@ algorithm.
 timestamps re-encoded in UUID format.
 
 
-== Images
+=== Images
 
 The `image` token defines an embedded image.  This section will not exist if no images
 are present.
@@ -499,6 +499,11 @@ Footprint graphical items define all of the drawing items that are used in the
 <<_footprint_curve,curves>>, and <<_dimension,dimensions>>.
 
 NOTE: Footprint graphic items starting with `fp_` are not valid outside of a footprint definition.
+
+==== Footprint Images
+
+See the <<_images,images>> section.  This section will not exist if there are no images on the footprint.
+Footprint images are not displayed on the PCB when a footprint is placed, only in the footprint editor.
 
 ===== Footprint Text
 
