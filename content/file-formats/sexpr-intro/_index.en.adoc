@@ -234,6 +234,35 @@ algorithm.
 timestamps re-encoded in UUID format.
 
 
+== Images
+
+The `image` token defines an embedded image.  This section will not exist if no images
+are present.
+
+```
+  (image
+    POSITION_IDENTIFIER                                         <1>
+    [(scale SCALAR)]                                            <2>
+    [(layer LAYER_DEFINITIONS)]                                 <3>
+    UNIQUE_IDENTIFIER                                           <4>
+    (data IMAGE_DATA)                                           <5>
+  )
+```
+
+<1> The POSITION_IDENTIFIER defines the
+    xref:../sexpr-intro/index.adoc#_position_identifier[X and Y coordinates] of the image.
+<2> The optional `scale` token attribute defines the SCALE_FACTOR of the image.
+<3> The `layer` token attribute defines the associated board layer of the image using one
+    <<_canonical_layer_names,canonical layer name>>.
+    Only used by board and footprint images.
+<4> The UNIQUE_IDENTIFIER defines the
+    xref:../sexpr-intro/index.adoc#_universally_unique_identifier[universally unique identifier]
+    for the image.
+<5> The `data` token attribute defines the image data in the
+    https://en.wikipedia.org/wiki/Portable_Network_Graphics[portable network graphics format (PNG)]
+    encoded with https://en.wikipedia.org/wiki/Base64#MIME[MIME type base64].
+
+
 == Board Common Syntax
 
 This section defines all syntax that is shared across the footprint library and printed
