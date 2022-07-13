@@ -33,6 +33,7 @@ A board file includes the following sections:
 * <<_nets_section,Nets>>
 * <<_footprint_section,Footprints>>
 * <<_graphic_items_section,Graphic Items>>
+* <<_images,Images>>
 * <<_tracks_section,Tracks>>
 * <<_zones_section,Zones>>
 * <<_group_section,Groups>>
@@ -323,6 +324,12 @@ definitions.  This section will not exist if there are no footprints on the boar
 
 See the xref:../sexpr-intro/index.adoc#_graphic_items[Graphic Items] section in the s-expression
 board common definitions.  This section will not exist if there are no graphics on the board.
+
+
+== Images Section
+
+See the xref:../sexpr-intro/index.adoc#_images[Images] section in the s-expression
+board common definitions.  This section will not exist if there are no images on the board.
 
 
 == Tracks Section
