@@ -233,28 +233,7 @@ exist if there are no wires or buses in the schematic.
 
 
 == Image Section
-
-The `image` token defines on or more embedded images.  This section will not exist if no images
-are in the schematic.
-
-```
-  (image
-    POSITION_IDENTIFIER                                         <1>
-    [(scale SCALAR)]                                            <2>
-    UNIQUE_IDENTIFIER                                           <3>
-    (data IMAGE_DATA)                                           <4>
-  )
-```
-
-<1> The POSITION_IDENTIFIER defines the
-    xref:../sexpr-intro/index.adoc#_position_identifier[X and Y coordinates] of the image.
-<2> The optional `scale` token attribute defines the SCALE_FACTOR of the image.
-<3> The UNIQUE_IDENTIFIER defines the
-    xref:../sexpr-intro/index.adoc#_universally_unique_identifier[universally unique identifier]
-    for the image.
-<4> The `data` token attribute defines the image data in the
-    https://en.wikipedia.org/wiki/Portable_Network_Graphics[portable network graphics format (PNG)]
-    encoded with https://en.wikipedia.org/wiki/Base64#MIME[MIME type base64].
+See common xref:../sexpr-intro/index.adoc#_images[Images] section.
 
 
 == Graphical Line Section
