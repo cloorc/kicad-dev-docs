@@ -12,7 +12,7 @@ We welcome anyone to contribute bug fixes, improvements and new features.
 
 === Developer mailing list
 The first thing to do before anything is to join the
-link:https://launchpad.net/~kicad-developers[KiCad Developers Mailing List].
+link:https://groups.google.com/a/kicad.org/g/devlist[KiCad Developers Mailing List].
 Here you can ask broad questions and present your ideas or plans if it's beyond a bug fix.
 
 
@@ -94,6 +94,6 @@ link:++https://gitlab.com/kicad/code/kicad/issues?scope=all&utf8=%E2%9C%93&state
 == Help
 
 If you encounter any problems with building or developing KiCad, you may ask for guidance on our
-link:++https://launchpad.net/~kicad-developers++[mailing list]. If you prefer real-time
+link:https://groups.google.com/a/kicad.org/g/devlist[mailing list]. If you prefer real-time
 communication, you may also ask on our link:++https://discord.gg/xEPC8QXFnS++[unofficial developer
 help channel on Discord].
