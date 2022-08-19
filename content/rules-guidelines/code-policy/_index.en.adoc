@@ -47,7 +47,8 @@ as utf8. Convert to `wxString` for interacting with user interfaces only.
 
 == 4. Integer Types
 
-Where possible, integer types from `cstdint` such as `int32_t`, `int64_t` are used over basic
+Where possible, integer types from `cstdint` such as `int32_t`, `int64_t` should be used over basic
 types like `int` `long int` `long long int`. 
+
 The explicitly named types from `cstdint` make the intention clear and avoid accidental
-bugs like forgetting `long int` is 64-bit on Linux and 32-bit on Windows.
+bugs such as forgetting `long int` is 64-bit on Linux and 32-bit on Windows.
