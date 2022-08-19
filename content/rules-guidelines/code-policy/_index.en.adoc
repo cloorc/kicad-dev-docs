@@ -39,14 +39,15 @@ NOTE: The only exception is the {link-with-underscores}[wxWidgets Debugging Macr
       aware of coding issues without having to run from the command line or
       in a debugger to see assertion messages.
 
+
+=== 3.1. std::string vs wxString
+
+When possible, use std::string for internal kicad data structures and treat the contents of the std::string
+as utf8. Convert to `wxString` for interacting with user interfaces only.
+
 == 4. Integer Types
 
 Where possible, integer types from `cstdint` such as `int32_t`, `int64_t` are used over basic
 types like `int` `long int` `long long int`. 
 The explicitly named types from `cstdint` make the intention clear and avoid accidental
 bugs like forgetting `long int` is 64-bit on Linux and 32-bit on Windows.
-
-== 5. std::string vs wxString
-
-When possible, use std::string for internal kicad data structures. Treat the contents of the std::string
-as utf8. Convert to `wxString` for interacting with user interfaces only.
