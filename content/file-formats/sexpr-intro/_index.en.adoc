@@ -1488,6 +1488,7 @@ The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can b
     GRAPHIC_ITEMS...                                            <8>
     PINS...                                                     <9>
     UNITS...                                                    <10>
+    [(unit_name "UNIT_NAME")]                                   <11>
   )
 ```
 
@@ -1520,6 +1521,8 @@ The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can b
 <9> The <<_symbol_pin,PINS>> section is a list of pins that are used by the symbol. This section
     can be empty if the symbol does not have any pins.
 <10> The optional UNITS can be one or more child `symbol` tokens embedded in a parent `symbol`.
+<11> The optional `unit_name` token defines the display name of a subunit in the symbol editor and 
+    symbol chooser. It is only permitted for child `symbol` tokens embedded in a parent `symbol`.
 
 
 ==== Symbol Property
