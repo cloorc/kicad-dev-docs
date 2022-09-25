@@ -1525,7 +1525,7 @@ The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can b
     symbol chooser. It is only permitted for child `symbol` tokens embedded in a parent `symbol`.
 
 
-==== Symbol Property
+==== Symbol Properties
 
 The `property` token defines a symbol property when used inside a `symbol` definition.
 
