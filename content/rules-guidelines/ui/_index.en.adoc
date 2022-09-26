@@ -35,7 +35,7 @@ would override platform defaults/theme settings must be avoided.
 
 For all visible text used within KiCad, follow recommendations in the
 capitalization section in the
-https://developer.gnome.org/hig/stable/writing-style.html.en[writing style section of the GNOME User
+https://developer.gnome.org/hig/guidelines/writing-style.html[writing style section of the GNOME User
 Interface Guidelines].  This applies to all Menus, Titles, Labels, Tooltips,
 Buttons, etc.
 
