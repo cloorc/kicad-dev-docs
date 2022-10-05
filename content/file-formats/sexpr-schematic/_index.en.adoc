@@ -22,15 +22,14 @@ Because KiCad schematics can support multiple instances of the same schematic us
 sheets, information for shared sheets is done using paths consisting of the
 xref:../sexpr-intro/index.adoc#_universally_unique_identifier[universally unique identifiers]
 that represent the hierarchical path for the sheet the instance separated by a forward slash
-('/').  The root schematic path is just a forward slash.  A typical instance path would look
-like:
+('/').  A typical instance path would look like:
 
 ```
 "/00000000-0000-0000-0000-00004b3a13a4/00000000-0000-0000-0000-00004b617b88"
 ```
 
-NOTE: The last identifier can only be a valid <<_hierarchical_sheet_section,hiearchical sheet>>
-      or a <<_symbol_section,schematic symbol>>.
+WARNING: The fist identifier must be the root <<_hierarchical_sheet_section,hierarchical sheet>>
+         which is the same identifier as the root schematic file.
 
 
 === Label and Pin Shapes
@@ -84,9 +83,9 @@ A schematic file includes the following sections:
 * <<_graphical_text_section,Graphical Text Section>>
 * <<_local_label_section,Local Label Section>>
 * <<_global_label_section,Global Label Section>>
+* <<_symbol_section,Symbol Section>>
 * <<_hierarchical_sheet_section,Hierarchical Sheet Section>>
 * <<_hierarchical_sheet_instance_section,Hierarchical Sheet Instance Section>>
-* <<_symbol_instance_section,Symbol Instance Section>>
 
 
 == Header Section
@@ -119,10 +118,13 @@ The `uuid` token defines the globally unique identifier that identifies the sche
   UNIQUE_IDENTIFIER                                             <1>
 ```
 
+NOTE Only the root schematic identifier is used as the virtual root sheet identifier.  All other
+     identifiers are belong to <<_hierarchical_sheet_section,hierarchical sheet objects>>.
+
 <1> The UNIQUE_IDENTIFIER defines the
     xref:../sexpr-intro/index.adoc#_universally_unique_identifier[universally unique identifier]
     for the schematic file.  This identifier is used when creating hierarchical sheet paths which
-    are used to reference <<_symbol_instance_section,symbol>> and
+    are used to reference symbol instance data and
     <<_hierarchical_sheet_instance_section,hierarchical sheet instance>> information.
 
 
@@ -387,6 +389,20 @@ The `symbol` token in the symbol section of the schematic defines an instance of
     UNIQUE_IDENTIFIER                                           <6>
     PROPERTIES                                                  <7>
     (pin "1" (uuid e148648c-6605-4af1-832a-31eaf808c2f8))       <8>
+    (instances                                                  <9>
+      (project "PROJECT_NAME"                                   <10>
+        (path "PATH_INSTANCE"                                   <11>
+          (reference "REFERENCE")                               <12>
+          (unit UNIT)                                           <13>
+          (value "VALUE")                                       <14>
+          (footprint "LIBRARY_IDENTIFIER")                      <15>
+        )
+
+        ;; Optional instances for this `project`...
+      )
+
+      ;; Optional instances for other `project`...
+    )
   )
 ```
 
@@ -409,6 +425,21 @@ The `symbol` token in the symbol section of the schematic defines an instance of
 <7> The PROPERTIES section defines a list of
     xref:../sexpr-intro/index.adoc#_symbol_property[symbol properties] of the schematic symbol.
 <8> The `pin` token attributes define ???.
+<9> The `instances` token defines a list of symbol instances grouped by project.  Every symbol
+    will have a least one instance.
+<10> The `project` token attribute defines the name of the project to which the instance data
+     belongs.  There can be instance data from other project when schematics are shared across
+     multiple projects.  The projects will be sorted by the `PROJECT_NAME` in alphabetical order.
+<11> The `path` token attribute is the <<_instance_path,path to the sheet instance>> for the
+     instance data.
+<12> The `reference` token attribute is a string that defines the reference designator for the
+     symbol instance.
+<13> The `unit` token attribute is a integer ordinal that defines the symbol unit for the symbol
+     instance.  For symbols that do not define multiple units, this will always be 1.
+<14> The `value` token attribute is a string that defines the value field for the symbol instance.
+<15> The `footprint` token attribute is a string that defines the
+     xref:../sexpr-intro/index.adoc#_library_identifier[LIBRARY_IDENTIFIER] for footprint
+     associated with the symbol instance.
 
 
 == Hierarchical Sheet Section
@@ -511,31 +542,3 @@ section will only exist in schematic files that are the root sheet of a project.
 <2> The `page` token defines the page number of the schematic represented by the sheet instance
     information.  Page numbers can be any valid string.
 
-
-== Symbol Instance Section
-
-The `symbol_instance` token defines the per symbol information for the entire schematic.  This
-section will only exist in schematic files that are the root sheet of a project.
-
-
-=== Symbol Instance Information
-
-```
- (path
-    PATH_INSTANCE                                               <1>
-    (reference "REFERENCE")                                     <2>
-    (unit UNIT)                                                 <3>
-    (value "VALUE")                                             <4>
-    (footprint "LIBRARY_IDENTIFIER")                            <5>
-  )
-```
-
-<1> The INSTANCE_PATH attribute is the <<_instance_path,path to the sheet instance>>.
-<2> The `reference` token attribute is a string that defines the reference designator for the
-    symbol instance.
-<3> The `unit` token attribute is a integer ordinal that defines the symbol unit for the symbol
-    instance.  For symbols that do not define multiple units, this will always be 1.
-<4> The `value` token attribute is a string that defines the value field for the symbol instance.
-<5> The `footprint` token attribute is a string that defines the
-    xref:../sexpr-intro/index.adoc#_library_identifier[LIBRARY_IDENTIFIER] for footprint
-    associated with the symbol instance.
