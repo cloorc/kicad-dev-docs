@@ -14,7 +14,7 @@ Some of these tools are required to build from source and some are optional.
 
 https://cmake.org[CMake] is the build configuration and makefile generation tool used by KiCad.  It is required.
 
-
+[#git,reftext=Git]
 === Git Version Control System
 
 The official source code repository is hosted on https://gitlab.com/[GitLab] and requires https://git-scm.com/[git] to get
@@ -59,7 +59,7 @@ The https://www.boost.org/[Boost] {cpp} library version 1.59 or greater is requi
 === GLEW OpenGL Extension Wrangler Library
 
 The http://glew.sourceforge.net/[OpenGL Extension Wrangler] is an OpenGL helper library used by the KiCad graphics
-abstraction library [GAL] and is always required to build KiCad.
+abstraction library (GAL) and is always required to build KiCad.
 
 === ZLib Library
 
@@ -69,12 +69,12 @@ and is always required to build KiCad.
 === GLM OpenGL Mathematics Library
 
 The http://glm.g-truc.net/[OpenGL Mathematics Library] is an OpenGL helper library used by the KiCad graphics
-abstraction library [GAL] and is always required to build KiCad.
+abstraction library (GAL) and is always required to build KiCad.
 
 === GLUT OpenGL Utility Toolkit Library
 
 The https://www.opengl.org/resources/libraries/glut/[OpenGL Utility Toolkit] is an OpenGL helper library used by the KiCad graphics
-abstraction library [GAL] and is always required to build KiCad.
+abstraction library (GAL)and is always required to build KiCad.
 
 === Cairo 2D Graphics Library
 
@@ -98,15 +98,16 @@ have been known to cause runtime issues.
 === Curl Multi-Protocol File Transfer Library
 
 The http://curl.haxx.se/libcurl/[Curl Multi-Protocol File Transfer Library] is used to provide secure internet
-file transfer access for the [GitHub][] plug in.  This library needs to be installed unless
-the GitHub plug build option is disabled.
+file transfer access for the Plugin and Content Manager.
 
+[#libocct, reftext=OpenCascade]
 === OpenCascade Library
 
 https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] is used to provide support for loading and saving
 3D model file formats such as STEP.  This library needs to be installed unless the OCC build
 option is disabled.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make building easier
 
+[#ngspice,reftext=Ngspice]
 ==== Ngspice Library
 
 The https://sourceforge.net/projects/ngspice/[Ngspice Library] is used to provide Spice simulation support in the schematic
@@ -127,14 +128,14 @@ Pcbnew including the wxPython console.
 === Integrated Spice simulator
 
 The KICAD_SPICE option is used to control if the Spice simulator interface for Eeschema is
-built.  When this option is enabled, it requires [ngspice][] to be available as a shared
+built.  When this option is enabled, it requires <<ngspice>> to be available as a shared
 library.  This option is enabled by default.
 
 === STEP/IGES support for the 3D viewer
 
 The KICAD_USE_OCC is used for the 3D viewer plugin to support STEP and IGES 3D models. Build tools
 and plugins related to OpenCascade (OCC) are enabled with this option. When
-enabled it requires [libocct][] to be available.  This option is enabled by default.
+enabled it requires <<libocct>> to be available.  This option is enabled by default.
 
 === Wayland EGL support
 
@@ -170,7 +171,7 @@ KICAD_STDLIB_DEBUG and KICAD_STDLIB_LIGHT_DEBUG. Both these options are disabled
 one should be turned on at a time with KICAD_STDLIB_DEBUG taking precedence.
 
 The KICAD_STDLIB_LIGHT_DEBUG option enables the light-weight standard library assertions by passing
-`_GLIBCXX_ASSERTIONS ` into CXXFLAGS. This enables things such as bounds checking on strings, arrays
+`_GLIBCXX_ASSERTIONS` into CXXFLAGS. This enables things such as bounds checking on strings, arrays
 and vectors, as well as null pointer checks for smart pointers.
 
 The KICAD_STDLIB_DEBUG option enables the full set of standard library assertions by passing
@@ -224,12 +225,12 @@ is appended along with a leading '-' to the full version string as follows:
 
     (KICAD_VERSION[-KICAD_VERSION_EXTRA])
 
-The build script automatically creates the version string information from the [git][] repository
+The build script automatically creates the version string information from the <<git>> repository
 information as follows:
 
     (5.0.0-rc2-dev-100-g5a33f0960)
      |
-     output of `git describe --dirty` if git is available.
+     output of "git describe --dirty" if git is available.
 
 
 === KiCad Config Directory
@@ -269,7 +270,7 @@ from the build directory.
 == Getting the KiCad Source Code
 
 There are several ways to get the KiCad source.  If you want to build the stable version you
-can down load the source archive from the [GitLab][] repository.  Use tar or some
+can down load the source archive from the https://gitlab.com/kicad/code/kicad/[GitLab] repository.  Use tar or some
 other archive program to extract the source on your system.  If you are using tar, use the
 following command:
 
