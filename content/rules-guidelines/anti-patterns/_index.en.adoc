@@ -16,6 +16,42 @@ please fix them.
 WARNING: Do not modify this document without the consent of the project leader.
          All changes to this document require approval.
 
+=== Bare Enumerations
+
+Bare enums are declared like this
+
+```c++
+enum LAST_LAYOUT {
+    NONE,
+    ALIAS,
+    PARENT
+};
+```
+
+These are problematic
+because they declare the simple keywords `NONE`, `ALIAS` and `PARENT` into the 
+global scope.  These then clash with enums or worse, defines, that exist in other
+header or source files used in the project.
+
+The solution is to use https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations[scoped enums].  In this form, the enum is 
+
+```c++
+enum class LAST_LAYOUT {
+    NONE,
+    ALIAS,
+    PARENT
+};
+
+LAST_LAYOUT l = LAST_LAYOUT::NONE;
+ 
+switch(l)
+{
+    case LAST_LAYOUT::NONE   : std::cout << "NONE\n";   break;
+    case LAST_LAYOUT::ALIAS  : std::cout << "ALIAS\n";  break;
+    case LAST_LAYOUT::PARENT : std::cout << "PARENT\n"; break;
+}
+```
+
 === Dereferencing Pointers
 
 Dereferencing an invalid pointer almost always results in a crash.  **Never**
