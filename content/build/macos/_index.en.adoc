@@ -52,7 +52,7 @@ cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
 ./ci/arm64-on-arm64/bootstrap.sh
-./build.py --arch arm64 --target setup-kicad-dependencies
+WX_SKIP_DOXYGEN_VERSION_CHECK=1 ./build.py --arch arm64 --target setup-kicad-dependencies
 ```
 
 Or, on an x86_64 (Intel) machine:
@@ -63,7 +63,7 @@ cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
 ./ci/x86_64-on-x86_64/bootstrap.sh
-./build.py --arch x86_64 --target setup-kicad-dependencies
+WX_SKIP_DOXYGEN_VERSION_CHECK=1 ./build.py --arch x86_64 --target setup-kicad-dependencies
 ```
 
 NOTE: The first command, `boostrap.sh`, will install Homebrew if it is not already installed, and
