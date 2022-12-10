@@ -24,9 +24,18 @@ repository for guidance as to which packages to install and how to configure and
 
 NOTE: KiCad requires a custom fork of wxWidgets on macOS to work properly. This fork is hosted at
       https://gitlab.com/kicad/code/wxWidgets[the KiCad GitLab].  Currently, the
-      `kicad/macos-wx-3.1` branch should be used to build the master branch of KiCad.  If you use
+      `kicad/macos-wx-3.2` branch should be used to build the master branch of KiCad.  If you use
       `kicad-mac-builder` to set up your build environment, the correct version of wxWidgets will
       be downloaded and built for you automatically.
+
+=== Prerequisites
+
+As of version 7, KiCad requires macOS 11 or higher to build (the build outputs can be run on some
+older verisons of macOS).  KiCad supports Apple's arm64 architecture as well as x86_64, and the
+packaging scripts can produce a "universal binary" that will run on either architecture.  You must
+take care to maintain a consistent architecture when building on arm64, which `kicad-mac-builder`
+will try to ensure for you.  Building some of the dependencies for `arm64` and some for `x86_64`
+will result in linker errors (or Python errors) later in the process.
 
 === Setting up development environment using kicad-mac-builder
 
@@ -34,25 +43,49 @@ This guide assumes you already have the appropriate Apple C++ development toolch
 your macOS release installed.  See Apple's documentation for details on how to install Xcode or the
 Xcode command-line tools.  `kicad-mac-builder` will not install this for you.
 
-To obtain `kicad-mac-builder` and set up the KiCad build dependencies, run the following:
+To obtain `kicad-mac-builder` and set up the KiCad build dependencies, run the following on an
+Apple arm64 machine:
 
 [source,sh]
 ```
 cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
-./ci/src/bootstrap.sh
-./build.py --target setup-kicad-dependencies
+./ci/arm64-on-arm64/bootstrap.sh
+./build.py --arch arm64 --target setup-kicad-dependencies
+```
+
+Or, on an x86_64 (Intel) machine:
+
+[source,sh]
+```
+cd <your preferred working directory>
+git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
+cd kicad-mac-builder
+./ci/x86_64-on-x86_64/bootstrap.sh
+./build.py --arch x86_64 --target setup-kicad-dependencies
 ```
 
 NOTE: The first command, `boostrap.sh`, will install Homebrew if it is not already installed, and
       install all the KiCad dependencies that are available as Homebrew packages.  You may wish to
       manually install the required dependencies instead of running this script.  If so, simply
-      inspect the script to see the current list of required Homebrew packages to install.
+      inspect the script to see the current list of required Homebrew packages to install.  The
+      example bootstrap scripts are used for native compilation on the two Apple architectures.
+      There is also an `x86_64-on-arm64` option that can be used for cross-compilation on arm64
+      machines.
+
+WARNING: The bootstrapping scripts are designed to run in a "clean" installation of macOS on our CI
+         build machines.  If you already have Homebrew installed to a non-standard directory, do
+         not run `bootstrap.sh`.  Instead, inspect the script and adapt the commands in it to your
+         environment.  If you already have Python installed, especially if you use a tool like
+         `pyenv` to manage Python versions, you must ensure that the `python3` that is found first
+         on your `PATH` matches the target architecture you are building KiCad for.
 
 At the end of the `kicad-mac-builder` build process, `build.py` will print a list of suggested
 CMake arguments to the terminal.  **Copy this output to a safe place: you will need to refer to it
 when you set up your KiCad build.**
+
+=== Building KiCad
 
 Now you are ready to build KiCad itself.  Run the following to obtain and build KiCad:
 
@@ -82,3 +115,29 @@ build that can be debugged using `lldb`.
 
 NOTE: We recommend using Ninja instead of `make` for faster builds.  To do so, run
       `brew install ninja` and then add `-G Ninja` to your `cmake` arguments.
+
+=== Running and debugging
+
+On macOS, it is not currently possible to run the build outputs from the build directory as can be
+done on other platforms.  You must run `make install` (or `ninja install`) to package a complete
+`KiCad.app` and then launch that.  You can use `lldb` to debug the application, or attach to a
+running copy.
+
+The installed package will be self-signed by the installation process.  This will allow it to run
+on the local machine, but this package cannot be distributed to other machines without triggering
+Apple's security measures.
+
+=== Updating dependencies
+
+At the moment, `kicad-mac-builder` is designed to run in a "clean-slate" environment and does not
+automatically handle dependency updates.  From time to time, you may wish to update your KiCad
+build dependencies.  To do so:
+
+1) Run `git pull` inside your `kicad-mac-builder` folder to sync with KiCad upstream.
+2) Delete the contents of the `./build` directory.
+3) Re-run the `setup-kicad-dependencies` step as described above.
+
+NOTE: It is possible to rebuild only certain dependencies by deleting certain folders inside the
+      `./build` directory, however this is an advanced usage and will not be documented here.
+      Inspect the `cmake` files inside the `kicad-mac-builder` subdirectory to figure out what to
+      do.
