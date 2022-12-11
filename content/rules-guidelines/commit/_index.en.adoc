@@ -85,7 +85,7 @@ Following is an example of a properly formatted commit message:
 == Git Aliases File
 
 There is a file containing helpful git aliases located at
-`helpers/git/fixes_alias`. To install it, run in the source repository:
+`tools/git/fixes_alias`. To install it, run in the source repository:
 
 ```sh
     git config --add include.path $(pwd)/tools/git/fixes_alias
