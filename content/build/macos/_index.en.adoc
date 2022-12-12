@@ -51,7 +51,7 @@ Apple arm64 machine:
 cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
-./ci/arm64-on-arm64/bootstrap.sh
+./ci/arm64-on-arm64/bootstrap-arm64-on-arm64.sh
 WX_SKIP_DOXYGEN_VERSION_CHECK=1 ./build.py --arch arm64 --target setup-kicad-dependencies
 ```
 
@@ -62,7 +62,7 @@ Or, on an x86_64 (Intel) machine:
 cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
-./ci/x86_64-on-x86_64/bootstrap.sh
+./ci/x86_64-on-x86_64/bootstrap-x86_64-on_x86_64.sh
 WX_SKIP_DOXYGEN_VERSION_CHECK=1 ./build.py --arch x86_64 --target setup-kicad-dependencies
 ```
 
