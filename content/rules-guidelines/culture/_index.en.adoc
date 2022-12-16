@@ -14,6 +14,7 @@ for current lead developers in how to manage and resolve uncertainty and conflic
 
 === Base Guidelines
 - We are a team of equals.
+- We respect our userbase.
 - We respect each others’ contributions.
 - The code we contribute belongs to everyone.
 - In a disagreement, everyone gives a little.
@@ -30,9 +31,29 @@ In the event a decision is deadlocked after multiple developers have weighed in,
 
 We also recognize that we each bring different experiences to the team.  We will try to give weight to the lead developers who actively use a particular feature when deciding on implementation issues.
 
+=== We respect our userbase
+
+We all come to this project, developers and users, with differing expectations, experiences and english fluency.  When dealing with
+each other, it is inevitable that these differences will lead to conflict over politeness, appropriate expectations or any of the myriad
+other _impedance mismatches_ we might have in our communications.
+
+As lead developers, our behavior in public project spaces reflects on the project as a whole.  We will hold ourselves to a higher
+standard in our behavior than the standard to which we hold the end users.
+
+We will not respond to any issue report, merge request or forum post when we feel annoyed or irritated by the person posting or by
+the content of the post.  We provide a Zulip channel where lead developers can tag others to take on the burden of calmly responding.  We will do the following:
+
+1. Post a link to the page in question
+2. (optional) Express any frustrations we have
+3. Say why this content is wrong
+
+(1) and (3) are required.  (2) is optional but available if it helps to diffuse the emotion around the content.  At this point, another, disinterested lead developer will take on the task of responding.  You get to go back to coding other things.
+
+Failing to follow this guideline will inevitably lead to drama.  And drama sucks time from both you, the other person and the rest of the 
+lead developer team as we end up dealing with the response and not the actual content.  
+
 
 === We respect each others’ contributions
-We respect the contributions of each developer.  
 While we all make mistakes, we will not revert the contributions of 
 other developers without their explicit consent, even when we think 
 that they might not have implemented something in accordance with our 
@@ -49,7 +70,7 @@ commit can be reverted after publicly (either on GitLab or Zulip)
 discussing and agreeing on this with the rest of the lead development team.
 
 When we disagree with a contribution made by another developer, we will 
-address it directly with them respectfully.  Examples of respectful 
+address it directly with them politely.  Examples of polite 
 feedback might include:
 
 > This code doesn’t work for me when I…
@@ -58,7 +79,7 @@ Or
 
 > I think that this code will cause problems because…
 
-Examples of disrespectful feedback that we will avoid include:
+Examples of rude feedback that we will avoid include:
 
 > This code stinks/sucks/is really bad/etc
 
@@ -66,7 +87,8 @@ Or
 
 > Whoever screwed up this part of the codebase…
 
-Naturally, we are all welcome to provide ourselves with as much disrespectful feedback on code we have written as we can handle. :)
+Naturally, we are all welcome to provide ourselves with as much impolite
+feedback on code we have written as we can handle. :)
 
 === The code we contribute belongs to everyone
 We are a free/libre open source community.  Everything that we contribute to the KiCad project belongs to and is the responsibility of the whole KiCad development team.  Copyrights on new files will be assigned to the KiCad Development team.  They may be additionally assigned to a primary author or sponsor of the code that is written, but this does not mean that the original author has veto power or even greater weight in the discussions of how the code develops.
