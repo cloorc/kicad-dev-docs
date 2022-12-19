@@ -140,8 +140,8 @@ All text objects can have an optional `effects` section that defines how the tex
       [italic]                                                  <6>
       [(line_spacing LINE_SPACING)]                             <7>
     )
-    [(justify [left | right] [top | bottom] [mirror])]          <8>
-    [hide]                                                      <9>
+    [(justify [left | right] [top | bottom] [mirror])]          <8><9>
+    [hide]                                                      <10>
   )
 ```
 
@@ -157,7 +157,8 @@ All text objects can have an optional `effects` section that defines how the tex
 <8> The optional `justify` token attributes define if the text is justified horizontally `right`
     or `left` and/or vertically `top` or `bottom` and/or mirrored.  If the justification is not
     defined, then the text is center justified both horizontally and vertically and not mirrored.
-<9> The optional `hide` token defines if the text is hidden.
+<9> The `mirror` token is only supported in the PCB Editor and Footprints.
+<10> The optional `hide` token defines if the text is hidden.
 
 
 === Page Settings
