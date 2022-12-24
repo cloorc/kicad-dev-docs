@@ -25,7 +25,10 @@ file.  This approach is shown with some examples in the https://docs.kicad.org/m
 documentation].
 
 Another documentation source is the auto-generated Doxygen reference of the
-API. It can be found http://docs.kicad.org/doxygen-python/namespacepcbnew.html[here].
+API. It can be found here:
+
+http://docs.kicad.org/doxygen-python-6.0/namespacepcbnew.html[KiCad 6.0]
+http://docs.kicad.org/doxygen-python-nightly/namespacepcbnew.html[KiCad Nightly]
 
 == "Action Plugin" Support
 Besides the stand-alone usage of the generated Python plugin interface,
