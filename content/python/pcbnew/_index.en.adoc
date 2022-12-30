@@ -132,7 +132,7 @@ it in pcbnew preferences.
 
 === Complex Plugin Example
 The complex plugin example represents a single Python package that is imported
-on Pcbnew startup.  When the Python package is imported, the `__init__.py` file
+on Pcbnew startup.  When the Python package is imported, the `\\__init__.py` file
 is executed and is thus a perfect place to instantiate and register the plugin
 to Pcbnew.
 The big advantage here is, that you can modularize your plugin much better and
@@ -177,7 +177,7 @@ class ComplexPluginAction(pcbnew.ActionPlugin):
         print("Hello World")
 ----
 
-The `__init__.py` file is then used to instantiate and register the plugin to
+The `\\__init__.py` file is then used to instantiate and register the plugin to
 Pcbnew as follows.
 
 [source,python]
@@ -189,7 +189,7 @@ ComplexPluginAction().register() # Instantiate and register to Pcbnew
 As described in https://www.python.org/dev/peps/pep-0338/[PEP 338] Python can
 execute packages (or modules) as scripts.  This can be useful to implement a
 command-line stand-alone version of your KiCad plugin with minimum effort.
-In order to implement this feature, a `__main__.py` file is created in the
+In order to implement this feature, a `\\__main__.py` file is created in the
 package directory.
 This file can be executed by running the following command.
 
@@ -199,6 +199,6 @@ Make sure that your current directory is the parent directory of the package
 directory when running the command.
 In these examples, this would be `~/.kicad_plugins`.
 When running the command the Python interpreter runs
-`/complex_plugin/__init__.py` followed by `/complex_plugin/__main__.py`.
+`/complex_plugin/\\__init__.py` followed by `/complex_plugin/\\__main__.py`.
 
 
