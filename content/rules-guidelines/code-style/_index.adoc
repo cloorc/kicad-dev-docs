@@ -110,7 +110,7 @@ Then you can use the following aliases:
 * `git check-format`: show any formatting warnings (but make no changes)
 * `git fix-format`: correct formatting (you will need to `git add` afterwards)
 
-These aliases use a script, `tools/check-coding.sh`, which takes care of only
+These aliases use a script, `tools/check_coding.sh`, which takes care of only
 checking the formatting for files that should be formatted. This script has
 other uses:
 
