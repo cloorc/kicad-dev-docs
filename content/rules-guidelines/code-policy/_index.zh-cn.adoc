@@ -17,7 +17,9 @@ KiCad 是一个跨平台项目。 因此，所有依赖库都必须为所有 htt
 
 == 3. 底层对象设计
 
-所有与用户界面设计不直接相关的 KiCad 底层对象必须不依赖于用户界面代码。 这包括所有 `SCH_*`、`LIB_*`、`PCB_*`、`FP_* 和 `I/O` 插件对象:link-with-underscores: https://docs.wxwidgets.org/3.0/group__group__funcmacro__debug.html
+所有与用户界面设计不直接相关的 KiCad 底层对象必须不依赖于用户界面代码。 这包括所有 `SCH_*`、`LIB_*`、`PCB_*`、`FP_* 和 `I/O` 插件对象
+
+:link-with-underscores: https://docs.wxwidgets.org/3.0/group__group__funcmacro__debug.html
 
 NOTE: 唯一的例外是 {link-with-underscores}[wxWidgets 调试宏]。原因是 wxWidgets 的用户界面代码只用于调试构建。 这样做的好处是，开发人员可以意识到编码问题，而不必从命令行或调试器中运行来查看断言信息。
 
