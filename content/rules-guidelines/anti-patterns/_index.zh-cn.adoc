@@ -1,0 +1,121 @@
+---
+title: 反模式
+weight: 11
+summary: 为 KiCad 项目编写代码的反模式指南。
+---
+
+:toc:
+
+== 简介
+
+本文档的目的是为 KiCad 项目提供如何 **不** 写代码的指南。 反模式是指那些似乎经常出现但不应该出现的代码做法。 如果你的代码中包含这些模式，请修正它们。
+
+WARNING: 未经项目负责人同意，请勿修改本文件。
+         对本文件的所有修改都需要批准。
+
+=== 枚举基础
+
+基础的枚举是这样声明的
+
+```c++
+enum LAST_LAYOUT {
+    NONE,
+    ALIAS,
+    PARENT
+};
+```
+
+这些都是有问题的，因为它们将简单的关键字 `NONE`、`ALIAS` 和 `PARENT` 声明到全局范围。 这些都会与项目中使用的其他头文件或源文件中存在的枚举或更糟的定义发生冲突。
+
+解决方案是使用 https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations[作用域枚举]。 在这种形式下，该枚举是
+
+```c++
+enum class LAST_LAYOUT {
+    NONE,
+    ALIAS,
+    PARENT
+};
+
+LAST_LAYOUT l = LAST_LAYOUT::NONE;
+ 
+switch(l)
+{
+    case LAST_LAYOUT::NONE   : std::cout << "NONE\n";   break;
+    case LAST_LAYOUT::ALIAS  : std::cout << "ALIAS\n";  break;
+    case LAST_LAYOUT::PARENT : std::cout << "PARENT\n"; break;
+}
+```
+
+=== 析构指针
+
+析构一个无效的指针几乎总是导致崩溃。 **永远不要** 假设一个指针是有效的。 即使有问题的代码以前从未崩溃过，这也不意味着将来有人会破坏一些东西。 使用断言来帮助开发人员在开发过程中捕获无效的指针。 比断言更好的是，你可以使用 link:https://docs.wxwidgets.org/3.0/group__group__funcmacro__debug.html[wxWidgets 调试宏]，它可以在调试构建中提出断言，并在发布构建中优雅地处理运行时问题。 如果你担心拉入 wxWidgets 的用户界面代码，有一些只用头的 C++ 断言库可用。
+
+避免默默地隐藏潜在的坏指针的诱惑。 如下的代码。
+
+```c++
+void SomeFunction( SomeObject* somePointer )
+{
+    if( somePointer )
+    {
+        somePointer->DeReferencedMethod();
+    }
+}
+```
+
+应替换为:
+
+```c++
+void SomeFunction( SomeObject* somePointer )
+{
+    assert( somePointer )
+
+    somePointer->DeReferencedMethod();
+}
+```
+
+=== wxUpdateUIEvent 的滥用
+
+避免将 https://docs.wxwidgets.org/3.0/classwx_update_u_i_event.html[`wxUpdateUIEvent`] 用于事件对象所提供的方法之外的其他事情。 在 `wxUpdateUIEvent` 处理程序中更新控件通常会触发其他的控件事件，而这些事件又会引发更多的 wxUpdateUIEvents，这就导致了一个无限的事件循环，会导致用户界面的响应速度降低。
+
+如果你不确定你是否在滥用 `wxUpdateUIEvent`，高级配置设置 `UpdateUIEventInterval` 允许你设置产生更新事件的时间（以毫秒为单位），或者 -1 来禁用所有更新事件。 如果减缓或禁用更新事件使用户界面反应更灵敏，那么 `wxUpdateUIEvent` 处理器就是问题所在。
+
+
+=== 翻译部分句子
+
+
+不要把一个翻译句子分成多个 `_()` 标签。 这将使翻译无法理解你的意图，也无法在英语以外的语言中创建语句正确的句子。
+
+例如，以下内容不正确:
+
+```c++
+ShowReport( _( "Duplicate instances of " ) + m_changeArray[j].NewRefDes );
+```
+
+这应该由以下内容代替:
+
+```c++
+ShowReport( wxString::Format( _( "Duplicate instances of %s" ), m_changeArray[j].NewRefDes ) );
+```
+
+新的表述允许译者移动句子的对象。 在原来的表述中，对象（`NewRefDes` 字符串）总是出现在句子的末尾，这在非英语语言中可能在语法上不正确。
+
+
+同样地，不要把句子分成这样的部分:
+
+```c++
+wxString verb  = updateMode ? _( "Update" ) : _( "Change" );
+wxString warning = _( "%s all items on the board?" );
+
+wxMsgBox( wxString::Format( warning, verb ) );
+```
+
+在英语中，`Update` 这个词既是名词又是动词。 如果没有上下文，译者将不知道该使用哪个版本。 此外，译者将不清楚 `verb` 字符串是由 `warning` 字符串使用的，因为它们不会一起出现在翻译文件中。
+
+相反，我们必须明确地写出这些句子:
+
+```c++
+wxString msg = updateMode ? _( "Update all items on the board?" ) :
+                            _( "Change all items on the board?" );
+
+wxMsgBox( msg );
+```
