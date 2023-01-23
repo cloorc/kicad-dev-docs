@@ -153,33 +153,34 @@ Example `metadata.json` for a color theme:
 }
 ```
 
-===== Mandatory fields
+===== Fields
 
-`$schema`: must contain the URL to the current KiCad addon JSON schema
+`$schema`: **(optional)** Must contain the URL to the current KiCad package JSON schema
            (https://go.kicad.org/pcm/schemas/v1)
 
-`name`: the human-readable name of the package (may contain any valid UTF-8 characters)
+`name`: **(required)** The human-readable name of the package (may contain any valid UTF-8 characters)
 
-`description`: a short free-form description of the package that will be shown in the PCM alongside
+`description`: **(required)** A short free-form description of the package that will be shown in the PCM alongside
                the package name.  May contain a maximum of 150 characters.
 
-`description_full`: a long free-form description of the package that will be shown in the PCM when
+`description_full`: **(required)** A long free-form description of the package that will be shown in the PCM when
                     the package is selected by the user.  May include line breaks.
 
-`identifier`: the unique identifier for the package.  May contain only alphanumeric characters and
+`identifier`: **(required)** The unique identifier for the package.  May contain only alphanumeric characters and
               the dash (`-`) symbol.  Must be between 2 and 50 characters in length.  Must start
               with a latin character and end with a latin character or a numeral.  See instructions
               below on namespaces for guidelines for selecting an identifier.
 
-`type`: the type of the package; one of `plugin`, `library`, or `colortheme`.
+`type`: **(required)** The type of the package; one of `plugin`, `library`, or `colortheme`.
 
-`author`: object containing one mandatory field, `name`, containing the name of the package
+`author`: **(required)** Object containing one mandatory field, `name`, containing the name of the package
           creator. An optional `contact` field may be present, containing free-form fields with
           contact information.
 
-`maintainer`: same as `author`, but containing information about the maintainer of the package.
+`maintainer`: **(optional)** Semantics same as `author`, but containing information about the maintainer of the package.
+              Can be omitted if same as author.
 
-`license`: a string containing the license under which the package is distributed.
+`license`: **(required)** A string containing the license under which the package is distributed.
 
 The license must be a valid string under link:https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/#license-specification[Debian license rules]
 with the following modifications:
@@ -199,37 +200,70 @@ above:
 - `open-source`: Other Open Source Initiative (OSI) approved license.
 - `unrestricted`: Not an OSI approved license, but not restricted.
 
-`versions`: a list of objects describing package versions.  Each version object can contain the
+`resources`: **(optional)** Additional resource links for the package. Place your website, github,
+             documentation and other links here.
+
+`keep_on_update`: **(optional)** **(since KiCad 7.0)** List of regular expressions describing which files should
+                  be kept on package update. Each file from the extracted package is tested against all regex 
+                  with the `$KICADX_3RD_PARTY` component removed. If it matches any expression then it will not be
+                  deleted. 
+                  
+If your plugin type package archive has `keepme.txt` file directly in `plugins` directory, 
+then path `/plugins/your_package_id/keepme.txt` will be tested against all regex in the list.
+
+[NOTE]
+====
+* For consistency, directory delimiter will always be forward slash (`/`) even on windows. Tested path will have
+  a leading forward slash.
+
+* Dots in package identifier are replaced with underscore (`_`) when extracted.
+
+* When updating the package `keep_on_update` field is used as it is in the repository at the moment of update,
+  not at the moment of previous version installation.
+
+* link:https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions[Extended POSIX] flavour of
+  regular expressions is used.
+
+====
+[TIP]
+====
+If you want to keep all ini and bkp files on update, this regex will work: `.*(\.ini|\.bkp)$`.
+
+If you want to keep all .step files from 3d models directory: `^/3dmodels/.*\.step$`
+====
+
+`versions`: **(required)** A list of objects describing package versions. Each version object can contain the
 following keys:
 
-`version`: A string containing the version of the package (format of this is up to you).
+`version`: **(required)** A string containing the version of the package (format of this is up to you).
 
-`status`: A string containing one of the following:
+`status`: **(required)** A string containing one of the following:
 
 - `stable`: This package is stable for general use.
 - `testing`: This package is in a testing phase, users should be cautious and report issues.
 - `development`: This package is in a development phase and should not be expected to work fully.
 - `deprecated`: This package is no longer maintained.
-- `invalid`: This package is no longer available.
 
-`kicad_version`: The minimum required KiCad version for this package (major.minor).
+`kicad_version`: **(required)** The minimum required KiCad version for this package (major.minor).
 
-`kicad_version_max` (optional): The latest KiCad version this package is compatible with (major.minor).
+`kicad_version_max`: **(optional)** The latest KiCad version this package is compatible with (major.minor).
 
-`download_sha256`: A string containing a SHA-256 hash of the package archive.
+`download_sha256`: **(optional)** A string containing a SHA-256 hash of the package archive.
 
-`download_url`: A string containing a direct download URL for the package archive.
+`download_url`: **(optional)** A string containing a direct download URL for the package archive.
 
-`download_size`: The size of the package archive, in bytes.
+`download_size`: **(optional)** The size of the package archive, in bytes.
 
-`install_size`: The size of the package (uncompressed), in bytes.
+`install_size`: **(optional)** The size of the package (uncompressed), in bytes.
+
+`keep_on_update`: **(optional)** **(since KiCad 7.0)** Same semantics as corresponding field in package struct but
+                  specific to this version. Field of the package version user is updating **to** is used, not the
+                  package user is updating **from**.
 
 NOTE: The `download_*` keys must only be present in the version of the `metadata.json` that you
       submit to the package metadata repository, not in the version of the file that is actually
       present in the package archive.  It is not possible to put a valid `download_sha256` value in
       the `metadata.json` file inside the archive.
-
-TODO: Describe optional fields
 
 === Submission to the official repository
 
