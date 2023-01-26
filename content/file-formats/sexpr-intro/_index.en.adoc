@@ -119,7 +119,7 @@ The `stroke` token defines how the outlines of graphical objects are drawn.
     are:
 * `dash`
 * `dash_dot`
-* `dash_dot_dot`  (version 7)
+* `dash_dot_dot`  (from version 7)
 * `dot`
 * `default`
 * `solid`
@@ -147,7 +147,7 @@ All text objects can have an optional `effects` section that defines how the tex
 
 <1> The `font` token attributes define how the text is shown.
 <2> The optional `face` token indicates the font family.  It should be a TrueType font family
-    name or "KiCad Font" for the KiCad stroke font.  (Kicad version 7)
+    name or "KiCad Font" for the KiCad stroke font.  (from version 7)
 <3> The `size` token attributes define the font height and width.
 <4> The `thickness` token attribute defines the line thickness of the font.
 <5> The `bold` token specifies if the font should be bold.
@@ -544,9 +544,9 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 <7> The `effects` token defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
-===== Footprint Text Box
+===== Footprint Text Box (from version 7)
 
-The `fp_text_box` token defines a rectangle containing line-wrapped text. (KiCad version 7)
+The `fp_text_box` token defines a rectangle containing line-wrapped text.
 
 ```
   (fp_text_box
@@ -604,9 +604,11 @@ The `fp_line` token defines a graphic line in a <<_footprint,footprint definitio
 
 <1> The `start` token defines the coordinates of the beginning of the line.
 <2> The `end` token defines the coordinates of the end of the line.
-<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides on.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides 
+     on.
 <4> The `width` token defines the line width. (prior to version 7)
-<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line.  (version 7)
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line. 
+     (from version 7)
 <6> The optional `locked` token defines if the line cannot be edited.
 <7> The `tstamp` token defines the unique identifier of the line object.
 
@@ -633,7 +635,7 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
     resides on.
 <4> The `width` token defines the line width of the rectangle. (prior to version 7)
 <5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the 
-    rectangle.  (version 7)
+    rectangle.  (from version 7)
 <6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
 <7> The optional `locked` token defines if the rectangle cannot be edited.
@@ -662,7 +664,7 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
     resides on.
 <4> The `width` token defines the line width of the circle. (prior to version 7)
 <5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the circle.
-    (version 7)
+    (from version 7)
 <6> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the circle is not filled.
 <7> The optional `locked` token defines if the circle cannot be edited.
@@ -690,7 +692,8 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
 <3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
 <5> The `width` token defines the line width of the arc. (prior to version 7)
-<6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc.  (version 7)
+<6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc. 
+     (from version 7)
 <7> The optional `locked` token defines if the arc cannot be edited.
 <8> The `tstamp` token defines the unique identifier of the arc object.
 
@@ -716,7 +719,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
     on.
 <3> The `width` token defines the line width of the polygon. (prior to version 7)
 <4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the polygon.  
-    (version 7)
+    (from version 7)
 <5> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
 <6> The optional `locked` token defines if the polygon cannot be edited.
@@ -744,7 +747,7 @@ in a <<_footprint,footprint definition>>.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
 <3> The `width` token defines the line width of the curve. (prior to version 7)
 <4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the curve.  
-    (version 7)
+    (from version 7)
 <5> The optional `locked` token defines if the curve cannot be edited.
 <6> The `tstamp` token defines the unique identifier of the curve object.
 
@@ -896,8 +899,9 @@ a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>
     <<_graphical_rectangle,rectangles>>, <<_graphical_arc,arcs>>, <<_graphical_circle,circles>>,
     <<_graphical_curve,curves>>, <<_graphical_polygon,polygons>>, and 
     <<_annotation_bounding_box,annotation bounding boxes>> that define the shape of the
-    custom pad.  The item definitions only include the geometrical information that defines the
-    item.  The text bounding box defines the location and size of the pad number and netname.
+    custom pad (annotation bounding boxes from version 7).  The item definitions only include 
+    the geometrical information that defines the item.  The text bounding box defines the location 
+    and size of the pad number and netname.
 <2> The `width` token defines the line width of the <<_graphical_items_section,graphical items>>.
 <3> The optional `fill` token attribute `yes` indicates the geometry defined by the
     <<_graphical_items_section,graphical items>> should be filled.
@@ -948,9 +952,9 @@ The `gr_text` token defines graphical text.
 <4> The `tstamp` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
-=== Graphical Text Box
+=== Graphical Text Box (from version 7)
 
-The `gr_text_box` token defines a rectangle containing line-wrapped text. (KiCad version 7)
+The `gr_text_box` token defines a rectangle containing line-wrapped text.
 
 ```
   (gr_text_box
@@ -1125,7 +1129,7 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 <3> The `width` token defines the line width of the curve.
 <4> The `tstamp` token defines the unique identifier of the curve object.
 
-==== Annotation Bounding Box
+==== Annotation Bounding Box (from version 7)
 
 The `gr_bbox` token defines a bounding box inside which annotations (such as pad numbers
 and netnames) will be shown.
@@ -1162,7 +1166,7 @@ The `dimension` token defines a dimension object.
 
 <1> The optional `locked` token specifies if the dimension can be moved.
 <2> The `type` token attribute defines the type of dimension.  Valid dimension types are
-    `aligned`, `leader`, `center`, `orthogonal` (and `radial` in KiCad version 7).
+    `aligned`, `leader`, `center`, `orthogonal`, and `radial` (`radial` from version 7).
 <3> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer] 
     the polygon resides on.
 <4> The `tstamp` token defines the unique identifier of the dimension object.
