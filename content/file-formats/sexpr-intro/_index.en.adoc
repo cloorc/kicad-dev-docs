@@ -924,7 +924,7 @@ The `gr_text` token defines graphical text.
   (gr_text
     "TEXT"                                                      <1>
     POSITION_INDENTIFIER                                        <2>
-    (layer LAYER_DEFINITION)                                    <3>
+    (layer LAYER_DEFINITION [knockout])                         <3>
     (tstamp UUID)                                               <4>
     (effects TEXT_EFFECTS)                                      <5>
   )
@@ -933,7 +933,7 @@ The `gr_text` token defines graphical text.
 <1> The "TEXT" attribute is a quoted string that defines the text.
 <2> The POSITION_IDENTIFER defines the
     <<_position_identifier,X and Y coordinates and optional orientation angle>> of the text.
-<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.  It is optionally followed by a `knockout` token indicating the text should be knocked out.
 <4> The `tstamp` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
