@@ -1213,7 +1213,12 @@ The `format` token attributes define the text formatting of the dimension.
 * 0 - No suffix.
 * 1 - Bare suffix.
 * 2 - Wrap suffix in parenthesis.
-<5> The `precision` token attribute defines the number of significant digits to display.
+<5> The `precision` token attribute defines the number of significant digits to display.  From 
+     version 7, a `precision` above 5 indicates a units-scaled precision:
+* 6 - 0.00 in / 0 mils / 0.0 mm
+* 7 - 0.000 in / 0 mils / 0.00 mm
+* 8 - 0.0000 in / 0.0 mils / 0.000mm
+* 9 - 0.00000 in / 0.00 mils / 0.0000mm
 <6> The optional `override_value` token attribute defines the text to substitute for the actual
     physical dimension.
 <7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
