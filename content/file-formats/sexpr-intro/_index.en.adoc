@@ -544,7 +544,9 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 <7> The `effects` token defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
-===== Footprint Text Box (from version 7)
+===== Footprint Text Box 
+
+(from version 7)
 
 The `fp_text_box` token defines a rectangle containing line-wrapped text.
 
@@ -900,8 +902,8 @@ a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>
     <<_graphical_curve,curves>>, <<_graphical_polygon,polygons>>, and 
     <<_annotation_bounding_box,annotation bounding boxes>> that define the shape of the
     custom pad (annotation bounding boxes from version 7).  The item definitions only include 
-    the geometrical information that defines the item.  The text bounding box defines the location 
-    and size of the pad number and netname.
+    the geometrical information that defines the item.  The annotation bounding box defines the 
+    location (and size) of the pad number and netname.
 <2> The `width` token defines the line width of the <<_graphical_items_section,graphical items>>.
 <3> The optional `fill` token attribute `yes` indicates the geometry defined by the
     <<_graphical_items_section,graphical items>> should be filled.
@@ -952,7 +954,9 @@ The `gr_text` token defines graphical text.
 <4> The `tstamp` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
-=== Graphical Text Box (from version 7)
+=== Graphical Text Box
+
+(from version 7)
 
 The `gr_text_box` token defines a rectangle containing line-wrapped text.
 
@@ -1129,7 +1133,9 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 <3> The `width` token defines the line width of the curve.
 <4> The `tstamp` token defines the unique identifier of the curve object.
 
-==== Annotation Bounding Box (from version 7)
+==== Annotation Bounding Box
+
+(from version 7)
 
 The `gr_bbox` token defines a bounding box inside which annotations (such as pad numbers
 and netnames) will be shown.
