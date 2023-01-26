@@ -895,7 +895,7 @@ a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>
 <1> The graphical items is a list of graphical <<_graphical_line,lines>>,
     <<_graphical_rectangle,rectangles>>, <<_graphical_arc,arcs>>, <<_graphical_circle,circles>>,
     <<_graphical_curve,curves>>, <<_graphical_polygon,polygons>>, and 
-    <<_graphical_text_bounding_boxes,text bounding boxes>> that define the shape of the
+    <<_annotation_bounding_box,annotation bounding boxes>> that define the shape of the
     custom pad.  The item definitions only include the geometrical information that defines the
     item.  The text bounding box defines the location and size of the pad number and netname.
 <2> The `width` token defines the line width of the <<_graphical_items_section,graphical items>>.
@@ -1125,10 +1125,10 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qub
 <3> The `width` token defines the line width of the curve.
 <4> The `tstamp` token defines the unique identifier of the curve object.
 
-==== Graphical Text Bounding Box
+==== Annotation Bounding Box
 
-The `gr_bbox` token defines a bounding box into which graphical text annotations (such as
-pad numbers and netnames) will be shown.
+The `gr_bbox` token defines a bounding box inside which annotations (such as pad numbers
+and netnames) will be shown.
 
 ```
   (gr_bbox
