@@ -404,6 +404,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     [(thermal_width WIDTH)]                                     <19>
     [(thermal_gap DISTANCE)]                                    <20>
     [ATTRIBUTES]                                                <21>
+    [(private_layers LAYER_DEFINITIONS)]
+    [(net_tie_pad_groups PAD_GROUP_DEFINITIONS)]
     GRAPHIC_ITEMS...                                            <22>
     PADS...                                                     <23>
     ZONES...                                                    <24>
@@ -457,16 +459,19 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
      connections for all pads in the footprint.  If not set, the zone `thermal_gap` setting is
      used.  If not set, the zone `thermal_gap` setting is used.
 <21> The optional <<_footprint_attributes,attributes section>> defines the attributes of the 
-    footprint.
-<22> The graphic objects section is a list of one or more
+     footprint.
+<22> An optional list of <<_canonical_layer_names, canonical layer names>> which are private to 
+     the footprint.
+<23> An optional list of <<_net-tie_pad_groups, net tie-pad groups>>.
+<24> The graphic objects section is a list of one or more
      <<_footprint_graphics_items, graphical objects>> in the footprint.  At a minimum, the
      reference designator and value  <<_footprint_text, text objects>> are defined.  All other
      graphical objects are optional.
-<23> The optional pads section is a list of <<_footprint_pad, pads>> in the footprint.
-<24> The optional zones section is a list of
+<25> The optional pads section is a list of <<_footprint_pad, pads>> in the footprint.
+<26> The optional zones section is a list of
      <<_zone,keep out zones>> in the footprint.
-<25> The optional groups section is a list of <<_group, grouped objects>> in the footprint.
-<26> The <<_footprint_3d_model, 3D model section>> defines the 3D model object associated with
+<27> The optional groups section is a list of <<_group, grouped objects>> in the footprint.
+<28> The <<_footprint_3d_model, 3D model section>> defines the 3D model object associated with
      the footprint.
 
 ==== Footprint Attributes
@@ -490,6 +495,11 @@ Footprint `attr` token defines the list of attributes of the footprint.
     should not be included when creating position files.
 <4> The optional `exclude_from_bom` token indicates that the footprint should be excluded when
     creating bill of materials (BOM) files.
+
+==== Net-tie Pad Groups
+
+A space-separated list of quoted strings, each containing a comma-separated list of pad names.  
+Nets attached to pads within a single pad-group are allowed to short.
 
 ==== Footprint Graphics Items
 
