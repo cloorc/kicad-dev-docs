@@ -1115,11 +1115,11 @@ The `gr_poly` token defines a graphical polygon.
 
 ==== Graphical Curve
 
-The `gr_curve` token defines a graphic
+The `bezier` token defines a graphic
 https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve].
 
 ```
-  (gr_curve
+  (bezier
     COORDINATE_POINT_LIST                                       <1>
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
@@ -1659,11 +1659,11 @@ The `circle` token defines a graphical circle in a symbol definition.
 
 ==== Symbol Curve
 
-The `curve` token defines a graphical .
+The `bezier` token defines a graphical .
 https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve].
 
 ```
-  (gr_curve
+  (bezier
     COORDINATE_POINT_LIST                                       <1>
     STROKE_DEFINITION                                           <2>
     FILL_DEFINITION                                             <3>
