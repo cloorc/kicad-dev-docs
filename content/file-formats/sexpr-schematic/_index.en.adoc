@@ -28,8 +28,8 @@ that represent the hierarchical path for the sheet the instance separated by a f
 "/00000000-0000-0000-0000-00004b3a13a4/00000000-0000-0000-0000-00004b617b88"
 ```
 
-WARNING: The fist identifier must be the root <<_hierarchical_sheet_section,hierarchical sheet>>
-         which is the same identifier as the root schematic file.
+WARNING: The fist identifier must be the root <<_hierarchical_sheet_section, sheet>> which is
+         the same identifier as the root schematic file.
 
 
 === Label and Pin Shapes
@@ -85,7 +85,7 @@ A schematic file includes the following sections:
 * <<_global_label_section,Global Label Section>>
 * <<_symbol_section,Symbol Section>>
 * <<_hierarchical_sheet_section,Hierarchical Sheet Section>>
-* <<_hierarchical_sheet_instance_section,Hierarchical Sheet Instance Section>>
+* <<_root_sheet_instance_section,Root Sheet Instance Section>>
 
 
 == Header Section
@@ -394,14 +394,12 @@ The `symbol` token in the symbol section of the schematic defines an instance of
         (path "PATH_INSTANCE"                                   <11>
           (reference "REFERENCE")                               <12>
           (unit UNIT)                                           <13>
-          (value "VALUE")                                       <14>
-          (footprint "LIBRARY_IDENTIFIER")                      <15>
         )
 
-        ;; Optional instances for this `project`...
+        ;; Optional symbol instances for this `project`...
       )
 
-      ;; Optional instances for other `project`...
+      ;; Optional symbol instances for other `project`...
     )
   )
 ```
@@ -436,10 +434,6 @@ The `symbol` token in the symbol section of the schematic defines an instance of
      symbol instance.
 <13> The `unit` token attribute is a integer ordinal that defines the symbol unit for the symbol
      instance.  For symbols that do not define multiple units, this will always be 1.
-<14> The `value` token attribute is a string that defines the value field for the symbol instance.
-<15> The `footprint` token attribute is a string that defines the
-     xref:../sexpr-intro/index.adoc#_library_identifier[LIBRARY_IDENTIFIER] for footprint
-     associated with the symbol instance.
 
 
 == Hierarchical Sheet Section
@@ -457,6 +451,17 @@ The `sheet` token defines a hierarchical sheet of the schematic.
     SHEET_NAME_PROPERTY                                         <7>
     FILE_NAME_PROPERTY                                          <8>
     HIERARCHICAL_PINS                                           <9>
+    (instances                                                  <10>
+      (project "PROJECT_NAME"                                   <11>
+        (path "PATH_INSTANCE"                                   <12>
+          (page "PAGE_NUMBER")                                  <13>
+        )
+
+        ;; Optional sheet instances for this `project`...
+      )
+
+      ;; Optional sheet instances for other `project`...
+    )
   )
 ```
 
@@ -482,6 +487,14 @@ The `sheet` token defines a hierarchical sheet of the schematic.
 <9> The HIERARCHICAL_PINS section is a list of
     <<_hierarchical_sheet_pin_definition, hierarchical pins>> that map a
     <<_hierarchical_label_section,hierarchical label>> defined in the associated schematic file.
+<10> The `instances` token defines a list of sheet instances grouped by project.  Every sheet
+     will have a least one instance.
+<11> The `project` token attribute defines the name of the project to which the instance data
+     belongs.  There can be instance data from other project when schematics are shared across
+     multiple projects.  The projects will be sorted by the `PROJECT_NAME` in alphabetical order.
+<12> The `path` token attribute is the <<_instance_path,path to the sheet instance>> for the
+     sheet instance data.
+<13> The `page` token attribute is a string that defines the page number for the sheet instance.
 
 === Hierarchical Sheet Pin Definition
 
@@ -513,32 +526,15 @@ defined in the associated schematic file.
     for the pin.
 
 
-== Hierarchical Sheet Instance Section
-
-The `sheet_instance` token defines the per sheet information for the entire schematic.  This
-section will only exist in schematic files that are the root sheet of a project.
-
-```
-  (sheet_instances
-    SHEET_INSTANCE_INFO                                         <1>
-    ...
-  )
-```
-
-<1> The SHEET_INSTANCE_INFO is a list of
-    <<_hierarchical_sheet_instance_information,sheet instance information>> for all of the
-    sheets in the design.
-
-=== Hierarchical Sheet Instance Information
+== Root Sheet Instance Section
 
 ```
  (path
-    INSTANCE_PATH                                               <1>
+    "/"                                                         <1>
     (page "PAGE")                                               <2>
   )
 ```
 
-<1> The INSTANCE_PATH attribute is the <<_instance_path,path to the sheet instance>>.
-<2> The `page` token defines the page number of the schematic represented by the sheet instance
-    information.  Page numbers can be any valid string.
-
+<1> The instance path is always empty ("/") since there are no sheets pointing to the root sheet.
+<2> The `page` token defines the page number of the root sheet.  Page numbers can be any valid
+    string.
