@@ -1758,7 +1758,8 @@ The `pin` token defines a pin in a symbol definition.
     valid pin graphical styles and descriptions.
 <3> The POSITION_IDENTIFIER defines the
     <<_position_identifier,X and Y coordinates and rotation angle>> of the connection point of
-    the pin relative to the symbol origin position.
+    the pin relative to the symbol origin position.  The only supported rotation angles for pins
+    are 0, 90, 180, and 270 degrees.
 <4> The `length` token attribute defines the LENGTH of the pin.
 <5> The `name` token defines a quoted string containing the NAME of the pin and the TEXT_EFFECTS
     defines how the <<_text_effects,text is displayed>>.
