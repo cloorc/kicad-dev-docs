@@ -81,8 +81,8 @@ The `at` token defines the positional coordinates and rotation of an object.
 <2> The Y attribute defines the vertical position of the object.
 <3> The optional ANGLE attribute defines the rotational angle of the object.  Not all objects have
     rotational position definitions.
-    
-NOTE: Symbol `text` ANGLEs are stored in tenth's of a degree.  All other ANGLEs are stored in 
+
+NOTE: Symbol `text` ANGLEs are stored in tenth's of a degree.  All other ANGLEs are stored in
       degrees.
 
 
@@ -152,7 +152,7 @@ All text objects can have an optional `effects` section that defines how the tex
 <4> The `thickness` token attribute defines the line thickness of the font.
 <5> The `bold` token specifies if the font should be bold.
 <6> The `italic` token specifies if the font should be italicized.
-<7> The `line_spacing` token specifies the spacing between lines as a ratio of standard line-spacing. 
+<7> The `line_spacing` token specifies the spacing between lines as a ratio of standard line-spacing.
     (Not yet supported)
 <8> The optional `justify` token attributes define if the text is justified horizontally `right`
     or `left` and/or vertically `top` or `bottom` and/or mirrored.  If the justification is not
@@ -227,11 +227,11 @@ The `uuid` token defines an universally unique identifier.
   )
 ```
 
-<1> The UUID attribute is a Version 4 (random) UUID that should be globally unique.  KiCad 
-UUIDs are generated using the https://en.wikipedia.org/wiki/Mersenne_Twister[mt19937 Mersenne Twister] 
+<1> The UUID attribute is a Version 4 (random) UUID that should be globally unique.  KiCad
+UUIDs are generated using the https://en.wikipedia.org/wiki/Mersenne_Twister[mt19937 Mersenne Twister]
 algorithm.
 
-<2> Files converted from legacy versions of KiCad (prior to 6.0) have their locally-unique 
+<2> Files converted from legacy versions of KiCad (prior to 6.0) have their locally-unique
 timestamps re-encoded in UUID format.
 
 
@@ -423,7 +423,7 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <5> The `tedit` token defines a the last time the footprint was edited.
 <6> The `tstamp` token defines the unique identifier for the footprint.  This only applies to
     footprints defined in the board file format.
-<7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational 
+<7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational
     angle of the footprint.  This only applies to footprints defined in the board file format.
 <8> The optional `tags` token defines a string of search tags for the footprint.
 <9> The optional `descr` token defines a string containing the description of the footprint.
@@ -448,19 +448,18 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <18> The optional `zone_connect` token defines how all pads are connected to filled zone.  If not
      defined, then the zone `connect_pads` setting is used.  Valid connection types are integers
      values from 0 to 3 which defines:
-* 0 - Pads are not connect to zone.
-* 1 - Pads are connected to zone using thermal reliefs.
-* 2 - Pads are connected to zone using solid fill.
-* 3 - Only through hold pads are connected to zone using thermal reliefs.
+     * 0 - Pads are not connect to zone.
+     * 1 - Pads are connected to zone using thermal reliefs.
+     * 2 - Pads are connected to zone using solid fill.
 <19> The optional `thermal_width` token defined the thermal relief spoke width used for zone
      connections for all pads in the footprint.  This only affects pads connected to zones with
      thermal reliefs.  If not set, the zone `thermal_width` setting is used.
 <20> The optional `thermal_gap` is the distance from the pad to the zone of thermal relief
      connections for all pads in the footprint.  If not set, the zone `thermal_gap` setting is
      used.  If not set, the zone `thermal_gap` setting is used.
-<21> The optional <<_footprint_attributes,attributes section>> defines the attributes of the 
+<21> The optional <<_footprint_attributes,attributes section>> defines the attributes of the
      footprint.
-<22> An optional list of <<_canonical_layer_names, canonical layer names>> which are private to 
+<22> An optional list of <<_canonical_layer_names, canonical layer names>> which are private to
      the footprint.
 <23> An optional list of <<_net-tie_pad_groups, net tie-pad groups>>.
 <24> The graphic objects section is a list of one or more
@@ -498,23 +497,24 @@ Footprint `attr` token defines the list of attributes of the footprint.
 
 ==== Net-tie Pad Groups
 
-A space-separated list of quoted strings, each containing a comma-separated list of pad names.  
+A space-separated list of quoted strings, each containing a comma-separated list of pad names.
 Nets attached to pads within a single pad-group are allowed to short.
 
 ==== Footprint Graphics Items
 
 Footprint graphical items define all of the drawing items that are used in the
 <<_footprint,footprint definition>>.  This includes <<_footprint_text,text>>,
-<<_footprint_text_box,text boxes>>, <<_footprint_line,lines>>, <<_footprint_rectangle,rectangles>>, 
-<<_footprint_circle,circles>>, <<_footprint_arc,arcs>>, <<_footprint_polygon,polygons>>, 
+<<_footprint_text_box,text boxes>>, <<_footprint_line,lines>>, <<_footprint_rectangle,rectangles>>,
+<<_footprint_circle,circles>>, <<_footprint_arc,arcs>>, <<_footprint_polygon,polygons>>,
 <<_footprint_curve,curves>>, and <<_dimension,dimensions>>.
 
 NOTE: Footprint graphic items starting with `fp_` are not valid outside of a footprint definition.
 
 ==== Footprint Images
 
-See the <<_images,images>> section.  This section will not exist if there are no images on the footprint.
-Footprint images are not displayed on the PCB when a footprint is placed, only in the footprint editor.
+See the <<_images,images>> section.  This section will not exist if there are no images on the
+footprint.  Footprint images are not displayed on the PCB when a footprint is placed, only in
+the footprint editor.
 
 ===== Footprint Text
 
@@ -535,7 +535,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 
 <1> The TYPE attribute defines the type of text.  Valid types are `reference`, `value`, and `user`.
 <2> The "TEXT" attribute is a quoted string that defines the text.
-<3> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y position coordinates and 
+<3> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y position coordinates and
     optional orientation angle of the text.
 <4> The optional `unlocked` token indicates if the text orientation can be anything other than
     the upright orientation.
@@ -544,7 +544,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 <7> The `effects` token defines how the <<_text_effects,text is displayed>>.
 <8> The `tstamp` token defines the unique identifier of the text object.
 
-===== Footprint Text Box 
+===== Footprint Text Box
 
 (from version 7)
 
@@ -570,22 +570,23 @@ The `fp_text_box` token defines a rectangle containing line-wrapped text.
 <2> The content of the text box
 <3> The `start` token defines the top-left of a cardinally oriented text box.
 <4> The `end` token defines the bottom-right of a cardinally oriented text box.
-<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners must
-    be in order, but the winding can be either direction.
+<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners
+    must be in order, but the winding can be either direction.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
-<7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides on.
+<7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
+    on.
 <8> The `tstamp` token defines the unique identifier of the text box.
 <9> The <<_text_effects, TEXT_EFFECTS>> describe the style of the text in the text box.
-<10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to be drawn 
-     around the text box.
+<10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to
+     be drawn around the text box.
 <11> If the `TEXT_EFFECTS` prescribe a TrueType font then a render cache should be given in case the
      font can not be found on the current system.
 
-NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST 
-      have `start` and `end` tokens.  
-      
-NOTE: If `angle` is given and is not a cardinal angle, then the text box MUST have a `pts` token (with 
-      4 pts).
+NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST
+      have `start` and `end` tokens.
+
+NOTE: If `angle` is given and is not a cardinal angle, then the text box MUST have a `pts` token
+      (with 4 pts).
 
 
 ===== Footprint Line
@@ -606,10 +607,10 @@ The `fp_line` token defines a graphic line in a <<_footprint,footprint definitio
 
 <1> The `start` token defines the coordinates of the beginning of the line.
 <2> The `end` token defines the coordinates of the end of the line.
-<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides 
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides
      on.
 <4> The `width` token defines the line width. (prior to version 7)
-<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line. 
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line.
      (from version 7)
 <6> The optional `locked` token defines if the line cannot be edited.
 <7> The `tstamp` token defines the unique identifier of the line object.
@@ -636,7 +637,7 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the rectangle
     resides on.
 <4> The `width` token defines the line width of the rectangle. (prior to version 7)
-<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the 
+<5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the
     rectangle.  (from version 7)
 <6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
@@ -694,7 +695,7 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
 <3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
 <5> The `width` token defines the line width of the arc. (prior to version 7)
-<6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc. 
+<6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc.
      (from version 7)
 <7> The optional `locked` token defines if the arc cannot be edited.
 <8> The `tstamp` token defines the unique identifier of the arc object.
@@ -720,7 +721,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 <2> The `layer` token defines the <<_canonical_layer_names,canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon. (prior to version 7)
-<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the polygon.  
+<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the polygon.
     (from version 7)
 <5> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
@@ -748,7 +749,7 @@ in a <<_footprint,footprint definition>>.
     <<_coordinate_point_list, X/Y coordinates>> of each point of the curve.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
 <3> The `width` token defines the line width of the curve. (prior to version 7)
-<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the curve.  
+<4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the curve.
     (from version 7)
 <5> The optional `locked` token defines if the curve cannot be edited.
 <6> The `tstamp` token defines the unique identifier of the curve object.
@@ -833,10 +834,9 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
 <24> The optional `zone_connection` token attribute defines type of zone connect for the pad.  If
      not defined, the footprint `zone_connection` setting is used.  Valid connection types are
      integers values from 0 to 3 which defines:
-* 0 - Pad is not connect to zone.
-* 1 - Pad is connected to zone using thermal relief.
-* 2 - Pad is connected to zone using solid fill.
-* 3 - Only through hold pad is connected to zone using thermal relief.
+     * 0 - Pad is not connect to zone.
+     * 1 - Pad is connected to zone using thermal relief.
+     * 2 - Pad is connected to zone using solid fill.
 <25> The optional `thermal_width` token attribute defines the thermal relief spoke width used for
      zone connection for the pad.  This only affects a pad connected to a zone with a thermal
      relief.  If not set, the footprint `thermal_width` setting is used.
@@ -899,10 +899,10 @@ a custom pad shape.  This token is only used when a <<_footprint_pad,custom pad>
 
 <1> The graphical items is a list of graphical <<_graphical_line,lines>>,
     <<_graphical_rectangle,rectangles>>, <<_graphical_arc,arcs>>, <<_graphical_circle,circles>>,
-    <<_graphical_curve,curves>>, <<_graphical_polygon,polygons>>, and 
+    <<_graphical_curve,curves>>, <<_graphical_polygon,polygons>>, and
     <<_annotation_bounding_box,annotation bounding boxes>> that define the shape of the
-    custom pad (annotation bounding boxes from version 7).  The item definitions only include 
-    the geometrical information that defines the item.  The annotation bounding box defines the 
+    custom pad (annotation bounding boxes from version 7).  The item definitions only include
+    the geometrical information that defines the item.  The annotation bounding box defines the
     location (and size) of the pad number and netname.
 <2> The `width` token defines the line width of the <<_graphical_items_section,graphical items>>.
 <3> The optional `fill` token attribute `yes` indicates the geometry defined by the
@@ -950,7 +950,8 @@ The `gr_text` token defines graphical text.
 <1> The "TEXT" attribute is a quoted string that defines the text.
 <2> The POSITION_IDENTIFER defines the
     <<_position_identifier,X and Y coordinates and optional orientation angle>> of the text.
-<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.  It is optionally followed by a `knockout` token indicating the text should be knocked out.
+<3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
+    It is optionally followed by a `knockout` token indicating the text should be knocked out.
 <4> The `tstamp` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
@@ -980,22 +981,23 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text.
 <2> The content of the text box
 <3> The `start` token defines the top-left of a cardinally oriented text box.
 <4> The `end` token defines the bottom-right of a cardinally oriented text box.
-<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners must
-    be in order, but the winding can be either direction.
+<5> The `pts` token defines the four corners of a non-cardianlly oriented text box.  The corners
+    must be in order, but the winding can be either direction.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
-<7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides on.
+<7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
+    on.
 <8> The `tstamp` token defines the unique identifier of the text box.
 <9> The <<_text_effects, TEXT_EFFECTS>> describe the style of the text in the text box.
-<10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to be 
+<10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to be
      drawn around the text box.
 <11> If the `TEXT_EFFECTS` prescribe a TrueType font then a render cache should be given in case the
      font can not be found on the current system.
 
-NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST 
-      have `start` and `end` tokens.  
-      
-NOTE: If `angle` is given and is not a cardinal angle, then the text box MUST have a `pts` token (with 
-      4 pts).
+NOTE: If `angle` is not given, or is a cardinal angle (0, 90, 180 or 270), then the text box MUST
+      have `start` and `end` tokens.
+
+NOTE: If `angle` is given and is not a cardinal angle, then the text box MUST have a `pts` token
+      (with 4 pts).
 
 
 ==== Graphical Line
@@ -1116,7 +1118,7 @@ The `gr_poly` token defines a graphical polygon.
 ==== Graphical Curve
 
 The `bezier` token defines a graphic
-https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Qubic Bezier curve].
+https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Cubic Bezier curve].
 
 ```
   (bezier
@@ -1173,7 +1175,7 @@ The `dimension` token defines a dimension object.
 <1> The optional `locked` token specifies if the dimension can be moved.
 <2> The `type` token attribute defines the type of dimension.  Valid dimension types are
     `aligned`, `leader`, `center`, `orthogonal`, and `radial` (`radial` from version 7).
-<3> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer] 
+<3> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer]
     the polygon resides on.
 <4> The `tstamp` token defines the unique identifier of the dimension object.
 <5> The `pts` token attributes define the list of `xy` coordinates of the dimension.
@@ -1210,21 +1212,21 @@ The `format` token attributes define the text formatting of the dimension.
     text.
 <3> The `units` token attribute defines the dimension units used to display the dimension text.
     Valid units are as follows:
-* 0 - Inches.
-* 1 - Mils.
-* 2 - Millimeters.
-* 3 - Automatic.
+    * 0 - Inches.
+    * 1 - Mils.
+    * 2 - Millimeters.
+    * 3 - Automatic.
 <4> The `units_format` token attribute defines how the unit's suffix is formatted.  Valid units
     formats are as follows:
-* 0 - No suffix.
-* 1 - Bare suffix.
-* 2 - Wrap suffix in parenthesis.
-<5> The `precision` token attribute defines the number of significant digits to display.  From 
-     version 7, a `precision` above 5 indicates a units-scaled precision:
-* 6 - 0.00 in / 0 mils / 0.0 mm
-* 7 - 0.000 in / 0 mils / 0.00 mm
-* 8 - 0.0000 in / 0.0 mils / 0.000mm
-* 9 - 0.00000 in / 0.00 mils / 0.0000mm
+    * 0 - No suffix.
+    * 1 - Bare suffix.
+    * 2 - Wrap suffix in parenthesis.
+<5> The `precision` token attribute defines the number of significant digits to display.  From
+    version 7, a `precision` above 5 indicates a units-scaled precision:
+    * 6 - 0.00 in / 0 mils / 0.0 mm
+    * 7 - 0.000 in / 0 mils / 0.00 mm
+    * 8 - 0.0000 in / 0.0 mils / 0.000mm
+    * 9 - 0.00000 in / 0.00 mils / 0.0000mm
 <6> The optional `override_value` token attribute defines the text to substitute for the actual
     physical dimension.
 <7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
@@ -1247,17 +1249,17 @@ The `format` token attributes define the text formatting of the dimension.
 <2> The `arrow_length` token attribute defines the length of the dimension arrows.
 <3> The `text_position_mode` token attribute defines the position mode of the dimension text.
     Valid position modes are as follows:
-* 0 - Text is outside the dimension line.
-* 1 - Text is in line with the dimension line.
-* 2 - Text has been manually placed by the user.
+    * 0 - Text is outside the dimension line.
+    * 1 - Text is in line with the dimension line.
+    * 2 - Text has been manually placed by the user.
 <4> The optional `extension_height` token attribute defines the length of the extension lines
     past the dimension crossbar.
 <5> The optional `text_frame` token attribute defines the style of the frame around the dimension
     text.  This only applies to `leader` dimensions.  Valid text frames are as follows:
-* 0 - No text frame.
-* 1 - Rectangle.
-* 2 - Circle.
-* 3 - Rounded rectangle.
+    * 0 - No text frame.
+    * 1 - Rectangle.
+    * 2 - Circle.
+    * 3 - Rounded rectangle.
 <6> The optional `extension_offset` token attribute defines the distance from feature points to
     extension line start.
 <7> The optional `keep_text_aligned` token indicates that the dimension text should be kept in
@@ -1312,6 +1314,11 @@ filled copper zones and keep out areas.
 <11> The optional <<_zone_keep_out_settings,zone keep out settings>> section defines the keep
      out items if the zone defines as a keep out area.
 <12> The <<_zone_fill_settings,zone fill settings section>> defines how the zone is to be filled.
+     * 0 - All footprint pads are not connect to zone.
+     * 1 - All footprint pads are connected to zone using thermal relief.
+     * 2 - All footprint pads are connected to zone using solid fill.
+     * 3 - Only footprint through hole pads are connected to zone using thermal relief.  Surface
+           mount pads are connected using solid fill.
 <13> The `polygon` token attribute defines the COORDINATE_POINT_LIST of
      <<_coordinate_point_list, X/Y coordinates>> of corner points of the polygon outline.
 the corners of the zone outline polygon.
@@ -1383,9 +1390,9 @@ The `fill` token attributes define how the zone is to be filled.
     radius of the smoothing.  Valid smoothing styles are `chamfer` and `fillet`.
 <6> The optional `island_removal_mode` token attribute defines the island removal mode.  Valid
     island removal modes are:
-* 0 - Always remove islands.
-* 1 - Never remove islands.
-* 2 - Minimum area island to allow.
+    * 0 - Always remove islands.
+    * 1 - Never remove islands.
+    * 2 - Minimum area island to allow.
 <7> The optional `island_area_min` token attribute defines the minimum allowable zone island.
     This only valid when the remove islands mode is set to 2.
 <8> The optional `hatch_thickness` token attribute defines the thickness for hatched fills.
@@ -1393,16 +1400,16 @@ The `fill` token attributes define how the zone is to be filled.
 <10> The optional `hatch_orientation` token attribute defines the line angle for hatched fills.
 <11> The optional `hatch_smoothing_level` token attribute defines how hatch outlines are smoothed.
      Valid hatch smoothing levels are:
-* 0 - No smoothing.
-* 1 - Fillet.
-* 2 - Arc minimum.
-* 3 - Arc maximum.
+     * 0 - No smoothing.
+     * 1 - Fillet.
+     * 2 - Arc minimum.
+     * 3 - Arc maximum.
 <12> The optional `hatch_smoothing_value` token attribute defines the ratio between the hole
      and the chamfer/fillet size.
 <13> The optional `hatch_border_algorithm` token attribute defines the if the zone line thickness
      is used when performing a hatch fill.  Valid values for the hatch border algorithm are:
-* 0 - Use zone minimum thickness.
-* 1 - Use hatch thickness.
+     * 0 - Use zone minimum thickness.
+     * 1 - Use hatch thickness.
 <14> The optional `hatch_min_hole_area` token attribute defines the minimum area a hatch file
      hole can be.
 
@@ -1562,7 +1569,7 @@ The `symbol` token defines a symbol or sub-unit of a parent symbol.  There can b
 <9> The <<_symbol_pin,PINS>> section is a list of pins that are used by the symbol. This section
     can be empty if the symbol does not have any pins.
 <10> The optional UNITS can be one or more child `symbol` tokens embedded in a parent `symbol`.
-<11> The optional `unit_name` token defines the display name of a subunit in the symbol editor and 
+<11> The optional `unit_name` token defines the display name of a subunit in the symbol editor and
     symbol chooser. It is only permitted for child `symbol` tokens embedded in a parent `symbol`.
 
 
