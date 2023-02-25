@@ -425,8 +425,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     footprints defined in the board file format.
 <7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational
     angle of the footprint.  This only applies to footprints defined in the board file format.
-<8> The optional `tags` token defines a string of search tags for the footprint.
-<9> The optional `descr` token defines a string containing the description of the footprint.
+<8> The optional `descr` token defines a string containing the description of the footprint.
+<9> The optional `tags` token defines a string of search tags for the footprint.
 <10> The optional `property` token defines a property for the footprint.
 <11> The `path` token defines the hierarchical path of the schematic symbol linked to the footprint.
      This only applies to footprints defined in the board file format.
