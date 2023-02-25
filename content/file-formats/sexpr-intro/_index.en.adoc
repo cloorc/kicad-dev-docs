@@ -774,7 +774,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
       [(roundrect_rratio RATIO)]                                <12>
       [(chamfer_ratio RATIO)]                                   <13>
       [(chamfer CORNER_LIST)]                                   <14>
-      (net NUMBER "NAME")                                       <15>
+      [(net NUMBER "NAME")]                                     <15>
       (tstamp UUID)                                             <16>
       [(pinfunction "PIN_FUNCTION")]                            <17>
       [(pintype "PIN_TYPE")]                                    <18>
