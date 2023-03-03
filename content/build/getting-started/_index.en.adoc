@@ -45,16 +45,20 @@ documentation to perform these tasks.
 
 === wxWidgets Cross Platform GUI Library
 
-http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library used by KiCad. On
-Windows and MacOS, we use the development branch of wxWidgets (3.1) due to it containing numerous
-bugfixes compared to the latest stable release series (3.0).  On Linux, we rely on the wxWidgets
-version packaged by each distribution, which tends to be something in the 3.0 series.  Note that on
-MacOS we use a custom fork of wxWidgets with some patches applied - see the MacOS build
-instructions for details.
+http://wxwidgets.org/[wxWidgets] is the graphical user interface (GUI) library used by KiCad.
+As of version 7.0, KiCad is developed and tested against wxWidgets 3.2. The KiCad team will not
+perform testing or bugfixing against older versions of wxWidgets, and may inadvertently introduce
+changes that break compilation or function when building against older versions. We welcome patches
+to fix build issues against earlier versions of wxWidgets as long as these patches do not change
+functionality when compiling against more modern versions. These patches should be the minimum
+necessary to get KiCad working, rather than attempting to backport functionality from the newer
+wxWidgets API (unless doing so is trivial).
+
+On macOS we use a custom fork of wxWidgets -- see the macOS build instructions for details.
 
 === Boost {cpp} Libraries
 
-The https://www.boost.org/[Boost] {cpp} library version 1.59 or greater is required to build KiCad.
+The https://www.boost.org/[Boost] {cpp} library version 1.71 or greater is required to build KiCad.
 
 === GLEW OpenGL Extension Wrangler Library
 
@@ -103,9 +107,9 @@ file transfer access for the Plugin and Content Manager.
 [#libocct, reftext=OpenCascade]
 === OpenCascade Library
 
-https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] is used to provide support for loading and saving
-3D model file formats such as STEP.  This library needs to be installed unless the OCC build
-option is disabled.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make building easier
+https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] is used to provide
+support for loading and saving 3D model file formats such as STEP.  KiCad requires OCC 7.3.0 or
+higher.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make building easier
 
 [#ngspice,reftext=Ngspice]
 ==== Ngspice Library
