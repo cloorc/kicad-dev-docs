@@ -309,7 +309,7 @@ NOTE: Internally, all layer names are canonical.  User defined layer names are o
 
 === Canonical Layer Names
 
-The table below list all of the canonical layer names.
+The table below list all of the canonical layer names used in the file format.
 
 [options="header"]
 |====================================================
@@ -346,21 +346,21 @@ The table below list all of the canonical layer names.
 |In29.Cu | Inner copper layer 29
 |In30.Cu | Inner copper layer 30
 |B.Cu | Back copper layer
-|B.Adhesive | Back adhesive layer
-|F.Adhesive | Front adhesive layer
+|B.Adhes | Back adhesive layer
+|F.Adhes | Front adhesive layer
 |B.Paste | Back solder paste layer
 |F.Paste| Front solder paste layer
-|B.Silkscreen | Back silk screen layer
-|F.Silkscreen | Front silk screen layer
+|B.SilkS | Back silk screen layer
+|F.SilkS | Front silk screen layer
 |B.Mask | Back solder mask layer
 |F.Mask | Front solder mask layer
-|User.Drawings | User drawing layer
-|User.Comments | User comment layer
-|User.Eco1 | User engineering change order layer 1
-|User.Eco2 | User engineering change order layer 2
-|Edge.Cu | Board outline layer
-|F.Courtyard | Footprint front courtyard layer
-|B.Courtyard | Footprint back courtyard layer
+|Dwgs.User | User drawing layer
+|Cmts.User | User comment layer
+|Eco1.User | User engineering change order layer 1
+|Eco2.User | User engineering change order layer 2
+|Edge.Cuts | Board outline layer
+|F.CrtYd | Footprint front courtyard layer
+|B.CrtYd | Footprint back courtyard layer
 |F.Fab | Footprint front fabrication layer
 |B.Fab | Footprint back fabrication layer
 |User.1 | User definable layer 1
