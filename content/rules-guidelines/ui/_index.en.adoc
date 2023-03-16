@@ -106,9 +106,10 @@ This section defines how dialog boxes should be designed.  The KiCad project
 uses the https://developer.gnome.org/hig/stable/[GNOME User Interface Guidelines] for laying out
 dialogs.  When designing dialogs, follow the https://developer.gnome.org/hig/stable/visual-layout.html.en[visual layout section of the GNOME
 User Interface Guidelines].  KiCad's dialogs may either be
-designed with https://github.com/wxFormBuilder/wxFormBuilder[wxformbuilder] or created by hand.  However,
-existing dialogs must be maintained in the same way as they have been
-implemented.  Please use https://github.com/wxFormBuilder/wxFormBuilder/releases[wxformbuilder-releases]
+designed with https://github.com/wxFormBuilder/wxFormBuilder[wxformbuilder] or
+created by hand.  Existing dialogs must be maintained in the same way as they
+have been implemented.  Please use the latest
+https://github.com/wxFormBuilder/wxFormBuilder/releases[wxformbuilder release]
 to avoid version mismatch between developers.
 
 === Escape Key Termination
@@ -124,7 +125,8 @@ key is pressed.
 === Dialog Layout with Sizers
 
 Use wxWidgets "sizers" in all dialogs, no matter how simple they are.  Using
-absolute sizing in dialogs is forbidden in KiCad.  See the link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview]
+absolute sizing in dialogs is forbidden in KiCad.  See the
+link:http://docs.wxwidgets.org/3.0/overview_sizer.html[wxWidgets sizer overview]
 for more information on using sizers.  Configure the sizers so that as the
 dialog window is expanded, the most sensible use of the increased dialog
 window occurs automatically by the sizers. For example, in the DRC dialog
@@ -166,7 +168,8 @@ to the "Dialog" tab:
 
 This will provide for an override of the Show( bool ) wxWindow() function
 and provide retentive size and position for the session.  For more information,
-see the link:https://gitlab.com/kicad/code/kicad/-/blob/master/common/dialog_shim.cpp[DIALOG_SHIM class source code].
+see the
+link:https://gitlab.com/kicad/code/kicad/-/blob/master/common/dialog_shim.cpp[DIALOG_SHIM class source code].
 
 Use tooltips to explain the functionality of each non-obvious control.
 This is important because the help files and the wiki often lag behind
