@@ -226,7 +226,7 @@ polygons in the work sheet.
 
 === Image
 
-The `image` token defines on or more embedded images.  This section will not exist if no images
+The `image` token defines one or more embedded images.  This section will not exist if no images
 are in the work sheet.
 
 ```
