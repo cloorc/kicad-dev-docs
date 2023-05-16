@@ -1,10 +1,29 @@
 ---
 title: Icon Design Guidelines
 weight: 5
-summary: The icon style guidelines that should be used for icon changes or additions.
+summary: The style guidelines that should be used for visual asset (icon, etc.) changes or additions.
 ---
 
 :toc:
+
+== 0. Community Contributions
+
+In general, KiCad does not accept contributions of graphic assets (icons, etc.) from the community
+directly.  The lead development team may make small tweaks to icons themselves, but aims to employ
+professional graphic designers for larger changes and development of new assets.
+
+Community contributors looking to add new features to KiCad that require new art assets (for
+example, adding a tool that requires a toolbutton icon) may create placeholder art to be used until
+a final asset can be created.  This placeholder art may be modified or replaced at the discretion
+of the KiCad lead development team in coordination with an external designer.
+
+This policy is aimed at achieving a consistent and unified look and feel for KiCad and also
+removing debate over art assets from the review process for community contributions.  We still
+welcome feedback and suggestions related to art assets from the community, and will consider this
+type of input when discussing changes or additions to KiCad's art assets.
+
+The following guidelines are presented for reference and represent the current consensus of the
+lead development team.  New placeholder art assets should attempt to follow these guidelines.
 
 == 1. Look and Feel
 
