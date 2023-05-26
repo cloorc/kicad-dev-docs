@@ -98,8 +98,27 @@ NOTE: Back ports from the development branch can only be applied to the
 == 4 Bug Fix Release Policy
 Bug fix releases are at the discretion of the lead development team.
 
-Bug fix releases will be announced 30 days in advance of the release by the
+Bug fix releases will be announced 14 days in advance of the release by the
 project manager to allow time for all required release actions to be completed.
+
+A release candidate `-rc1` tag will be created a minimum of three days before
+the final release.  The release candidate will be announced by the project
+leader on the
+https://www.kicad.org/blog/[KiCad blog] along with the usual KiCad social
+media sites.
+
+During the release candidate period, only regression fixes since the last
+bug fix release are allowed.  All other bug fixes must wait until the next
+bug fix release period.
+
+If a regression is fixed in the release candidate before the three day
+minimum testing period ends, a new incremental release candidate will be
+created and the three day minimum testing period begins from the date of
+the new release candidate.  This process repeats until no new regressions
+are found in a release candidate.
+
+The final bug fix release will be tagged if no new regressions occur within
+three days of the last release candidate.
 
 NOTE: Bug fixes cannot contain translatable string changes except for spelling
       and grammar errors.
