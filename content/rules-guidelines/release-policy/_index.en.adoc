@@ -108,14 +108,15 @@ https://www.kicad.org/blog/[KiCad blog] along with the usual KiCad social
 media sites.
 
 During the release candidate period, only regression fixes since the last
-bug fix release are allowed.  All other bug fixes must wait until the next
-bug fix release period.
+bug fix release are allowed.  All other bug fixes must wait until after the
+bug fix release period and release announcement are completed.
 
 If a regression is fixed in the release candidate before the three day
 minimum testing period ends, a new incremental release candidate will be
 created and the three day minimum testing period begins from the date of
 the new release candidate.  This process repeats until no new regressions
-are found in a release candidate.
+are found in a release candidate.  Multiple regressions may be fixed
+between release candidates.
 
 The final bug fix release will be tagged if no new regressions occur within
 three days of the last release candidate.
