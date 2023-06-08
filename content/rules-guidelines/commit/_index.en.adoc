@@ -48,7 +48,7 @@ notes and notify the documentation maintainers about changes.
 === Making the Documentation Developers Aware of Changes
 
 When a commit with changelog tag is pushed, the committer should create a new
-issue in the http://github.com/KiCad/kicad-doc/issues[documentation repository] to notify the
+issue in the https://gitlab.com/kicad/services/kicad-doc/issues[documentation repository] to notify the
 documentation maintainers.  Include a link to the commit containing the reported
 changes.
 

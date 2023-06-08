@@ -44,7 +44,7 @@ summary: 关于如何格式化 git 提交信息的指引
 === 让文档开发者意识到改动
 
 当推送有变更记录标签的提交时，提交者应该到
-http://github.com/KiCad/kicad-doc/issues[文档仓库]
+https://gitlab.com/kicad/services/kicad-doc/issues[文档仓库]
 创建一个新问题，用于提示文档维护者。这个问题里包含一个关于这次提交的链接。
 
 === 提取变更记录
