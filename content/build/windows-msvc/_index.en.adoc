@@ -206,9 +206,11 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
 ==== Trailing Whitespace Remover
 It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] (edition for Visual Studio 2022 link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespace64[here]) which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
 
-=== Additional Notes
+=== Advanced
 
-==== vcpkg binary caching
+WARNING: It is recommended to only try these changes after getting a basic configuration working using the above steps.
+
+==== Binary caching
 By default vcpkg will bundle up each dependency and store it in a *binary cache* which maintains copies of all past built dependencies by version.
 
 The binary cache is located usually in %LOCALAPPDATA%\vcpkg\archives
@@ -221,6 +223,36 @@ or
 
 You may disable binary caching by setting the environment variable `VCPKG_FEATURE_FLAGS` with value `-binarycaching`. This is not advisable as the intention of the cache is to avoid rebuilds if the application cmake cache is destroyed and rebuilt and rebuilding kicad dependencies is quite time consuming.
 
+==== Manifest mode
+The KiCad repository is configured to use link:https://vcpkg.readthedocs.io/en/latest/users/manifests/[Manifest Mode].
+
+The benefits of using this is that it ensures the developer's dependencies always match that of the project so that if any dependencies are added or version bumped, they will be automatically build.
+The negative side of manifest mode is that whenever you update your version of visual studio or navigate the git history, you will need to rebuild vcpkg dependencies.
+
+If this is deemed undesirable, it is possible to disable manifest mode locally by following these steps:
+
+. Copy vcpkg-configuration.json from kicad root into your vcpkg root
+. Manually run a vcpkg install command for all dependencies currently defined in the KiCad root `vcpkg.json`. E.g. something like:
++
+----
+ .\vcpkg install --triplet x64-windows boost-algorithm boost-filesystem boost-functional boost-iterator boost-locale boost-optional boost-property-tree boost-ptr-container boost-range boost-test boost-uuid cairo wxwidgets glew curl gettext harfbuzz glm opencascade opengl python3 openssl icu ngspice wxpython nng protobuf
+----
+.  {empty}
++
+----
+.\vcpkg upgrade --no-dry-run`
+----
+. Set cmake variable `VCPKG_MANIFEST_MODE` to `OFF`
+. Ensure launch.vs.json `PATH` and `PYTHONHOME` variables point to the vcpkg folder (instead of the one in cmake root) - i.e. modify to be as follows:
++
+----
+        "PYTHONHOME": "C:\\PATH\\TO\\vcpkg_installed\\x64-windows\\tools\\python3",
+        "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
+        "PATH": "C:\\PATH\\TO\\vcpkg\\installed\\x64-windows\\debug\\bin;${env.PATH}",
+----
+. Delete cmake cache and reconfigure
+
+WARNING: Disabling manifest mode means you have to manually ensure that the dependencies you have installed locally match those required by the KiCad project.
 
 === Troubleshooting
 
