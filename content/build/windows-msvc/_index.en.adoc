@@ -240,7 +240,7 @@ If this is deemed undesirable, it is possible to disable manifest mode locally b
 .  {empty}
 +
 ----
-.\vcpkg upgrade --no-dry-run`
+.\vcpkg upgrade --no-dry-run
 ----
 . Set cmake variable `VCPKG_MANIFEST_MODE` to `OFF`
 . Ensure launch.vs.json `PATH` and `PYTHONHOME` variables point to the vcpkg folder (instead of the one in cmake root) - i.e. modify to be as follows:
