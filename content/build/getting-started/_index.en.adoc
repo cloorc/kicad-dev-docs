@@ -87,14 +87,12 @@ available and is always required to build KiCad.
 
 === Python Programming Language
 
-The https://www.python.org/[Python] programming language is used to provide scripting support to KiCad.  It needs
-to be installed unless the [KiCad scripting](#kicad_scripting) build configuration option is
-disabled.
+The https://www.python.org/[Python] programming language is used to provide scripting support to KiCad. It is always required to build KiCad.
 
 === wxPython Library
 
 The http://wxpython.org/[wxPython] library is used to provide a scripting console for Pcbnew.  It needs to be
-installed unless the [wxPython scripting](#wxpython_scripting) build configuration option is
+installed unless the <<wxPython scripting>> build configuration option is
 disabled.  When building KiCad with wxPython support, make sure the version of the wxWidgets
 library and the version of wxPython installed on your system are the same.  Mismatched versions
 have been known to cause runtime issues.
@@ -124,6 +122,7 @@ KiCad has many build options that can be configured to build different options d
 the availability of support for each option on a given platform.  This section documents
 these options and their default values.
 
+[#wxpython_scripting,reftext=wxPython scripting]
 === wxPython Scripting Support
 
 The KICAD_SCRIPTING_WXPYTHON option is used to enable building the wxPython interface into
