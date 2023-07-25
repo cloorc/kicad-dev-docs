@@ -50,13 +50,13 @@ This is the correct way to make Visual Studio directly handle *CMake* projects.
 
 SWIG must be installed manually.  Obtain the latest `swigwin` package from
 https://sourceforge.net/projects/swig/files/swigwin/ (at the time of this writing, the latest is
-`swigwin-4.0.2`) and extract the zip file to a known location.
+`swigwin-4.1.1`) and extract the zip file to a known location.
 
 At present, you must add CMake arguments SWIG
 that you downloaded in a previous step.  Choose the Configuration you want to use (e.g. x64-Debug) in the toolbar. Then, open the CMake Settings editor (Project menu > CMake
 Settings), and add the following items to the CMake Command Arguments option field:
 
-`-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.0.2\\swig.exe`
+`-DSWIG_EXECUTABLE=C:\\PATH\\TO\\swigwin-4.1.1\\swig.exe`
 
 Replace the `PATH\\TO\\` section with the appropriate paths to SWIG on your
 installation.  Make sure to change single backslashes to double backslashes if you are pasting in
