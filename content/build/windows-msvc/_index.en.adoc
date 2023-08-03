@@ -224,7 +224,7 @@ or
 You may disable binary caching by setting the environment variable `VCPKG_FEATURE_FLAGS` with value `-binarycaching`. This is not advisable as the intention of the cache is to avoid rebuilds if the application cmake cache is destroyed and rebuilt and rebuilding kicad dependencies is quite time consuming.
 
 ==== Manifest mode
-The KiCad repository is configured to use link:https://vcpkg.readthedocs.io/en/latest/users/manifests/[Manifest Mode].
+The KiCad repository is configured to use link:https://learn.microsoft.com/en-us/vcpkg/users/manifests[Manifest Mode].
 
 The benefits of using this is that it ensures the developer's dependencies always match that of the project so that if any dependencies are added or version bumped, they will be automatically build.
 The negative side of manifest mode is that whenever you update your version of visual studio or navigate the git history, you will need to rebuild vcpkg dependencies.
