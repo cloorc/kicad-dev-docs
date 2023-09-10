@@ -9,7 +9,9 @@ tags: ["windows"]
 
 == Building using MSYS2
 
-NOTE: MSYS2 is the legacy build system for Windows due to KiCad's historical roots. KiCad has switched to MSVC for nightly builds (5.99) and for the eventual 6.0. MSYS2 is still supported but your mileage may vary.
+WARNING: MSYS2 is the legacy build system for Windows due to KiCad's historical roots. 
+KiCad has switched to MSVC (Microsoft Visual Studio) from version 6.0 and onwards for development and releases.
+Building via MSYS2 is still possible but does not receive a high level of attention.
 
 === Setup
 
@@ -42,7 +44,7 @@ pacman -S base-devel \
           mingw-w64-x86_64-glew \
           mingw-w64-x86_64-curl \
           mingw-w64-x86_64-wxPython \
-          mingw-w64-x86_64-wxmsw3.1 \
+          mingw-w64-x86_64-wxmsw3.2 \
           mingw-w64-x86_64-toolchain \
           mingw-w64-x86_64-glm \
           mingw-w64-x86_64-opencascade \
