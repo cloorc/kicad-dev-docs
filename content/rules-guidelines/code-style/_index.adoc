@@ -263,6 +263,10 @@ overly verbose (such as iterators or `std::make_shared`), or when not using
 auto   board = m_frame->GetBoard();         // Not permitted, use the actual type name
 BOARD* board = m_frame->GetBoard();         // OK
 auto   it    = someComplexSTLType.begin();  // OK, improves readability
+
+for( auto& item : container )       // Discouraged where the actual type name isn't very long
+for( TYPE& item : container )       // Preferred
+for( auto& [key, value] : map )     // C++17 structured binding; acceptable when readable
 ----
 
 === 2.9 Casting
