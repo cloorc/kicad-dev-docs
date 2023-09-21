@@ -1,13 +1,13 @@
 ---
 date: 2016-04-09T16:50:16+02:00
-title: PcbNew Plugins
+title: PCB Python Bindings
 weight: 18
 ---
 
 :toc:
 
 KiCad implements a Python plugin interface so that external Python plugins can
-be run from within Pcbnew.  The interface is generated using the `Simplified
+be run from within the PCB editor.  The interface is generated using the `Simplified
 Wrapper and Interface Generator` or http://www.swig.org[SWIG].  SWIG is
 instructed to translate specific C/{cpp} header files into other languages using
 `interface` files.  These files ultimately decide what C/{cpp} functions, classes
@@ -18,23 +18,34 @@ corresponding .py files.  These files are installed into Python's system-wide
 *dist-packages* repository, thus they can be imported by any Python 3
 interpreter installed on the system.
 
-== Existing Pcbnew Python API documentation
-The Pcbnew Python API can be used stand-alone, i.e. no instance of Pcbnew is
+WARNING: Since this interface is a raw binding layer over KiCad rather than a true API,
+it is unstable and will generally change between KiCad major versions.  While the development
+team will make reasonable efforts to maintain compatiblity of function, there are no guarantees
+on strict compatibility, so plugins will need to handle situations such as function calls and
+data types being renamed from time to time.
+
+Python bindings are provided for the PCB editor only at this time.  Using Python from within the
+other parts of KiCad is not supported.  The Python binding module is called `pcbnew`, a reference
+to the internal name of the PCB Editor (which was its official name in old versions of KiCad).
+
+== Existing PCB Editor Python Bindings documentation
+The PCB Editor Python bindings can be used stand-alone, i.e. no instance of the PCB Editor is
 running and the board project to be manipulated is loaded and saved from and to
 file.  This approach is shown with some examples in the https://docs.kicad.org/master/en/pcbnew/pcbnew.html#scripting[user's
 documentation].
 
 Another documentation source is the auto-generated Doxygen reference of the
-API. It can be found here:
+bindings. It can be found here:
 
 http://docs.kicad.org/doxygen-python-6.0/namespacepcbnew.html[KiCad 6.0]
+http://docs.kicad.org/doxygen-python-7.0/namespacepcbnew.html[KiCad 7.0]
 http://docs.kicad.org/doxygen-python-nightly/namespacepcbnew.html[KiCad Nightly]
 
 == "Action Plugin" Support
 Besides the stand-alone usage of the generated Python plugin interface,
 additional support regarding online manipulation of board projects is available
-for Pcbnew.  Plugins using this feature are called *Action Plugins* and they are
-accessible using a Pcbnew menu entry that can be found under *Tools->External
+for the PCB Editor.  Plugins using this feature are called *Action Plugins* and they are
+accessible using a PCB Editor menu entry that can be found under *Tools->External
 Plugins*.  KiCad plugins that follow the *Action Plugin* conventions can be made
 to show up as external plugins in that menu and optionally as top toolbar button.
 The user can run the plugin resulting in calling a defined entry function in the
@@ -43,7 +54,7 @@ This function can then be used to access and manipulate the currently loaded
 board from the Python script environment.
 
 === Typical Plugin Structure
-The *Action Plugin* support is implemented in Pcbnew by discovering Python
+The *Action Plugin* support is implemented in the PCB editor by discovering Python
 packages and Python script files in specific directories on startup.
 In order for the discovery process to work, the following requirements must be met.
 
@@ -128,13 +139,13 @@ dark window themes.  If this property is not present, the icon specified in `ico
 be used when the dark theme is active;
 
 `show_toolbar_button` only defines a default state for plugin toolbar button. Users can override
-it in pcbnew preferences.
+it in the PCB Editor preferences.
 
 === Complex Plugin Example
 The complex plugin example represents a single Python package that is imported
-on Pcbnew startup.  When the Python package is imported, the `\\__init__.py` file
+on startup of the editor.  When the Python package is imported, the `\\__init__.py` file
 is executed and is thus a perfect place to instantiate and register the plugin
-to Pcbnew.
+to KiCad.
 The big advantage here is, that you can modularize your plugin much better and
 include other files without cluttering the KiCad plugin directory.
 Additionally, the same plugin can be executed standalone using `python -m`
@@ -144,7 +155,7 @@ The following folder structure shows how complex plugins are implemented:
 ----
 + ~/.kicad_plugins/ # this directory has to be in the plugin path
     + complex_plugin/ # The plugin directory (A Python package)
-        - __init__.py # This file is executed when the package is imported (on Pcbnew startup)
+        - __init__.py # This file is executed when the package is imported (on PCB editor startup)
         - __main__.py # This file is optional. See below
         - complex_plugin_action.py # The ActionPlugin derived class lives here
         - complex_plugin_utils.py # Other Python parts of the plugin
@@ -183,7 +194,7 @@ Pcbnew as follows.
 [source,python]
 ----
 from .complex_plugin_action import ComplexPluginAction # Note the relative import!
-ComplexPluginAction().register() # Instantiate and register to Pcbnew
+ComplexPluginAction().register() # Instantiate and register to PCB editor
 ----
 
 As described in https://www.python.org/dev/peps/pep-0338/[PEP 338] Python can

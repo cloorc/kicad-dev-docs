@@ -1,5 +1,5 @@
 ---
-title: APIs and Binding
+title: APIs and Bindings
 weight: 9
 pre: "<i class='fas fa-chevron-right'></i> "
 ---
