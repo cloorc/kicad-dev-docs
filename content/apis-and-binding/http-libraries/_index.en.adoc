@@ -74,25 +74,31 @@ HTTP_200_OK
 ```
 
 ==== Fetching Parts for Symbol Chooser
-To display parts underneath a certain category inside KiCad's *Symbol Chooser*, KiCad queries the parts endpoint using a standard GET request: *{root-url}/parts/category/16.json*; with 16 being a numerical example ID for a specific category. As server response, KiCad expects an array containing one or more parts for that specific category. For each part KiCad expects only an ```id```. If there is a need to display a different name to the ```id``` inside the *Symbol Chooser*, one can use the optional ```name``` key as shown below.
+To display parts underneath a certain category inside KiCad's *Symbol Chooser*, KiCad queries the parts endpoint using a standard GET request: *{root-url}/parts/category/16.json*; with 16 being a numerical example ID for a specific category. As server response, KiCad expects an array containing one or more parts for that specific category. 
+
+For each part KiCad expects only an ```id```. If there is a need to display a different name to the ```id``` inside the *Symbol Chooser*, one can use the optional ```name``` key as shown below. Additionally, one can also provide a part description using the ```description``` key.
+
 ```
 HTTP_200_OK
 [
     {
         "id": "69",
-        "name": "830050789"
+        "name": "830050789",
+        "description": "CRYSTAL 32.7680KHZ 12.5PF SMD"
     },
     {
         "id": "40",
-        "name": "NE555PSR"
+        "name": "NE555PSR",
+        "description": "IC OSC SINGLE TIMER 100KHZ 8SO"
     },
     {
         "id": "238",
-        "name": "TLC555CPSR"
+        "name": "TLC555CPSR",
+        "description": "IC OSC SINGLE TIMER 2.1MHZ 8SO"
     }
 ]
 ```
-*TIP*: Since the part details are just for the high-level overview within the *Symbol Chooser*, one should only respond with the minimum data needed. This will speed up the data acquiring process and consequently enhance the user experience. Therefore, KiCad expects only the minimum amount of detail needed (see example above) to display the parts inside the *Symbol Chooser*. Any other key/value pairs are ignored at this stage. However, the API can send the full details if that's easier to implement and bandwith is not a concern.
+*TIP*: Since the part details are just for the high-level overview within the *Symbol Chooser*, one should only respond with the minimum data needed. This will speed up the data acquiring process and consequently enhance the user experience. Therefore, KiCad expects only the minimum amount of detail needed (see example above) to display the parts inside the *Symbol Chooser*. Any other key/value pairs are ignored at this stage. However, the API can send the full details if that's easier to implement and bandwidth is not a concern.
 
 ==== Fetching Detailed Part Information
 
