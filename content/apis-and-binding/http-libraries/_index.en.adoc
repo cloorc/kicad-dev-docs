@@ -116,6 +116,9 @@ HTTP_200_OK
     "id": "1",
     "name": "R_0R0_0603_0.125W_1%",
     "symbolIdStr": "Device:R",
+    "exclude_from_bom": "False",
+    "exclude_from_board": "False",
+    "exclude_from_sim": "True",
     "fields": {
         "footprint": {
             "value": "Resistor_SMD:R_0603_1608Metric",
@@ -154,6 +157,17 @@ HTTP_200_OK
     }
 }
 ```
+==== Symbol Attributes
+
+The API provides the functionality to include exclusion flags, as illustrated in the example above. These attributes serve to specify certain preferences within the KiCad software. The following exclusion flags are currently supported:
+
+``exclude_from_bom``
+
+``exclude_from_board``
+
+``exclude_from_sim``
+
+It's important to note that if one ore more of these exclusion flags are not explicitly specified, KiCad will assume that they are not set for exclusion. In other words, the default behavior is to include all items and features in the relevant processes (BOM generation, board layout, and simulation) unless otherwise specified using these exclusion flags.
 
 ==== Server Response Codes
 
