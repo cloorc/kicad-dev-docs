@@ -5,7 +5,7 @@ summary: Summary of CMake build configuration options.
 ---
 
 These are the build options that can be passed to CMake during configuration.
-s
+
 == All Platforms
 
 
