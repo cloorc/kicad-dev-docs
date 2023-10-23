@@ -49,7 +49,8 @@ pacman -S base-devel \
           mingw-w64-x86_64-glm \
           mingw-w64-x86_64-opencascade \
           mingw-w64-x86_64-ngspice \
-          mingw-w64-x86_64-zlib
+          mingw-w64-x86_64-zlib \
+          mingw-w64-x86_64-libgit2
 cd kicad-source
 mkdir -p build/release
 mkdir build/debug               # Optional for debug build.
