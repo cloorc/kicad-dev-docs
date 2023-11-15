@@ -118,8 +118,11 @@ NOTE: We recommend using Ninja instead of `make` for faster builds.  To do so, r
 
 === Running and debugging
 
-On macOS, it is not currently possible to run the build outputs from the build directory as can be
-done on other platforms.  You must run `make install` (or `ninja install`) to package a complete
+On macOS, starting from 7.99 nightlies, you can set the `KICAD_RUN_FROM_BUILD_DIR` environment variable 
+and launch any KiCad executable from the build directory for run or debug. This is generally done in the
+target launch configuration options of IDEs like CLion.
+
+You can also create and run the entire app bundle by running `make install` (or `ninja install`) to package a complete
 `KiCad.app` and then launch that.  You can use `lldb` to debug the application, or attach to a
 running copy.
 
