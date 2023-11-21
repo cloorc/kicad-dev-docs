@@ -307,3 +307,93 @@ MY_DIALOG::~MY_DIALOG()
 }
 ```
 
+=== S-Expression File Format Anti-patterns
+
+==== Unquoted strings
+
+Always quote strings in KiCad file formats, whether or not they contain user-generated data or
+you think they might need to be quoted.
+
+```
+// Do this
+(generator "eeschema")
+
+// Not this (assuming that 'eeschema' is not a token)
+(generator eeschema)
+```
+
+==== Non-standard boolean flags
+
+Use the tokens `yes` and `no` for booleans in the file format.  All boolean flags should be a two-
+element list of the form `(token [yes|no])`.  Do not use implicit-true booleans.  Boolean flags may
+be omitted from formatting where it makes sense to do so (and the parser should have a defined
+default value that will be assumed if the flag is missing), but if the boolean token is present,
+an explicit value must also be present.
+
+```
+// Do this
+(my_item
+   (hide yes)
+)
+
+// Or this
+(my_item
+    (show no)
+)
+
+// Not this (an implicitly-true boolean)
+(my_item
+    (hide)
+)
+
+// And not this (a boolean outside an enclosing list)
+(my_item hide yes)
+
+```
+
+==== Ignoring unneeded or deprecated tokens implicitly
+
+When implementing a parser that needs to skip over tokens in a file that are not needed, always
+do so explicitly, by parsing the tokens and doing nothing with them.  Do not do this implicitly by
+skipping a certain number of symbols.
+
+```c++
+// Do this
+for( token = NextTok(); token != T_RIGHT && token != EOF; token = NextTok() )
+{
+    if( token == T_LEFT )
+        token = NextTok();
+
+    switch( token )
+    {
+    case T_generator:
+        // Skip (generator "generatorname")
+        NeedSYMBOL();
+        NeedRIGHT();
+        break;
+    //...
+    }
+}
+
+// Don't do this
+for( token = NextTok(); token != T_RIGHT && token != EOF; token = NextTok() )
+{
+    if( token == T_LEFT )
+        token = NextTok();
+
+    switch( token )
+    {
+    case T_version:
+        m_requiredVersion = parseInt( FromUTF8().mb_str( wxConvUTF8 ) );
+        NeedRIGHT();
+
+        // Skip (generator "generatorname")
+        NeedLEFT();
+        NeedSYMBOL();
+        NeedSYMBOL();
+        NeedRIGHT();
+        break;
+    //...
+    }
+}
+```
