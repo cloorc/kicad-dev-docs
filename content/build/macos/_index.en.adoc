@@ -48,6 +48,7 @@ Apple arm64 machine:
 
 [source,sh]
 ```
+softwareupdate --install-rosetta # only required if you did not already install rosetta
 cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
