@@ -48,7 +48,7 @@ Apple arm64 machine:
 
 [source,sh]
 ```
-softwareupdate --install-rosetta # only required if you did not already install rosetta
+softwareupdate --install-rosetta --agree-to-license # only required if you did not already install rosetta
 cd <your preferred working directory>
 git clone https://gitlab.com/kicad/packaging/kicad-mac-builder.git
 cd kicad-mac-builder
@@ -137,9 +137,9 @@ At the moment, `kicad-mac-builder` is designed to run in a "clean-slate" environ
 automatically handle dependency updates.  From time to time, you may wish to update your KiCad
 build dependencies.  To do so:
 
-1) Run `git pull` inside your `kicad-mac-builder` folder to sync with KiCad upstream.
-2) Delete the contents of the `./build` directory.
-3) Re-run the `setup-kicad-dependencies` step as described above.
+1. Run `git pull` inside your `kicad-mac-builder` folder to sync with KiCad upstream.
+2. Delete the contents of the `./build` directory.
+3. Re-run the `setup-kicad-dependencies` step as described above.
 
 NOTE: It is possible to rebuild only certain dependencies by deleting certain folders inside the
       `./build` directory, however this is an advanced usage and will not be documented here.
