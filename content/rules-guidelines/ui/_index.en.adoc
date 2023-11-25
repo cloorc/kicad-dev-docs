@@ -89,6 +89,7 @@ of user interface element.
 |Menu items | Header
 |Menu items in applications | Header
 |Menu titles in applications | Header
+|Property names displayed in the Properties Panel | Header
 |Radio button labels | Sentence
 |Slider labels | Sentence
 |Spin box labels | Sentence
