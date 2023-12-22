@@ -13,7 +13,7 @@ weight: 44
 This documents the s-expression symbol library file format for all versions of KiCad from 6.0.
 
 * Symbol library files use the `.kicad_sym` extension.
-* Symbol library files can only define one or more footprints.
+* Symbol library files can define one or more symbols.
 
 
 == Layout
