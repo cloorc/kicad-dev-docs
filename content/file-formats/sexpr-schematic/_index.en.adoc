@@ -28,7 +28,7 @@ that represent the hierarchical path for the sheet the instance separated by a f
 "/00000000-0000-0000-0000-00004b3a13a4/00000000-0000-0000-0000-00004b617b88"
 ```
 
-WARNING: The fist identifier must be the root <<_hierarchical_sheet_section, sheet>> which is
+WARNING: The first identifier must be the root <<_hierarchical_sheet_section, sheet>> which is
          the same identifier as the root schematic file.
 
 
