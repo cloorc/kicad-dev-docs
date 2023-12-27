@@ -116,7 +116,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -129,7 +129,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -142,7 +142,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -155,7 +155,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -168,7 +168,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -181,7 +181,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     },
     {
@@ -194,7 +194,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
         "KICAD_USE_EXTERNAL_PYTHONHOME": "1",
         "PYTHONHOME": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\tools\\python3",
         "PYTHONPATH": "${cmake.buildRoot}\\pcbnew;${projectDir}\\scripting",
-        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${env.PATH}"
+        "PATH": "${cmake.buildRoot}\\vcpkg_installed\\x64-windows\\debug\\bin;${cmake.buildRoot}\\common;${cmake.buildRoot}\\common\\gal;${env.PATH}"
       }
     }
   ]
