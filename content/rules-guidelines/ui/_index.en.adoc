@@ -190,13 +190,15 @@ which were broken.  Do not implement default button handlers in your dialog
 code.  Use validators to transfer data to and from controls and allow the
 default dialog button handlers work the way they were designed.
 
-==== Internationalization
+=== Internationalization
 
 To generate a list of strings occurring in a dialog, one needs to enable
-'internationalize' checkbox in the project properties.  Otherwise, it will not
-be possible to translate the dialog.
+'internationalize' checkbox in the project properties when using wxFormbuilder.
+Otherwise, it will not be possible to translate the dialog.
 
-== String Quoting
+== Strings
+
+=== Quoting
 
 Often text strings will be quoted for display which use may used in controls
 that render HTML.  Using angle brackets will cause grief for HTML rendering
@@ -206,3 +208,9 @@ controls so text should be quoted with single quotes ''.  e.g.:
 * 'longpath/subdir'
 * 'FOOTPRINTNAME'
 * 'anything else'
+
+=== Abbreviations
+
+All user interface strings should be spelled out for translation purposes.
+The only exceptions are units such as mm, in, etc. or universally accepted
+abbreviations across languages such as PCB.
