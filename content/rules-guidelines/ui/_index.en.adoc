@@ -101,6 +101,23 @@ of user interface element.
 |Webpage titles and navigational elements | Header
 |===
 
+=== Quoting
+
+Often text strings will be quoted for display which may be used in controls
+that render HTML.  Using angle brackets will cause grief for HTML rendering
+controls so text should be quoted with single quotes ''.  e.g.:
+
+* 'filename.kicad_pcb'
+* 'longpath/subdir'
+* 'FOOTPRINTNAME'
+* 'anything else'
+
+=== Abbreviations
+
+All user interface strings should be spelled out for translation purposes.
+The only exceptions are units such as mm, in, etc. or universally accepted
+abbreviations across languages such as PCB.
+
 == Dialogs
 
 This section defines how dialog boxes should be designed.  The KiCad project
@@ -195,22 +212,3 @@ default dialog button handlers work the way they were designed.
 To generate a list of strings occurring in a dialog, one needs to enable
 'internationalize' checkbox in the project properties when using wxFormbuilder.
 Otherwise, it will not be possible to translate the dialog.
-
-== Strings
-
-=== Quoting
-
-Often text strings will be quoted for display which use may used in controls
-that render HTML.  Using angle brackets will cause grief for HTML rendering
-controls so text should be quoted with single quotes ''.  e.g.:
-
-* 'filename.kicad_pcb'
-* 'longpath/subdir'
-* 'FOOTPRINTNAME'
-* 'anything else'
-
-=== Abbreviations
-
-All user interface strings should be spelled out for translation purposes.
-The only exceptions are units such as mm, in, etc. or universally accepted
-abbreviations across languages such as PCB.
