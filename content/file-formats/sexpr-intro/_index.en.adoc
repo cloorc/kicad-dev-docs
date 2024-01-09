@@ -461,7 +461,7 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
      footprint.
 <22> An optional list of <<_canonical_layer_names, canonical layer names>> which are private to
      the footprint.
-<23> An optional list of <<_net-tie_pad_groups, net tie-pad groups>>.
+<23> An optional list of <<_net_tie_pad_groups, net-tie pad groups>>.
 <24> The graphic objects section is a list of one or more
      <<_footprint_graphics_items, graphical objects>> in the footprint.  At a minimum, the
      reference designator and value  <<_footprint_text, text objects>> are defined.  All other
