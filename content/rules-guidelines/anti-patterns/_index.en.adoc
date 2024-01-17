@@ -270,7 +270,7 @@ void MY_DIALOG::OnCloseEvent( wxCloseEvent& aEvent )
 ===== Memory Management
 
 https://www.wxwidgets.org/[wxWidgets] mode-less dialogs are always created on
-the stack using the C++ `new` operator.  Therefore, it is the developers
+the heap using the C++ `new` operator.  Therefore, it is the developers
 responsibility to manage the memory allocated for the dialog.  However,
 https://www.wxwidgets.org/[wxWidgets] windows object memory should never
 be cleaned up using the C++ `delete` operator.  https://www.wxwidgets.org/[wxWidgets]
