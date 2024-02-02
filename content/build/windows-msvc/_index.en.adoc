@@ -44,7 +44,12 @@ Edit `CMakeSettings.json` update the VcPkgDir environment variable up top to mat
 * When the initial wizard launches, select to **Open a local folder**. 
 This is the correct way to make Visual Studio directly handle *CMake* projects.
 * Select the build root folder.
+* Ensure `x64-Debug` build configuration is selected. This will start the cmake configuration process and building of vcpkg dependencies. Note: You can see the progress by opening the Output window (if not already open) by navigating to View -> Output
+
+NOTE: This step will take a long time (several hours, depending on the speed of your computer). It is recommended to run this step overnight. It might appear as at some points the process is stuck because the output window doesn't update for many minutes (or even an hour, depending on your machine) with a message like `Building x64-windows`. This is nomal. Keep visual studio open until it is complete.
+
 * Wait until the "CMake in Visual Studio" tab appears and the CMake process hits an error, which we'll fix in the next step.
+
 
 ==== 3. Configure paths to SWIG
 
