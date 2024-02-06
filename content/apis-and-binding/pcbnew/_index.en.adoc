@@ -6,6 +6,16 @@ weight: 18
 
 :toc:
 
+== Deprecation notice
+
+WARNING: The SWIG-based Python bindings in KiCad will be deprecated and removed in a future
+version. They will be replaced by the IPC API, which is a stable interface that is accessible from
+many languages including Python. The current plan is to officially deprecate the bindings in KiCad
+9.0, and remove them in KiCad 10.0. This plan is subject to delay based on development timelines
+and community feedback.  KiCad 10.0 is currently planned for release in February 2026.
+
+== Introduction
+
 KiCad implements a Python plugin interface so that external Python plugins can
 be run from within the PCB editor.  The interface is generated using the `Simplified
 Wrapper and Interface Generator` or http://www.swig.org[SWIG].  SWIG is
