@@ -1,7 +1,9 @@
 ---
 title: 贡献
-weight: 18
+weight: 1
 pre: "<i class='fas fa-chevron-right'></i> "
+aliases:
+- /zh-cn/contribute/
 ---
 
 

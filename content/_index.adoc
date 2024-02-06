@@ -3,8 +3,26 @@
 This site contains information for contributors to the KiCad source code, translations, and Python
 plugins.
 
-Before starting your contribution, please read over the link:./contribute/[contribution guide] and
-the link:./rules-guidelines/[rules and guidelines] sections relevant to your contribution.
-All significant new features should be discussed with the development team via email or in a GitLab
-issue before development begins, so that we can ensure they will be implemented in a way that is
-consistent with the direction of the project.
+=== Building and Contributing to KiCad Software
+
+If you would like to build KiCad from source and contribute bug fixes or new features, please read
+the link:./getting-started[Getting Started] section carefully.  We welcome contributions from new
+developers and expect all new contributors to familiarize themselves with our policies and
+guidelines before opening a merge request.
+
+=== Translating KiCad
+
+If you are interested in improving the translation of KiCad into your language, or adding a new
+language, please read the link:./translation[translation information] page for details.
+
+=== Developing Python plugins
+
+If you are interested in creating plugins using the KiCad Python API (currently only accessible in
+the PCB editor), the link:./python[Python] section has information about where to find SWIG
+binding documentation and some examples.
+
+=== Publishing Addons (Plugin and Content Manager packages)
+
+If you are interested in publishing your Python plugin, color theme, or symbol/footprint libraries
+in the KiCad public content repository, please read the link:./addons[KiCad addons] documentation
+for requirements and suggested guidelines.

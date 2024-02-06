@@ -1,13 +1,14 @@
 ---
-title: Contribute
-weight: 18
+title: Getting Started
+weight: 1
 pre: "<i class='fas fa-chevron-right'></i> "
+aliases:
+- /en/contribute/
 ---
 
-
 == Contributing to KiCad (application) development
-KiCad has been a community driven effort of engineers developing on their limited time.
-We welcome anyone to contribute bug fixes, improvements and new features.
+
+
 
 
 === Developer mailing list
