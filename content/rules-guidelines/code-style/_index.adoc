@@ -722,7 +722,7 @@ Debugging output is a common method for validating code. However, it
 should not always active in debug builds. This makes it difficult for
 other developers to see their debugging output and can have a significant
 impact on the performance of debug builds. I you need to use debugging
-output, use link:https://docs.wxwidgets.org/3.0/group$$__group__funcmacro__$$log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug]
+output, use link:https://docs.wxwidgets.org/3.2/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug]
 instead of `printf` or {cpp} output stream.  If
 you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
@@ -733,11 +733,15 @@ output (see 6.1).
 
 === 6.1 Using Tracing for Debugging Output
 There are occasions when you want to see debugging output to ensure
-existing code performs as expected. In this case, use link:https://docs.wxwidgets.org/3.0/group$$__group__funcmacro__$$log.html#gae28a46b220921cd87a6f75f0842294c5[wxLogTrace] which allows debugging output to be controlled by the `WXTRACE` environment
-variable. When using wxLogTrace, the trace environment
-variable string should be documented by either adding it to the
-`trace_helper.{h/cpp}` source files or locally using the https://www.doxygen.nl/index.html[Doxygen]
-comment `\ingroup trace_env_vars`.
+existing code performs as expected. In this case, use
+link:https://docs.wxwidgets.org/3.2/group__group__funcmacro__log.html#ga947e317db477914c12b13c4534867ec9[wxLogTrace]
+which allows debugging output to be controlled by the `WXTRACE` environment
+variable. When using wxLogTrace, the trace environment variable string should
+be documented by either adding it to the `trace_helper.{h/cpp}` source files
+or locally using the https://www.doxygen.nl/index.html[Doxygen]
+comment `\ingroup trace_env_vars`.  To prevent `WXTRACE` name space conflicts,
+all trace variable strings should be prefixed with "KICAD_".
+
 
 == 7. Header Files
 Project *.h source files should:
