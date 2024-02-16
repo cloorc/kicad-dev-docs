@@ -209,7 +209,7 @@ Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working
 === Visual Studio Extras
 
 ==== Trailing Whitespace Remover (Extension)
-It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer[Trailing Whitespace Visualizer] (edition for Visual Studio 2022 link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespace64[here]) which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
+It is *highly recommended* users install the link:https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespace64[Trailing Whitespace Visualizer] for Visual Studio 2022 which will not only highlight trailing whitespace as you type but also automatically remove it by default when you save the file.
 
 
 ==== natvis definitions for libraries
@@ -217,9 +217,10 @@ It is *highly recommended* users install the link:https://marketplace.visualstud
 Visual Studio supports defining decoders for objects in debug views.
 
 You can find some useful ones here:
-https://github.com/wxWidgets/wxWidgets/blob/master/misc/msvc/wxWidgets.natvis
-https://github.com/nlohmann/json/blob/develop/nlohmann_json.natvis
-https://github.com/Open-Cascade-SAS/OCCT/blob/master/dox/debug/occt.natvis
+
+- https://github.com/wxWidgets/wxWidgets/blob/master/misc/msvc/wxWidgets.natvis
+- https://github.com/nlohmann/json/blob/develop/nlohmann_json.natvis
+- https://github.com/Open-Cascade-SAS/OCCT/blob/master/dox/debug/occt.natvis
 
 Simply download the files and drop them into:
 `%USERPROFILE%\Documents\Visual Studio 2022\Visualizers`
