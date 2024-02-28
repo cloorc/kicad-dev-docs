@@ -289,6 +289,13 @@ technical requirements described above.
 - Your package identifier **must** be unique. The namespacing requirements above should make this
   easy.
 
+- If you are not clearly a maintainer of the project, we must have written confirmation from a
+  maintainer that you are permitted to submit the project to the KiCad repository on their behalf.
+
+- Your package must not be a fork or copy of an existing package in the KiCad repository, unless
+  your fork is significantly different in scope from the original work and has a clearly unique
+  name, or unless you are proposing to replace an abandoned project (see below).
+
 ==== Licensing
 
 - Packages **must** be licensed under a valid open-source license.  Closed-source packages may be
@@ -336,6 +343,19 @@ technical requirements described above.
   best meet the needs of the KiCad user community.  Publishers of existing packages that become in
   violation of new or updated content policies will receive advance notice and have the opportunity
   to make changes to meet the updated policies.
+
+==== Abandoned content policy
+
+- The KiCad team may consider a package published to the official repository abandoned if we are
+  unable to contact the maintainer, or if it has bugs preventing its use on a stable version of
+  KiCad that remain open with no feedback for longer than 90 days.  In order to prevent the
+  situation of users installing broken packages from the official repository, the KiCad team may
+  edit (for example, by changing the `kicad_version_max` field) or remove packages from the
+  repository if they have been abandoned.
+
+- Anyone wishing to "revive" an abandoned project can do so either by taking over maintenance of it
+  from the original submitter (with their permission) or by forking it and submitting it under a
+  new name.  The standard requirements for all packages will apply to the newly-forked project.
 
 ==== Commercial Services
 
