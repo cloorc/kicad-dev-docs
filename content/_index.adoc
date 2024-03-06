@@ -18,8 +18,8 @@ language, please read the link:./translation[translation information] page for d
 === Developing Python plugins
 
 If you are interested in creating plugins using the KiCad Python API (currently only accessible in
-the PCB editor), the link:./python[Python] section has information about where to find SWIG
-binding documentation and some examples.
+the PCB editor), the link:./apis-and-binding/pcbnew[Python] section has information about where to
+find SWIG binding documentation and some examples.
 
 === Publishing Addons (Plugin and Content Manager packages)
 

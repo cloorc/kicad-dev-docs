@@ -37,9 +37,10 @@ documentation].
 Another documentation source is the auto-generated Doxygen reference of the
 bindings. It can be found here:
 
-http://docs.kicad.org/doxygen-python-6.0/namespacepcbnew.html[KiCad 6.0]
-http://docs.kicad.org/doxygen-python-7.0/namespacepcbnew.html[KiCad 7.0]
-http://docs.kicad.org/doxygen-python-nightly/namespacepcbnew.html[KiCad Nightly]
+* http://docs.kicad.org/doxygen-python-6.0/namespacepcbnew.html[KiCad 6.0]
+* http://docs.kicad.org/doxygen-python-7.0/namespacepcbnew.html[KiCad 7.0]
+* http://docs.kicad.org/doxygen-python-8.0/namespacepcbnew.html[KiCad 8.0]
+* http://docs.kicad.org/doxygen-python-nightly/namespacepcbnew.html[KiCad Nightly]
 
 == "Action Plugin" Support
 Besides the stand-alone usage of the generated Python plugin interface,
