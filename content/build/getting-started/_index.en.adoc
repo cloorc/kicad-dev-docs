@@ -106,7 +106,7 @@ file transfer access for the Plugin and Content Manager.
 === OpenCascade Library
 
 https://www.opencascade.com/content/overview[Open CASCSADE Technology (OCC)] is used to provide
-support for loading and saving 3D model file formats such as STEP.  KiCad requires OCC 7.3.0 or
+support for loading and saving 3D model file formats such as STEP.  KiCad requires OCC 7.5.0 or
 higher.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make building easier
 
 [#ngspice,reftext=Ngspice]
