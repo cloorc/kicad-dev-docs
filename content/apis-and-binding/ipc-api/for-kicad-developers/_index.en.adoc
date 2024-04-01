@@ -7,3 +7,127 @@ weight: 16
 :toc:
 
 == API Documentation for KiCad developers
+
+The IPC API is implemented inside KiCad by a server thread that listens on a UNIX socket for
+connections using the nanomsg next generation (nng) protocol.  At the moment, this socket operates
+in request-reply mode, with KiCad as the server, so asynchronous notifications to API clients is
+not possible.  This server passes messages to the rest of KiCad using a wxWidgets event to cross
+onto the main (UI) thread.  As with all other interactive KiCad events, the rest of API processing
+happens on the UI thread.
+
+Messages are contained within an envelope structure, which is unpacked and then dispatched to a 
+request handler according to the type of the interior Protobuf message.  Request handlers are
+functions that typically belong to a subclass of the `API_HANDLER` class.  The low-level 
+infrastructure of the API all lives in `kicommon` and is shared between all parts of KiCad, but
+request handlers are dynamically registered and so can be attached to specific frames.  If a
+certain message does not have a handler registered to it, the API server will return an error to
+the client.
+
+Handlers are processed one by one, and it is possible to register more than one handler for a given
+message type.  This is useful for situations where a message has some specifying target information
+that can narrow down its effect to a subset of available handlers.  For example, the
+`GetOpenDocuments` message takes a `DocumentType` parameter that specifies which type of documents
+to query. Each open editor frame can register a handler for the same message, and return
+`ApiStatusCode::AS_UNHANDLED` if they don't handle that type of document.  In this way, the
+dispatcher can try to have a message handled by multiple handlers, and only return an error to the
+client if none of the available handlers return success.
+
+A block diagram showing a typical request from a Python plugin is shown below.  The API is 
+language-agnostic; `kicad-python` is used here as one example of a language binding.
+
+```
+┌─────────────────┐                                
+│ KiCad Internals │                                
+└───────▲─────────┘                                
+        │                                          
+┌───────┴─────────┐                                
+│ REQUEST_HANDLER │                                
+└───────▲─────────┘                                
+        │                                          
+ ┌──────┴────────┐                                 
+ │ API_HANDLER_* │                                 
+ └──────▲────────┘                                 
+        │                                          
+  ┌─────┴──────┐                    ┌─────────────┐
+  │ API_SERVER │                    │ Plugin Code │
+  └─────▲──────┘                    └─────┬───────┘
+        │                                 │        
+    ┌───┴───┐                      ┌──────▼───────┐
+    │ KINNG │                      │ kicad-python │
+    └───▲───┘                      └──────┬───────┘
+        │                                 │        
+     ┌──┴──┐                          ┌───▼───┐    
+     │ nng │                          │ pynng │    
+     └──▲──┘                          └───┬───┘    
+        │                                 │        
+ ┌──────┴──────┐                   ┌──────▼──────┐ 
+ │ UNIX socket ◄───────────────────┤ UNIX socket │ 
+ └─────────────┘                   └─────────────┘ 
+```
+
+=== Protocol Buffers
+
+The API itself is implemented as link:https://protobuf.dev/[Protocol Buffers] (protobufs), a way
+of describing and serializing messages that, if used correctly, can provide stability for API
+clients while allowing KiCad internals to evolve.  It is important for every KiCad developer who
+works on the API to read and understand the protobuf
+link:https://protobuf.dev/programming-guides/dos-donts/[programming best practices] and
+link:https://protobuf.dev/programming-guides/api/[API best practices], as the KiCad API attempts to
+follow these guidelines in most circumstances.  Some of the most important practices are:
+
+1. Care must be taken whenever evolving the API in a way that seeks to deprecate, rename, or
+   otherwise change the existing messages and fields.  In general, the API should be designed as
+   much as possible to support both the current state of KiCad and anything we know about our
+   desired future state, to avoid needing to deprecate lots of messages in the future.
+
+2. Plain data types should used sparingly.  It is almost always a better idea in terms of future-
+   proofing and API evolution to wrap data types in a container message, even if these types are
+   represented by a single plain old data variable in KiCad's C++ internals.  This is particularly
+   true for boolean values: they should almost never be included in protobuf messages.  Instead,
+   an enum type should be defined that distinguishes between UNKNOWN (which should always have the
+   value of `0`) and `false`.  This also makes it possible to swap out the boolean for a tri-state
+   at a later point in time with no compatibility issues.
+
+3. Be careful about message nesting.  It is not always a good idea to attempt to duplicate the
+   object hierarchy of KiCad's internal C++ classes into a hierarchy of messages.  Sometimes,
+   KiCad's object hierarchy comes more from developer convenience or history than logical design,
+   and this hierarchy doesn't always make sense at an abstract conceptual level.  The API should,
+   in general, be *conceptually* logical and not have its design influenced by how KiCad's C++ is
+   designed.
+
+=== Enumerations
+
+Exposing enumerations to the API requires special care to minimize the chance of bugs and
+compatibility issues.  To expose a new C++ enum type to the API, do the following:
+
+1. Define a new protobuf enum for the type.  This enum should have a CamelCase name that clearly
+   describes the type -- use this as a chance to double-check if the KiCad type is named clearly.
+
+2. Fill out the values for the protobuf enum.  Each value should be an UPPER_SNAKE_CASE name, and
+   begin with a prefix to avoid namespace conflicts (protobuf enums are implemented as plain enums,
+   not C++ enum classes).  That prefix is conventionally the abbreviation of the CamelCase enum
+   name, for example `StrokeLineStyle` has values like `SLS_SOLID`, but this can be deviated from
+   where it makes sense.  The first enum value must always be `<prefix>_UNKNOWN` and must be
+   assigned the value `0`.  This value represents a message where this enum has not been set, and
+   does not map to an equivalent C++ enum value.  Because of this, and because protobuf enums may
+   not contain negative numbers, it is generally not going to be the case that there is a 1:1
+   mapping between C++ enum value and protobuf enum value.
+
+3. Define a specialization of `FromProtoEnum` and `ToProtoEnum` for your new enum.  There are
+   several source files where these specializations could go, based on what compilation unit your
+   enum's C++ definition lives in.  For example, shared (common) enums go in
+   `common/api/api_enums.cpp`.
+
+4. Add your enum to the QA tests in `qa/tests/api/test_api_enums.cpp`.  Check that the tests pass,
+   which will confirm that your To/From function implementations are correct.
+
+Note that as enum definitions evolve over time in KiCad, the protobuf versions must never have
+values deleted or modified: they can only have values deprecated and new values added!  Use the
+`ToProtoEnum`/`FromProtoEnum` functions to handle any changes in how the values should map to
+KiCad internals.
+
+=== Object Serialization
+
+=== API Handlers
+
+Mention `HANDLER_RESULT` and `tl::expected`

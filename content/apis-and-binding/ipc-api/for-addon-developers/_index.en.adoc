@@ -7,3 +7,6 @@ weight: 17
 :toc:
 
 == API Documentation for Add-on Developers
+
+The IPC API is still in the process of being developed and is not yet considered stable or ready
+for add-on developers to use.  Please check back later in 2024 for updated information.
