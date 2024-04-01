@@ -54,6 +54,10 @@ BUILD_SMALL_DEBUG_FILES
  bitmaps_png/CMakeLists.txt file.
 |OFF
 
+|KICAD_IPC_API
+|Build KiCad with the experimental IPC API server active.
+|OFF
+
 |===
 
 

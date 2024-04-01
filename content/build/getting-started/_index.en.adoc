@@ -116,11 +116,30 @@ The https://sourceforge.net/projects/ngspice/[Ngspice Library] is used to provid
 editor.  Make sure the the version of ngspice library used was built with the--with-ngshared
 option.  This library needs to be installed unless the Spice build option is disabled.
 
+[#protobuf,reftext=Protobuf]
+==== Protocol Buffers (protobuf)
+The https://protobuf.dev/[protobuf] library is used to provide structured serialization of
+KiCad data for the IPC API.  It is required even when the IPC API is not enabled, as it is
+also used as part of QA testing and is likely to be used in other applications in the future.
+KiCad requires protobuf version 3.x, and must be built with the same version of protobuf that
+is deployed as a library on the target system.
+
+[#nng,reftext=NNG]
+==== Nanomsg Next Generation (nng)
+The https://nng.nanomsg.org/[nng] library is used to provide a communications channel between
+KiCad and third-party plugins and applications for the IPC API.  It is required when KICAD_IPC_API
+is enabled.
+
 == KiCad Build Configuration Options
 
 KiCad has many build options that can be configured to build different options depending on
 the availability of support for each option on a given platform.  This section documents
 these options and their default values.
+
+=== IPC API
+
+The KICAD_IPC_API option is used to enable the experimental IPC API server.  When this option is
+enabled, the <<nng>> library must be available.
 
 [#wxpython_scripting,reftext=wxPython scripting]
 === wxPython Scripting Support
