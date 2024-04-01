@@ -65,6 +65,13 @@ language-agnostic; `kicad-python` is used here as one example of a language bind
  └─────────────┘                   └─────────────┘ 
 ```
 
+=== Transport and wire protocol
+
+The underlying transport mechanism for the API is link:https://github.com/nanomsg/nng[nng], which
+is a library providing messaging primatives, including inter-process communication (IPC).  The IPC
+mechanism used by KiCad's API is to serialize protocol buffers to bytes and send them over a UNIX
+socket.  KiCad does not currently make use of any of the more advanced features of nng.
+
 === Protocol Buffers
 
 The API itself is implemented as link:https://protobuf.dev/[Protocol Buffers] (protobufs), a way
@@ -128,6 +135,86 @@ KiCad internals.
 
 === Object Serialization
 
+Objects on the drawing canvas (in other words, the KiCad classes that represent "real things" that
+the user places, modifies, etc) are all subclasses of the `SERIALIZABLE` interface.  This means
+that in order to expose them to the API, all you need to do is:
+
+1. Define a protobuf message describing that object
+
+2. Add the object to the QA tests in `qa/test/api/test_api_proto.cpp` -- you may need to extend the
+   `api_kitchen_sink.kicad_pcb` test file with instances of your object.  Make sure there is at
+   least one instance of your object that has all its properties set to non-default values for best
+   test coverage.
+
+3. Implement the `::Serialize` and `::Deserialize` methods, and iterate on them until the QA tests
+   pass.
+
+When adding new object messages, look at what exists already and try to be consistent.  Design for
+the desired conceptual representation of an object, even if that doesn't completely match the
+current C++ implementation.  And only include "concrete" data about the objects in the message.
+Calculated/computed properties of an object should rarely be included in an object's main message.
+
+Be careful about datatypes as well: as described above, plain data types (ints, bools, strings) are
+usually not the right choice to describe a property, as they can limit the ability to evolve that
+property over time.  Prefer enums and container messages.
+
+Use protobuf message hierarchies sparingly -- it is generally not a good idea to encode KiCad's C++
+class hierarchies into messages as described above.  For example, in KiCad, a `PCB_TRACK` and a
+`PCB_VIA` are related by inheritance, but there are separate `Track` and `Arc` protobuf messages
+that duplicate their shared properties, rather than defining the `Arc` message as containing an
+inner `Track` message.  The cost of a slight increase in code duplication is worth it because it
+prevents confusing/convoluted API surfaces (protobuf does not support inheritance, so the arc
+properties would need to be accessed as `arc.track.start` and `arc.mid` for example) and reduces
+interdependence between messages that could make API evolution more painful in the future.
+
+=== Common data types
+
+The `base_types.proto` file contains a number of data type definitions that are used throughout the
+API.  Use these (and expand them) instead of defining more specific types, where it makes sense.
+Some of the types to be aware of: `KIID`, `Vector2`, `Distance`, `Angle`, `Ratio`, `Color`, etc.
+
+Note that all physical distances that represent concrete object properties in the API are
+represented as 64-bit integer nanometer values, regardless of what part of KiCad they come from.
+
 === API Handlers
 
-Mention `HANDLER_RESULT` and `tl::expected`
+A handler function is any function-like construct with the following signature:
+
+```cpp
+HANDLER_RESULT<ResponseType>( HandlerType::* aHandler )( RequestType&, const HANDLER_CONTEXT& )
+```
+
+In this signature, `RequestType` and `ResponseType` are protobuf message classes, and
+`HANDLER_RESULT<T>` is a typedef for `tl::expected<T, ApiResponseStatus>`.  `tl::expected` is a
+library that backports `std::expected` to older C++ and adds some functionality beyond the STL
+spec.  This type represents either an expected value, or an unexpected value that contains more
+information about why something failed.  The expected value is always just the response message
+that we want to send back to the client, and the unexpected value, `ApiResponseStatus`, is a
+message that contains a status code as well as an error message string. 
+
+For example:
+
+```cpp
+e.set_status( ApiStatusCode::AS_BAD_REQUEST );
+e.set_error_message( fmt::format( "the client {} already has a commit in progress",
+                                  aCtx.ClientName ) );
+return tl::unexpected( e );
+```
+
+Notice that the error message begins lowercase and has no punctuation.  This is because the error
+returned by this handler will almost always be composed with other fragments to form a full
+sentence (for example, the text `"KiCad API error: "` might be prepended).
+
+The status code `ApiStatusCode::AS_UNHANDLED` is used as a special flag to note that this handler
+can't handle the given request, but there was nothing in particular wrong with the request.  This
+is used in situations when the same request is routed to multiple handlers, one after the other, in
+case one of them is able to handle the request.
+
+The base class `API_HANDLER_EDITOR` is used to provide many of the common handlers that all the
+graphical editors in KiCad need, such as object CRUD, document retrieval, etc.  This is then
+specialized into `API_HANDLER_PCB`, `API_HANDLER_SCH`, and so on.  Handlers that don't require an
+editor frame to be open are in `API_HANDLER_COMMON`.
+
+Handlers always get passed a `HANDLER_CONTEXT` structure that contains information about the API
+request that is in flight.  This can be used to tell apart multiple different API clients, for
+example.
