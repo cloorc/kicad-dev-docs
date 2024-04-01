@@ -72,6 +72,11 @@ is a library providing messaging primatives, including inter-process communicati
 mechanism used by KiCad's API is to serialize protocol buffers to bytes and send them over a UNIX
 socket.  KiCad does not currently make use of any of the more advanced features of nng.
 
+The socket is opened at `/tmp/kicad/api.sock` on macOS and Linux, and in a subdirectory of the
+user's temporary file directory on Windows.  If multiple instances of KiCad are launched, the
+socket filename for every KiCad instance other than the first will be `api-<PID>.sock`, where
+`<PID>` is the process identifier of the KiCad instance.
+
 === Protocol Buffers
 
 The API itself is implemented as link:https://protobuf.dev/[Protocol Buffers] (protobufs), a way
