@@ -102,7 +102,7 @@ the source directory:
 
 [source,bash]
 ----
-git config --add include.path $(pwd)/helpers/git/format_alias
+git config --add include.path $(pwd)/tools/git/format_alias
 ----
 
 Then you can use the following aliases:
