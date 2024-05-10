@@ -96,15 +96,13 @@ The variable `PYTHONPATH` must be present and set to include the paths to the `p
 module and the `kicad_pyshell` module.  The former is built next to `pcbnew.exe` in the build
 directory, and the latter lives in the source tree in the `scripting` directory.
 
-Use the `env` section of each configuration entry to set the required environment variables. For
-example, the below configuration allows running and debugging `kicad.exe` from the build directory,
-assuming `vcpkg` is installed at `C:\code\vcpkg`.
+Use the `env` section of each configuration entry to set the required environment variables,
+including the path to the `vcpkg` installed packages directory, which will allow KiCad to find
+dynamic libraries from dependencies. For example, the below configuration allows running and
+debugging `kicad.exe` from the build directory.
 
-Additionally, use the `environment` section to add the path to the `vcpkg` installed packages
-directory, which will allow KiCad to find dynamic libraries from dependencies.
-
-
-Create this file as <kicad_source>/.vs/launch.vs.json to have a baseline/working default launch configuration
+Create this file as `<kicad_source>/.vs/launch.vs.json` to have a baseline/working default launch
+configuration:
 [source,json]
 ```
 {
