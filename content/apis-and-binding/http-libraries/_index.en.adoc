@@ -1,12 +1,12 @@
 ---
-date: 2024-04-08T14:30:00+10:00
-title: HTTP Libraries
+date: 2024-05-27T10:44:00+02:00
+title: HTTP Libraries Version 1
 weight: 18
 ---
 
 :toc:
 
-=== HTTP Libraries
+=== HTTP Libraries Version 1
 HTTP libraries are a type of KiCad symbol library that sources data about parts for an external source such an ERP system. They do not contain any symbol or footprint definitions as standard KiCad libraries do. Instead, they *reference* to symbols and footprints found in other KiCad libraries. 
 
 HTTP libraries are read only for now but will eventually support read/write in the future. At the moment only REST or REST-Like APIs are supported but support for other libraries could be added easily.
@@ -26,7 +26,7 @@ KiCad expects a root-URL and an api-version to access the library. This must be 
 
 ### Examples
 
-Return all parts belonging to a category with *ID = 16* using the *root-url* and the *api-version* as shown in the config file: *{root-url}/{api-version}/parts/category/16.json*. In relation to the example config file this means: *\http://localhost:8000/kicad-api/v1/parts/category/16.json*.
+Return all parts belonging to a category with *ID = 16* using the *root-url* and the *api-version* as shown in the config file: *{root-url}/{api-version}/parts/category/16.json*. 
 
 Another example would be using a *non integer ID* such as *Resistors* *{root-url}/{api-version}/parts/category/Resistors.json*. 
 
@@ -78,7 +78,7 @@ HTTP_200_OK
 ==== Fetching Parts for Symbol Chooser
 To display parts underneath a certain category inside KiCad's *Symbol Chooser*, KiCad queries the parts endpoint using a standard GET request: *{root-url}/{api-version}/parts/category/16.json*; with 16 being a numerical example ID for a specific category. As server response, KiCad expects an array containing one or more parts for that specific category. 
 
-For each part KiCad expects only an ```id```. If there is a need to display a different name to the ```id``` inside the *Symbol Chooser*, one can use the optional ```name``` key as shown below. Additionally, one can also provide a part description using the ```description``` key.
+For each part KiCad expects only an ```id```. If there is a need to display a different name to the ```id``` inside the *Symbol Chooser*, one can use the optional ```name``` key as shown below. Additionally, one can also provide a part description using the ```description``` key. The key ```power_symbol``` can be used to mark symbols as power symbols.
 
 ```
 HTTP_200_OK
@@ -86,17 +86,20 @@ HTTP_200_OK
     {
         "id": "69",
         "name": "830050789",
-        "description": "CRYSTAL 32.7680KHZ 12.5PF SMD"
+        "description": "CRYSTAL 32.7680KHZ 12.5PF SMD",
+        "power_symbol": "False"
     },
     {
         "id": "40",
         "name": "NE555PSR",
         "description": "IC OSC SINGLE TIMER 100KHZ 8SO"
+        "power_symbol": "False"
     },
     {
         "id": "238",
         "name": "TLC555CPSR",
         "description": "IC OSC SINGLE TIMER 2.1MHZ 8SO"
+        "power_symbol": "False"
     }
 ]
 ```
