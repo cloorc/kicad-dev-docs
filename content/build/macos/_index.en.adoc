@@ -83,8 +83,14 @@ WARNING: The bootstrapping scripts are designed to run in a "clean" installation
          on your `PATH` matches the target architecture you are building KiCad for.
 
 At the end of the `kicad-mac-builder` build process, `build.py` will print a list of suggested
-CMake arguments to the terminal.  **Copy this output to a safe place: you will need to refer to it
-when you set up your KiCad build.**
+CMake arguments to the terminal.  
+
+**It is recommended you save either the independent list of variables OR the toolchain file path.
+You will need these when configuring your KiCad build.**
+The use of the toolchain file means you only have to set -DCMAKE_TOOLCHAIN_FILE=<path> in the cmake arguments
+later. Future reruns of KMB will keep the toolchain file updated.
+
+You can rerun build.py to get all the variables again at any time.
 
 === Building KiCad
 
