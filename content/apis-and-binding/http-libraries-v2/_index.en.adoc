@@ -36,7 +36,7 @@ KiCad expects a root-URL and an api-version to access the library. This must be 
 
 
 ==== Validation endpoint
-KiCad queries the root-URL on `{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/` and expects it to return a dictionary with the endpoints as key-value pairs.
+KiCad queries the root-URL on `"{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/"` and expects it to return a dictionary with the endpoints as key-value pairs.
 
 ===== Validation endpoint response
 ```
@@ -73,11 +73,15 @@ For the parameter curly braces (`{}`) must be included in the path. +
 
 
 ==== Content endpoint
-To display parts underneath a certain category inside KiCad's *Symbol Chooser*, KiCad queries the parts endpoint using a standard GET request: `{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/{{nbsp}parts( {{nbsp}timestamp{nbsp}} ){nbsp}}`.  This query is always executed if the *timestamp* of the last *parts* call is smaller than the *timestamp* `"parts"` from the *update* request. If a request has never been made, the last timestamp is assumed to be `0`. When making the request, the last time stamp is given as a parameter, so only parts that have a new change stamp are returned.
+All data is retrieved from KiCad via the content endpoint with a standard GET request: `"{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/" + format({{nbsp}content{nbsp}}, {{nbsp}timestamp{nbsp}} )`.
+
+The `{nbsp}{timestamp}{nbsp}` represents the value of the last request. The first time it is called after the program has started, `0` is used. Then the last timestamp that was sent by the server as a response is used.
+
+The server responds with all categories and parts that have been added, changed or deleted since the timestamp.
 
 *Note:* +
 Typically the *timestamps* are in seconds since January 1, 1970. It is up to the API to decide what exactly the value represents. The only condition is that higher numbers represent a later point in time. +
-If the server does not support an update function, the entire cache can be renewed. In this case it might make sense to increase the cache timeout in the config file.
+If the server does not support an update function, the entire cache can be renewed. In this case it might make sense to increase the cache_timeout in the config file.
 
 ===== Content endpoint response
 ```
