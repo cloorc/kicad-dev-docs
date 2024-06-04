@@ -1365,16 +1365,17 @@ The `fill` token attributes define how the zone is to be filled.
       [(mode FILL_MODE)]                                        <2>
       (thermal_gap GAP)                                         <3>
       (thermal_bridge_width WIDTH)                              <4>
-      [(smoothing STYLE (radius RADIUS))]                       <5>
-      [(island_removal_mode MODE)]                              <6>
-      [(island_area_min AREA)]                                  <7>
-      [(hatch_thickness THICKNESS)]                             <8>
-      [(hatch_gap GAP)]                                         <9>
-      [(hatch_orientation ORIENTATION)]                         <10>
-      [(hatch_smoothing_level LEVEL)]                           <11>
-      [(hatch_smoothing_value VALUE)]                           <12>
-      [(hatch_border_algorithm TYPE)]                           <13>
-      [(hatch_min_hole_area AREA)]                              <14>
+      [(smoothing STYLE)]                                       <5>
+      [(radius RADIUS)]                                         <6>
+      [(island_removal_mode MODE)]                              <7>
+      [(island_area_min AREA)]                                  <8>
+      [(hatch_thickness THICKNESS)]                             <9>
+      [(hatch_gap GAP)]                                         <10>
+      [(hatch_orientation ORIENTATION)]                         <11>
+      [(hatch_smoothing_level LEVEL)]                           <12>
+      [(hatch_smoothing_value VALUE)]                           <13>
+      [(hatch_border_algorithm TYPE)]                           <14>
+      [(hatch_min_hole_area AREA)]                              <15>
     )
 ```
 
@@ -1386,31 +1387,32 @@ The `fill` token attributes define how the zone is to be filled.
     thermal relief connections to the zone.
 <4> The optional `thermal_bridge_width` token attribute defines the spoke width for all pad
     thermal relief connection to the zone.
-<5> The optional `smoothing` token attributes define the style of corner smoothing and the
-    radius of the smoothing.  Valid smoothing styles are `chamfer` and `fillet`.
-<6> The optional `island_removal_mode` token attribute defines the island removal mode.  Valid
+<5> The optional `smoothing` token attributes define the style of corner smoothing.
+    Valid smoothing styles are `chamfer` and `fillet`.
+<6> The optional `radius` token defines the radius of the corner smoothing.
+<7> The optional `island_removal_mode` token attribute defines the island removal mode.  Valid
     island removal modes are:
     * 0 - Always remove islands.
     * 1 - Never remove islands.
     * 2 - Minimum area island to allow.
-<7> The optional `island_area_min` token attribute defines the minimum allowable zone island.
+<8> The optional `island_area_min` token attribute defines the minimum allowable zone island.
     This only valid when the remove islands mode is set to 2.
-<8> The optional `hatch_thickness` token attribute defines the thickness for hatched fills.
-<9> The optional `hatch_gap` token attribute defines the distance between lines for hatched fills.
-<10> The optional `hatch_orientation` token attribute defines the line angle for hatched fills.
-<11> The optional `hatch_smoothing_level` token attribute defines how hatch outlines are smoothed.
+<9> The optional `hatch_thickness` token attribute defines the thickness for hatched fills.
+<10> The optional `hatch_gap` token attribute defines the distance between lines for hatched fills.
+<11> The optional `hatch_orientation` token attribute defines the line angle for hatched fills.
+<12> The optional `hatch_smoothing_level` token attribute defines how hatch outlines are smoothed.
      Valid hatch smoothing levels are:
      * 0 - No smoothing.
      * 1 - Fillet.
      * 2 - Arc minimum.
      * 3 - Arc maximum.
-<12> The optional `hatch_smoothing_value` token attribute defines the ratio between the hole
+<13> The optional `hatch_smoothing_value` token attribute defines the ratio between the hole
      and the chamfer/fillet size.
-<13> The optional `hatch_border_algorithm` token attribute defines the if the zone line thickness
+<14> The optional `hatch_border_algorithm` token attribute defines the if the zone line thickness
      is used when performing a hatch fill.  Valid values for the hatch border algorithm are:
      * 0 - Use zone minimum thickness.
      * 1 - Use hatch thickness.
-<14> The optional `hatch_min_hole_area` token attribute defines the minimum area a hatch file
+<15> The optional `hatch_min_hole_area` token attribute defines the minimum area a hatch file
      hole can be.
 
 ==== Zone Fill Polygons
