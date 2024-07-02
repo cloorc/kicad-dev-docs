@@ -1,0 +1,7 @@
+<i class='fa-fw fas fa-calendar'></i> Last Modified <time datetime="{{ dateFormat .Site.Params.dateFormat .Page.Lastmod }}">{{ dateFormat .Site.Params.dateFormat .Page.Lastmod }}</time>
+
+{{- partial "term-list.html" (dict
+  "page" .
+  "taxonomy" "categories"
+  "icon" "layer-group"
+) }}
