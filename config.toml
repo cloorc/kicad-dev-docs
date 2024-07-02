@@ -3,7 +3,7 @@ languageCode = "en-US"
 defaultContentLanguage = "en"
 
 title = "KiCad Dev Documentation"
-theme = "hugo-theme-learn"
+theme = "hugo-theme-relearn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 ignoreFiles = [ "(^__|/__)(.+).adoc$" ]
@@ -11,8 +11,6 @@ enableGitInfo = true
 
 [params]
   editURL = "https://gitlab.com/kicad/services/kicad-dev-docs/-/edit/master/content/"
-  description = "KiCad Developer Documentation"
-  author = "Mathieu Cornic"
   showVisitedLinks = false
   disableBreadcrumb = false
   disableNextPrev = true
@@ -25,10 +23,11 @@ enableGitInfo = true
   dateFormat = "2006-01-02"
 
 [outputs]
-home = [ "HTML", "RSS", "JSON"]
+home = [ "HTML", "RSS", "search"]
 
 [Languages]
 [Languages.en]
+[Languages.en.params]
 title = "Developer Documentation | KiCad"
 weight = 1
 languageName = "English"
@@ -42,6 +41,7 @@ url = "https://gitlab.com/kicad/services/kicad-dev-docs"
 weight = 10
 
 [Languages.zh-cn]
+[Languages.zh-cn.params]
 title = "开发者文档 | KiCad"
 weight = 1
 languageName = "简体中文"

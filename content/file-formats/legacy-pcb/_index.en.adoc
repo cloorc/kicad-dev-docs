@@ -194,7 +194,7 @@ It is used by Pcbnew for displaying activity when loading data.
 |Nzone 1929	|Number of zone segments
 |Nmodule 29	|Number of modules
 |Nnets 26	|Number of nets
-|$EndGENERAL	End description
+|$EndGENERAL | End description
 |===
 
 ==	$SHEETDESCR
@@ -735,7 +735,7 @@ $endCZONE_OUTLINE
 |74655 51655 0 0	First corner (first filled area outline)
 |74655 13345 0 0	Next corner
 |$endPOLYSCORNERS
-|$endCZONE_OUTLINE	End description
+|$endCZONE_OUTLINE | End description
 |===
 
 Other example:
