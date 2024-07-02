@@ -23,7 +23,7 @@ enableGitInfo = true
   dateFormat = "2006-01-02"
 
 [outputs]
-home = [ "HTML", "RSS", "search"]
+  home = ['html', 'rss', 'search', 'searchpage']
 
 [Languages]
 [Languages.en]
