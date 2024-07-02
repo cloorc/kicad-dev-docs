@@ -6,7 +6,7 @@ stages:
 
 build_site_docker:
   tags:
-    - docker
+    - gitlab-org-docker
   image: docker:stable
   services:
     - docker:dind
