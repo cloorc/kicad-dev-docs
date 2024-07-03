@@ -17,7 +17,6 @@ enableGitInfo = true
   disableLandingPageButton = true
   disableInlineCopyToClipBoard = true
   disableMermaid = false
-  customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
   titleSeparator = "|"
   themeVariant = "blue"
   dateFormat = "2006-01-02"
