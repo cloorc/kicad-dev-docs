@@ -19,13 +19,7 @@ enableGitInfo = true
   disableMermaid = false
   titleSeparator = "|"
   dateFormat = "2006-01-02"
-
-  themeVariant = [
-    { identifier = "zen-auto",      name = "Zen Light/Dark", auto = [ "zen-light", "zen-dark" ] },
-    { identifier = "zen-light"      },
-    { identifier = "zen-dark"       },
-  ]
-
+  themeVariant = ['auto', 'zen-light', 'zen-dark']
 
 [outputs]
   home = ['html', 'rss', 'search', 'searchpage']
