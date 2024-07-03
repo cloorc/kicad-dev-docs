@@ -18,8 +18,14 @@ enableGitInfo = true
   disableInlineCopyToClipBoard = true
   disableMermaid = false
   titleSeparator = "|"
-  themeVariant = "blue"
   dateFormat = "2006-01-02"
+
+  themeVariant = [
+    { identifier = "zen-auto",      name = "Zen Light/Dark", auto = [ "zen-light", "zen-dark" ] },
+    { identifier = "zen-light"      },
+    { identifier = "zen-dark"       },
+  ]
+
 
 [outputs]
   home = ['html', 'rss', 'search', 'searchpage']
