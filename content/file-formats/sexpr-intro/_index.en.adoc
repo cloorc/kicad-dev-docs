@@ -425,8 +425,8 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     footprints defined in the board file format.
 <7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational
     angle of the footprint.  This only applies to footprints defined in the board file format.
-<8> The optional `tags` token defines a string of search tags for the footprint.
-<9> The optional `descr` token defines a string containing the description of the footprint.
+<8> The optional `descr` token defines a string containing the description of the footprint.
+<9> The optional `tags` token defines a string of search tags for the footprint.
 <10> The optional `property` token defines a property for the footprint.
 <11> The `path` token defines the hierarchical path of the schematic symbol linked to the footprint.
      This only applies to footprints defined in the board file format.
@@ -774,7 +774,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
       [(roundrect_rratio RATIO)]                                <12>
       [(chamfer_ratio RATIO)]                                   <13>
       [(chamfer CORNER_LIST)]                                   <14>
-      (net NUMBER "NAME")                                       <15>
+      [(net NUMBER "NAME")]                                     <15>
       (tstamp UUID)                                             <16>
       [(pinfunction "PIN_FUNCTION")]                            <17>
       [(pintype "PIN_TYPE")]                                    <18>
@@ -803,7 +803,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
 <8> The `layers` token defines the <<_layers,layer or layers>> the pad reside on.
 <9> The optional `property` token defines any special properties for the pad.  Valid properties are
     `pad_prop_bga`, `pad_prop_fiducial_glob`, `pad_prop_fiducial_loc`, `pad_prop_testpoint`,
-    `pad_prop_heatsink`, `pad_prop_heatsink`, and `pad_prop_castellated`.
+    `pad_prop_heatsink`, and `pad_prop_castellated`.
 <10> The optional `remove_unused_layer` token specifies that the copper should be removed from any
     layers the pad is not connected to.
 <11> The optional `keep_end_layers` token specifies that the top and bottom layers should be
