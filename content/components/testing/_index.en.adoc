@@ -10,7 +10,7 @@ weight: 20
 KiCad has a limited number of unit tests, which can be used to
 check that certain functionality works.
 
-Tests are registered using https://cmake.org/cmake/help/latest/module/CTest.html[CTest], 
+Tests are registered using https://cmake.org/cmake/help/latest/module/CTest.html[CTest],
 part of CMake. CTest gathers all the
 disparate test programs and runs them. Most {cpp} unit
 tests are written using the https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/index.html[Boost Unit Test framework],
@@ -36,7 +36,7 @@ arguments. For example:
 ----
 # run the libcommon tests
 cd /path/to/kicad/build
-qa/common/qa_common [parameters]
+qa/tests/common/qa_common [parameters]
 ----
 
 For Boost unit tests, you can see the options for the test with `<test> --help`.
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE( SomeTest )
 ----
 
 There is a range of functions like `BOOST_CHECK`, which are documented
-https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/boost_test/utf_reference/testing_tool_ref.html[here]. 
+https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/boost_test/utf_reference/testing_tool_ref.html[here].
 Using the most specific function is preferred, as that
 allows Boost to provide more detailed failures: `BOOST_CHECK( foo == bar )` only
 reports a mismatch, `BOOST_CHECK_EQUAL( foo, bar )` will show the values of

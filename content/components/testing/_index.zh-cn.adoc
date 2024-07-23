@@ -33,7 +33,7 @@ CTest 收集并运行所有不同的测试程序。
 ----
 # 运行 libcommon 测试
 cd /path/to/kicad/build
-qa/common/qa_common [parameters]
+qa/tests/common/qa_common [parameters]
 ----
 
 对于 Boost 单元测试，可以使用 `<test>--help` 查看测试选项。
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE( SomeTest )
 }
 ----
 
-有一系列像 `BOOST_CHECK`这样的函数，它们记录在 
+有一系列像 `BOOST_CHECK`这样的函数，它们记录在
 https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/boost_test/utf_reference/testing_tool_ref.html[这里]。
 最好使用最具体的函数，因为这样 Boost 可以提供更详细的故障：
 `BOOST_CHECK( foo == bar )` 只报告不匹配，
@@ -85,7 +85,7 @@ https://www.boost.org/doc/libs/1_68_0/libs/test/doc/html/boost_test/utf_referenc
 只有在 `-l` 参数设置为 `message` 或更高的时候才能看到，
 这样文本的颜色会有所不同，以区别于其他测试消息和标准输出。
 
-您也可以使用 `std::cout`、`printf`、`wxLogDebug` 等来处理测试函数内部的调试消息 
+您也可以使用 `std::cout`、`printf`、`wxLogDebug` 等来处理测试函数内部的调试消息
 (即您没有权限访问 Boost 单元测试头文件的地方)。这些文件总是打印出来的，
 所以在提交之前一定要删除它们，否则当 KiCad 正常运行时它们就会出现！
 
