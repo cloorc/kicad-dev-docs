@@ -388,7 +388,7 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
     [placed]                                                    <3>
     (layer LAYER_DEFINITIONS)                                   <4>
     (tedit TIME_STAMP)                                          <5>
-    [(tstamp UUID)]                                             <6>
+    [(uuid UUID)]                                               <6>
     [POSITION_IDENTIFIER]                                       <7>
     [(descr "DESCRIPTION")]                                     <8>
     [(tags "NAME")]                                             <9>
@@ -421,7 +421,7 @@ NOTE: Prior to version 6, the `footprint` token was referred to as `module`.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the footprint
     is placed.
 <5> The `tedit` token defines a the last time the footprint was edited.
-<6> The `tstamp` token defines the unique identifier for the footprint.  This only applies to
+<6> The `uuid` token defines the unique identifier for the footprint.  This only applies to
     footprints defined in the board file format.
 <7> The <<_position_identifier,POSITION_IDENTIFIER>> defines the X and Y coordinates and rotational
     angle of the footprint.  This only applies to footprints defined in the board file format.
@@ -529,7 +529,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
       (layer LAYER_DEFINITION)                                  <5>
       [hide]                                                    <6>
       (effects TEXT_EFFECTS)                                    <7>
-      (tstamp UUID)                                             <8>
+      (uuid UUID)                                               <8>
     )
 ```
 
@@ -542,7 +542,7 @@ The `fp_text` token defines text in a <<_footprint,footprint definition>>.
 <5> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
 <6> The optional [hide] token, defines if the text is hidden.
 <7> The `effects` token defines how the <<_text_effects,text is displayed>>.
-<8> The `tstamp` token defines the unique identifier of the text object.
+<8> The `uuid` token defines the unique identifier of the text object.
 
 ===== Footprint Text Box
 
@@ -559,7 +559,7 @@ The `fp_text_box` token defines a rectangle containing line-wrapped text.
     [(pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))]                 <5>
     [(angle ROTATION)]                                          <6>
     (layer LAYER_DEFINITION)                                    <7>
-    (tstamp UUID)                                               <8>
+    (uuid UUID)                                                 <8>
     TEXT_EFFECTS                                                <9>
     [STROKE_DEFINITION]                                         <10>
     [(render_cache RENDER_CACHE)]                               <11>
@@ -575,7 +575,7 @@ The `fp_text_box` token defines a rectangle containing line-wrapped text.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
 <7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
     on.
-<8> The `tstamp` token defines the unique identifier of the text box.
+<8> The `uuid` token defines the unique identifier of the text box.
 <9> The <<_text_effects, TEXT_EFFECTS>> describe the style of the text in the text box.
 <10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to
      be drawn around the text box.
@@ -601,7 +601,7 @@ The `fp_line` token defines a graphic line in a <<_footprint,footprint definitio
       (width WIDTH)                                             <4>
       STROKE_DEFINITION                                         <5>
       [(locked)]                                                <6>
-      (tstamp UUID)                                             <7>
+      (uuid UUID)                                               <7>
     )
 ```
 
@@ -613,7 +613,7 @@ The `fp_line` token defines a graphic line in a <<_footprint,footprint definitio
 <5> The <<_stroke_definition, STROKE_DEFINITION>> describes the width and style of the line.
      (from version 7)
 <6> The optional `locked` token defines if the line cannot be edited.
-<7> The `tstamp` token defines the unique identifier of the line object.
+<7> The `uuid` token defines the unique identifier of the line object.
 
 ===== Footprint Rectangle
 
@@ -628,7 +628,7 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
       STROKE_DEFINITION                                         <5>
       [(fill TYPE)]                                             <6>
       [(locked)]                                                <7>
-      (tstamp UUID)                                             <8>
+      (uuid UUID)                                               <8>
     )
 ```
 
@@ -642,7 +642,7 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
 <6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
 <7> The optional `locked` token defines if the rectangle cannot be edited.
-<8> The `tstamp` token defines the unique identifier of the rectangle object.
+<8> The `uuid` token defines the unique identifier of the rectangle object.
 
 ===== Footprint Circle
 
@@ -657,7 +657,7 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
       STROKE_DEFINITION                                         <5>
       [(fill TYPE)]                                             <6>
       [(locked)]                                                <7>
-      (tstamp UUID)                                             <8>
+      (uuid UUID)                                               <8>
     )
 ```
 
@@ -671,7 +671,7 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
 <6> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the circle is not filled.
 <7> The optional `locked` token defines if the circle cannot be edited.
-<8> The `tstamp` token defines the unique identifier of the circle object.
+<8> The `uuid` token defines the unique identifier of the circle object.
 
 ===== Footprint Arc
 
@@ -686,7 +686,7 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
       (width WIDTH)                                             <5>
       STROKE_DEFINITION                                         <6>
       [(locked)]                                                <7>
-      (tstamp UUID)                                             <8>
+      (uuid UUID)                                               <8>
     )
 ```
 
@@ -698,7 +698,7 @@ The `fp_arc` token defines a graphic arc in a <<_footprint,footprint definition>
 <6> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the arc.
      (from version 7)
 <7> The optional `locked` token defines if the arc cannot be edited.
-<8> The `tstamp` token defines the unique identifier of the arc object.
+<8> The `uuid` token defines the unique identifier of the arc object.
 
 ===== Footprint Polygon
 
@@ -712,7 +712,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
       STROKE_DEFINITION                                         <4>
       [(fill TYPE)]                                             <5>
       [(locked)]                                                <6>
-      (tstamp UUID)                                             <7>
+      (uuid UUID)                                               <7>
     )
 ```
 
@@ -726,7 +726,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 <5> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
 <6> The optional `locked` token defines if the polygon cannot be edited.
-<7> The `tstamp` token defines the unique identifier of the polygon object.
+<7> The `uuid` token defines the unique identifier of the polygon object.
 
 ===== Footprint Curve
 
@@ -741,7 +741,7 @@ in a <<_footprint,footprint definition>>.
       (width WIDTH)                                             <3>
       STROKE_DEFINITION                                         <4>
       [(locked)]                                                <5>
-      (tstamp UUID)                                             <6>
+      (uuid UUID)                                               <6>
     )
 ```
 
@@ -752,7 +752,7 @@ in a <<_footprint,footprint definition>>.
 <4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the curve.
     (from version 7)
 <5> The optional `locked` token defines if the curve cannot be edited.
-<6> The `tstamp` token defines the unique identifier of the curve object.
+<6> The `uuid` token defines the unique identifier of the curve object.
 
 ==== Footprint Pad
 
@@ -775,7 +775,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
       [(chamfer_ratio RATIO)]                                   <13>
       [(chamfer CORNER_LIST)]                                   <14>
       (net NUMBER "NAME")                                       <15>
-      (tstamp UUID)                                             <16>
+      (uuid UUID)                                               <16>
       [(pinfunction "PIN_FUNCTION")]                            <17>
       [(pintype "PIN_TYPE")]                                    <18>
       [(die_length LENGTH)]                                     <19>
@@ -818,7 +818,7 @@ The `pad` token defines a pad in a <<_footprint,footprint definition>>.
      `bottom_right`.
 <15> The optional `net` token defines the integer number and name string of the net connection for
      the pad.
-<16> The `tstamp` token defines the unique identifier of the pad object.
+<16> The `uuid` token defines the unique identifier of the pad object.
 <17> The optional `pinfunction` token attribute defines the associated schematic symbol pin name.
 <18> The optional `pintype` token attribute defines the associated schematic pin electrical type.
 <19> The optional `die_length` token attribute defines the die length between the component pad and
@@ -942,7 +942,7 @@ The `gr_text` token defines graphical text.
     "TEXT"                                                      <1>
     POSITION_INDENTIFIER                                        <2>
     (layer LAYER_DEFINITION [knockout])                         <3>
-    (tstamp UUID)                                               <4>
+    (uuid UUID)                                                 <4>
     (effects TEXT_EFFECTS)                                      <5>
   )
 ```
@@ -952,7 +952,7 @@ The `gr_text` token defines graphical text.
     <<_position_identifier,X and Y coordinates and optional orientation angle>> of the text.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text resides on.
     It is optionally followed by a `knockout` token indicating the text should be knocked out.
-<4> The `tstamp` token defines the unique identifier of the text object.
+<4> The `uuid` token defines the unique identifier of the text object.
 <5> The TEXT_EFFECTS defines how the <<_text_effects,text is displayed>>.
 
 === Graphical Text Box
@@ -970,7 +970,7 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text.
     [(pts (xy X Y) (xy X Y) (xy X Y) (xy X Y))]                 <5>
     [(angle ROTATION)]                                          <6>
     (layer LAYER_DEFINITION)                                    <7>
-    (tstamp UUID)                                               <8>
+    (uuid UUID)                                                 <8>
     TEXT_EFFECTS                                                <9>
     [STROKE_DEFINITION]                                         <10>
     [(render_cache RENDER_CACHE)]                               <11>
@@ -986,7 +986,7 @@ The `gr_text_box` token defines a rectangle containing line-wrapped text.
 <6> The optional `angle` token defines the rotation of the text box in degrees.
 <7> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the text box resides
     on.
-<8> The `tstamp` token defines the unique identifier of the text box.
+<8> The `uuid` token defines the unique identifier of the text box.
 <9> The <<_text_effects, TEXT_EFFECTS>> describe the style of the text in the text box.
 <10> The <<_stroke_definition, STROKE_DEFINITION>> describes the style of an optional border to be
      drawn around the text box.
@@ -1011,7 +1011,7 @@ The `gr_line` token defines a graphical line.
     [(angle ANGLE)]                                             <3>
     (layer LAYER_DEFINITION)                                    <4>
     (width WIDTH)                                               <5>
-    (tstamp UUID)                                               <6>
+    (uuid UUID)                                                 <6>
   )
 ```
 
@@ -1020,7 +1020,7 @@ The `gr_line` token defines a graphical line.
 <3> The optional `angle` token defines the rotational angle of the line.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the line resides on.
 <5> The `width` token defines the line width.
-<6> The `tstamp` token defines the unique identifier of the line object.
+<6> The `uuid` token defines the unique identifier of the line object.
 
 ==== Graphical Rectangle
 
@@ -1033,7 +1033,7 @@ The `gr_rect` token defines a graphical rectangle.
     (layer LAYER_DEFINITION)                                    <3>
     (width WIDTH)                                               <4>
     [(fill MODE)]                                               <5>
-    (tstamp UUID)                                               <6>
+    (uuid UUID)                                                 <6>
   )
 ```
 
@@ -1044,7 +1044,7 @@ The `gr_rect` token defines a graphical rectangle.
 <4> The `width` token defines the line width of the rectangle.
 <5> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the rectangle is not filled.
-<6> The `tstamp` token defines the unique identifier of the rectangle object.
+<6> The `uuid` token defines the unique identifier of the rectangle object.
 
 ==== Graphical Circle
 
@@ -1057,7 +1057,7 @@ The `gr_circle` token defines a graphical circle.
     (layer LAYER_DEFINITION)                                    <3>
     (width WIDTH)                                               <4>
     [(fill MODE)]                                               <5>
-    (tstamp UUID)                                               <6>
+    (uuid UUID)                                                 <6>
   )
 ```
 
@@ -1068,7 +1068,7 @@ The `gr_circle` token defines a graphical circle.
 <4> The `width` token defines the line width of the circle.
 <5> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the circle is not filled.
-<6> The `tstamp` token defines the unique identifier of the circle object.
+<6> The `uuid` token defines the unique identifier of the circle object.
 
 ==== Graphical Arc
 
@@ -1081,7 +1081,7 @@ The `gr_arc` token defines a graphical arc.
     (end X Y)                                                   <3>
     (layer LAYER_DEFINITION)                                    <4>
     (width WIDTH)                                               <5>
-    (tstamp UUID)                                               <6>
+    (uuid UUID)                                                 <6>
   )
 ```
 
@@ -1090,7 +1090,7 @@ The `gr_arc` token defines a graphical arc.
 <3> The `end` token defines the coordinates of the end position of the arc radius.
 <4> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the arc resides on.
 <5> The `width` token defines the line width of the arc.
-<6> The `tstamp` token defines the unique identifier of the arc object.
+<6> The `uuid` token defines the unique identifier of the arc object.
 
 ==== Graphical Polygon
 
@@ -1102,7 +1102,7 @@ The `gr_poly` token defines a graphical polygon.
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
     [(fill MODE)]                                               <4>
-    (tstamp UUID)                                               <5>
+    (uuid UUID)                                                 <5>
   )
 ```
 
@@ -1113,7 +1113,7 @@ The `gr_poly` token defines a graphical polygon.
 <3> The `width` token defines the line width of the polygon.
 <4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
     and `none`.  If not defined, the polygon is not filled.
-<5> The `tstamp` token defines the unique identifier of the polygon object.
+<5> The `uuid` token defines the unique identifier of the polygon object.
 
 ==== Graphical Curve
 
@@ -1125,7 +1125,7 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Cub
     COORDINATE_POINT_LIST                                       <1>
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
-    (tstamp UUID)                                               <4>
+    (uuid UUID)                                                 <4>
   )
 ```
 
@@ -1133,7 +1133,7 @@ https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves[Cub
     <<_coordinate_point_list, X/Y coordinates>> of the four pointS of the curve.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the curve resides on.
 <3> The `width` token defines the line width of the curve.
-<4> The `tstamp` token defines the unique identifier of the curve object.
+<4> The `uuid` token defines the unique identifier of the curve object.
 
 ==== Annotation Bounding Box
 
@@ -1161,7 +1161,7 @@ The `dimension` token defines a dimension object.
     [locked]                                                    <1>
     (type DIMENSION_TYPE)                                       <2>
     (layer LAYER_DEFINITION)                                    <3>
-    (tstamp UUID)                                               <4>
+    (uuid UUID)                                                 <4>
     (pts (xy X Y) (xy X Y))                                     <5>
     [(height HEIGHT)]                                           <6>
     [(orientation ORIENTATION)]                                 <7>
@@ -1177,7 +1177,7 @@ The `dimension` token defines a dimension object.
     `aligned`, `leader`, `center`, `orthogonal`, and `radial` (`radial` from version 7).
 <3> The `layer` token defines the xref:../sexpr-intro/index.adoc#_canonical_layer_names[canonical layer]
     the polygon resides on.
-<4> The `tstamp` token defines the unique identifier of the dimension object.
+<4> The `uuid` token defines the unique identifier of the dimension object.
 <5> The `pts` token attributes define the list of `xy` coordinates of the dimension.
 <6> The optional `height` token attribute defines the height of aligned dimensions.
 <7> The optional `orientation` token attribute defines the rotation angle for orthogonal
@@ -1277,7 +1277,7 @@ filled copper zones and keep out areas.
     (net NET_NUMBER)                                            <1>
     (net_name "NET_NAME")                                       <2>
     (layer LAYER_DEFINITION)                                    <3>
-    (tstamp UUID)                                               <4>
+    (uuid UUID)                                                 <4>
     [(name "NAME")]                                             <5>
     (hatch STYLE PITCH)                                         <6>
     [(priority PRIORITY)]                                       <7>
@@ -1298,7 +1298,7 @@ filled copper zones and keep out areas.
     xref:../sexpr-pcb/index.adoc#_nets_section[name of the net] if the zone is not a keep out
     area.  The net name attribute will be an empty string if the zone is a keep out area.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the zone resides on.
-<4> The `tstamp` token defines the unique identifier of the zone object.
+<4> The `uuid` token defines the unique identifier of the zone object.
 <5> The optional `name` token attribute defines the name of the zone if one has been assigned.
 <6> The `hatch` token attributes define the zone outline display hatch style and pitch.  Valid
     hatch styles are `none`, `edge`, and `full`.
