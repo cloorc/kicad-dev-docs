@@ -1202,7 +1202,7 @@ The `format` token attributes define the text formatting of the dimension.
       (units_format UNITS_FORMAT)                               <4>
       (precision PRECISION)                                     <5>
       [(override_value "VALUE")]                                <6>
-      [suppress_zeros]                                          <7>
+      [(suppress_zeros yes | no)]                               <7>
     )
 ```
 
@@ -1230,6 +1230,7 @@ The `format` token attributes define the text formatting of the dimension.
 <6> The optional `override_value` token attribute defines the text to substitute for the actual
     physical dimension.
 <7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
+    The only valid attributes are `yes` and `no`.
 
 ===== Dimension Style
 
