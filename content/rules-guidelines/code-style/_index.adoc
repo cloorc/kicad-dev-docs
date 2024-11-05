@@ -374,7 +374,7 @@ by an optional detailed description as the shown in the example below.
      *
      * A really detailed description goes here if it's needed.
      *
-     * @param aMestLevel is the multiple of spaces to precede the output with.
+     * @param aNestLevel is the multiple of spaces to precede the output with.
      * @param aFmt is a printf() style format string.
      * @param ... is a variable list of parameters that will get blended into
      *  the output under control of the format string.
