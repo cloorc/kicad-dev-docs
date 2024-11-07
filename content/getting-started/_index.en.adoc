@@ -65,7 +65,7 @@ If you feel like working on the user interface, you will find useful reading the
 link:../rules-guidelines/ui/[User Interface Guidelines].
 
 It's important for us to keep the codebase readable by
-all developers. Your patches will not be accepted until adhere to the rules set forth in these
+all developers. Your patches will not be accepted until they adhere to the rules set forth in these
 policies.
 
 Programming is an iterative process, don't worry if you have to go back and make changes to your patches, we all do.
