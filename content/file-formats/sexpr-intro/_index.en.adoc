@@ -626,7 +626,7 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
       (layer LAYER_DEFINITION)                                  <3>
       (width WIDTH)                                             <4>
       STROKE_DEFINITION                                         <5>
-      [(fill TYPE)]                                             <6>
+      [(fill yes | no)]                                         <6>
       [(locked)]                                                <7>
       (uuid UUID)                                               <8>
     )
@@ -639,8 +639,8 @@ The `fp_rect` token defines a graphic rectangle in a <<_footprint,footprint defi
 <4> The `width` token defines the line width of the rectangle. (prior to version 7)
 <5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the
     rectangle.  (from version 7)
-<6> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the rectangle is not filled.
+<6> The optional `fill` token defines if the rectangle is filled. If not defined, the rectangle
+    is not filled.
 <7> The optional `locked` token defines if the rectangle cannot be edited.
 <8> The `uuid` token defines the unique identifier of the rectangle object.
 
@@ -655,7 +655,7 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
       (layer LAYER_DEFINITION)                                  <3>
       (width WIDTH)                                             <4>
       STROKE_DEFINITION                                         <5>
-      [(fill TYPE)]                                             <6>
+      [(fill yes | no)]                                         <6>
       [(locked)]                                                <7>
       (uuid UUID)                                               <8>
     )
@@ -668,8 +668,8 @@ The `fp_circle` token defines a graphic circle in a <<_footprint,footprint defin
 <4> The `width` token defines the line width of the circle. (prior to version 7)
 <5> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the circle.
     (from version 7)
-<6> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the circle is not filled.
+<6> The optional `fill` token defines if the circle is filled. If not defined, the circle is
+    not filled.
 <7> The optional `locked` token defines if the circle cannot be edited.
 <8> The `uuid` token defines the unique identifier of the circle object.
 
@@ -710,7 +710,7 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
       (layer LAYER_DEFINITION)                                  <2>
       (width WIDTH)                                             <3>
       STROKE_DEFINITION                                         <4>
-      [(fill TYPE)]                                             <5>
+      [(fill yes | no)]                                         <5>
       [(locked)]                                                <6>
       (uuid UUID)                                               <7>
     )
@@ -723,8 +723,8 @@ The `fp_poly` token defines a graphic polygon in a <<_footprint,footprint defini
 <3> The `width` token defines the line width of the polygon. (prior to version 7)
 <4> The <<_stroke_definition, STROKE_DEFINITION>> describes the line width and style of the polygon.
     (from version 7)
-<5> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the polygon is not filled.
+<5> The optional `fill` token defines if the polygon is filled. If not defined, the polygon
+    is not filled.
 <6> The optional `locked` token defines if the polygon cannot be edited.
 <7> The `uuid` token defines the unique identifier of the polygon object.
 
@@ -1032,7 +1032,7 @@ The `gr_rect` token defines a graphical rectangle.
     (end X Y)                                                   <2>
     (layer LAYER_DEFINITION)                                    <3>
     (width WIDTH)                                               <4>
-    [(fill MODE)]                                               <5>
+    [(fill yes | no)]                                           <5>
     (uuid UUID)                                                 <6>
   )
 ```
@@ -1042,8 +1042,8 @@ The `gr_rect` token defines a graphical rectangle.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the rectangle
     resides on.
 <4> The `width` token defines the line width of the rectangle.
-<5> The optional `fill` toke defines how the rectangle is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the rectangle is not filled.
+<5> The optional `fill` token defines how the rectangle is filled. If not defined, the
+    rectangle is not filled.
 <6> The `uuid` token defines the unique identifier of the rectangle object.
 
 ==== Graphical Circle
@@ -1056,7 +1056,7 @@ The `gr_circle` token defines a graphical circle.
     (end X Y)                                                   <2>
     (layer LAYER_DEFINITION)                                    <3>
     (width WIDTH)                                               <4>
-    [(fill MODE)]                                               <5>
+    [(fill yes | no)]                                           <5>
     (uuid UUID)                                                 <6>
   )
 ```
@@ -1066,8 +1066,8 @@ The `gr_circle` token defines a graphical circle.
 <3> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the circle
     resides on.
 <4> The `width` token defines the line width of the circle.
-<5> The optional `fill` toke defines how the circle is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the circle is not filled.
+<5> The optional `fill` token defines how the circle is filled. If not defined,
+    the circle is not filled.
 <6> The `uuid` token defines the unique identifier of the circle object.
 
 ==== Graphical Arc
@@ -1101,7 +1101,7 @@ The `gr_poly` token defines a graphical polygon.
     COORDINATE_POINT_LIST                                       <1>
     (layer LAYER_DEFINITION)                                    <2>
     (width WIDTH)                                               <3>
-    [(fill MODE)]                                               <4>
+    [(fill yes | no)]                                           <4>
     (uuid UUID)                                                 <5>
   )
 ```
@@ -1111,8 +1111,8 @@ The `gr_poly` token defines a graphical polygon.
 <2> The `layer` token defines the <<_canonical_layer_names, canonical layer>> the polygon resides
     on.
 <3> The `width` token defines the line width of the polygon.
-<4> The optional `fill` toke defines how the polygon is filled.  Valid fill types are `solid`
-    and `none`.  If not defined, the polygon is not filled.
+<4> The optional `fill` token defines how the polygon is filled.  If not defined, the
+    polygon is not filled.
 <5> The `uuid` token defines the unique identifier of the polygon object.
 
 ==== Graphical Curve
