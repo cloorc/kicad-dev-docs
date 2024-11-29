@@ -1241,7 +1241,7 @@ The `format` token attributes define the text formatting of the dimension.
       [(extension_height HEIGHT)]                               <4>
       [(text_frame TEXT_FRAME_TYPE)]                            <5>
       [(extension_offset OFFSET)]                               <6>
-      [(keep_text_aligned)]                                     <7>
+      [(keep_text_aligned yes | no)]                            <7>
     )
 ```
 
