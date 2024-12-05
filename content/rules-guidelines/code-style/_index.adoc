@@ -287,7 +287,7 @@ Comments in KiCad typically fall into two categories: in line code
 comments and Doxygen comments. In line comments have no set formatting
 rules other than they should have the same indent level as the code if
 they do not follow a statement. In line comments that follow statements
-should not exceed 99 columns unless absolutely necessary. The prevents
+should not exceed 99 columns unless absolutely necessary. This prevents
 word wrapping in an editor when the viewable columns is set to 100. In
 line comments can use either the {cpp} or the C commenting style, but {cpp}
 comments are preferred for single line comments or comments consisting
