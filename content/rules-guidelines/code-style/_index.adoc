@@ -710,7 +710,7 @@ public:
 
 
 == 5. License Statement
-There is a file called copyright.h in which you can copy into the top of
+There is a file called copyright.h, which you can copy into the top of
 your new source files and edit the \<author\> field. KiCad depends on
 the copyright enforcement capabilities of copyright law, and this
 means that source files must be copyrighted and not be released into
@@ -728,7 +728,7 @@ you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
 from the source tree before pushing changes to the main KiCad repo. Do not
 comment out debugging output. This just adds more cruft to the code base.
-If you need to leave debugging output on, future testing, use tracing
+If you need to leave debugging output on, for future testing, use tracing
 output (see 6.1).
 
 === 6.1 Using Tracing for Debugging Output
