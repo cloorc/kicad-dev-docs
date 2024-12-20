@@ -646,7 +646,7 @@ reject clang-format's suggested changes, if you use it:
     }
 ----
 
-=== 4.11 Lamdas
+=== 4.11 Lambdas
 The braces and statements of the body should be indented as you would a method,
 with the braces lined up under the capture block:
 
