@@ -12,21 +12,6 @@ The IPC API is an interface that can be used to remotely control a running insta
 can be used to implement KiCad plug-ins as well as to interface KiCad with external software. The
 API is currently under development, with the plan of stabilizing the first version for KiCad 9.0.
 
-WARNING: During initial development of the API, documentation and stability are not as high
-priorities as they will be once the API has stabilized. We will document things on a best-effort
-basis, but please be aware that during the KiCad 9.0 development cycle (i.e. during the 8.99
-nightly builds), information described here and in other API documentation is subject to change
-without notice.
-
-=== Contributing to the API
-
-During initial development, the API efforts are being coordinated between members of the KiCad core
-team and community contributors.  While we welcome help, the work is expected to be less stable and
-more dynamic until the release of KiCad 9.0.  If you are interested in contributing to the API in
-any way, please contact Jon Evans.  **Merge requests made without first contacting the API team may
-be rejected if they do not align with our plans; please get in touch first to make sure your
-efforts are not wasted.**
-
 === Overall Design Principles
 
 The KiCad API is implemented using Protocol Buffers to define the structure and contents of
@@ -38,7 +23,7 @@ applications act as clients which open connections to KiCad.
 KiCad is an event-driven GUI application, and like most other such applications, it operates a
 single thread that handles all events (background worker threads are used for certain computations
 to improve performance).  While the API server itself is decoupled from the rest of KiCad, API
-events are handled like any other form of user input, and thus are synchronous.  This is an 
+events are handled like any other form of user input, and thus are synchronous.  This is an
 important difference from other APIs that users may be used to (for example, APIs for web services)
 which are often asynchronous to some extent.  In practice, this means a few things must be kept in
 mind:
