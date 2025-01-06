@@ -128,6 +128,14 @@ API request and response at the Protobuf message level.
 
 NOTE: The API log file can grow quite large, so be sure to disable it when you are done debugging.
 
+Plugins using the Python runtime are launched from a virtual environment created by KiCad for that
+plugin.  You can find the virtual environment for each plugin located in a cache folder
+`${KICAD_CACHE_HOME}/python-environments/<plugin_identifier>`.  The default `KICAD_CACHE_HOME` is
+platform-dependent: `~/Library/Caches/KiCad/<version>` on macOS,
+`C:\Users\<username>\AppData\Local\KiCad\<version>` on Windows, and `~/.cache/KiCad/<version>` on
+most Linux systems.  Activating this virtual environment will allow you to run the plugin from a
+terminal or IDE, manually install Python packages, and debug the plugin using the Python debugger.
+
 === Python Bindings
 
 `link:https://gitlab.com/kicad/code/kicad-python[kicad-python]` is the official Python bindings
