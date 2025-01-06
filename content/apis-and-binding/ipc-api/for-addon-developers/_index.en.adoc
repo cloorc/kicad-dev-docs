@@ -84,7 +84,7 @@ Action Plugins system.  There are several differences in how this is done, howev
     `~/.local/share/KiCad`.
 2.  Plugins must provide a `plugin.json` file containing metadata about the plugin and any actions
     it provides.  The `plugin.json` file must be in a subdirectory of the plugins directory, and
-    must follow the link:https://go.kicad.org/api/schemas/v1]schema defined by KiCad].
+    must follow the link:https://go.kicad.org/api/schemas/v1[schema defined by KiCad].
 
 The plugin system currently supports two types of plugins: Python-based, and executable.  Python
 plugins are run by an external Python interpreter (unlike the SWIG-based plugins which run in an
