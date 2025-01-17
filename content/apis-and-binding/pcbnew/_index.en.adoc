@@ -8,11 +8,14 @@ weight: 18
 
 == Deprecation notice
 
-WARNING: The SWIG-based Python bindings in KiCad will be deprecated and removed in a future
-version. They will be replaced by the IPC API, which is a stable interface that is accessible from
-many languages including Python. The current plan is to officially deprecate the bindings in KiCad
-9.0, and remove them in KiCad 10.0. This plan is subject to delay based on development timelines
+WARNING: The SWIG-based Python bindings in KiCad are deprecated as of KiCad 9.0 and will be removed
+in a future version. They will be replaced by the link:../ipc-api/[IPC API], which is a stable
+interface that is accessible from many languages including Python. The current plan is to remove
+the SWIG bindings in KiCad 10.0.  This plan is subject to delay based on development timelines
 and community feedback.  KiCad 10.0 is currently planned for release in February 2026.
+
+Check out the link:https://gitlab.com/kicad/code/kicad-python[kicad-python library] for a Pythonic
+interface to the IPC API.
 
 == Introduction
 
