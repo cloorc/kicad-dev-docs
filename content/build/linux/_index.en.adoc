@@ -23,7 +23,21 @@ sudo make install
 ```
 
 If the CMake configuration fails, determine the missing dependencies (see <<Dependencies>>) and
-install them on your system.  By default, CMake sets the install path on Linux to `/usr/local`.
+install them on your system. 
+
+[NOTE]
+--
+If CMake fails at finding Protobuf even after installing the dependencies, try enabling 
+`KICAD_USE_CMAKE_FINDPROTOBUF`, i.e.:
+[source,sh]
+```
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+      -DKICAD_USE_CMAKE_FINDPROTOBUF=ON \
+        ../../
+```
+--
+
+By default, CMake sets the install path on Linux to `/usr/local`.
 Use the `CMAKE_INSTALL_PREFIX` option to specify a different install path.
 
 We recommend using the `RelWithDebInfo` build type for personal release builds, as this will
