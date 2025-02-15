@@ -54,23 +54,28 @@ HTTP_200_OK
 [
     {
         "id": "16",
-        "name": "Active Parts/Clock and Timer ICs"
+        "name": "Active Parts/Clock and Timer ICs",
+        "description" : "A description of Active Parts/Clock and Timer ICs"
     },
     {
         "id": "17",
-        "name": "Active Parts/Driver ICs"
+        "name": "Active Parts/Driver ICs",
+        "description" : "A description of Active Parts/Driver ICs"
     },
     {
         "id": "20",
-        "name": "Active Parts/Embedded Processors and Controllers"
+        "name": "Active Parts/Embedded Processors and Controllers",
+        "description" : "A description of Active Parts/Embedded Processors and Controllers"
     },
     {
         "id": "22",
-        "name": "Active Parts/Interfaces"
+        "name": "Active Parts/Interfaces",
+        "description" : "A description of Active Parts/Interfaces"
     },
     {
         "id": "15",
-        "name": "Active Parts/Logic ICs"
+        "name": "Active Parts/Logic ICs",
+        "description" : "A description of Active Parts/Logic ICs"
     }
 ]
 ```
