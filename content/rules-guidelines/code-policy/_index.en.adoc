@@ -28,7 +28,7 @@ accepted.
 == 3. Low Level Object Design
 
 All KiCad low level objects not directly related to user interface design must
-be free of user interface code dependcies.  This includes all `SCH_*`, `LIB_*`,
+be free of user interface code dependencies.  This includes all `SCH_*`, `LIB_*`,
 `PCB_*`, `FP_*`, and I/O plugin objects.
 
 :link-with-underscores: https://docs.wxwidgets.org/3.0/group__group__funcmacro__debug.html
