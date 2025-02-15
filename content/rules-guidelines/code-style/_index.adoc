@@ -646,7 +646,7 @@ reject clang-format's suggested changes, if you use it:
     }
 ----
 
-=== 4.11 Lamdas
+=== 4.11 Lambdas
 The braces and statements of the body should be indented as you would a method,
 with the braces lined up under the capture block:
 
@@ -710,7 +710,7 @@ public:
 
 
 == 5. License Statement
-There is a the file copyright.h which you can copy into the top of
+There is a file called copyright.h, which you can copy into the top of
 your new source files and edit the \<author\> field. KiCad depends on
 the copyright enforcement capabilities of copyright law, and this
 means that source files must be copyrighted and not be released into
@@ -721,14 +721,14 @@ the public domain. Each source file has one or more owners.
 Debugging output is a common method for validating code. However, it
 should not always active in debug builds. This makes it difficult for
 other developers to see their debugging output and can have a significant
-impact on the performance of debug builds. I you need to use debugging
+impact on the performance of debug builds. If you need to use debugging
 output, use link:https://docs.wxwidgets.org/3.2/group__group__funcmacro__log.html#ga9c530ae20eb423744f90874d2c97d02b[wxLogDebug]
 instead of `printf` or {cpp} output stream.  If
 you accidentally leave the debugging output in the source, it will expand
 to nothing on release builds.  All debugging output code should be removed
 from the source tree before pushing changes to the main KiCad repo. Do not
 comment out debugging output. This just adds more cruft to the code base.
-If you need to leave debugging output for, future testing, use tracing
+If you need to leave debugging output on, for future testing, use tracing
 output (see 6.1).
 
 === 6.1 Using Tracing for Debugging Output
@@ -748,7 +748,7 @@ Project *.h source files should:
 
 - contain a license statement
 - contain a nested include `#ifndef`
-- be fully self standing and not depend on other headers that are not
+- be fully self-contained and not depend on other headers that are not
   included within it.
 
 The license statement was described above.
@@ -1100,10 +1100,10 @@ below was taken directly from the KiCad source.
 
 == 11. Resources
 There are plenty of excellent resources on the Internet on {cpp} coding
-styles and coding do's and don'ts. Here are a few useful ones. In most
+styles and coding dos and don'ts. Here are a few useful ones. In most
 cases, the coding styles do not follow the KiCad coding style but there
 is plenty of other good information here. Besides, most of them have
-some great humor in them enjoyable to read. Who knows, you might even
+some great humor that makes them enjoyable to read. Who knows, you might even
 learn something new.
 
 - http://www.possibility.com/Cpp/CppCodingStandard.html[{cpp} Coding Standard]
