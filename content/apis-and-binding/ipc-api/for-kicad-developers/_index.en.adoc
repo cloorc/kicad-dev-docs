@@ -160,6 +160,11 @@ object's properties):
    appropriate comment, and update the `ToProtoEnum` and `FromProtoEnum` functions to handle the
    deprecated value in whatever way makes sense.
 
+4. Please document fields that are added to existing messages with a note such as `// Since: 9.0.1`
+   in the comment line above the field.  These comments will be included in client bindings, so
+   adding information about when new APIs were introduced will help make sure the binding
+   documentation is kept up-to-date.
+
 === Object Serialization
 
 Objects on the drawing canvas (in other words, the KiCad classes that represent "real things" that
