@@ -15,9 +15,9 @@ not possible.  This server passes messages to the rest of KiCad using a wxWidget
 onto the main (UI) thread.  As with all other interactive KiCad events, the rest of API processing
 happens on the UI thread.
 
-Messages are contained within an envelope structure, which is unpacked and then dispatched to a 
+Messages are contained within an envelope structure, which is unpacked and then dispatched to a
 request handler according to the type of the interior Protobuf message.  Request handlers are
-functions that typically belong to a subclass of the `API_HANDLER` class.  The low-level 
+functions that typically belong to a subclass of the `API_HANDLER` class.  The low-level
 infrastructure of the API all lives in `kicommon` and is shared between all parts of KiCad, but
 request handlers are dynamically registered and so can be attached to specific frames.  If a
 certain message does not have a handler registered to it, the API server will return an error to
@@ -32,37 +32,37 @@ to query. Each open editor frame can register a handler for the same message, an
 dispatcher can try to have a message handled by multiple handlers, and only return an error to the
 client if none of the available handlers return success.
 
-A block diagram showing a typical request from a Python plugin is shown below.  The API is 
+A block diagram showing a typical request from a Python plugin is shown below.  The API is
 language-agnostic; `kicad-python` is used here as one example of a language binding.
 
 ```
-┌─────────────────┐                                
-│ KiCad Internals │                                
-└───────▲─────────┘                                
-        │                                          
-┌───────┴─────────┐                                
-│ REQUEST_HANDLER │                                
-└───────▲─────────┘                                
-        │                                          
- ┌──────┴────────┐                                 
- │ API_HANDLER_* │                                 
- └──────▲────────┘                                 
-        │                                          
+┌─────────────────┐
+│ KiCad Internals │
+└───────▲─────────┘
+        │
+┌───────┴─────────┐
+│ REQUEST_HANDLER │
+└───────▲─────────┘
+        │
+ ┌──────┴────────┐
+ │ API_HANDLER_* │
+ └──────▲────────┘
+        │
   ┌─────┴──────┐                    ┌─────────────┐
   │ API_SERVER │                    │ Plugin Code │
   └─────▲──────┘                    └─────┬───────┘
-        │                                 │        
+        │                                 │
     ┌───┴───┐                      ┌──────▼───────┐
     │ KINNG │                      │ kicad-python │
     └───▲───┘                      └──────┬───────┘
-        │                                 │        
-     ┌──┴──┐                          ┌───▼───┐    
-     │ nng │                          │ pynng │    
-     └──▲──┘                          └───┬───┘    
-        │                                 │        
- ┌──────┴──────┐                   ┌──────▼──────┐ 
- │ UNIX socket ◄───────────────────┤ UNIX socket │ 
- └─────────────┘                   └─────────────┘ 
+        │                                 │
+     ┌──┴──┐                          ┌───▼───┐
+     │ nng │                          │ pynng │
+     └──▲──┘                          └───┬───┘
+        │                                 │
+ ┌──────┴──────┐                   ┌──────▼──────┐
+ │ UNIX socket ◄───────────────────┤ UNIX socket │
+ └─────────────┘                   └─────────────┘
 ```
 
 === Transport and wire protocol
@@ -138,6 +138,28 @@ values deleted or modified: they can only have values deprecated and new values 
 `ToProtoEnum`/`FromProtoEnum` functions to handle any changes in how the values should map to
 KiCad internals.
 
+=== Adding, Modifying, and Removing API surface
+
+Please follow these guidelines when making any changes or additions to the API or to code that
+depends on the API surface (for example, when adding, removing, or modifying the behavior of an
+object's properties):
+
+1. Never rename, re-order, or change the functional meaning of existing fields in any Protobuf
+   messages.  The only changes permitted are to add new fields or to remove deprecated fields by
+   commenting them out (preserving their original field index, which must never be re-used).
+
+2. Never remove fields in a bugfix release of KiCad.  If a field is deprecated, add a comment
+   above it noting the deprecation (and any replacement, if applicable).  The field must remain in
+   the message until the next major KiCad release (at minimum).  If it is necessary to deprecate a
+   field in a bugfix release, the serialization code must continue supporting the deprecated field
+   as best as possible (for example, serializing a default value even if the field no longer
+   exists on the source object, and accepting but ignoring the value when deserializing).
+
+3. Never remove or change the meaning of any Protobuf enum values.  If enums on the KiCad side
+   change such that a Protobuf enum value no longer makes sense, mark it as deprecated with an
+   appropriate comment, and update the `ToProtoEnum` and `FromProtoEnum` functions to handle the
+   deprecated value in whatever way makes sense.
+
 === Object Serialization
 
 Objects on the drawing canvas (in other words, the KiCad classes that represent "real things" that
@@ -195,7 +217,7 @@ library that backports `std::expected` to older C++ and adds some functionality 
 spec.  This type represents either an expected value, or an unexpected value that contains more
 information about why something failed.  The expected value is always just the response message
 that we want to send back to the client, and the unexpected value, `ApiResponseStatus`, is a
-message that contains a status code as well as an error message string. 
+message that contains a status code as well as an error message string.
 
 For example:
 
