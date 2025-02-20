@@ -1202,7 +1202,7 @@ The `format` token attributes define the text formatting of the dimension.
       (units_format UNITS_FORMAT)                               <4>
       (precision PRECISION)                                     <5>
       [(override_value "VALUE")]                                <6>
-      [suppress_zeros]                                          <7>
+      [(suppress_zeros yes | no)]                               <7>
     )
 ```
 
@@ -1230,6 +1230,7 @@ The `format` token attributes define the text formatting of the dimension.
 <6> The optional `override_value` token attribute defines the text to substitute for the actual
     physical dimension.
 <7> The optional `suppress_zeros` token removes all trailing zeros from the dimension text.
+    The only valid attributes are `yes` and `no`.
 
 ===== Dimension Style
 
@@ -1238,10 +1239,11 @@ The `format` token attributes define the text formatting of the dimension.
       (thickness THICKNESS)                                     <1>
       (arrow_length LENGTH)                                     <2>
       (text_position_mode MODE)                                 <3>
-      [(extension_height HEIGHT)]                               <4>
-      [(text_frame TEXT_FRAME_TYPE)]                            <5>
-      [(extension_offset OFFSET)]                               <6>
-      [(keep_text_aligned yes | no)]                            <7>
+      [(arrow_direction DIRECTION)]                             <4>
+      [(extension_height HEIGHT)]                               <5>
+      [(text_frame TEXT_FRAME_TYPE)]                            <6>
+      [(extension_offset OFFSET)]                               <7>
+      [(keep_text_aligned yes | no)]                            <8>
     )
 ```
 
@@ -1252,17 +1254,22 @@ The `format` token attributes define the text formatting of the dimension.
     * 0 - Text is outside the dimension line.
     * 1 - Text is in line with the dimension line.
     * 2 - Text has been manually placed by the user.
-<4> The optional `extension_height` token attribute defines the length of the extension lines
+<4> The `arrow_direction` token attribute defines the direction of the dimension arrows.
+    Only `aligned` and `orthogonal` dimensions support this attribute.  Valid directions are
+    as follows:
+    * `outward`: The arrows face outward, pointing away from midpoint of the crossbar.
+    * `inward`: The arrows face inward, pointing towards the midpoint of the crossbar.
+<5> The optional `extension_height` token attribute defines the length of the extension lines
     past the dimension crossbar.
-<5> The optional `text_frame` token attribute defines the style of the frame around the dimension
+<6> The optional `text_frame` token attribute defines the style of the frame around the dimension
     text.  This only applies to `leader` dimensions.  Valid text frames are as follows:
     * 0 - No text frame.
     * 1 - Rectangle.
     * 2 - Circle.
     * 3 - Rounded rectangle.
-<6> The optional `extension_offset` token attribute defines the distance from feature points to
+<7> The optional `extension_offset` token attribute defines the distance from feature points to
     extension line start.
-<7> The optional `keep_text_aligned` token indicates that the dimension text should be kept in
+<8> The optional `keep_text_aligned` token indicates that the dimension text should be kept in
     line with the dimension crossbar.  When not defined, the dimension text is shown horizontally
     regardless of the orientation of the dimension.
 
