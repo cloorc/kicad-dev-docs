@@ -55,8 +55,8 @@ BUILD_SMALL_DEBUG_FILES
 |OFF
 
 |KICAD_IPC_API
-|Build KiCad with the experimental IPC API server active.
-|OFF
+|Build KiCad with support for the IPC API server (requires the `nng` library)
+|ON
 
 |===
 
