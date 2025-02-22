@@ -350,3 +350,31 @@ Any features enabled though the advanced configuration system are
 considered experimental and therefore unsuitable for production use. These
 features are explicitly not supported or considered fully tested.
 Issues are still welcome for defects discovered.
+
+== Router debugging
+
+The push and shove (PNS) router has some debugging tools.
+
+=== PNG debug graphics
+
+Setting the `ShowRouterDebugGraphics` advanced config enables graphics which
+show some internal state of the router:
+
+image::images/pns_debug_graphics.png[alt="Screenshot of PNS debug graphics"]
+
+=== PNS logging
+
+There is a logging function that allows the router to store and save a log of events
+that can be used to replay the events that lead to a problem.
+
+To create a PNS log dump:
+
+* Set the advanced config option `EnableRouterDump=1` and restart KiCad
+* During routing, after recreating the issue, press `0`.
+* Save the `pns.log` file where you want
+
+To view a PNS log, you need to build an extra tool:
+
+* Set the `KICAD_BUILD_PNS_DEBUG_TOOL` CMake setting to `ON`
+* Build the `pns_debug_tool` tool
+* Run this tool with `./qa/tools/pns/pns_debug_tool replay path/to/pns.log`
