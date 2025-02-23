@@ -28,7 +28,7 @@ content, and several optional files.  The archive must be in ZIP format (compati
 must include a control file called `metadata.json` that is described in detail below.
 
 NOTE: Addon archives must follow the exact folder structure listed below.  Extra files that are not
-      related to your addon are not permitted and must be stripped out of the archive.  
+      related to your addon are not permitted and must be stripped out of the archive.
 
 ==== Python plugins
 
@@ -108,7 +108,7 @@ colors and background color as the theme.
 
 ==== Metadata file format
 
-The metadata file, `metadata.json`, follows a JSON schema, currently published at 
+The metadata file, `metadata.json`, follows a JSON schema, currently published at
 https://go.kicad.org/pcm/schemas/v1
 
 Unless otherwise noted all fields are limited to valid UTF-8 code points and 1000 characters.
@@ -204,11 +204,11 @@ above:
              documentation and other links here.
 
 `keep_on_update`: **(optional)** **(since KiCad 7.0)** List of regular expressions describing which files should
-                  be kept on package update. Each file from the extracted package is tested against all regex 
+                  be kept on package update. Each file from the extracted package is tested against all regex
                   with the `$KICADX_3RD_PARTY` component removed. If it matches any expression then it will not be
-                  deleted. 
-                  
-If your plugin type package archive has `keepme.txt` file directly in `plugins` directory, 
+                  deleted.
+
+If your plugin type package archive has `keepme.txt` file directly in `plugins` directory,
 then path `/plugins/your_package_id/keepme.txt` will be tested against all regex in the list.
 
 [NOTE]
@@ -260,6 +260,10 @@ following keys:
                   specific to this version. Field of the package version user is updating **to** is used, not the
                   package user is updating **from**.
 
+`runtime`: **(optional)** **(since KiCad 9.0.1)** For plugin packages, this field
+           may be set to either "ipc" or "swig" to indicate which runtime the plugin
+           requires.  If not set, the plugin will be assumed to require the SWIG (legacy) runtime.
+
 NOTE: The `download_*` keys must only be present in the version of the `metadata.json` that you
       submit to the package metadata repository, not in the version of the file that is actually
       present in the package archive.  It is not possible to put a valid `download_sha256` value in
@@ -285,7 +289,7 @@ technical requirements described above.
   obvious link between the domain name you submit and the download location of your package, or if
   it is not otherwise clear that you control the domain name, the KiCad team may request further
   information before approving your submission.
-  
+
 - Your package identifier **must** be unique. The namespacing requirements above should make this
   easy.
 
