@@ -113,7 +113,7 @@ higher.  When building OCC locally, use the option BUILD_MODULE_Draw=OFF to make
 ==== Ngspice Library
 
 The https://sourceforge.net/projects/ngspice/[Ngspice Library] is used to provide Spice simulation support in the schematic
-editor.  Make sure the the version of ngspice library used was built with the--with-ngshared
+editor.  Make sure the version of ngspice library used was built with the--with-ngshared
 option.  This library needs to be installed unless the Spice build option is disabled.
 
 [#protobuf,reftext=Protobuf]

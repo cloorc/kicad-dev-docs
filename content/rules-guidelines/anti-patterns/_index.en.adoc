@@ -283,7 +283,7 @@ memory.
 https://www.wxwidgets.org/[wxWidgets] does **not** guarantee that a parent window will out live a mode-less
 dialog created by it.  Therefore, attempting to access the parent window from
 the dialog's destructor <<_avoid_direct_access_of_parent, (See Avoid Direct Access
-of Parent)>> may crash.  If you have to access the parent from the the dialog
+of Parent)>> may crash.  If you have to access the parent from the dialog
 destructor, check to make sure the dialog has been shown in either the modal or
 quasi-modal mode.
 

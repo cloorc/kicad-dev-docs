@@ -113,7 +113,7 @@ When a user clicks on a part inside the *Symbol Chooser*, KiCad will try to retr
 
 The dict ```fields``` can contain any number of additional key/value pairs; this includes being an empty dictionary! A *key* represents a *FIELD Name* which is visible in KiCad's symbol editor. The server can provide as many fields as needed; there is no limit to it.
 
-Each *KiCad FIELD* is represented using a dict, and must contain at least the the ```value``` key. Additionally, the API can return whether or not the field is displayed using the optional ```visible``` key. If this key is not specified, KiCad will display the field by default.
+Each *KiCad FIELD* is represented using a dict, and must contain at least the ```value``` key. Additionally, the API can return whether or not the field is displayed using the optional ```visible``` key. If this key is not specified, KiCad will display the field by default.
 
 As mentioned above all types *must* be converted to strings. Allowed booleans are: "1", "0", "true", "false", "yes", "no", "y", "n". The strings are case-insensitive.
 

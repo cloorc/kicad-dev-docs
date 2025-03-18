@@ -27,7 +27,7 @@ and run `msys2_shell.cmd`.
 The following commands assume you are building for 64-bit Windows, and that you already have
 the KiCad source code in a folder called `kicad-source` in your home directory.  See below
 for changes if you need to build for 32-bit instead.  Run `mingw64.exe` from the MSYS2
-install path. At the command prompt run the the following commands:
+install path. At the command prompt run the following commands:
 
 [source,bash]
 ----
