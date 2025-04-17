@@ -254,7 +254,7 @@ If this is deemed undesirable, it is possible to disable manifest mode locally b
 . Manually run a vcpkg install command for all dependencies currently defined in the KiCad root `vcpkg.json`. E.g. something like:
 +
 ----
-.\vcpkg install --recurse --triplet x64-windows boost-algorithm boost-filesystem boost-functional boost-iterator boost-locale boost-optional boost-property-tree boost-ptr-container boost-range boost-test boost-uuid cairo wxwidgets glew curl gettext[tools] harfbuzz glm opencascade[rapidjson] opengl python3 openssl sqlite3[fts5,fts4,fts3,rtree,session] icu ngspice wxpython libgit2 nng protobuf zstd
+.\vcpkg install --recurse --triplet x64-windows boost-algorithm boost-filesystem boost-functional boost-iterator boost-locale boost-optional boost-property-tree boost-ptr-container boost-range boost-test boost-uuid cairo wxwidgets glew libepoxy curl gettext[tools] harfbuzz glm opencascade[rapidjson] opengl python3 openssl sqlite3[fts5,fts4,fts3,rtree,session] icu ngspice wxpython libgit2 nng protobuf zstd
 ----
 .  {empty}
 +
