@@ -60,10 +60,12 @@ On macOS we use a custom fork of wxWidgets -- see the macOS build instructions f
 
 The https://www.boost.org/[Boost] {cpp} library version 1.71 or greater is required to build KiCad.
 
-=== GLEW OpenGL Extension Wrangler Library
+=== GLEW OpenGL Extension Wrangler Library or libepoxy
 
 The http://glew.sourceforge.net/[OpenGL Extension Wrangler] is an OpenGL helper library used by the KiCad graphics
 abstraction library (GAL) and is always required to build KiCad.
+
+In newer kicad verions (10+) https://github.com/anholt/libepoxy is used instead
 
 === ZLib Library
 
