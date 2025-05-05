@@ -61,5 +61,5 @@ weight = 10
 
 [security]
   [security.exec]
-    allow = ['asciidoctor']
+    allow = ['asciidoctor', 'git']
 
