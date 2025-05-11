@@ -251,10 +251,10 @@ The negative side of manifest mode is that whenever you update your version of v
 If this is deemed undesirable, it is possible to disable manifest mode locally by following these steps:
 
 . Copy vcpkg-configuration.json from kicad root into your vcpkg root
-. Manually run a vcpkg install command for all dependencies currently defined in the KiCad root `vcpkg.json`. E.g. something like:
+. Manually run a vcpkg install command for all dependencies currently defined in the KiCad root `vcpkg.json`. E.g. something like below:
 +
 ----
-.\vcpkg install --recurse --triplet x64-windows boost-algorithm boost-filesystem boost-functional boost-iterator boost-locale boost-optional boost-property-tree boost-ptr-container boost-range boost-test boost-uuid cairo wxwidgets glew curl gettext[tools] harfbuzz glm opencascade[rapidjson] opengl python3 openssl sqlite3[fts5,fts4,fts3,rtree,session] icu ngspice wxpython libgit2 nng protobuf zstd
+.\vcpkg.exe install --recurse --triplet x64-windows boost-algorithm boost-bimap boost-filesystem boost-functional boost-iterator boost-locale boost-optional boost-property-tree boost-ptr-container boost-range boost-test boost-uuid cairo wxwidgets glew curl gettext[tools] harfbuzz glm opencascade[rapidjson] opengl python3 openssl sqlite3[fts5,fts4,fts3,rtree,session] icu ngspice wxpython libgit2[ssh,winhttp] nng protobuf zstd
 ----
 .  {empty}
 +
