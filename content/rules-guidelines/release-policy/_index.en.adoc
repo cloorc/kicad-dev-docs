@@ -80,9 +80,9 @@ NOTE: Only the source code repository branch is mandatory.  All other
 Features from the current development branch of KiCad can be back ported to
 the current stable branch provided the following criteria is met:
 
-- The the last feature commit was pushed to the development branch at least
+- The last feature commit was pushed to the development branch at least
   60 days prior to merging into the current stable branch.
-- The the last known issue filed against the feature occurred at least 30 days
+- The last known issue filed against the feature occurred at least 30 days
   prior to merging into the current stable branch.
 - The cherry pick to current stable can be performed without pulling any other
   dependent code that does meets the file format change criteria above.

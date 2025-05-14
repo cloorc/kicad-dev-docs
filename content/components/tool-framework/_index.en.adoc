@@ -37,7 +37,7 @@ Some examples of tools in the Pcbnew GAL are:
 
 == Major parts of a tool
 
-There are two main aspects to tools: the actions and the the tool class.
+There are two main aspects to tools: the actions and the tool class.
 
 === Tool actions
 
