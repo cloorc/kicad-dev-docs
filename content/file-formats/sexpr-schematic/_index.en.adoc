@@ -185,6 +185,23 @@ will not exist if there are not any no connects in the schematic.
     xref:../sexpr-intro/index.adoc#_universally_unique_identifier[universally unique identifier]
     for the no connect.
 
+== Bus Alias Section
+
+The `bus_alias` token defines a list of net names as members of a bus in the schematic. This provides 
+a means to use {BUS_NAME} as a short-hand for {MEMBER_LIST} while labelling a bus. The bus alias section
+will not exist if there are no bus aliases in the schematic.
+
+```
+  (bus_alias
+    "BUS_NAME"                                                  <1>
+    (members MEMBER_LIST)                                       <2>
+  )
+```
+
+<1> The `BUS_NAME` defines a unique text name for the bus.
+<2> The `MEMBER_LIST` defines a list of double-quoted net names as members of the bus. If you label
+a bus with {BUS_NAME}, then these member net names will appear in the "Unfold from bus" option of the 
+context menu of the bus.
 
 == Bus Entry Section
 
