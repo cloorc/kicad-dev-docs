@@ -1,0 +1,390 @@
+---
+date: 2024-05-27T11:38:00+02:00
+title: HTTP Libraries Version 2
+weight: 18
+---
+
+:toc:
+
+=== HTTP Libraries Version 2
+HTTP libraries are a type of KiCad symbol library that sources data about parts for an external source such an ERP system. They do not contain any symbol or footprint definitions as standard KiCad libraries do. Instead, they *reference* to symbols and footprints found in other KiCad libraries. 
+
+HTTP libraries are read only for now but will eventually support read/write in the future. At the moment only REST or REST-Like APIs are supported but support for other libraries could be added easily.
+
+
+==== Authentication
+Authentication is done via an *Access Token* only; usually issued by the providing application. The token will be used in every request using the following header: `'Authorization': 'Token usertokendatastring'.`
+
+
+==== Content type and encoding
+KiCad only accepts JSON responses in UTF8 Encoded text format. It is recommended to compress the responses on the server side. +
+Every request using the following headers: +
+`'Accept': 'application/json'.` +
+`'Accept-Encoding': 'gzip, deflat'` +
+`'Authorization': 'Token usertokendatastring'`
+
+ 
+==== Endpoint definition
+
+Different to ODBC, the REST API provides the information already pre-formatted. KiCad does not know anything about tables, nor does it need to know anything about the underlying database structure of the providing application (API).
+
+KiCad expects a root-URL and an api-version to access the library. This must be provided via the *Configuration File*. There are two endpoints which will provide all data necessary to KiCad. Those are called:
+
+- *validation*
+- *content*
+
+
+
+==== Validation endpoint
+KiCad queries the root-URL on `"{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/"` and expects it to return a dictionary with the endpoints as key-value pairs.
+
+===== Validation endpoint response
+```
+HTTP_200_OK
+{
+    "version": "v2",
+    "content": "{}",
+}
+```
+
+===== Validation endpoint response keys
+[cols="1,1,1,2"]
+|===
+|*Key*
+|*Type*
+|*Default value*
+|*Description*
+
+|`"version"`
+|`string`
+|`-`
+|Shows the API server version. The API is only supported with this configuration if the server returns `"version": "v2"`.
+
+|`"content"`
+|`string`
+|`"{}"`
+|The endpoint returns all changed data from a specific `{{nbsp}timestamp{nbsp}}`. When the program starts, `0` is used as `{{nbsp}timestamp{nbsp}}`. +
+ +
+For the parameter curly braces (`{}`) must be included in the path. +
+
+|=== 
+
+*Note:* If the value of the relative path is empty (`""`), the default values is used. The parameter {{nbsp}timestamp{nbsp}}` do not necessarily have to be at the end. For example, it is also possible to use the path `"data/{}.json"`. It is also possible to work with parameters such as `"?ts={}"`.
+
+
+==== Content endpoint
+All data is retrieved from KiCad via the content endpoint with a standard GET request: `"{{nbsp}root-url{nbsp}}/{{nbsp}api-version{nbsp}}/" + format({{nbsp}content{nbsp}}, {{nbsp}timestamp{nbsp}} )`.
+
+The `{nbsp}{timestamp}{nbsp}` represents the value of the last request. The first time it is called after the program has started, `0` is used. Then the last timestamp that was sent by the server as a response is used.
+
+The server responds with all categories and parts that have been added, changed or deleted since the timestamp.
+
+*Note:* +
+Typically the *timestamps* are in seconds since January 1, 1970. It is up to the API to decide what exactly the value represents. The only condition is that higher numbers represent a later point in time. +
+If the server does not support an update function, the entire cache can be renewed. In this case it might make sense to increase the cache_timeout in the config file.
+
+===== Content endpoint response
+```
+HTTP_200_OK
+{
+    "timestamp": 1713798874,
+    "categories": [
+        {
+            "id": "3",
+            "name": "Chip Resistor"
+            "active": true,
+            "description": "SMD chip resistors"
+        },
+        {
+            "id": "2",
+            "name": "MLCC Chip Capacitor"
+            "description": "SMD chip multi layer ceramic capacitor"
+        },
+        "Power": {
+            "id": "1"
+            "name": "Power"
+            "description": "Power symbols to create global power labels"
+        }
+    ],
+    "parts": [
+        {
+            "id": "9",
+            "name": "0603-4700-0W1",
+            "active": true,
+            "category_id": "3",
+            "symbol": "passiv:R",
+            "keywords": "470Ohm",
+            "reference": {
+                "value": "R",
+                "show": true,
+                "show_name": false
+            },
+            "value": {
+                "value": "470",
+                "show": true,
+                "show_name": false
+            },
+            "footprint": {
+                "value": "resistor:R_0603",
+                "show": false,
+                "show_name": false
+            },
+            "datasheet": {
+                "value": "www.kicad.org",
+                "show": false,
+                "show_name": false
+            },
+            "description": {
+                "d": "Thick Film Chip Resistor 470Ω",
+                "show": false,
+                "show_name": false
+            },
+            "fields": {
+                "Custom Field 1 (Rating)": {
+                    "value": "75V, 100mW, ±1%, ±100ppm/K",
+                    "show": false,
+                    "show_name": false
+                },
+                "Custom Field 2 (Dimension)": {
+                    "value": "1.6 × 0.8 × 0.45 mm",
+                    "show": false,
+                    "show_name": false
+                }
+            },
+            "exclude_from_bom": false,
+            "exclude_from_board": false,
+            "exclude_from_sim": false,
+            "power_symbol": false
+        },
+        {
+            "id" : "10",
+            "name": "0603-1003-0W1",
+            "category_id": "3",
+            "symbol": "passiv:R",
+            "keywords": "100kOhm",
+            "reference": {
+                "value": "R"
+            },
+            "value": {
+                "value": "100k"
+            },
+            "footprint": {
+                "value": "resistor:R_0603"
+            },
+            "datasheet": {
+                "value": "www.kicad.org"
+            },
+            "description": {
+                "d": "Thick Film Chip Resistor 100kΩ"
+            },
+            "fields": {
+                "Custom Field 1 (Rating)": {
+                    "value": "75V, 100mW, ±1%, ±100ppm/K"
+                },
+                "Custom Field 2 (Dimension)": {
+                    "value": "1.6 × 0.8 × 0.45 mm"
+                }
+            }
+        }
+    ]
+}
+```
+
+===== Content endpoint response keys
+[cols="1,2,3"]
+|===
+|*Key*
+|*Type*
+|*Description*
+
+|`"timestamp"`
+|`long long`
+|Timestamp of the current request. +
+ +
+*Note:* If the server does not support an update function, a `0` should always be returned.
+
+|`"categories"`
+|`category[]`
+|Contains an array of objects each representing a category for caching.
+
+|`"parts"`
+|`part[]`
+|Contains an array of objects each representing a part for caching.
+
+|=== 
+
+===== Category object keys
+
+[cols="1,1,1,2"]
+|===
+|*Key*
+|*Type*
+|*Default*
+|*Description*
+
+|`"id"`
+|`string`
+|-
+|Unique identifier for the category.
+
+|`"name"`
+|`string`
+|`"{{nbsp}id{nbsp}}"`
+|The field is optional and contains the name of the category. If no name is specified, the `{{nbsp}id{nbsp}}` is used as the name. The name must be clearly different from the other categories. The name is displayed for the sublibrary in the symbol chooser
+
+|`"description"`
+|`string`
+|`""`
+|The field is optional and contains the description of the category. The description is displayed for the sublibrary in the symbol chooser.
+
+|`"active"`
+|`bool`
+|`true`
+|The field is optional and is only required if you deviate from the default values. Categories that are `"active": flase` are not displayed are not cached. This means that categories that have been deleted in the database can be removed from the cache during an update. No parts are cached that belong to an `"active": flase` category.
+
+|=== 
+
+===== Part object keys
+
+[cols="1,1,1,2"]
+|===
+|*Key*
+|*Type*
+|*Default*
+|*Description*
+ 
+|`"id"`
+|`string`
+|-
+|Unique identifier for the part.
+ 
+|`"name"`
+|`string`
+|`"{{nbsp}id{nbsp}}"`
+|The field is optional and contains the name of the part. If no name is specified, the key is used as the name. The name must be clearly different from the other part. The name is displayed in the symbol chooser.
+
+|`"category_id"`
+|`string`
+|-
+|Identifier of the category.
+
+|`"symbol"`
+|`string`
+|-
+|Reference to the symbol in the local libraries. The following format is expected: `"{{nbsp}LibraryNickName{nbsp}}:{{{nbsp}SymbolName{nbsp}}"`.
+ 
+|`"keywords"`
+|`string`
+|`""`
+|The field is optional and allows additional key words to be stored for the search.
+ 
+|`"reference"`
+|`field`
+|`"value": "#"` +
+`"show": true` +
+`"show_name": false`
+|The reference is needed. The subfield `"value"`  cannot be empty or a number. The subfields `"show"` and `"show_name"` are optional and are only required if non-default values are applied.
+ 
+|`"value"`
+|`field`
+|`"value": ""` +
+`"show": true` +
+`"show_name": false`
+|Represents the value of the part. The subfields `"show"` and `"show_name"` are optional and are only required if non-default values are applied.
+
+|`"footprint"`
+|`field`
+|`"value": ""` +
+`"show": false` +
+`"show_name": false`
+|Reference to the footprint in the local libraries. The following format is expected: `"{{nbsp}LibraryNickName{nbsp}}:{{{nbsp}FootprintName{nbsp}}"`. The field and the subfields are optional and only required when applying non-default values.
+
+|`"datasheet"`
+|`field`
+|`"value": ""` +
+`"show": false` +
+`"show_name": false`
+|Path to datasheet, this can be a web link, network path or local path. Path environment variables like ${KICAD_USER_DATASHEET_DIR} can also be used. The field and the subfields are optional and only required when applying non-default values.
+
+|`"description"`
+|`field`
+|`"value": ""` +
+`"show": false` +
+`"show_name": false`
+|Describes the part. The field and the subfields are optional and only required when applying non-default values.
+
+|`"fields"`
+|`dictionary<string, field>`
+|-
+|Contains the custom fields. The field is optional and is only required if custom fields are available. The fields are introduced in the same order as they are submitted by the server. The keys are adopted as a name and are case-sensitive.
+
+|`"exclude_from_bom"`
+|`bool`
+|`false`
+|The field is optional and is only required if non-default values are applied. +
+`true`: exludes the part from the bill of materials +
+`false`: includes the part to the bill of materials
+ 
+|`"exclude_from_board"`
+|`bool`
+|`false`
+|The field is optional and is only required if non-default values are applied. +
+`true`: exludes the part from the pcb +
+`false`: includes the part to the pcb
+ 
+|`"exclude_from_sim"`
+|`bool`
+|`false`
+|The field is optional and is only required if non-default values are applied. +
+`true`: exludes the part from the simulation +
+`false`: includes the part to the simulation
+  
+|`"power_symbol"`
+|`bool`
+|`false`
+|The field is optional and is only required if non-default values are applied. +
+`true`: it is a power symbol  +
+`false`: it is a normal symbol
+
+|`"active"`
+|`bool`
+|`true`
+|The field is optional and is only required if you deviate from the default values. Parts that are `"active": flase` are not displayed are not cached. This means that parts that have been deleted in the database can be removed from the cache during an update.
+
+|=== 
+
+===== Part field keys
+
+[cols="1,1,1,2"]
+|===
+|*Key*
+|*Type*
+|*Default*
+|*Description*
+
+
+|`"value"`
+|`string`
+|`""`
+|The field is optional and contains the value of the custom field.
+ 
+|`"show"`
+|`bool`
+|`false` +
+ +
+*Note:* For the keys +
+`"reference"` +
+`"value"` +
+the default is: `true`.
+|The field is optional and is only required if non-default values are applied.
+`true`: The value of the field is displayed when inserted into the schematic.
+`false`: The value of the field is not displayed when it is inserted into the schematic.
+ 
+|`"show_name"`
+|`bool`
+|`false`
+|The field is optional and is only required if non-default values are applied.
+`true`: The name of the field is displayed when inserted into the schematic.
+`false`: The name of the field is not displayed when it is inserted into the schematic.
+
+|=== 
