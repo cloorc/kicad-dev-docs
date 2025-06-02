@@ -200,7 +200,7 @@ above:
 - `open-source`: Other Open Source Initiative (OSI) approved license.
 - `unrestricted`: Not an OSI approved license, but not restricted.
 
-`resources`: **(optional)** Additional resource links for the package. Place your website, github,
+`resources`: **(required)** Additional resource links for the package. Place your website, github,
              documentation and other links here.
 
 `keep_on_update`: **(optional)** **(since KiCad 7.0)** List of regular expressions describing which files should
