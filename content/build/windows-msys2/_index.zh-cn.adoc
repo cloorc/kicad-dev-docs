@@ -19,30 +19,32 @@ https://www.msys2.org/[MSYS2] 项目为编译 KiCad 所需的所有依赖项提�
 === 编译
 
 以下命令假定您是为 64 位 Windows 编译的，并且您的主目录中名为 `kicad-source` 的文件夹中已经有 KiCad 源代码。
-如果您需要编译 32 位版本，请参见下面的更改。从 MSYS2 安装路径运行 `mingw64.exe`。
-在命令提示符下运行以下命令：
+如果您需要编译 32 位版本，请参见下面的更改。在命令提示符下运行以下命令：
 
 [source,bash]
 ----
 pacman -S base-devel \
             git \
-            mingw-w64-x86_64-cmake \
-            mingw-w64-x86_64-doxygen \
-            mingw-w64-x86_64-gcc \
-            mingw-w64-x86_64-python2 \
-            mingw-w64-x86_64-pkg-config \
-            mingw-w64-x86_64-swig \
-            mingw-w64-x86_64-boost \
-            mingw-w64-x86_64-cairo \
-            mingw-w64-x86_64-glew \
-            mingw-w64-x86_64-curl \
-            mingw-w64-x86_64-wxPython \
-            mingw-w64-x86_64-wxWidgets \
-            mingw-w64-x86_64-toolchain \
-            mingw-w64-x86_64-glm \
-            mingw-w64-x86_64-oce \
-            mingw-w64-x86_64-ngspice \
-            mingw-w64-x86_64-zlib
+            mingw-w64-ucrt-x86_64-cmake \
+            mingw-w64-ucrt-x86_64-doxygen \
+            mingw-w64-ucrt-x86_64-gcc \
+            mingw-w64-ucrt-x86_64-python \
+            mingw-w64-ucrt-x86_64-pkg-config \
+            mingw-w64-ucrt-x86_64-swig \
+            mingw-w64-ucrt-x86_64-boost \
+            mingw-w64-ucrt-x86_64-cairo \
+            mingw-w64-ucrt-x86_64-glew \
+            mingw-w64-ucrt-x86_64-curl \
+            mingw-w64-ucrt-x86_64-wxPython \
+            mingw-w64-ucrt-x86_64-toolchain \
+            mingw-w64-ucrt-x86_64-glm \
+            mingw-w64-ucrt-x86_64-opencascade \
+            mingw-w64-ucrt-x86_64-ngspice \
+            mingw-w64-ucrt-x86_64-zlib \
+            mingw-w64-ucrt-x86_64-libgit2 \
+            mingw-w64-ucrt-x86_64-wxwidgets3.2-msw \
+            mingw-w64-ucrt-x86_64-protobuf \
+            mingw-w64-ucrt-x86_64-nng
 cd kicad-source
 mkdir -p build/release
 mkdir build/debug               # 对于调试版本是可选的。
@@ -55,6 +57,8 @@ cmake -DCMAKE_BUILD_TYPE=Release \
         ../../
 make -j N install   # 其中 N 是系统可以处理的并发线程数
 ----
+
+因为 `nng` 仅为 `CLANG64` 、 `CLANGARM64` 和 `UCRT64` 环境提供了安装包, 因此本文推荐使用 `UCRT64` 作为构建环境。
 
 对于 32 位版本，运行 `mingw32.exe`，将包名中的 `x86_64` 改为 `i686`，并将 cmake 配置中的路径从 `/mingw64` 改为 `/mingw32`。
 

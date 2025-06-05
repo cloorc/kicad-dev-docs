@@ -25,32 +25,34 @@ and run `msys2_shell.cmd`.
 
 === Building
 The following commands assume you are building for 64-bit Windows, and that you already have
-the KiCad source code in a folder called `kicad-source` in your home directory.  See below
-for changes if you need to build for 32-bit instead.  Run `mingw64.exe` from the MSYS2
-install path. At the command prompt run the the following commands:
+the KiCad source code in a folder called `kicad-source` in your home directory. See below
+for changes if you need to build for 32-bit instead.  At the command prompt run the the 
+following commands:
 
 [source,bash]
 ----
 pacman -S base-devel \
           git \
-          mingw-w64-x86_64-cmake \
-          mingw-w64-x86_64-doxygen \
-          mingw-w64-x86_64-gcc \
-          mingw-w64-x86_64-python2 \
-          mingw-w64-x86_64-pkg-config \
-          mingw-w64-x86_64-swig \
-          mingw-w64-x86_64-boost \
-          mingw-w64-x86_64-cairo \
-          mingw-w64-x86_64-glew \
-          mingw-w64-x86_64-curl \
-          mingw-w64-x86_64-wxPython \
-          mingw-w64-x86_64-wxmsw3.2 \
-          mingw-w64-x86_64-toolchain \
-          mingw-w64-x86_64-glm \
-          mingw-w64-x86_64-opencascade \
-          mingw-w64-x86_64-ngspice \
-          mingw-w64-x86_64-zlib \
-          mingw-w64-x86_64-libgit2
+          mingw-w64-ucrt-x86_64-cmake \
+          mingw-w64-ucrt-x86_64-doxygen \
+          mingw-w64-ucrt-x86_64-gcc \
+          mingw-w64-ucrt-x86_64-python \
+          mingw-w64-ucrt-x86_64-pkg-config \
+          mingw-w64-ucrt-x86_64-swig \
+          mingw-w64-ucrt-x86_64-boost \
+          mingw-w64-ucrt-x86_64-cairo \
+          mingw-w64-ucrt-x86_64-glew \
+          mingw-w64-ucrt-x86_64-curl \
+          mingw-w64-ucrt-x86_64-wxPython \
+          mingw-w64-ucrt-x86_64-toolchain \
+          mingw-w64-ucrt-x86_64-glm \
+          mingw-w64-ucrt-x86_64-opencascade \
+          mingw-w64-ucrt-x86_64-ngspice \
+          mingw-w64-ucrt-x86_64-zlib \
+          mingw-w64-ucrt-x86_64-libgit2 \
+          mingw-w64-ucrt-x86_64-wxwidgets3.2-msw \
+          mingw-w64-ucrt-x86_64-protobuf \
+          mingw-w64-ucrt-x86_64-nng
 cd kicad-source
 mkdir -p build/release
 mkdir build/debug               # Optional for debug build.
@@ -64,6 +66,9 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       ../../
 make -j N install   # Where N is the number of concurrent threads that your system can handle.
 ----
+
+Since `nng` has only provided packages for `CLANG64`, `CLANGARM64`, and `UCRT64` environments, 
+this article recommends `UCRT64` as the building environment.
 
 For 32-bit builds, run `mingw32.exe` and change `x86_64` to `i686` in the package names and
 change the paths in the cmake configuration from `/mingw64` to `/mingw32`.
